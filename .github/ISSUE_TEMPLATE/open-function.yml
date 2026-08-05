@@ -1,0 +1,42 @@
+name: Open function
+description: Publish a piece of work small enough for one person to finish.
+title: "Function: "
+labels: ["open-function"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        An issue becomes an open function when it is small enough for one person to
+        complete and defined enough that its result composes with the rest. Issues with
+        the `open-function` label appear live on the board at
+        [drayker.org/#org/fn](https://drayker.org/#org/fn) — nothing on that board is
+        written by hand.
+
+        Add `skill:code`, `skill:research`, `skill:design`, `skill:docs`,
+        `skill:translation` or `skill:governance` so the function reaches the right
+        people, plus `level:entry` / `level:intermediate` / `level:advanced` and an
+        `effort:~4h`-style label if you can estimate it.
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What is delivered
+      description: The finished thing, described so that someone else can tell when it is done.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Why it is needed
+      description: Which requirement, paper or gap this function comes from. Link the source.
+    validations:
+      required: true
+  - type: textarea
+    id: start
+    attributes:
+      label: Where to start
+      description: Files, documents or prior discussion someone should read first.
+  - type: input
+    id: review
+    attributes:
+      label: Who reviews it
+      description: Optional. A person, a council, or the community review branch.
