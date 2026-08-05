@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Drayker Organization — Volunteers Portal</title>
+<meta name="description" content="Drayker is a volunteer, non-profit organization building open infrastructure through distributed collaboration.">
+<meta name="theme-color" content="#08080A">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet" />
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#08080A;color:#EDECF0;font-family:'Space Grotesk',sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:#FF5500;text-decoration:none}
+  a:hover{color:#FF7A33}
+  ::selection{background:#FF5500;color:#08080A}
+  .dk-glow{text-shadow:0 0 32px rgba(255,85,0,0.3),0 0 80px rgba(255,85,0,0.1)}
+  input,textarea,select,button{font-family:inherit}
+  /* dk-surf: slides the faint diagonal streak (gradient #dkog, inside the clipped .dk-surf group) sideways across
+     the sphere — a slow "moving light on a surface" texture. dk-breathe: very subtle idle scale pulse on the
+     whole mark (.dk-core) so it doesn't look frozen. Both are decorative only; the ring/shadow shapes are NOT
+     animated by CSS — they're redrawn every frame in JS, see "MARK PHYSICS" further down. */
+  @keyframes dk-surf{from{transform:translateX(0)}to{transform:translateX(74px)}}
+  @keyframes dk-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.015)}}
+  @keyframes dk-fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .dk-surf{animation:dk-surf 9s linear infinite}
+  .dk-core{animation:dk-breathe 8s ease-in-out infinite;transform-box:view-box;transform-origin:0 0}
+  .dk-page{animation:dk-fade .34s ease both}
+</style>
+</helmet>
+
+<div style="background:#08080A;min-height:100vh;display:flex;flex-direction:column">
+
+  <header style="position:sticky;top:0;z-index:50;background:rgba(11,11,12,0.9);backdrop-filter:blur(14px);border-bottom:1px solid #18181E">
+    <div style="max-width:1320px;margin:0 auto;padding:13px clamp(16px,4vw,44px);display:flex;align-items:center;gap:clamp(14px,2.6vw,36px);flex-wrap:wrap">
+      <div onClick="{{ goHome }}" style="display:flex;align-items:center;gap:10px;cursor:pointer;flex-shrink:0">
+<!-- Flat mark (header, small size): two static crossed ellipses = the ring (stroke #8585A0, greyscale to
+           match dkring above), solid circle = sphere body (fill #FF5500, keep in sync with dkball's base hue),
+           path below = fixed shadow wedge (fill #000000, keep in sync with dkdark). No JS, no gradients. -->
+<svg viewBox="-106 -106 212 212" width="30" height="30" style="display:block">
+          <ellipse cx="0" cy="0" rx="119" ry="38" transform="rotate(45)" fill="none" stroke="#8585A0" stroke-width="3.4"></ellipse>
+          <ellipse cx="0" cy="0" rx="119" ry="38" transform="rotate(-45)" fill="none" stroke="#8585A0" stroke-width="3.4"></ellipse>
+          <circle r="100" fill="#FF5500"></circle>
+          <path d="M -84.4 -53.7 A 119 38 45 0 0 0 51.2 A 119 38 -45 0 0 84.4 -53.7 A 100 100 0 0 0 -84.4 -53.7 Z M 0 51.2 A 119 38 45 0 0 53.7 84.4 A 100 100 0 0 1 -53.7 84.4 A 119 38 -45 0 0 0 51.2 Z" fill="#000000"></path>
+              
+        </svg>
+        <span style="font-size:17px;font-weight:600;letter-spacing:-0.02em">Drayker</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6A6A80;letter-spacing:0.08em;padding-top:3px">{{ domain }}</span>
+      </div>
+
+      <nav style="display:flex;align-items:center;gap:clamp(9px,1.5vw,20px);flex-wrap:wrap;flex:1">
+        <sc-for list="{{ nav }}" as="item" hint-placeholder-count="7">
+          <div onClick="{{ item.onClick }}" style="font-size:13.5px;font-weight:500;cursor:pointer;padding:5px 0;border-bottom:1px solid transparent;white-space:nowrap;color:{{ item.color }};border-bottom-color:{{ item.line }}" style-hover="color:#EDECF0">{{ item.label }}</div>
+        </sc-for>
+      </nav>
+
+      <div style="display:flex;align-items:center;gap:12px;flex-shrink:0">
+        <div onClick="{{ toggleSite }}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;color:#65657A;border:1px solid #222230;padding:6px 10px;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">{{ switchLabel }}</div>
+        <div onClick="{{ goJoin }}" style="background:#FF5500;color:#08080A;padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 0 16px rgba(255,85,0,0.2)" style-hover="background:#FF7A33;box-shadow:0 0 24px rgba(255,85,0,0.35)">Volunteer</div>
+      </div>
+    </div>
+  </header>
+
+  <main style="flex:1">
+
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <div class="dk-page" key="{{ pageKey }}">
+      <section style="max-width:1320px;margin:0 auto;padding:clamp(40px,7vw,92px) clamp(16px,4vw,44px) clamp(34px,5vw,62px);display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(28px,5vw,72px);align-items:center">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#FF5500;margin-bottom:22px">{{ heroKicker }}</div>
+          <h1 class="dk-glow" style="font-size:clamp(42px,6.2vw,88px);line-height:0.93;letter-spacing:-0.04em;font-weight:700;margin:0 0 26px;text-wrap:balance">{{ heroTitle }}</h1>
+          <p style="font-size:clamp(16px,1.3vw,19px);line-height:1.62;color:#9898A8;max-width:52ch;margin:0 0 34px;text-wrap:pretty">{{ heroBody }}</p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <div onClick="{{ heroPrimary }}" style="background:#FF5500;color:#08080A;padding:16px 30px;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 0 24px rgba(255,85,0,0.25)" style-hover="background:#FF7A33;box-shadow:0 0 36px rgba(255,85,0,0.4)">{{ heroPrimaryLabel }}</div>
+            <div onClick="{{ goManifesto }}" style="border:1px solid #2E2E38;color:#EDECF0;padding:16px 30px;font-size:14px;font-weight:500;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">Read the manifesto</div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:center;padding:clamp(8px,3vw,36px)">
+<!-- ============================================================================
+     DRAYKER MARK — full 3D version (hero only). Structure, back to front:
+       1. circle r=138 fill=dkglow        -> soft halo/backdrop behind the sphere ("fundo do globo")
+       2. path ringBackRef                -> ring arcs that pass BEHIND the sphere (dim)
+       3. circle r=100 fill=dkball        -> the lit sphere body (base color)
+       4. clipped .dk-surf rect (dkog)    -> faint drifting streak/texture on the surface
+       5. path shadowRef  fill=dkdark     -> night-side shadow wedge (recomputed live, see JS)
+       6. path ringOverRef                -> ring arcs crossing IN FRONT of the sphere but inside its
+                                             silhouette (soft overlay, reads as "wrapping through" the ball)
+       7. path ringOutRef                 -> ring arcs in front of the sphere, outside its silhouette
+                                             (the normal, fully-visible ring color, gradient dkring)
+       8. circle r=100 stroke=dkrim       -> thin rim-light outline around the sphere edge
+     Header/footer use a FLAT 2-tone version instead (no gradients, no JS): two static crossed
+     ellipses (stroke only) + solid circle fill + one dark path for the shadow wedge — see the
+     comment near those <svg> blocks below for how to recolor them together with this one.
+     ============================================================================ -->
+<svg ref="{{ markRef }}" viewBox="-128 -128 256 256" style="width:100%;max-width:450px;height:auto;display:block">
+            <defs>
+              <!-- COLORS TO EDIT (each id = one gradient below):
+                     dkglow  backdrop glow color/spread behind the sphere ("fundo do globo") — edit the 3 stop-color hexes (opacity ramp can stay)
+                     dkball  sphere base color, light->dark ramp — THIS is the sphere's main hue
+                     dkdark  shadow/night-side overlay tint (keep near-black/neutral so it reads as shade, not a 2nd color)
+                     dkrim   rim-light stroke around the sphere edge (dark -> transparent -> warm highlight)
+                     dkring  metallic color of the crossing ring band (chrome grey by default)
+                     dkog    faint moving surface streak, usually leave near-white/low-opacity -->
+              <clipPath id="dkow" clipPathUnits="userSpaceOnUse"><circle r="100"></circle></clipPath>
+              <radialGradient id="dkglow" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="138">
+                <stop offset="0.5" stop-color="#FF5500" stop-opacity="0.17"></stop>
+                <stop offset="0.78" stop-color="#FF5500" stop-opacity="0.05"></stop>
+                <stop offset="1" stop-color="#FF5500" stop-opacity="0"></stop>
+              </radialGradient>
+              <radialGradient id="dkball" gradientUnits="userSpaceOnUse" cx="-42" cy="-48" r="172">
+                <stop offset="0" stop-color="#FFB050"></stop>
+                <stop offset="0.26" stop-color="#FF7A10"></stop>
+                <stop offset="0.6" stop-color="#E05000"></stop>
+                <stop offset="0.88" stop-color="#B03800"></stop>
+                <stop offset="1" stop-color="#7A2600"></stop>
+              </radialGradient>
+              <radialGradient id="dkdark" gradientUnits="userSpaceOnUse" cx="-42" cy="-48" r="182">
+                <stop offset="0" stop-color="#1B1B22"></stop>
+                <stop offset="0.42" stop-color="#0D0D12"></stop>
+                <stop offset="1" stop-color="#040406"></stop>
+              </radialGradient>
+              <radialGradient id="dkspec" gradientUnits="userSpaceOnUse" cx="-44" cy="-50" r="60">
+                <stop offset="0" stop-color="#FFF0E0" stop-opacity="0.42"></stop>
+                <stop offset="0.55" stop-color="#FFF0E0" stop-opacity="0.08"></stop>
+                <stop offset="1" stop-color="#FFF0E0" stop-opacity="0"></stop>
+              </radialGradient>
+              <linearGradient id="dkrim" gradientUnits="userSpaceOnUse" x1="-72" y1="-74" x2="76" y2="84">
+                <stop offset="0" stop-color="#000000" stop-opacity="0.4"></stop>
+                <stop offset="0.5" stop-color="#000000" stop-opacity="0.12"></stop>
+                <stop offset="1" stop-color="#FFB070" stop-opacity="0.55"></stop>
+              </linearGradient>
+              <linearGradient id="dkring" gradientUnits="userSpaceOnUse" x1="-104" y1="-104" x2="104" y2="104">
+                <stop offset="0" stop-color="#E4E4F0"></stop>
+                <stop offset="0.45" stop-color="#9090A8"></stop>
+                <stop offset="1" stop-color="#444462"></stop>
+              </linearGradient>
+              <linearGradient id="dkog" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="74" y2="0" spreadMethod="repeat">
+                <stop offset="0" stop-color="#fff" stop-opacity="0"></stop>
+                <stop offset="0.5" stop-color="#fff" stop-opacity="0.11"></stop>
+                <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+              </linearGradient>
+            </defs>
+            <g class="dk-core" style="transform-box:view-box;transform-origin:0 0">
+              <circle r="138" fill="url(#dkglow)"></circle>
+              <path ref="{{ ringBackRef }}" d="" fill="none" stroke="#32324A" stroke-width="2" stroke-linecap="round"></path>
+              <circle r="100" fill="url(#dkball)"></circle>
+              <g clip-path="url(#dkow)"><g class="dk-surf"><rect x="-260" y="-110" width="520" height="220" fill="url(#dkog)"></rect></g></g>
+              <path ref="{{ shadowRef }}" d="M -84.4 -53.7 A 118 38 45 0 0 0 50.7 A 118 38 -45 0 0 84.4 -53.7 A 100 100 0 0 0 -84.4 -53.7 Z M 0 50.7 A 118 38 45 0 0 53.7 84.4 A 100 100 0 0 1 -53.7 84.4 A 118 38 -45 0 0 0 50.7 Z" fill="url(#dkdark)"></path>
+              <path ref="{{ ringOverRef }}" d="" fill="none" stroke="#FFE8D0" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round"></path>
+              <path ref="{{ ringOutRef }}" d="M 83.4 83.4 A 118 38 45 0 1 -83.4 -83.4 A 118 38 45 0 1 83.4 83.4 Z M -83.4 83.4 A 118 38 -45 0 1 83.4 -83.4 A 118 38 -45 0 1 -83.4 83.4 Z" fill="none" stroke="url(#dkring)" stroke-width="2.1" stroke-linecap="round"></path>
+              <circle r="100" fill="none" stroke="url(#dkrim)" stroke-width="1.6"></circle>
+            </g>
+          </svg>
+        </div>
+      </section>
+
+      <section style="border-top:1px solid #18181E;border-bottom:1px solid #18181E">
+        <div style="max-width:1320px;margin:0 auto;padding:0 clamp(16px,4vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">
+          <div style="padding:26px 24px 26px 0;border-right:1px solid #18181E">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#FF5500;letter-spacing:0.14em;margin-bottom:8px">100% VOLUNTARY</div>
+            <div style="font-size:14px;color:#8585A0;line-height:1.55">Built entirely on volunteer effort and resources.</div>
+          </div>
+          <div style="padding:26px 24px;border-right:1px solid #18181E">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#FF5500;letter-spacing:0.14em;margin-bottom:8px">NON-PROFIT</div>
+            <div style="font-size:14px;color:#8585A0;line-height:1.55">Resources governed by the DAF — a decentralized autonomous federation.</div>
+          </div>
+          <div style="padding:26px 24px">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#FF5500;letter-spacing:0.14em;margin-bottom:8px">OPEN SOURCE</div>
+            <div style="font-size:14px;color:#8585A0;line-height:1.55">Every paper, protocol and repository is public under Creative Commons.</div>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1320px;margin:0 auto;padding:clamp(46px,7vw,100px) clamp(16px,4vw,44px)">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#FF5500;margin-bottom:18px">Three layers</div>
+        <h2 style="font-size:clamp(30px,4vw,54px);line-height:1.02;letter-spacing:-0.035em;font-weight:600;margin:0 0 48px;max-width:24ch">One protocol, one kernel, one ecosystem.</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:#18181E;border:1px solid #18181E">
+          <div onClick="{{ goDfm }}" style="background:#0C0C0F;padding:32px 28px 28px;cursor:pointer;display:flex;flex-direction:column;gap:12px;min-height:250px" style-hover="background:#111115">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6A6A80">01</div>
+            <div style="font-size:24px;font-weight:700;letter-spacing:-0.02em">DFM Protocol</div>
+            <p style="font-size:15px;line-height:1.6;color:#8585A0;margin:0;flex:1">Model a problem, break it into small functions, distribute them worldwide through decentralized peer review.</p>
+            <div style="font-size:13px;color:#FF5500;font-weight:500">Open the protocol map →</div>
+          </div>
+          <div onClick="{{ goDk }}" style="background:#0C0C0F;padding:32px 28px 28px;cursor:pointer;display:flex;flex-direction:column;gap:12px;min-height:250px" style-hover="background:#111115">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6A6A80">02</div>
+            <div style="font-size:24px;font-weight:700;letter-spacing:-0.02em">Dk — the kernel</div>
+            <p style="font-size:15px;line-height:1.6;color:#8585A0;margin:0;flex:1">A unified intelligence, organization and computing system: DFM architecture, BSDK coordination, LCrypt security.</p>
+            <div style="font-size:13px;color:#FF5500;font-weight:500">Inside the kernel →</div>
+          </div>
+          <div onClick="{{ goEco }}" style="background:#0C0C0F;padding:32px 28px 28px;cursor:pointer;display:flex;flex-direction:column;gap:12px;min-height:250px" style-hover="background:#111115">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6A6A80">03</div>
+            <div style="font-size:24px;font-weight:700;letter-spacing:-0.02em">The ecosystem</div>
+            <p style="font-size:15px;line-height:1.6;color:#8585A0;margin:0;flex:1">A parallel network, a universal identity, a federation without an owner — and everything the volunteers build on top.</p>
+            <div style="font-size:13px;color:#FF5500;font-weight:500">See all projects →</div>
+          </div>
+        </div>
+      </section>
+
+      <section style="border-top:1px solid #18181E;background:#0C0C0F">
+        <div style="max-width:1320px;margin:0 auto;padding:clamp(52px,8vw,116px) clamp(16px,4vw,44px)">
+          <p class="dk-glow" style="font-size:clamp(25px,3.6vw,48px);line-height:1.14;letter-spacing:-0.03em;font-weight:500;margin:0;max-width:30ch;text-wrap:pretty">Humanity has immense latent capacity. We exist to create the conditions — of organization and action — that unlock it.</p>
+          <div onClick="{{ goManifesto }}" style="display:inline-block;margin-top:32px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;color:#FF5500;cursor:pointer;border-bottom:1px solid #FF5500;padding-bottom:3px">THE MANIFESTO</div>
+        </div>
+      </section>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isManifesto }}" hint-placeholder-val="{{ true }}">
+      <div class="dk-page">
+      <section style="max-width:1320px;margin:0 auto;padding:clamp(42px,6vw,88px) clamp(16px,4vw,44px) clamp(28px,4vw,48px)">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#FF5500;margin-bottom:22px">Manifesto</div>
+        <h1 class="dk-glow" style="font-size:clamp(36px,5.6vw,78px);line-height:0.96;letter-spacing:-0.04em;font-weight:700;margin:0;max-width:20ch;text-wrap:balance">We can solve problems we believe are impossible.</h1>
+      </section>
+
+      <section style="border-top:1px solid #18181E">
+        <div style="max-width:1320px;margin:0 auto;padding:clamp(42px,6vw,78px) clamp(16px,4vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,5vw,78px)">
+          <div>
+            <p style="font-size:clamp(17px,1.4vw,21px);line-height:1.62;color:#D2D0D8;margin:0 0 24px;text-wrap:pretty">Drayker starts from a conviction: we can do more with less, evolve faster, and solve problems we have given up on.</p>
+            <p style="font-size:16px;line-height:1.68;color:#8585A0;margin:0 0 20px;text-wrap:pretty">None of that is a question of talent or capital. It is a question of conditions — the conditions of organization and of action. Most human effort is lost in coordination: in hierarchies that filter information, in work that is never documented, in decisions nobody can trace, in problems too large for any single team to hold.</p>
+            <p style="font-size:16px;line-height:1.68;color:#8585A0;margin:0;text-wrap:pretty">Drayker exists to create those conditions — so civilization can build infrastructure, scale up, and act at a level it never could before.</p>
+          </div>
+          <div>
+            <p style="font-size:16px;line-height:1.68;color:#8585A0;margin:0 0 20px;text-wrap:pretty">So we started with the method instead of the product. First a specification for collaboration — <strong style="color:#EDECF0;font-weight:500">DFM</strong> — which breaks any issue into small individual functions, so that thousands of strangers can work on one thing without a manager in the middle.</p>
+            <p style="font-size:16px;line-height:1.68;color:#8585A0;margin:0 0 20px;text-wrap:pretty">Then the systems that method makes possible: a distributed kernel, a parallel network, a universal identity, a federation that manages resources without an owner.</p>
+            <p style="font-size:16px;line-height:1.68;color:#8585A0;margin:0;text-wrap:pretty">We develop human, collective and artificial intelligence to reach further and see further. We do this for people — for each person. The boundless evolution of humanity is the end; intelligence is the means.</p>
+          </div>
+        </div>
+      </section>
+
+      <section style="border-top:1px solid #18181E;background:#0C0C0F">
+        <div style="max-width:1320px;margin:0 auto;padding:clamp(46px,7vw,100px) clamp(16px,4vw,44px)">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#FF5500;margin-bottom:38px">What we hold to</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:#18181E;border:1px solid #18181E">
+            <sc-for list="{{ principles }}" as="p" hint-placeholder-count="6">
+              <div style="background:#08080A;padding:30px 26px;display:flex;flex-direction:column;gap:10px;min-height:186px">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6A6A80">{{ p.n }}</div>
+                <div style="font-size:19px;font-weight:600;letter-spacing:-0.015em;line-height:1.2">{{ p.title }}</div>
+                <div style="font-size:14px;line-height:1.6;color:#8585A0">{{ p.body }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isDfm }}" hint-placeholder-val="{{ true }}">
+      <div class="dk-page">
+      <section style="max-width:1320px;margin:0 auto;padding:clamp(40px,6vw,78px) clamp(16px,4vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,5vw,72px);align-items:center">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#FF5500;margin-bottom:22px">DFM Protocol</div>
+          <h1 style="font-size:clamp(36px,5.4vw,72px);line-height:1;letter-spacing:-0.04em;font-weight:700;margin:0 0 26px;max-width:24ch;text-wrap:balance">A problem, cut small enough for the world to solve.</h1>
+          <p style="font-size:clamp(16px,1.3vw,19px);line-height:1.62;color:#9898A8;max-width:62ch;margin:0;text-wrap:pretty">Distributed function modularization is the collaboration paradigm behind every Drayker project. It adapts to different domains, but the logic is always the same: model, fragment, distribute, review.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:20px;padding:clamp(6px,2vw,26px)">
+<!-- Same physics-driven mark as the hero (suffix "3" gradients), in liquid-metal silver. -->
+<svg ref="{{ markRef }}" viewBox="-128 -128 256 256" style="width:100%;max-width:300px;height:auto;display:block">
+            <defs>
+              <radialGradient id="dkglow3" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="138">
+                <stop offset="0.5" stop-color="#C7CBD6" stop-opacity="0.17"></stop>
+                <stop offset="0.78" stop-color="#C7CBD6" stop-opacity="0.05"></stop>
+                <stop offset="1" stop-color="#C7CBD6" stop-opacity="0"></stop>
+              </radialGradient>
+              <radialGradient id="dkball3" gradientUnits="userSpaceOnUse" cx="-42" cy="-48" r="172">
+                <stop offset="0" stop-color="#F5F6FA"></stop>
+                <stop offset="0.26" stop-color="#D3D6E0"></stop>
+                <stop offset="0.6" stop-color="#9AA0AE"></stop>
+                <stop offset="0.88" stop-color="#4B4F5A"></stop>
+                <stop offset="1" stop-color="#202226"></stop>
+              </radialGradient>
+              <radialGradient id="dkdark3" gradientUnits="userSpaceOnUse" cx="-42" cy="-48" r="182">
+                <stop offset="0" stop-color="#1B1B22"></stop>
+                <stop offset="0.42" stop-color="#0D0D12"></stop>
+                <stop offset="1" stop-color="#040406"></stop>
+              </radialGradient>
+              <linearGradient id="dkrim3" gradientUnits="userSpaceOnUse" x1="-72" y1="-74" x2="76" y2="84">
+                <stop offset="0" stop-color="#000000" stop-opacity="0.4"></stop>
+                <stop offset="0.5" stop-color="#000000" stop-opacity="0.12"></stop>
+                <stop offset="1" stop-color="#EAF0FF" stop-opacity="0.55"></stop>
+              </linearGradient>
+              <linearGradient id="dkring3" gradientUnits="userSpaceOnUse" x1="-104" y1="-104" x2="104" y2="104">
+                <stop offset="0" stop-color="#E4E4F0"></stop>
+                <stop offset="0.45" stop-color="#9090A8"></stop>
+                <stop offset="1" stop-color="#444462"></stop>
+              </linearGradient>
+              <linearGradient id="dkog3" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="74" y2="0" spreadMethod="repeat">
+                <stop offset="0" stop-color="#fff" stop-opacity="0"></stop>
+                <stop offset="0.5" stop-color="#fff" stop-opacity="0.11"></stop>
+                <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+              </linearGradient>
+              <clipPath id="dkow3" clipPathUnits="userSpaceOnUse"><circle r="100"></circle></clipPath>
+            </defs>
+            <g class="dk-core" style="transform-box:view-box;transform-origin:0 0">
+              <circle r="138" fill="url(#dkglow3)"></circle>
+              <path ref="{{ ringBackRef }}" d="" fill="none" stroke="#32324A" stroke-width="2" stroke-linecap="round"></path>
+              <circle r="100" fill="url(#dkball3)"></circle>
+              <g clip-path="url(#dkow3)"><g class="dk-surf"><rect x="-260" y="-110" width="520" height="220" fill="url(#dkog3)"></rect></g></g>
+              <path ref="{{ shadowRef }}" d="M -84.4 -53.7 A 118 38 45 0 0 0 50.7 A 118 38 -45 0 0 84.4 -53.7 A 100 100 0 0 0 -84.4 -53.7 Z M 0 50.7 A 118 38 45 0 0 53.7 84.4 A 100 100 0 0 1 -53.7 84.4 A 118 38 -45 0 0 0 50.7 Z" fill="url(#dkdark3)"></path>
+              <path ref="{{ ringOverRef }}" d="" fill="none" stroke="#FFE8D0" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round"></path>
+              <path ref="{{ ringOutRef }}" d="M 83.4 83.4 A 118 38 45 0 1 -83.4 -83.4 A 118 38 45 0 1 83.4 83.4 Z M -83.4 83.4 A 118 38 -45 0 1 83.4 -83.4 A 118 38 -45 0 1 -83.4 83.4 Z" fill="none" stroke="url(#dkring3)" stroke-width="2.1" stroke-linecap="round"></path>
+              <circle r="100" fill="none" stroke="url(#dkrim3)" stroke-width="1.6"></circle>
+            </g>
+          </svg>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#6A6A80;text-align:center">THE MARK, IN LIQUID SILVER</div>
+        </div>
+      </section>
+
+      <section style="border-top:1px solid #18181E">
+        <div style="max-width:1320px;margin:0 auto;padding:0 clamp(16px,4vw,44px)">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));border-left:1px solid #18181E;border-right:1px solid #18181E">
+
+            <div style="border-right:1px solid #18181E">
+              <sc-for list="{{ dfmSteps }}" as="s" hint-placeholder-count="5">
+                <div onClick="{{ s.onClick }}" style="padding:24px 26px;cursor:pointer;border-bottom:1px solid #18181E;border-left:2px solid {{ s.mark }};background:{{ s.bg }}" style-hover="background:#111115">
+                  <div style="display:flex;gap:16px;align-items:flex-start">
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6A6A80;padding-top:5px;flex-shrink:0">{{ s.n }}</div>
+                    <div>
+                      <div style="font-size:19px;font-weight:600;letter-spacing:-0.02em;margin-bottom:5px">{{ s.title }}</div>
+                      <div style="font-size:13px;color:#8585A0;line-height:1.5">{{ s.tag }}</div>
+                    </div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+
+            <div style="padding:clamp(26px,4vw,50px);display:flex;flex-direction:column;gap:28px;background:#0C0C0F">
+              <div style="display:flex;justify-content:center;align-items:center;min-height:210px">
+                {{ dfmDiagram }}
+              </div>
+              <div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#FF5500;margin-bottom:14px">STEP {{ dfmN }} — {{ dfmTitle }}</div>
+                <p style="font-size:16px;line-height:1.68;color:#9898A8;margin:0 0 14px;text-wrap:pretty">{{ dfmBody }}</p>
+                <p style="font-size:14px;line-height:1.66;color:#65657A;margin:0;text-wrap:pretty">{{ dfmNote }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1320px;margin:0 auto;padding:clamp(46px,7vw,96px) clamp(16px,4vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,5vw,70px)">
+        <div>
+          <h2 style="font-size:clamp(23px,2.8vw,36px);line-height:1.08;letter-spacing:-0.03em;font-weight:600;margin:0 0 18px">Self-assessed, validated, re-evaluated.</h2>
+          <p style="font-size:16px;line-height:1.68;color:#8585A0;margin:0 0 16px;text-wrap:pretty">The protocol ensures that every paper is self-assessed, validated and re-evaluated. Validation walks alongside development — ideas are discussed with communities and councils, then shaped into a detailed, widely revised paper that passes through the DAOs and councils before adoption.</p>
+          <p style="font-size:16px;line-height:1.68;color:#8585A0;margin:0">All ideas, goals and purposes must be in line with Drayker.</p>
+        </div>
+        <div style="border-left:1px solid #18181E;padding-left:clamp(20px,3vw,40px)">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#FF5500;margin-bottom:20px">DFMP — PROPOSAL PROCESS</div>
+          <p style="font-size:15px;line-height:1.66;color:#8585A0;margin:0 0 18px;text-wrap:pretty">A paper enters the DFMP process only after being presented, discussed and validated in the community issue threads. Once legitimated, it moves through the community review branch to master. Updates follow the paper's own validation branch — every decision is traceable.</p>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <a href="https://github.com/draykerdk/dfmp" target="_blank" rel="noreferrer" style="font-size:13px;font-weight:500">DFMP-000 · the proposal process →</a>
+            <a href="https://dfmp.drayker.org" target="_blank" rel="noreferrer" style="font-size:13px;font-weight:500">dfmp.drayker.org →</a>
+          </div>
+        </div>
+      </section>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isDk }}" hint-placeholder-val="{{ true }}">
+      <div class="dk-page">
+      <section style="max-width:1320px;margin:0 auto;padding:clamp(40px,6vw,86px) clamp(16px,4vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,5vw,72px);align-items:center">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#5CE02E;margin-bottom:22px">Dk · the distributed kernel</div>
+          <h1 style="font-size:clamp(36px,5.4vw,72px);line-height:1;letter-spacing:-0.04em;font-weight:700;margin:0 0 26px;max-width:22ch">Intelligence, distributed.</h1>
+          <p style="font-size:clamp(16px,1.3vw,19px);line-height:1.62;color:#9898A8;max-width:56ch;margin:0;text-wrap:pretty">Dk is a unified system of intelligence, organization and computing — built from the ground up to be distributed, secure, fail-safe and self-improving.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:20px;padding:clamp(6px,2vw,26px)">
+<!-- Same physics-driven mark as the hero (see mark comment + "MARK PHYSICS"/"GAZE ANIMATION" in the logic class),
+     recolored green and a bit smaller. Gradients are self-contained duplicates (suffixed "2") so this section
+     doesn't depend on the hero's <defs> existing \u2014 ring stays chrome grey (dkring2), only the ball/glow/rim go green. -->
+<svg ref="{{ markRef }}" viewBox="-128 -128 256 256" style="width:100%;max-width:300px;height:auto;display:block">
+            <defs>
+              <radialGradient id="dkglow2" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="138">
+                <stop offset="0.5" stop-color="#5CE02E" stop-opacity="0.17"></stop>
+                <stop offset="0.78" stop-color="#5CE02E" stop-opacity="0.05"></stop>
+                <stop offset="1" stop-color="#5CE02E" stop-opacity="0"></stop>
+              </radialGradient>
+              <radialGradient id="dkball2" gradientUnits="userSpaceOnUse" cx="-42" cy="-48" r="172">
+                <stop offset="0" stop-color="#D4FFB0"></stop>
+                <stop offset="0.26" stop-color="#8CEC49"></stop>
+                <stop offset="0.6" stop-color="#5CE02E"></stop>
+                <stop offset="0.88" stop-color="#357E14"></stop>
+                <stop offset="1" stop-color="#204D0C"></stop>
+              </radialGradient>
+              <radialGradient id="dkdark2" gradientUnits="userSpaceOnUse" cx="-42" cy="-48" r="182">
+                <stop offset="0" stop-color="#1B1B22"></stop>
+                <stop offset="0.42" stop-color="#0D0D12"></stop>
+                <stop offset="1" stop-color="#040406"></stop>
+              </radialGradient>
+              <linearGradient id="dkrim2" gradientUnits="userSpaceOnUse" x1="-72" y1="-74" x2="76" y2="84">
+                <stop offset="0" stop-color="#000000" stop-opacity="0.4"></stop>
+                <stop offset="0.5" stop-color="#000000" stop-opacity="0.12"></stop>
+                <stop offset="1" stop-color="#DFFFC8" stop-opacity="0.55"></stop>
+              </linearGradient>
+              <linearGradient id="dkring2" gradientUnits="userSpaceOnUse" x1="-104" y1="-104" x2="104" y2="104">
+                <stop offset="0" stop-color="#E4E4F0"></stop>
+                <stop offset="0.45" stop-color="#9090A8"></stop>
+                <stop offset="1" stop-color="#444462"></stop>
+              </linearGradient>
+              <linearGradient id="dkog2" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="74" y2="0" spreadMethod="repeat">
+                <stop offset="0" stop-color="#fff" stop-opacity="0"></stop>
+                <stop offset="0.5" stop-color="#fff" stop-opacity="0.11"></stop>
+                <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+              </linearGradient>
+              <clipPath id="dkow2" clipPathUnits="userSpaceOnUse"><circle r="100"></circle></clipPath>
+            </defs>
+            <g class="dk-core" style="transform-box:view-box;transform-origin:0 0">
+              <circle r="138" fill="url(#dkglow2)"></circle>
+              <path ref="{{ ringBackRef }}" d="" fill="none" stroke="#32324A" stroke-width="2" stroke-linecap="round"></path>
+              <circle r="100" fill="url(#dkball2)"></circle>
+              <g clip-path="url(#dkow2)"><g class="dk-surf"><rect x="-260" y="-110" width="520" height="220" fill="url(#dkog2)"></rect></g></g>
+              <path ref="{{ shadowRef }}" d="M -84.4 -53.7 A 118 38 45 0 0 0 50.7 A 118 38 -45 0 0 84.4 -53.7 A 100 100 0 0 0 -84.4 -53.7 Z M 0 50.7 A 118 38 45 0 0 53.7 84.4 A 100 100 0 0 1 -53.7 84.4 A 118 38 -45 0 0 0 50.7 Z" fill="url(#dkdark2)"></path>
+              <path ref="{{ ringOverRef }}" d="" fill="none" stroke="#FFE8D0" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round"></path>
+              <path ref="{{ ringOutRef }}" d="M 83.4 83.4 A 118 38 45 0 1 -83.4 -83.4 A 118 38 45 0 1 83.4 83.4 Z M -83.4 83.4 A 118 38 -45 0 1 83.4 -83.4 A 118 38 -45 0 1 -83.4 83.4 Z" fill="none" stroke="url(#dkring2)" stroke-width="2.1" stroke-linecap="round"></path>
+              <circle r="100" fill="none" stroke="url(#dkrim2)" stroke-width="1.6"></circle>
+            </g>
+          </svg>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#6A6A80;text-align:center">THE MARK, IN Dk GREEN</div>
+        </div>
+      </section>
+
+      <section style="border-top:1px solid #18181E;background:#0C0C0F">
+        <div style="max-width:1320px;margin:0 auto;padding:clamp(36px,5vw,64px) clamp(16px,4vw,44px)">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:#18181E;border:1px solid #18181E">
+            <div style="background:#0C0C0F;padding:26px">
+              <div style="font-size:15px;font-weight:600;margin-bottom:6px">DFM architecture</div>
+              <div style="font-size:13px;color:#8585A0;line-height:1.55">Every capability is a function in a distributed topology.</div>
+            </div>
+            <div style="background:#0C0C0F;padding:26px">
+              <div style="font-size:15px;font-weight:600;margin-bottom:6px">BSDK coordination</div>
+              <div style="font-size:13px;color:#8585A0;line-height:1.55">A DNA-like base structure integrating all functions and modules.</div>
+            </div>
+            <div style="background:#0C0C0F;padding:26px">
+              <div style="font-size:15px;font-weight:600;margin-bottom:6px">LCrypt security</div>
+              <div style="font-size:13px;color:#8585A0;line-height:1.55">An evolutionary encrypted tunnel authenticating the whole system.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="max-width:1320px;margin:0 auto;padding:clamp(46px,7vw,96px) clamp(16px,4vw,44px)">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#FF5500;margin-bottom:38px">Components</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:#18181E;border:1px solid #18181E">
+          <sc-for list="{{ dkParts }}" as="c" hint-placeholder-count="4">
+            <div style="background:#0C0C0F;padding:30px 26px;display:flex;flex-direction:column;gap:12px;min-height:226px" style-hover="background:#111115">
+              <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+                <div style="font-size:21px;font-weight:600;letter-spacing:-0.02em">{{ c.name }}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#FF5500;border:1px solid #3A2010;padding:3px 7px">{{ c.status }}</div>
+              </div>
+              <div style="font-size:15px;line-height:1.6;color:#8585A0;flex:1">{{ c.desc }}</div>
+              <a href="{{ c.href }}" target="_blank" rel="noreferrer" style="font-size:13px;font-weight:500">{{ c.link }}</a>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="border-top:1px solid #18181E;background:#0C0C0F">
+        <div style="max-width:1320px;margin:0 auto;padding:clamp(46px,7vw,96px) clamp(16px,4vw,44px)">
+          <p style="font-size:clamp(23px,3vw,38px);line-height:1.18;letter-spacing:-0.03em;font-weight:500;margin:0 0 20px;max-width:34ch;text-wrap:pretty">A general intelligence built on BSDK and DFM architecture — designed to bring human organization to another level.</p>
+          <p style="font-size:16px;line-height:1.68;color:#8585A0;margin:0;max-width:56ch;text-wrap:pretty">When machines carry the repetitive load, humans are free to do what matters. There will be no shortage of things to do.</p>
+        </div>
+      </section>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isEco }}" hint-placeholder-val="{{ true }}">
+      <div class="dk-page">
+      <section style="max-width:1320px;margin:0 auto;padding:clamp(40px,6vw,78px) clamp(16px,4vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,5vw,72px);align-items:center">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#FF5500;margin-bottom:22px">Ecosystem</div>
+          <h1 style="font-size:clamp(36px,5.4vw,72px);line-height:1;letter-spacing:-0.04em;font-weight:700;margin:0 0 24px;max-width:22ch">Everything that makes it run.</h1>
+          <p style="font-size:clamp(16px,1.3vw,19px);line-height:1.62;color:#9898A8;max-width:60ch;margin:0 0 34px;text-wrap:pretty">The projects, protocols and structures that carry Drayker forward — and the people building them.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <sc-for list="{{ ecoFilters }}" as="f" hint-placeholder-count="5">
+              <div onClick="{{ f.onClick }}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;padding:8px 13px;cursor:pointer;border:1px solid {{ f.bd }};background:{{ f.bg }};color:{{ f.fg }}">{{ f.label }}</div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:20px;padding:clamp(6px,2vw,26px)">
+<!-- Same physics-driven mark as the hero (suffix "4" gradients), in ecosystem blue. -->
+<svg ref="{{ markRef }}" viewBox="-128 -128 256 256" style="width:100%;max-width:300px;height:auto;display:block">
+            <defs>
+              <radialGradient id="dkglow4" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="138">
+                <stop offset="0.5" stop-color="#00D0FF" stop-opacity="0.17"></stop>
+                <stop offset="0.78" stop-color="#00D0FF" stop-opacity="0.05"></stop>
+                <stop offset="1" stop-color="#00D0FF" stop-opacity="0"></stop>
+              </radialGradient>
+              <radialGradient id="dkball4" gradientUnits="userSpaceOnUse" cx="-42" cy="-48" r="172">
+                <stop offset="0" stop-color="#A1F7FF"></stop>
+                <stop offset="0.26" stop-color="#42E2FF"></stop>
+                <stop offset="0.6" stop-color="#0EC1E9"></stop>
+                <stop offset="0.88" stop-color="#00627F"></stop>
+                <stop offset="1" stop-color="#003044"></stop>
+              </radialGradient>
+              <radialGradient id="dkdark4" gradientUnits="userSpaceOnUse" cx="-42" cy="-48" r="182">
+                <stop offset="0" stop-color="#1B1B22"></stop>
+                <stop offset="0.42" stop-color="#0D0D12"></stop>
+                <stop offset="1" stop-color="#040406"></stop>
+              </radialGradient>
+              <linearGradient id="dkrim4" gradientUnits="userSpaceOnUse" x1="-72" y1="-74" x2="76" y2="84">
+                <stop offset="0" stop-color="#000000" stop-opacity="0.4"></stop>
+                <stop offset="0.5" stop-color="#000000" stop-opacity="0.12"></stop>
+                <stop offset="1" stop-color="#BEF6FF" stop-opacity="0.55"></stop>
+              </linearGradient>
+              <linearGradient id="dkring4" gradientUnits="userSpaceOnUse" x1="-104" y1="-104" x2="104" y2="104">
+                <stop offset="0" stop-color="#E4E4F0"></stop>
+                <stop offset="0.45" stop-color="#9090A8"></stop>
+                <stop offset="1" stop-color="#444462"></stop>
+              </linearGradient>
+              <linearGradient id="dkog4" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="74" y2="0" spreadMethod="repeat">
+                <stop offset="0" stop-color="#fff" stop-opacity="0"></stop>
+                <stop offset="0.5" stop-color="#fff" stop-opacity="0.11"></stop>
+                <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+              </linearGradient>
+              <clipPath id="dkow4" clipPathUnits="userSpaceOnUse"><circle r="100"></circle></clipPath>
+            </defs>
+            <g class="dk-core" style="transform-box:view-box;transform-origin:0 0">
+              <circle r="138" fill="url(#dkglow4)"></circle>
+              <path ref="{{ ringBackRef }}" d="" fill="none" stroke="#32324A" stroke-width="2" stroke-linecap="round"></path>
+              <circle r="100" fill="url(#dkball4)"></circle>
+              <g clip-path="url(#dkow4)"><g class="dk-surf"><rect x="-260" y="-110" width="520" height="220" fill="url(#dkog4)"></rect></g></g>
+              <path ref="{{ shadowRef }}" d="M -84.4 -53.7 A 118 38 45 0 0 0 50.7 A 118 38 -45 0 0 84.4 -53.7 A 100 100 0 0 0 -84.4 -53.7 Z M 0 50.7 A 118 38 45 0 0 53.7 84.4 A 100 100 0 0 1 -53.7 84.4 A 118 38 -45 0 0 0 50.7 Z" fill="url(#dkdark4)"></path>
+              <path ref="{{ ringOverRef }}" d="" fill="none" stroke="#FFE8D0" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round"></path>
+              <path ref="{{ ringOutRef }}" d="M 83.4 83.4 A 118 38 45 0 1 -83.4 -83.4 A 118 38 45 0 1 83.4 83.4 Z M -83.4 83.4 A 118 38 -45 0 1 83.4 -83.4 A 118 38 -45 0 1 -83.4 83.4 Z" fill="none" stroke="url(#dkring4)" stroke-width="2.1" stroke-linecap="round"></path>
+              <circle r="100" fill="none" stroke="url(#dkrim4)" stroke-width="1.6"></circle>
+            </g>
+          </svg>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#6A6A80;text-align:center">THE MARK, IN ECOSYSTEM BLUE</div>
+        </div>
+      </section>
+
+      <section style="max-width:1320px;margin:0 auto;padding:0 clamp(16px,4vw,44px) clamp(54px,8vw,110px)">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:1px;background:#18181E;border:1px solid #18181E">
+          <sc-for list="{{ ecoCards }}" as="p" hint-placeholder-count="10">
+            <div style="background:#0C0C0F;padding:28px 24px;display:flex;flex-direction:column;gap:10px;min-height:218px" style-hover="background:#111115">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:#6A6A80">{{ p.layer }}</div>
+              <div style="font-size:21px;font-weight:600;letter-spacing:-0.02em;line-height:1.15">{{ p.name }}</div>
+              <div style="font-size:14px;line-height:1.6;color:#8585A0;flex:1">{{ p.desc }}</div>
+              <div style="display:flex;align-items:center;gap:8px">
+                <div style="width:6px;height:6px;background:#FF5500;border-radius:50%;flex-shrink:0"></div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#9898A8">{{ p.status }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isOrgPage }}" hint-placeholder-val="{{ true }}">
+      <div class="dk-page">
+      <section style="max-width:1320px;margin:0 auto;padding:clamp(40px,6vw,78px) clamp(16px,4vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,5vw,72px);align-items:center">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#FF5500;margin-bottom:22px">Organization</div>
+          <h1 style="font-size:clamp(36px,5.4vw,72px);line-height:1;letter-spacing:-0.04em;font-weight:700;margin:0 0 24px;max-width:22ch">Governance without an owner.</h1>
+          <p style="font-size:clamp(16px,1.3vw,19px);line-height:1.62;color:#9898A8;max-width:62ch;margin:0;text-wrap:pretty">Drayker is organized by the DFMP process; resources are governed by the non-profit DAF. Today we work on GitHub and third-party tools — building the foundation and experience to create our own collaboration platform at scale.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:20px;padding:clamp(6px,2vw,26px)">
+<!-- Same physics-driven mark as the hero (suffix "5" gradients), in organization gold. -->
+<svg ref="{{ markRef }}" viewBox="-128 -128 256 256" style="width:100%;max-width:300px;height:auto;display:block">
+            <defs>
+              <radialGradient id="dkglow5" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="138">
+                <stop offset="0.5" stop-color="#E6B816" stop-opacity="0.17"></stop>
+                <stop offset="0.78" stop-color="#E6B816" stop-opacity="0.05"></stop>
+                <stop offset="1" stop-color="#E6B816" stop-opacity="0"></stop>
+              </radialGradient>
+              <radialGradient id="dkball5" gradientUnits="userSpaceOnUse" cx="-42" cy="-48" r="172">
+                <stop offset="0" stop-color="#FFEAAE"></stop>
+                <stop offset="0.26" stop-color="#F8D05C"></stop>
+                <stop offset="0.6" stop-color="#E6B816"></stop>
+                <stop offset="0.88" stop-color="#805E00"></stop>
+                <stop offset="1" stop-color="#452F00"></stop>
+              </radialGradient>
+              <radialGradient id="dkdark5" gradientUnits="userSpaceOnUse" cx="-42" cy="-48" r="182">
+                <stop offset="0" stop-color="#1B1B22"></stop>
+                <stop offset="0.42" stop-color="#0D0D12"></stop>
+                <stop offset="1" stop-color="#040406"></stop>
+              </radialGradient>
+              <linearGradient id="dkrim5" gradientUnits="userSpaceOnUse" x1="-72" y1="-74" x2="76" y2="84">
+                <stop offset="0" stop-color="#000000" stop-opacity="0.4"></stop>
+                <stop offset="0.5" stop-color="#000000" stop-opacity="0.12"></stop>
+                <stop offset="1" stop-color="#F4E4B8" stop-opacity="0.55"></stop>
+              </linearGradient>
+              <linearGradient id="dkring5" gradientUnits="userSpaceOnUse" x1="-104" y1="-104" x2="104" y2="104">
+                <stop offset="0" stop-color="#E4E4F0"></stop>
+                <stop offset="0.45" stop-color="#9090A8"></stop>
+                <stop offset="1" stop-color="#444462"></stop>
+              </linearGradient>
+              <linearGradient id="dkog5" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="74" y2="0" spreadMethod="repeat">
+                <stop offset="0" stop-color="#fff" stop-opacity="0"></stop>
+                <stop offset="0.5" stop-color="#fff" stop-opacity="0.11"></stop>
+                <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+              </linearGradient>
+              <clipPath id="dkow5" clipPathUnits="userSpaceOnUse"><circle r="100"></circle></clipPath>
+            </defs>
+            <g class="dk-core" style="transform-box:view-box;transform-origin:0 0">
+              <circle r="138" fill="url(#dkglow5)"></circle>
+              <path ref="{{ ringBackRef }}" d="" fill="none" stroke="#32324A" stroke-width="2" stroke-linecap="round"></path>
+              <circle r="100" fill="url(#dkball5)"></circle>
+              <g clip-path="url(#dkow5)"><g class="dk-surf"><rect x="-260" y="-110" width="520" height="220" fill="url(#dkog5)"></rect></g></g>
+              <path ref="{{ shadowRef }}" d="M -84.4 -53.7 A 118 38 45 0 0 0 50.7 A 118 38 -45 0 0 84.4 -53.7 A 100 100 0 0 0 -84.4 -53.7 Z M 0 50.7 A 118 38 45 0 0 53.7 84.4 A 100 100 0 0 1 -53.7 84.4 A 118 38 -45 0 0 0 50.7 Z" fill="url(#dkdark5)"></path>
+              <path ref="{{ ringOverRef }}" d="" fill="none" stroke="#FFE8D0" stroke-opacity="0.2" stroke-width="2" stroke-linecap="round"></path>
+              <path ref="{{ ringOutRef }}" d="M 83.4 83.4 A 118 38 45 0 1 -83.4 -83.4 A 118 38 45 0 1 83.4 83.4 Z M -83.4 83.4 A 118 38 -45 0 1 83.4 -83.4 A 118 38 -45 0 1 -83.4 83.4 Z" fill="none" stroke="url(#dkring5)" stroke-width="2.1" stroke-linecap="round"></path>
+              <circle r="100" fill="none" stroke="url(#dkrim5)" stroke-width="1.6"></circle>
+            </g>
+          </svg>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#6A6A80;text-align:center">THE MARK, IN ORGANIZATION GOLD</div>
+        </div>
+      </section>
+
+      <section style="border-top:1px solid #18181E">
+        <div style="max-width:1320px;margin:0 auto;padding:clamp(38px,6vw,76px) clamp(16px,4vw,44px)">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1px;background:#18181E;border:1px solid #18181E">
+            <sc-for list="{{ orgUnits }}" as="u" hint-placeholder-count="5">
+              <div style="background:#0C0C0F;padding:30px 26px;display:flex;flex-direction:column;gap:11px;min-height:234px" style-hover="background:#111115">
+                <div style="font-size:21px;font-weight:600;letter-spacing:-0.02em">{{ u.name }}</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:#FF5500">{{ u.kind }}</div>
+                <div style="font-size:14px;line-height:1.62;color:#8585A0;flex:1">{{ u.desc }}</div>
+                <a href="{{ u.href }}" target="_blank" rel="noreferrer" style="font-size:13px;font-weight:500">{{ u.link }}</a>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+
+      <section style="border-top:1px solid #18181E;background:#0C0C0F">
+        <div style="max-width:1320px;margin:0 auto;padding:clamp(46px,7vw,96px) clamp(16px,4vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,5vw,70px)">
+          <div>
+            <h2 style="font-size:clamp(23px,2.8vw,36px);line-height:1.08;letter-spacing:-0.03em;font-weight:600;margin:0 0 18px">Start your own DAO.</h2>
+            <p style="font-size:16px;line-height:1.68;color:#8585A0;margin:0 0 16px;text-wrap:pretty">Anyone — a person, a team, a project or an initiative — can create their own DAO and link it to the federation. Over time, DAOs accumulate federative weight and voting power over federation resources and decisions.</p>
+            <p style="font-size:16px;line-height:1.68;color:#8585A0;margin:0;text-wrap:pretty">Support requests are made only where there is no other alternative: resource efficiency matters here, and the main projects are the priority.</p>
+          </div>
+          <div style="border-left:1px solid #18181E;padding-left:clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:22px">
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#FF5500;margin-bottom:6px">01 — PROPOSE</div>
+              <div style="font-size:14px;color:#8585A0;line-height:1.6">Present the initiative to the community through the issues.</div>
+            </div>
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#FF5500;margin-bottom:6px">02 — LINK</div>
+              <div style="font-size:14px;color:#8585A0;line-height:1.6">Register the DAO against the federation.</div>
+            </div>
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;color:#FF5500;margin-bottom:6px">03 — ACCUMULATE</div>
+              <div style="font-size:14px;color:#8585A0;line-height:1.6">Deliver work, gain federative weight, gain voting power.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isFn }}" hint-placeholder-val="{{ true }}">
+      <div class="dk-page">
+      <section style="max-width:1320px;margin:0 auto;padding:clamp(42px,6vw,78px) clamp(16px,4vw,44px)">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#FF5500;margin-bottom:22px">Open functions</div>
+        <h1 style="font-size:clamp(36px,5.4vw,72px);line-height:1;letter-spacing:-0.04em;font-weight:700;margin:0 0 24px;max-width:20ch">Take a function. Any size.</h1>
+        <p style="font-size:clamp(16px,1.3vw,19px);line-height:1.62;color:#9898A8;max-width:58ch;margin:0 0 34px;text-wrap:pretty">Every issue is fragmented into functions small enough for one person to finish. Pick one, claim it in the issue thread, deliver it through the community review branch.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <sc-for list="{{ fnFilters }}" as="f" hint-placeholder-count="5">
+            <div onClick="{{ f.onClick }}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;padding:8px 13px;cursor:pointer;border:1px solid {{ f.bd }};background:{{ f.bg }};color:{{ f.fg }}">{{ f.label }}</div>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="max-width:1320px;margin:0 auto;padding:0 clamp(16px,4vw,44px) clamp(54px,8vw,110px)">
+        <div style="border:1px solid #18181E;border-bottom:none">
+          <sc-for list="{{ fnRows }}" as="r" hint-placeholder-count="8">
+            <div style="border-bottom:1px solid #18181E;padding:20px 22px;display:flex;gap:clamp(12px,2.4vw,30px);align-items:center;flex-wrap:wrap;background:#0C0C0F" style-hover="background:#111115">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#FF5500;letter-spacing:0.08em;width:84px;flex-shrink:0">{{ r.id }}</div>
+              <div style="flex:1;min-width:220px">
+                <div style="font-size:16px;font-weight:500;letter-spacing:-0.01em;margin-bottom:4px">{{ r.title }}</div>
+                <div style="font-size:12.5px;color:#65657A">{{ r.meta }}</div>
+              </div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#9898A8;border:1px solid #242434;padding:5px 9px;flex-shrink:0">{{ r.level }}</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;color:#65657A;width:66px;flex-shrink:0">{{ r.effort }}</div>
+              <div onClick="{{ goJoin }}" style="font-size:13px;font-weight:600;color:#FF5500;cursor:pointer;flex-shrink:0" style-hover="color:#FF7A33">Claim →</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6A6A80;margin-top:16px;letter-spacing:0.06em">SAMPLE BOARD — TO BE SYNCED FROM GITHUB.COM/DRAYKERDK ISSUES</div>
+      </section>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isDocs }}" hint-placeholder-val="{{ true }}">
+      <div class="dk-page">
+      <section style="max-width:1320px;margin:0 auto;padding:clamp(42px,6vw,78px) clamp(16px,4vw,44px)">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#FF5500;margin-bottom:22px">Docs &amp; papers</div>
+        <h1 style="font-size:clamp(36px,5.4vw,72px);line-height:1;letter-spacing:-0.04em;font-weight:700;margin:0 0 24px;max-width:22ch">Everything is written down.</h1>
+        <p style="font-size:clamp(16px,1.3vw,19px);line-height:1.62;color:#9898A8;max-width:62ch;margin:0;text-wrap:pretty">All proposed resolutions presented here are solutions to the requirements of Dk and the Drayker platform — only those requirements are final. These motions illustrate what should be done; the definitive architecture will be structured around optimal solutions developed with metaprogramming intelligent algorithms and research organized through DFMP.</p>
+      </section>
+
+      <section style="border-top:1px solid #18181E">
+        <div style="max-width:1320px;margin:0 auto;padding:clamp(38px,6vw,72px) clamp(16px,4vw,44px)">
+          <div style="border:1px solid #18181E;border-bottom:none">
+            <sc-for list="{{ docs }}" as="d" hint-placeholder-count="7">
+              <a href="{{ d.href }}" target="_blank" rel="noreferrer" style="border-bottom:1px solid #18181E;padding:22px;display:flex;gap:clamp(12px,2.4vw,28px);align-items:center;flex-wrap:wrap;background:#0C0C0F;color:#EDECF0" style-hover="background:#111115">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#6A6A80;width:96px;flex-shrink:0;letter-spacing:0.08em">{{ d.tag }}</div>
+                <div style="flex:1;min-width:230px">
+                  <div style="font-size:17px;font-weight:600;letter-spacing:-0.015em;margin-bottom:4px">{{ d.name }}</div>
+                  <div style="font-size:13.5px;color:#8585A0;line-height:1.5">{{ d.desc }}</div>
+                </div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#FF5500">{{ d.host }} →</div>
+              </a>
+            </sc-for>
+          </div>
+          <p style="font-size:13px;color:#6A6A80;margin:18px 0 0;line-height:1.6">This work is licensed under a Creative Commons Attribution 4.0 International License. Every site is open source.</p>
+        </div>
+      </section>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isJoin }}" hint-placeholder-val="{{ true }}">
+      <div class="dk-page">
+      <section style="max-width:1320px;margin:0 auto;padding:clamp(42px,6vw,78px) clamp(16px,4vw,44px) clamp(54px,8vw,110px);display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(30px,5vw,80px)">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#FF5500;margin-bottom:22px">Volunteer</div>
+          <h1 style="font-size:clamp(34px,4.6vw,64px);line-height:1;letter-spacing:-0.04em;font-weight:700;margin:0 0 24px;max-width:18ch">There will be no shortage of things to do.</h1>
+          <p style="font-size:16px;line-height:1.68;color:#8585A0;margin:0 0 28px;max-width:46ch;text-wrap:pretty">You do not need to know the whole system to contribute to it — that is the point of the protocol. Tell us what you are good at and what you care about, and we will point you at functions that fit.</p>
+          <div style="display:flex;flex-direction:column;gap:14px;border-top:1px solid #18181E;padding-top:24px">
+            <div style="font-size:14px;color:#8585A0;line-height:1.6"><strong style="color:#EDECF0;font-weight:500">No obligation of hours.</strong> Functions are sized so that finishing one is always possible.</div>
+            <div style="font-size:14px;color:#8585A0;line-height:1.6"><strong style="color:#EDECF0;font-weight:500">Everything is documented.</strong> Your work stays attributed, reviewable and permanent.</div>
+            <div style="font-size:14px;color:#8585A0;line-height:1.6"><strong style="color:#EDECF0;font-weight:500">Not only code.</strong> Research, translation, design, review, governance and outreach all have open functions.</div>
+          </div>
+        </div>
+
+        <div style="border:1px solid #18181E;background:#0C0C0F;padding:clamp(24px,3.4vw,40px)">
+          <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#FF5500;margin-bottom:26px">APPLICATION</div>
+            <div style="display:flex;flex-direction:column;gap:20px">
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <label style="font-size:12px;letter-spacing:0.06em;color:#8585A0;text-transform:uppercase">Name</label>
+                <input value="{{ fName }}" onChange="{{ setName }}" placeholder="How should we call you?" style="background:#08080A;border:1px solid #222230;color:#EDECF0;padding:12px 14px;font-size:15px;outline:none;width:100%" style-focus="border-color:#FF5500" />
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <label style="font-size:12px;letter-spacing:0.06em;color:#8585A0;text-transform:uppercase">Email or GitHub handle</label>
+                <input value="{{ fContact }}" onChange="{{ setContact }}" placeholder="you@mail.com / @handle" style="background:#08080A;border:1px solid #222230;color:#EDECF0;padding:12px 14px;font-size:15px;outline:none;width:100%" style-focus="border-color:#FF5500" />
+              </div>
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <label style="font-size:12px;letter-spacing:0.06em;color:#8585A0;text-transform:uppercase">Where you can help</label>
+                <div style="display:flex;gap:8px;flex-wrap:wrap">
+                  <sc-for list="{{ skills }}" as="s" hint-placeholder-count="8">
+                    <div onClick="{{ s.onClick }}" style="font-size:12.5px;padding:8px 13px;cursor:pointer;border:1px solid {{ s.bd }};background:{{ s.bg }};color:{{ s.fg }}">{{ s.label }}</div>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <label style="font-size:12px;letter-spacing:0.06em;color:#8585A0;text-transform:uppercase">Hours a week you can give</label>
+                <div style="display:flex;gap:8px;flex-wrap:wrap">
+                  <sc-for list="{{ hours }}" as="h" hint-placeholder-count="4">
+                    <div onClick="{{ h.onClick }}" style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 14px;cursor:pointer;border:1px solid {{ h.bd }};background:{{ h.bg }};color:{{ h.fg }}">{{ h.label }}</div>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <label style="font-size:12px;letter-spacing:0.06em;color:#8585A0;text-transform:uppercase">What draws you to Drayker?</label>
+                <textarea value="{{ fWhy }}" onChange="{{ setWhy }}" rows="4" placeholder="A problem you want solved, a project you already follow…" style="background:#08080A;border:1px solid #222230;color:#EDECF0;padding:12px 14px;font-size:15px;outline:none;width:100%;resize:vertical;line-height:1.55" style-focus="border-color:#FF5500"></textarea>
+              </div>
+              <div onClick="{{ submit }}" style="background:#FF5500;color:#08080A;padding:16px;font-size:14px;font-weight:600;cursor:pointer;text-align:center;box-shadow:0 0 24px rgba(255,85,0,0.25)" style-hover="background:#FF7A33;box-shadow:0 0 36px rgba(255,85,0,0.4)">Send application</div>
+              <div style="font-size:12px;color:#6A6A80;line-height:1.6">Applications are read by the volunteers council. Expect an answer within a week.</div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:16px;padding:30px 0;min-height:300px;justify-content:center">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#FF5500">RECEIVED</div>
+              <div style="font-size:26px;font-weight:600;letter-spacing:-0.025em;line-height:1.15">Welcome, {{ sentName }}.</div>
+              <p style="font-size:15px;line-height:1.66;color:#8585A0;margin:0">Your application is in. While you wait, open the board and look at the functions tagged with what you picked — nothing stops you from claiming one today.</p>
+              <div onClick="{{ goFn }}" style="align-self:flex-start;border:1px solid #2E2E38;color:#EDECF0;padding:13px 22px;font-size:14px;font-weight:500;cursor:pointer;margin-top:6px" style-hover="border-color:#FF5500;color:#FF5500">See open functions</div>
+            </div>
+          </sc-if>
+        </div>
+      </section>
+      </div>
+    </sc-if>
+
+  </main>
+
+  <footer style="border-top:1px solid #18181E;background:#0C0C0F">
+    <div style="max-width:1320px;margin:0 auto;padding:clamp(38px,5vw,64px) clamp(16px,4vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:clamp(26px,4vw,54px)">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+<svg viewBox="-106 -106 212 212" width="24" height="24" style="display:block">
+          <ellipse cx="0" cy="0" rx="119" ry="38" transform="rotate(45)" fill="none" stroke="#8585A0" stroke-width="3.6"></ellipse>
+          <ellipse cx="0" cy="0" rx="119" ry="38" transform="rotate(-45)" fill="none" stroke="#8585A0" stroke-width="3.6"></ellipse>
+          <circle r="100" fill="#FF5500"></circle>
+          <path d="M -84.4 -53.7 A 119 38 45 0 0 0 51.2 A 119 38 -45 0 0 84.4 -53.7 A 100 100 0 0 0 -84.4 -53.7 Z M 0 51.2 A 119 38 45 0 0 53.7 84.4 A 100 100 0 0 1 -53.7 84.4 A 119 38 -45 0 0 0 51.2 Z" fill="#000000"></path>
+              
+        </svg>
+          <span style="font-size:15px;font-weight:600;letter-spacing:-0.02em">Drayker</span>
+        </div>
+        <div style="font-size:13px;color:#65657A;line-height:1.6;max-width:30ch">Go beyond things. Do more with less.</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#6A6A80;margin-bottom:4px">SYSTEM</div>
+        <div onClick="{{ goDfm }}" style="font-size:13.5px;color:#9898A8;cursor:pointer" style-hover="color:#FF5500">DFM Protocol</div>
+        <div onClick="{{ goDk }}" style="font-size:13.5px;color:#9898A8;cursor:pointer" style-hover="color:#FF5500">Dk</div>
+        <div onClick="{{ goEco }}" style="font-size:13.5px;color:#9898A8;cursor:pointer" style-hover="color:#FF5500">Ecosystem</div>
+        <div onClick="{{ goDocs }}" style="font-size:13.5px;color:#9898A8;cursor:pointer" style-hover="color:#FF5500">Docs</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#6A6A80;margin-bottom:4px">PARTICIPATE</div>
+        <div onClick="{{ goFn }}" style="font-size:13.5px;color:#9898A8;cursor:pointer" style-hover="color:#FF5500">Open functions</div>
+        <div onClick="{{ goJoin }}" style="font-size:13.5px;color:#9898A8;cursor:pointer" style-hover="color:#FF5500">Volunteer</div>
+        <div onClick="{{ goOrgPage }}" style="font-size:13.5px;color:#9898A8;cursor:pointer" style-hover="color:#FF5500">Organization</div>
+        <a href="https://github.com/draykerdk" target="_blank" rel="noreferrer" style="font-size:13.5px;color:#9898A8" style-hover="color:#FF5500">GitHub</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:9px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#6A6A80;margin-bottom:4px">ELSEWHERE</div>
+        <a href="https://steemit.com/@drayker" target="_blank" rel="noreferrer" style="font-size:13.5px;color:#9898A8" style-hover="color:#FF5500">Steemit</a>
+        <a href="https://medium.com/drayker" target="_blank" rel="noreferrer" style="font-size:13.5px;color:#9898A8" style-hover="color:#FF5500">Medium</a>
+        <a href="https://twitter.com/Draykerdk" target="_blank" rel="noreferrer" style="font-size:13.5px;color:#9898A8" style-hover="color:#FF5500">Twitter</a>
+      </div>
+    </div>
+    <div style="border-top:1px solid #18181E">
+      <div style="max-width:1320px;margin:0 auto;padding:18px clamp(16px,4vw,44px);display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#6A6A80;letter-spacing:0.06em">CC BY 4.0 · OPEN SOURCE · NON-PROFIT</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#6A6A80;letter-spacing:0.06em">{{ domain }}</div>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;site&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;com&quot;,&quot;org&quot;],&quot;default&quot;:&quot;org&quot;,&quot;tsType&quot;:&quot;'com' | 'org'&quot;,&quot;section&quot;:&quot;Site&quot;}}">
+const A = '#FF5500';
+
+const PRINCIPLES = [
+  { n: '01', title: 'Simplicity and cleanliness', body: 'The smallest structure that solves the problem is the correct one. Complexity has to justify itself.' },
+  { n: '02', title: 'Automation', body: 'Anything a machine can carry, a machine carries. Human attention is the scarce resource.' },
+  { n: '03', title: 'Traceability', body: 'Undocumented work does not exist. Every function traces back to the model it came from.' },
+  { n: '04', title: 'Agile development is evolutionary', body: 'The protocol changes without breaking what was built on it. Nothing is frozen; nothing is lost.' },
+  { n: '05', title: 'Worldwide collaboration', body: 'Strangers on opposite sides of the planet must be able to work on the same issue without a manager in between.' },
+  { n: '06', title: 'International community, local emergence', body: 'One global body, many local initiatives. Autonomy at the edge, coherence at the centre.' }
+];
+
+const STEPS = [
+  { n: '01', title: 'Model', tag: 'Modularization of the issue',
+    body: 'Modeling and modularization of an issue to be solved, defining the initial strategy in a Bayesian model.',
+    note: 'Before any code, the issue is expressed as a model: what is known, what is assumed, what would change the strategy.' },
+  { n: '02', title: 'Fragment', tag: 'Partition into small functions',
+    body: 'Partitioning and fragmentation of the problem, forming small functions.',
+    note: 'A function is the unit of collaboration: small enough that one person can complete it, defined enough that its result composes with the rest.' },
+  { n: '03', title: 'Distribute', tag: 'Among collaborators, worldwide',
+    body: 'Distribution of functions among collaborators, through decentralized peer review.',
+    note: 'Nobody assigns work. Functions are open; contributors claim what matches their skill, anywhere in the world.' },
+  { n: '04', title: 'Review', tag: 'Decentralized peer review',
+    body: 'Ideas are discussed with communities and councils and turned into a comprehensive, detailed and widely revised paper.',
+    note: 'Validation runs alongside development instead of after it. Papers pass through the DAOs and councils depending on their purpose.' },
+  { n: '05', title: 'Legitimate', tag: 'Community review branch → master',
+    body: 'Once legitimated, a pull request goes through the community review branch to be legitimized for master.',
+    note: 'Updates travel first through the branch of the paper\u2019s own validation status. The history of a decision is always traceable.' }
+];
+
+const DK_PARTS = [
+  { name: 'BSDK', status: 'BASE STRUCTURE', href: 'https://bsdk.drayker.org', link: 'bsdk.drayker.org →',
+    desc: 'The DNA of the kernel — an intelligent, evolutionary base structure that enables Dk and the interaction, cooperation and feedback loop between humans and machines.' },
+  { name: 'Dk Network', status: 'PARALLEL NETWORK', href: 'https://dknetwork.drayker.org', link: 'dknetwork.drayker.org →',
+    desc: 'A parallel internet built on Dk — distributed, secure, fail-safe and intelligent by construction.' },
+  { name: 'LCrypt', status: 'SECURITY', href: 'https://lc.drayker.org', link: 'lc.drayker.org →',
+    desc: 'Living Cryptography — an evolutionary encrypted tunnel that authenticates the system end to end. If authentication fails, the encryption itself changes.' },
+  { name: 'UID', status: 'IDENTITY', href: 'https://github.com/draykerdk/uid', link: 'github.com/draykerdk/uid →',
+    desc: 'Universal Identity — the super app and primary interface for every application on the Drayker platform.' }
+];
+
+const ECO = [
+  { layer: 'KERNEL', name: 'Dk', status: 'IN RESEARCH', filter: 'kernel', desc: 'A unified intelligence, organization and computing system — a stand-alone alternative to the essential systems of the future.' },
+  { layer: 'KERNEL', name: 'BSDK', status: 'IN RESEARCH', filter: 'kernel', desc: 'Base structure for system construction and massively distributed networks. The DNA of the kernel.' },
+  { layer: 'NETWORK', name: 'Dk Network', status: 'IN RESEARCH', filter: 'kernel', desc: 'A parallel internet: distributed, secure, fail-safe and intelligent by construction.' },
+  { layer: 'SECURITY', name: 'LCrypt', status: 'IN RESEARCH', filter: 'kernel', desc: 'Encrypted, evolutionary network tunnel that authenticates and protects the distributed computing system supporting the whole platform.' },
+  { layer: 'PLATFORM', name: 'UID', status: 'IN DESIGN', filter: 'platform', desc: 'Universal identity and super app — the basis of every application on the platform.' },
+  { layer: 'PLATFORM', name: 'Distributed support', status: 'CONCEPT', filter: 'platform', desc: 'Physical and virtual distributed support for the people and machines running the network.' },
+  { layer: 'PROTOCOL', name: 'DFM / DFMP', status: 'ACTIVE', filter: 'protocol', desc: 'The collaboration paradigm and the proposal process every project and motion for resolution is built with.' },
+  { layer: 'PROTOCOL', name: 'MetaDFMP', status: 'IN RESEARCH', filter: 'protocol', desc: 'Formally verifiable construction protocol for simulation-based metaprogramming, evolutionary computation and artificial intelligence.' },
+  { layer: 'ORGANIZATION', name: 'DAF', status: 'ACTIVE', filter: 'org', desc: 'Decentralized Autonomous Federation — the alliance basis between Drayker DAOs and DACs, and the non-profit that manages resources.' },
+  { layer: 'ORGANIZATION', name: 'Emergence Initiative', status: 'ACTIVE', filter: 'org', desc: 'A collaborative initiative within Drayker that simplifies the main collaboration needs of the volunteers.' },
+  { layer: 'APPLICATION', name: 'Open science & health', status: 'CONCEPT', filter: 'apps', desc: 'Smart health built on Dk and open science — one of the first domains the kernel is meant to serve.' },
+  { layer: 'APPLICATION', name: 'Value unit', status: 'CONCEPT', filter: 'apps', desc: 'An intelligent, autonomous value unit with its own resource-distribution ecosystem.' }
+];
+
+const ECO_FILTERS = [
+  { id: 'all', label: 'ALL' }, { id: 'protocol', label: 'PROTOCOL' }, { id: 'kernel', label: 'KERNEL' },
+  { id: 'platform', label: 'PLATFORM' }, { id: 'org', label: 'ORGANIZATION' }, { id: 'apps', label: 'APPLICATIONS' }
+];
+
+const ORG_UNITS = [
+  { name: 'DAF', kind: 'DECENTRALIZED AUTONOMOUS FEDERATION', href: 'https://github.com/draykerdk/daf', link: 'github.com/draykerdk/daf →',
+    desc: 'The non-profit federation that manages resources and forms the alliance basis between all Drayker DAOs and DACs.' },
+  { name: 'DAOs & DACs', kind: 'AUTONOMOUS UNITS', href: 'https://github.com/draykerdk', link: 'Existing units →',
+    desc: 'Each project, team or initiative organizes itself as an autonomous unit linked to the federation, with its own scope and its own decisions.' },
+  { name: 'Councils', kind: 'ADVISORY & VALIDATION', href: 'https://dfmp.drayker.org', link: 'How validation works →',
+    desc: 'Advisers are groups that discuss and validate papers alongside the communities, depending on the purpose of each proposal.' },
+  { name: 'DFMP', kind: 'PROPOSAL PROCESS', href: 'https://github.com/draykerdk/dfmp', link: 'The process →',
+    desc: 'The formal path a proposal takes from an issue thread to a legitimated paper on master.' },
+  { name: 'Volunteers portal', kind: 'PEOPLE', href: 'https://drayker.org', link: 'drayker.org →',
+    desc: 'Where new collaborators arrive, find open functions and enter the ecosystem. Our work is primarily voluntary.' }
+];
+
+const FN_ROWS = [
+  { id: 'FN-0142', title: 'Write the DFMP-000 reference implementation in plain Markdown', meta: 'Documentation · DFMP', level: 'ENTRY', effort: '~4h', filter: 'docs' },
+  { id: 'FN-0147', title: 'Translate the DFM protocol paper into Spanish', meta: 'Translation · DFMP', level: 'ENTRY', effort: '~6h', filter: 'translation' },
+  { id: 'FN-0151', title: 'Model the Bayesian strategy template as a reusable issue form', meta: 'Research · MetaDFMP', level: 'ADVANCED', effort: '~12h', filter: 'research' },
+  { id: 'FN-0155', title: 'Specify the federative weight calculation for linked DAOs', meta: 'Governance · DAF', level: 'ADVANCED', effort: '~16h', filter: 'governance' },
+  { id: 'FN-0158', title: 'Prototype the UID onboarding flow', meta: 'Design · UID', level: 'INTERMEDIATE', effort: '~10h', filter: 'design' },
+  { id: 'FN-0163', title: 'Build the open-functions board sync from GitHub issues', meta: 'Code · Emergence Initiative', level: 'INTERMEDIATE', effort: '~8h', filter: 'code' },
+  { id: 'FN-0167', title: 'Review the LCrypt authentication-failure re-encryption model', meta: 'Peer review · LCrypt', level: 'ADVANCED', effort: '~5h', filter: 'research' },
+  { id: 'FN-0170', title: 'Set up the community review branch checklist', meta: 'Governance · DFMP', level: 'ENTRY', effort: '~3h', filter: 'governance' },
+  { id: 'FN-0174', title: 'Diagram the BSDK module topology for the docs site', meta: 'Design · BSDK', level: 'INTERMEDIATE', effort: '~7h', filter: 'design' },
+  { id: 'FN-0178', title: 'Write contribution guides for first-time volunteers', meta: 'Documentation · Volunteers portal', level: 'ENTRY', effort: '~4h', filter: 'docs' }
+];
+
+const FN_FILTERS = [
+  { id: 'all', label: 'ALL' }, { id: 'code', label: 'CODE' }, { id: 'research', label: 'RESEARCH' },
+  { id: 'design', label: 'DESIGN' }, { id: 'docs', label: 'DOCUMENTATION' },
+  { id: 'translation', label: 'TRANSLATION' }, { id: 'governance', label: 'GOVERNANCE' }
+];
+
+const DOCS = [
+  { tag: 'PROTOCOL', name: 'DFMP', host: 'dfmp.drayker.org', href: 'https://dfmp.drayker.org', desc: 'The distributed function modularization / modeling protocol and its proposal process.' },
+  { tag: 'KERNEL', name: 'BSDK docs', host: 'bsdk.drayker.org', href: 'https://bsdk.drayker.org', desc: 'Base Structure DK — DNA Kernel FM. Motions for resolution on the kernel base structure.' },
+  { tag: 'NETWORK', name: 'Dk Network docs', host: 'dknetwork.drayker.org', href: 'https://dknetwork.drayker.org', desc: 'The parallel network built on Dk.' },
+  { tag: 'SECURITY', name: 'Living Cryptography', host: 'lc.drayker.org', href: 'https://lc.drayker.org', desc: 'Authentication and encryption across the whole distributed system.' },
+  { tag: 'ORGANIZATION', name: 'DAF', host: 'github.com/draykerdk', href: 'https://github.com/draykerdk/daf', desc: 'Decentralized Autonomous Federation — organization and governance.' },
+  { tag: 'IDENTITY', name: 'UID', host: 'github.com/draykerdk', href: 'https://github.com/draykerdk/uid', desc: 'Universal Identity Drayker — the super app that serves as the basis for platform applications.' },
+  { tag: 'REPOSITORIES', name: 'All Drayker repositories', host: 'github.com/draykerdk', href: 'https://github.com/draykerdk', desc: 'Every project, paper and protocol in the open.' }
+];
+
+const SKILLS = ['Code', 'Research', 'Design', 'Documentation', 'Translation', 'Governance', 'Outreach', 'Not sure yet'];
+const HOURS = ['1–3', '4–8', '9–15', '15+'];
+
+const NAV_COM = [
+  { id: 'manifesto', label: 'Manifesto' }, { id: 'dk', label: 'Dk' }, { id: 'dfm', label: 'DFM' },
+  { id: 'eco', label: 'Ecosystem' }, { id: 'org', label: 'Organization' }, { id: 'docs', label: 'Docs' }
+];
+const NAV_ORG = [
+  { id: 'fn', label: 'Open functions' }, { id: 'dfm', label: 'DFM' }, { id: 'org', label: 'Organization' },
+  { id: 'eco', label: 'Ecosystem' }, { id: 'docs', label: 'Docs' }, { id: 'manifesto', label: 'Manifesto' }
+];
+
+class Component extends DCLogic {
+  state = {
+    site: null, page: 'home', dfm: 0, ecoF: 'all', fnF: 'all',
+    name: '', contact: '', why: '', skills: [], hours: '', sent: false, sentName: ''
+  };
+
+  get site() { return this.state.site || this.props.site || 'com'; }
+
+  markRef = React.createRef();
+  shadowRef = React.createRef();
+  ringOverRef = React.createRef();
+  ringOutRef = React.createRef();
+  ringBackRef = React.createRef();
+  gaze = { x: 0, y: 0.42 };
+  gazeT = { x: 0, y: 0.42 };
+
+  // ============================================================================
+  // MARK PHYSICS — draws the ring as if it were two tilted metal hoops orbiting
+  // the sphere, redrawn every frame from a single "gaze" direction (gx, gy).
+  //
+  // Model: the ring is two identical great-circles of radius RR=118, both tilted
+  // by the same angle (0.733 rad / 42°) around a unit vector w = the gaze point
+  // on the sphere (w.z solved so |w|=1 — it's the point on the front hemisphere
+  // the "eye" is looking at). u1/u2 build an orthonormal frame around w; vs[0]/
+  // vs[1] are that frame rotated ±42° around w — the two planes the ring hoops
+  // sit in (this is what makes them look like a crossed double ring, like an
+  // armillary sphere / gyroscope, that reorients as the gaze moves).
+  //
+  // pt(v, t) walks one hoop: a point at angle t around the circle in plane v.
+  // For ~220 samples per hoop we classify each point by depth/radius:
+  //   'over' — in front of the sphere (z>0) but projecting INSIDE the sphere's
+  //            silhouette (radius < R) — would be hidden by the ball; drawn as
+  //            a soft overlay stroke (ringOverRef) so the ring reads as passing
+  //            through/around the ball rather than just floating in front.
+  //   'out'  — in front of the sphere AND outside its silhouette — the normal,
+  //            fully visible ring arcs (ringOutRef, gradient dkring).
+  //   'back' — behind the sphere (z<0, radius > R) — dimmer arcs (ringBackRef).
+  // Consecutive same-class samples are joined into one SVG path per run.
+  //
+  // The shadow wedge (shadowRef) is built separately: from the gaze point P,
+  // ray-march outward along both hoops (rays[]) until each ray crosses the ball
+  // radius R, binary-search the exact crossing point (hit()), then stitch the
+  // four crossing points plus the arc between them into one dark "night side"
+  // patch. This is what makes the shadow terminator rotate correctly with gaze.
+  // ============================================================================
+  markGeom(gx, gy) {
+    const R = 100, RR = 118, CA = Math.cos(0.733), SA = Math.sin(0.733);
+    const wz = Math.sqrt(Math.max(0.25, 1 - gx * gx - gy * gy));
+    const w = [gx, gy, wz];
+    let u1 = [1 - w[0] * w[0], -w[0] * w[1], -w[0] * w[2]];
+    const n1 = Math.hypot(u1[0], u1[1], u1[2]) || 1;
+    u1 = [u1[0] / n1, u1[1] / n1, u1[2] / n1];
+    const u2 = [w[1] * u1[2] - w[2] * u1[1], w[2] * u1[0] - w[0] * u1[2], w[0] * u1[1] - w[1] * u1[0]];
+    const vs = [
+      [CA * u1[0] + SA * u2[0], CA * u1[1] + SA * u2[1], CA * u1[2] + SA * u2[2]],
+      [CA * u1[0] - SA * u2[0], CA * u1[1] - SA * u2[1], CA * u1[2] - SA * u2[2]]
+    ];
+    const pt = (v, t) => {
+      const c = Math.cos(t), s = Math.sin(t);
+      return [RR * (w[0] * c + v[0] * s), RR * (w[1] * c + v[1] * s), RR * (w[2] * c + v[2] * s)];
+    };
+    const f = (n) => Math.round(n * 10) / 10;
+
+    const segs = { over: [], out: [], back: [] };
+    for (const v of vs) {
+      let cur = null, kind = '', prev = null;
+      const N = 220;
+      for (let i = 0; i <= N; i++) {
+        const p = pt(v, i / N * Math.PI * 2);
+        const r = Math.hypot(p[0], p[1]);
+        const k = p[2] > 0 ? (r < R ? 'over' : 'out') : (r > R ? 'back' : '');
+        if (k !== kind) {
+          if (k) {
+            const s = prev || p;
+            cur = ['M ' + f(s[0]) + ' ' + f(s[1]), 'L ' + f(p[0]) + ' ' + f(p[1])];
+            segs[k].push(cur);
+          }
+          kind = k;
+        } else if (k) cur.push('L ' + f(p[0]) + ' ' + f(p[1]));
+        prev = p;
+      }
+    }
+
+    const P = [RR * w[0], RR * w[1]];
+    const hit = (a, b) => {
+      let lo = 0, hi = 1;
+      for (let i = 0; i < 14; i++) {
+        const m = (lo + hi) / 2;
+        const x = a[0] + (b[0] - a[0]) * m, y = a[1] + (b[1] - a[1]) * m;
+        if (Math.hypot(x, y) < R) lo = m; else hi = m;
+      }
+      return [a[0] + (b[0] - a[0]) * lo, a[1] + (b[1] - a[1]) * lo];
+    };
+    const rays = [];
+    for (let ri = 0; ri < 2; ri++) for (const sg of [1, -1]) {
+      const seq = [];
+      let prev = P, end = null;
+      for (let k = 1; k <= 140; k++) {
+        const p = pt(vs[ri], sg * k * 0.0209);
+        if (Math.hypot(p[0], p[1]) >= R) { end = hit(prev, p); break; }
+        seq.push([p[0], p[1]]);
+        prev = [p[0], p[1]];
+      }
+      if (!end) {
+        const m = Math.hypot(prev[0], prev[1]) || 1;
+        end = [prev[0] / m * R, prev[1] / m * R];
+      }
+      rays.push({ sg: sg, seq: seq, end: end, psi: Math.atan2(end[1], end[0]) });
+    }
+    rays.sort((a, b) => a.psi - b.psi);
+
+    const inArc = (from, to, q) => {
+      let s = to - from; if (s < 0) s += Math.PI * 2;
+      let d2 = q - from; if (d2 < 0) d2 += Math.PI * 2;
+      return d2 <= s;
+    };
+    const dark = [];
+    for (let i = 0; i < 4; i++) {
+      const a = rays[i], b = rays[(i + 1) % 4];
+      if (inArc(a.psi, b.psi, -Math.PI / 2) || inArc(a.psi, b.psi, Math.PI / 2)) dark.push(i);
+    }
+    const useTB = dark.length === 2 && (dark[1] - dark[0]) % 2 === 0;
+
+    let dsh = '';
+    for (let i = 0; i < 4; i++) {
+      const a = rays[i], b = rays[(i + 1) % 4];
+      if (useTB ? dark.indexOf(i) < 0 : a.sg === b.sg) continue;
+      let span = b.psi - a.psi;
+      if (span < 0) span += Math.PI * 2;
+      dsh += 'M ' + f(P[0]) + ' ' + f(P[1]) + ' ';
+      for (const q of a.seq) dsh += 'L ' + f(q[0]) + ' ' + f(q[1]) + ' ';
+      dsh += 'L ' + f(a.end[0]) + ' ' + f(a.end[1]) + ' A ' + R + ' ' + R + ' 0 ' + (span > Math.PI ? 1 : 0) + ' 1 ' + f(b.end[0]) + ' ' + f(b.end[1]) + ' ';
+      for (let k = b.seq.length - 1; k >= 0; k--) dsh += 'L ' + f(b.seq[k][0]) + ' ' + f(b.seq[k][1]) + ' ';
+      dsh += 'Z ';
+    }
+    const join = (a) => a.map((s) => s.join(' ')).join(' ');
+    return { shadow: dsh, over: join(segs.over), out: join(segs.out), back: join(segs.back) };
+  }
+
+  paintMark() {
+    const g = this.markGeom(this.gaze.x, this.gaze.y);
+    const set = (ref, d) => { if (ref.current) ref.current.setAttribute('d', d); };
+    set(this.shadowRef, g.shadow);
+    set(this.ringOverRef, g.over);
+    set(this.ringOutRef, g.out);
+    set(this.ringBackRef, g.back);
+  }
+
+  // ============================================================================
+  // GAZE ANIMATION — drives markGeom() above every frame.
+  // onGaze (pointermove): converts cursor position into a normalized gaze
+  // target (gazeT), relative to the mark's own bounding box, clamped to radius
+  // 0.5 so the ring never spins fully edge-on.
+  // Idle drift: if the pointer hasn't moved for 2.4s, the target instead follows
+  // a slow combined sine/cosine (Lissajous-like) path, so the mark keeps a
+  // gentle life of its own when nobody is interacting.
+  // Each animation frame eases the live gaze 6% of the way toward the target
+  // (exponential smoothing/lerp) and, if it moved enough, calls paintMark() to
+  // recompute + re-set the path 'd' attributes directly on the SVG refs (no
+  // React re-render needed — keeps this at 60fps).
+  // ============================================================================
+  componentDidMount() {
+    this.lastMove = -9999;
+    this.onGaze = (ev) => {
+      const el = this.markRef.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      if (!r.width) return;
+      const k = r.width * 0.66;
+      let gx = (ev.clientX - (r.left + r.width / 2)) / k;
+      let gy = (ev.clientY - (r.top + r.height / 2)) / k;
+      const m = Math.hypot(gx, gy);
+      if (m > 0.5) { gx = gx / m * 0.5; gy = gy / m * 0.5; }
+      this.gazeT = { x: gx, y: gy };
+      this.lastMove = performance.now();
+    };
+    window.addEventListener('pointermove', this.onGaze, { passive: true });
+    const tick = () => {
+      const now = performance.now();
+      let t = this.gazeT;
+      if (now - this.lastMove > 2400) {
+        const s = now / 1000;
+        t = { x: Math.sin(s * 0.23) * 0.22 + Math.sin(s * 0.07) * 0.06, y: 0.34 + Math.cos(s * 0.17) * 0.17 };
+      }
+      const nx = this.gaze.x + (t.x - this.gaze.x) * 0.06;
+      const ny = this.gaze.y + (t.y - this.gaze.y) * 0.06;
+      if (Math.abs(nx - this.gaze.x) > 0.0002 || Math.abs(ny - this.gaze.y) > 0.0002) {
+        this.gaze = { x: nx, y: ny };
+        this.paintMark();
+      }
+      this.raf = requestAnimationFrame(tick);
+    };
+    this.paintMark();
+    this.raf = requestAnimationFrame(tick);
+  }
+
+  componentWillUnmount() {
+    cancelAnimationFrame(this.raf);
+    window.removeEventListener('pointermove', this.onGaze);
+  }
+
+  componentDidUpdate() { this.paintMark(); }
+
+  go = (page) => () => { this.setState({ page }); if (typeof window !== 'undefined') window.scrollTo(0, 0); };
+
+  chip = (active) => active
+    ? { bd: '#FF5500', bg: '#FF5500', fg: '#08080A' }
+    : { bd: '#222230', bg: 'transparent', fg: '#8585A0' };
+
+  diagram() {
+    const e = React.createElement;
+    const mono = { fontFamily: 'JetBrains Mono, monospace', fontSize: 9, fill: '#6A6A80', textAnchor: 'middle' };
+    const svg = (children) => e('svg', { viewBox: '0 0 340 200', style: { width: '100%', maxWidth: 380, height: 'auto', display: 'block' } }, children);
+    const i = this.state.dfm;
+    if (i === 0) return svg([
+      e('circle', { key: 'a', cx: 170, cy: 100, r: 76, fill: 'none', stroke: '#222230' }),
+      e('circle', { key: 'b', cx: 170, cy: 100, r: 52, fill: 'none', stroke: '#2C2C42' }),
+      e('circle', { key: 'c', cx: 170, cy: 100, r: 28, fill: 'none', stroke: A }),
+      e('circle', { key: 'd', cx: 170, cy: 100, r: 7, fill: A }),
+      e('line', { key: 'e', x1: 94, y1: 100, x2: 246, y2: 100, stroke: '#222230', strokeDasharray: '3 5' }),
+      e('line', { key: 'f', x1: 170, y1: 24, x2: 170, y2: 176, stroke: '#222230', strokeDasharray: '3 5' }),
+      e('text', { key: 'g', x: 170, y: 194, ...mono }, 'BAYESIAN MODEL · INITIAL STRATEGY')
+    ]);
+    if (i === 1) return svg([
+      e('rect', { key: 'a', x: 24, y: 64, width: 74, height: 74, fill: 'none', stroke: '#2C2C42' }),
+      e('line', { key: 'b', x1: 108, y1: 101, x2: 146, y2: 101, stroke: A }),
+      e('g', { key: 'c', fill: 'none', stroke: A }, [0, 1, 2].flatMap((r) => [0, 1, 2].map((c) =>
+        e('rect', { key: r + '-' + c, x: 160 + c * 40, y: 54 + r * 40, width: 30, height: 30 })))),
+      e('text', { key: 'd', x: 61, y: 52, ...mono }, 'ISSUE'),
+      e('text', { key: 'e', x: 215, y: 186, ...mono }, 'SMALL FUNCTIONS')
+    ]);
+    if (i === 2) {
+      const pts = [[60, 46], [280, 46], [40, 120], [300, 120], [106, 166], [234, 166]];
+      return svg([
+        e('g', { key: 'l', stroke: '#2C2C42' }, pts.map((p, k) => e('line', { key: k, x1: 170, y1: 100, x2: p[0], y2: p[1] }))),
+        e('rect', { key: 'r', x: 152, y: 82, width: 36, height: 36, fill: A }),
+        e('g', { key: 'n', fill: '#0C0C0F', stroke: A }, pts.map((p, k) => e('circle', { key: k, cx: p[0], cy: p[1], r: 11 }))),
+        e('text', { key: 't', x: 170, y: 194, ...mono }, 'DISTRIBUTED AMONG COLLABORATORS')
+      ]);
+    }
+    if (i === 3) return svg([
+      e('g', { key: 'a', fill: 'none', stroke: '#2C2C42' }, [
+        e('circle', { key: '1', cx: 80, cy: 70, r: 20 }),
+        e('circle', { key: '2', cx: 260, cy: 70, r: 20 }),
+        e('circle', { key: '3', cx: 170, cy: 146, r: 20 })
+      ]),
+      e('g', { key: 'b', stroke: A }, [
+        e('line', { key: '1', x1: 100, y1: 70, x2: 240, y2: 70 }),
+        e('line', { key: '2', x1: 88, y1: 88, x2: 152, y2: 132 }),
+        e('line', { key: '3', x1: 252, y1: 88, x2: 188, y2: 132 })
+      ]),
+      e('g', { key: 'c', fill: A }, [
+        e('circle', { key: '1', cx: 170, cy: 70, r: 4 }),
+        e('circle', { key: '2', cx: 120, cy: 110, r: 4 }),
+        e('circle', { key: '3', cx: 220, cy: 110, r: 4 })
+      ]),
+      e('text', { key: 'd', x: 170, y: 194, ...mono }, 'DECENTRALIZED PEER REVIEW')
+    ]);
+    return svg([
+      e('line', { key: 'a', x1: 30, y1: 150, x2: 310, y2: 150, stroke: '#2C2C42' }),
+      e('line', { key: 'b', x1: 90, y1: 62, x2: 250, y2: 62, stroke: A }),
+      e('line', { key: 'c', x1: 90, y1: 150, x2: 90, y2: 62, stroke: A }),
+      e('line', { key: 'd', x1: 250, y1: 62, x2: 250, y2: 150, stroke: A }),
+      e('g', { key: 'e', fill: '#0C0C0F', stroke: A }, [
+        e('circle', { key: '1', cx: 140, cy: 62, r: 7 }),
+        e('circle', { key: '2', cx: 200, cy: 62, r: 7 })
+      ]),
+      e('circle', { key: 'f', cx: 250, cy: 150, r: 8, fill: A }),
+      e('text', { key: 'g', x: 170, y: 46, ...mono }, 'COMMUNITY REVIEW BRANCH'),
+      e('text', { key: 'h', x: 170, y: 176, ...mono }, 'MASTER · LEGITIMATED PAPER')
+    ]);
+  }
+
+  renderVals() {
+    const s = this.state, p = s.page, org = this.site === 'org';
+    const step = STEPS[s.dfm];
+
+    const nav = (org ? NAV_ORG : NAV_COM).map((n) => ({
+      label: n.label, onClick: this.go(n.id),
+      color: p === n.id ? '#EDECF0' : '#8585A0',
+      line: p === n.id ? A : 'transparent'
+    }));
+
+    return {
+      markRef: this.markRef,
+      shadowRef: this.shadowRef,
+      ringOverRef: this.ringOverRef,
+      ringOutRef: this.ringOutRef,
+      ringBackRef: this.ringBackRef,
+      domain: org ? 'drayker.org' : 'drayker.com',
+      switchLabel: org ? 'GO TO .COM' : 'GO TO .ORG',
+      toggleSite: () => this.setState({ site: org ? 'com' : 'org', page: 'home' }),
+      nav, pageKey: this.site,
+
+      isHome: p === 'home', isManifesto: p === 'manifesto', isDfm: p === 'dfm', isDk: p === 'dk',
+      isEco: p === 'eco', isOrgPage: p === 'org', isFn: p === 'fn', isDocs: p === 'docs', isJoin: p === 'join',
+
+      goHome: this.go('home'), goManifesto: this.go('manifesto'), goDfm: this.go('dfm'), goDk: this.go('dk'),
+      goEco: this.go('eco'), goOrgPage: this.go('org'), goFn: this.go('fn'), goDocs: this.go('docs'), goJoin: this.go('join'),
+
+      heroKicker: org ? 'Volunteers portal · drayker.org' : 'Open infrastructure',
+      heroTitle: org ? 'The whole world, working on the same problem.' : 'Go beyond things. Do more with less.',
+      heroBody: org
+        ? 'No hierarchy — just protocol. Take an open function, review a paper, or start your own DAO. Every contribution is modelled, peer-reviewed and permanent.'
+        : 'A volunteer, non-profit organization building Dk — a unified system of intelligence, organization and computing — and the protocol that lets the whole world build it together.',
+      heroPrimary: org ? this.go('fn') : this.go('dk'),
+      heroPrimaryLabel: org ? 'See open functions' : 'Inside the kernel',
+
+      principles: PRINCIPLES,
+      dkParts: DK_PARTS,
+      orgUnits: ORG_UNITS,
+      docs: DOCS,
+
+      dfmSteps: STEPS.map((st, i) => ({
+        n: st.n, title: st.title, tag: st.tag,
+        onClick: () => this.setState({ dfm: i }),
+        mark: i === s.dfm ? A : 'transparent',
+        bg: i === s.dfm ? '#111115' : 'transparent'
+      })),
+      dfmN: step.n, dfmTitle: step.title.toUpperCase(), dfmBody: step.body, dfmNote: step.note,
+      dfmDiagram: this.diagram(),
+
+      ecoFilters: ECO_FILTERS.map((f) => ({ label: f.label, onClick: () => this.setState({ ecoF: f.id }), ...this.chip(s.ecoF === f.id) })),
+      ecoCards: ECO.filter((c) => s.ecoF === 'all' || c.filter === s.ecoF),
+
+      fnFilters: FN_FILTERS.map((f) => ({ label: f.label, onClick: () => this.setState({ fnF: f.id }), ...this.chip(s.fnF === f.id) })),
+      fnRows: FN_ROWS.filter((r) => s.fnF === 'all' || r.filter === s.fnF),
+
+      notSent: !s.sent, sent: s.sent, sentName: s.sentName,
+      fName: s.name, fContact: s.contact, fWhy: s.why,
+      setName: (e) => this.setState({ name: e.target.value }),
+      setContact: (e) => this.setState({ contact: e.target.value }),
+      setWhy: (e) => this.setState({ why: e.target.value }),
+      skills: SKILLS.map((k) => ({
+        label: k, ...this.chip(s.skills.indexOf(k) >= 0),
+        onClick: () => this.setState((st) => ({ skills: st.skills.indexOf(k) >= 0 ? st.skills.filter((x) => x !== k) : st.skills.concat(k) }))
+      })),
+      hours: HOURS.map((h) => ({ label: h + ' h', ...this.chip(s.hours === h), onClick: () => this.setState({ hours: h }) })),
+      submit: () => this.setState({ sent: true, sentName: (s.name || 'volunteer').split(' ')[0] })
+    };
+  }
+}
+</script>
+</body>
+</html>
