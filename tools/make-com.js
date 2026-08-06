@@ -21,9 +21,10 @@ if (!target) {
   process.exit(1);
 }
 
-// Set to false and regenerate on the day drayker.com resolves to GitHub Pages, together with
-// adding the CNAME file to that repository. Staging must never be indexed as the real site.
-const STAGING = true;
+// True while the site is only reachable at draykerdk.github.io — staging must never be indexed
+// as the real thing. Turned off on 2026-08-06, when drayker.com was pointed at GitHub Pages and
+// the CNAME file was added to that repository.
+const STAGING = false;
 
 const HEAD = `<title>Drayker — open infrastructure through distributed collaboration</title>
 <meta name="description" content="Drayker is a volunteer, non-profit organization building Dk — a unified system of intelligence, organization and computing — and the protocol that lets the whole world build it together.">
