@@ -24,7 +24,15 @@ global.window = { location: { hash: '', pathname: '/', search: '' }, history: {}
 global.performance = { now: () => 0 };
 global.fetch = () => Promise.resolve({ ok: true, json: () => Promise.resolve({ items: [] }) });
 
-const Component = eval(block[1] + '\n;Component');
+// SITE is a build constant, so each presentation is checked by evaluating the script with
+// that constant flipped — the same substitution `make-com.js` performs to generate the
+// institutional build.
+const SITE_CONST = /const SITE = '(org|com)';/;
+if (!SITE_CONST.test(block[1])) {
+  console.error('SITE build constant not found — has the header of the script changed?');
+  process.exit(1);
+}
+const load = (site) => eval(block[1].replace(SITE_CONST, "const SITE = '" + site + "';") + '\n;Component');
 
 const PAGES = [
   'home', 'manifesto', 'dfm', 'dk', 'eco', 'org', 'fn', 'docs', 'join',
@@ -35,13 +43,14 @@ const PAGES = [
 const BOUND = [
   'domain', 'switchLabel', 'heroTitle', 'heroBody', 'ecoTitle', 'ecoLead', 'orgTitle',
   'orgLead', 'orgDaoTitle', 'orgDaoBody', 'dfmTitleTop', 'dfmLead', 'docsTitle', 'docsLead',
-  'docsFoot', 'dkHeroBody', 'fnEmptyKicker', 'fnEmptyBody'
+  'docsFoot', 'dkHeroBody', 'fnEmptyKicker', 'fnEmptyBody', 'crossSiteUrl', 'switchLabel', 'switchAriaLabel'
 ];
 
 const problems = [];
 let checked = 0;
 
 for (const site of ['org', 'com']) {
+  const Component = load(site);
   for (const page of PAGES) {
     const c = new Component();
     c.props = { site };
