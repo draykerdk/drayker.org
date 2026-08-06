@@ -35,7 +35,12 @@ const HEAD = `<title>Drayker — open infrastructure through distributed collabo
 <meta property="og:title" content="Drayker — open infrastructure through distributed collaboration">
 <meta property="og:description" content="A volunteer, non-profit organization building Dk and the protocol behind it.">
 <meta property="og:url" content="https://drayker.com/">
-<meta name="twitter:card" content="summary">`;
+<meta property="og:image" content="https://drayker.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Drayker mark: an orange sphere crossed by two rings.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://drayker.com/og.png">`;
 
 let out = fs.readFileSync(source, 'utf8');
 const fail = (what) => { console.error('make-com: could not rewrite ' + what + ' — the source has changed shape.'); process.exit(1); };
@@ -48,7 +53,7 @@ const beforeCross = out;
 out = out.replace(/const CROSS_SITE_URL = '[^']*';/, "const CROSS_SITE_URL = 'https://drayker.org';");
 if (out === beforeCross) fail('the cross-site URL');
 
-const headBlock = /<title>[\s\S]*?<meta name="twitter:card" content="summary">/;
+const headBlock = /<title>[\s\S]*?<meta name="twitter:image" content="[^"]*">/;
 if (!headBlock.test(out)) fail('the document head');
 out = out.replace(headBlock, HEAD + (STAGING ? '\n<meta name="robots" content="noindex, nofollow">' : ''));
 
