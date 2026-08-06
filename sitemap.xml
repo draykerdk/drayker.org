@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The site is a single Design Component with hash routes (#org/dk, #com/eco …).
+     Search engines do not treat a fragment as a separate URL, so this deployment has
+     exactly one indexable address. The documentation sites at *.drayker.org carry the
+     rest of the crawlable surface, each with its own generated sitemap. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://drayker.org/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
