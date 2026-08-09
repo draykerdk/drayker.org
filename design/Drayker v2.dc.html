@@ -1,24 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="utf-8">
-<title>Drayker Organization — Volunteers Portal</title>
-<meta name="description" content="Drayker is a volunteer, non-profit organization building open infrastructure through distributed collaboration.">
-<meta name="theme-color" content="#08080A">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="canonical" href="https://drayker.org/">
-<link rel="icon" href="./assets/logo/drayker-favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="./assets/logo/kit/apple-touch-icon.png">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Drayker Organization — Volunteers Portal">
-<meta property="og:description" content="Open infrastructure built through distributed collaboration.">
-<meta property="og:url" content="https://drayker.org/">
-<meta property="og:image" content="https://drayker.org/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="The Drayker mark: an orange sphere crossed by two rings.">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://drayker.org/og.png">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -936,7 +920,7 @@
       <sc-if value="{{ cProject }}" hint-placeholder-val="{{ false }}">
         <div>
         <section style="max-width:1320px;margin:0 auto;padding:clamp(28px,4vw,48px) clamp(16px,4vw,44px) clamp(24px,3vw,36px)">
-          <div onClick="{{ backToProjects }}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;color:var(--tx3);cursor:pointer;margin-bottom:26px" style-hover="color:#FF5500">{{ backProjectLabel }}</div>
+          <div onClick="{{ backToProjects }}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;color:var(--tx3);cursor:pointer;margin-bottom:26px" style-hover="color:#FF5500">← ALL PROJECTS</div>
           <div style="display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;margin-bottom:18px">
             <h1 style="font-size:clamp(34px,4.6vw,62px);line-height:1;letter-spacing:-0.04em;font-weight:700;margin:0">{{ pd.name }}</h1>
             <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.14em;color:#FF5500">{{ pd.layer }}</div>
@@ -1732,7 +1716,7 @@ const PROJECTS = [
     tagline: 'Where a proposal meets people who can argue with it.',
     vision: 'The advisory and validation groups of Drayker: collaborators take part in different councils according to their areas of study, interest and prominence. Validation runs alongside development, not after it.',
     problem: 'A council is not an approval gate bolted onto the end of a process. Without it, peer review is a formality — with it, a proposal has to survive people who read it properly.',
-    state: 'Almost nothing is written down. How a council is formed, how someone joins, which councils exist and how a council records its position are not yet specified. For a system whose legitimacy depends on decentralized peer review, that gap matters more than most.',
+    state: 'Almost nothing is written down. How a council is formed, how someone joins, which councils exist and how a council records its position are all undefined. For a system whose legitimacy depends on decentralized peer review, that gap matters more than most.',
     arch: ['Councils by area of study', 'Validation alongside development', 'Papers routed to DAOs and/or councils', 'Recorded positions'],
     contribute: ['Propose the first version of how a council is formed', 'Define how someone joins a council', 'Write how a council records its position'] },
 
@@ -1856,12 +1840,6 @@ const CONTRIB_TABS = [
   { id: 'projects', label: 'PROJECTS' }, { id: 'fn', label: 'OPEN FUNCTIONS' }, { id: 'guide', label: 'GUIDE' }
 ];
 
-// Deployment constants. The Design Component is shared, but each public domain
-// owns one presentation: drayker.org is the volunteers portal and drayker.com is
-// institutional. tools/make-com.js changes only these constants and the head.
-const SITE = 'org';
-const CROSS_SITE_URL = 'https://drayker.com';
-
 const NAV_COM = [
   { id: 'manifesto', label: 'Manifesto' }, { id: 'dk', label: 'Dk' }, { id: 'dfm', label: 'DFM' },
   { id: 'eco', label: 'Ecosystem' }, { id: 'org', label: 'Organization' }, { id: 'docs', label: 'Docs' }
@@ -1873,10 +1851,10 @@ const NAV_ORG = [
 
 class Component extends DCLogic {
   state = {
-    site: SITE, page: 'home', dfm: 0, ecoF: 'all', fnF: 'all',
+    site: null, page: 'home', dfm: 0, ecoF: 'all', fnF: 'all',
     name: '', contact: '', why: '', skills: [], hours: '', sent: false, sentName: '',
     themePref: 'auto', resolved: 'dark',
-    tab: 'overview', proj: null, returnToJoin: false, trackF: 'all', lvlF: 'all',
+    tab: 'overview', proj: null, trackF: 'all', lvlF: 'all',
     jStep: 0, jAns: {},
     ghRepos: [], ghIssues: [], ghPeople: [], ghState: 'idle', ghAt: 0
   };
@@ -1968,33 +1946,22 @@ class Component extends DCLogic {
   // ============================================================================
   TABS = ['overview', 'tracks', 'projects', 'fn', 'guide'];
 
-  crossTo = (site, path) => {
-    const url = CROSS_SITE_URL.replace(/\/$/, '') + '/#' + site + '/' + (path || 'home');
-    if (window.location.assign) window.location.assign(url);
-    else window.location.href = url;
-  };
-
   readHash = () => {
     const parts = (window.location.hash || '').replace(/^#\/?/, '').split('/').filter(Boolean);
     if (!parts.length) return;
     const site = (parts[0] === 'com' || parts[0] === 'org') ? parts[0] : null;
     const rest = site ? parts.slice(1) : parts;
+    const st = site ? { site } : {};
     const p = rest[0] || 'home';
-    const participation = p === 'fn' || p === 'contrib' || p === 'contribute' || p === 'project' || p === 'join';
-    if ((site && site !== SITE) || (SITE === 'com' && participation)) {
-      this.crossTo(site && site !== SITE ? site : 'org', rest.join('/') || 'home');
-      return;
-    }
-    const st = { site: SITE };
     if (p === 'fn' || p === 'contrib' || p === 'contribute') {
       st.site = 'org';
       st.page = 'contrib';
       st.tab = p === 'fn' ? 'fn' : (this.TABS.indexOf(rest[1]) >= 0 ? rest[1] : 'overview');
-      st.proj = null; st.returnToJoin = false;
+      st.proj = null;
     } else if (p === 'project') {
-      st.site = 'org'; st.page = 'contrib'; st.tab = 'project'; st.proj = rest[1] || null; st.returnToJoin = false;
+      st.site = 'org'; st.page = 'contrib'; st.tab = 'project'; st.proj = rest[1] || null;
     } else if (p === 'join') {
-      st.site = 'org'; st.page = 'join'; st.returnToJoin = false;
+      st.site = 'org'; st.page = 'join';
     } else {
       st.page = p;
     }
@@ -2031,7 +1998,7 @@ class Component extends DCLogic {
     window.scrollTo(0, 0);
   };
 
-  jRestart = () => { this.setState({ jStep: 0, jAns: {}, sent: false, returnToJoin: false }); window.scrollTo(0, 0); };
+  jRestart = () => { this.setState({ jStep: 0, jAns: {}, sent: false }); window.scrollTo(0, 0); };
 
   // Resolves the answers into a track, projects and first steps.
   jResult = () => {
@@ -2048,29 +2015,17 @@ class Component extends DCLogic {
       });
     });
     const ranked = TRACKS.slice().sort((a, b) => (score[b.id] || 0) - (score[a.id] || 0));
-    const groups = Object.keys(layers);
-    const wanted = groups.reduce((acc, g) => acc.concat(LAYER_GROUPS[g] || []), []);
-    const matched = PROJECTS.filter((p) => wanted.length === 0 || wanted.indexOf(p.layer) >= 0);
-    const remaining = PROJECTS.filter((p) => matched.indexOf(p) < 0);
-    const projects = matched.concat(remaining).slice(0, 3);
-    return { track: ranked[0], second: ranked[1], projects, hours: ans.time || '4–8', entryGroup: groups[0] || 'kernel' };
+    const wanted = Object.keys(layers).reduce((acc, g) => acc.concat(LAYER_GROUPS[g] || []), []);
+    const projects = PROJECTS.filter((p) => wanted.length === 0 || wanted.indexOf(p.layer) >= 0).slice(0, 3);
+    return { track: ranked[0], second: ranked[1], projects, hours: ans.time || '4–8' };
   };
 
   // Participation lives on .org only. Every route into it carries the site with
   // it, so a .com visitor who clicks "Take part" lands on the volunteers portal
   // instead of seeing contribution UI under the institutional domain.
-  goTab = (tab) => () => {
-    if (SITE !== 'org') return this.crossTo('org', tab === 'fn' ? 'fn' : 'contrib/' + tab);
-    this.setState({ site: 'org', page: 'contrib', tab, proj: null, returnToJoin: false }); window.scrollTo(0, 0);
-  };
-  openProj = (key, returnToJoin) => () => {
-    if (SITE !== 'org') return this.crossTo('org', 'project/' + key);
-    this.setState({ site: 'org', page: 'contrib', tab: 'project', proj: key, returnToJoin: !!returnToJoin }); window.scrollTo(0, 0);
-  };
-  goJoin = () => {
-    if (SITE !== 'org') return this.crossTo('org', 'join');
-    this.setState({ site: 'org', page: 'join' }); window.scrollTo(0, 0);
-  };
+  goTab = (tab) => () => { this.setState({ site: 'org', page: 'contrib', tab, proj: null }); window.scrollTo(0, 0); };
+  openProj = (key) => () => { this.setState({ site: 'org', page: 'contrib', tab: 'project', proj: key }); window.scrollTo(0, 0); };
+  goJoin = () => { this.setState({ site: 'org', page: 'join' }); window.scrollTo(0, 0); };
 
   // ============================================================================
   // THEME — themePref is what the user chose ('auto' | 'light' | 'dark'), resolved
@@ -2090,7 +2045,7 @@ class Component extends DCLogic {
     this.applyTheme(pref);
   };
 
-  get site() { return SITE; }
+  get site() { return this.state.site || this.props.site || 'com'; }
 
   markRef = React.createRef();
   shadowRef = React.createRef();
@@ -2467,7 +2422,7 @@ class Component extends DCLogic {
       })),
       themeNow: s.themePref === 'auto' ? 'System · ' + s.resolved : s.resolved,
 
-      toggleSite: () => this.crossTo(org ? 'com' : 'org', 'home'),
+      toggleSite: () => this.setState({ site: org ? 'com' : 'org', page: 'home' }),
       nav, pageKey: this.site,
 
       isHome: p === 'home', isManifesto: p === 'manifesto', isDfm: p === 'dfm', isDk: p === 'dk',
@@ -2579,10 +2534,7 @@ class Component extends DCLogic {
       pdIssues: projIssues.map((i) => ({ id: '#' + i.num, title: i.title, url: i.url, level: i.level, meta: this.ago(i.at) })),
       pdHasIssues: projIssues.length > 0,
       pdNoIssues: projIssues.length === 0,
-      backProjectLabel: s.returnToJoin ? '← YOUR RESULT' : '← ALL PROJECTS',
-      backToProjects: s.returnToJoin
-        ? () => { this.setState({ page: 'join', tab: 'overview', proj: null, returnToJoin: false, jStep: JOIN_STEPS.length }); window.scrollTo(0, 0); }
-        : this.goTab('projects'),
+      backToProjects: this.goTab('projects'),
 
       dfmSteps: STEPS.map((st, i) => ({
         n: st.n, title: st.title, tag: st.tag,
@@ -2624,10 +2576,10 @@ class Component extends DCLogic {
           fg: sel ? '#FF5500' : 'var(--tx)', mark: sel ? '#FF5500' : 'transparent'
         };
       }) : [],
-      jNextOp: (!jSt || jSt.multi || !!ansCur) ? '1' : '0.35',
+      jNextOp: (ansCur && (!jSt || !jSt.multi || ansCur.length > 0)) ? '1' : '0.35',
       jNextLabel: jStep === jTotal - 1 ? 'See where I fit →' : 'Continue →',
       jNext: () => {
-        if (jSt && !jSt.multi && !ansCur) return;
+        if (!ansCur || (jSt && jSt.multi && !ansCur.length)) return;
         this.jGo(1)();
       },
       jBack: this.jGo(-1), jBackShow: jStep > 0, jRestart: this.jRestart,
@@ -2655,7 +2607,7 @@ class Component extends DCLogic {
       ].map((row) => {
         const layers = LAYER_GROUPS[row.g] || [];
         const nodes = PROJECTS.filter((p) => layers.indexOf(p.layer) >= 0);
-        const hit = res ? row.g === res.entryGroup : false;
+        const hit = res ? nodes.some((p) => res.projects.some((x) => x.key === p.key)) : false;
         return {
           label: row.label, role: row.role,
           you: hit ? 'YOU ARE HERE' : '',
@@ -2663,7 +2615,7 @@ class Component extends DCLogic {
           nodes: nodes.map((p) => {
             const on = res ? res.projects.some((x) => x.key === p.key) : false;
             return {
-              name: p.name, tagline: p.tagline, open: this.openProj(p.key, true),
+              name: p.name, tagline: p.tagline, open: this.openProj(p.key),
               bd: on ? '#FF5500' : 'var(--line2)',
               bg: on ? 'var(--surf2)' : 'transparent',
               fg: on ? 'var(--tx)' : 'var(--tx3)',
