@@ -31,6 +31,8 @@ const HEAD = `<title>Drayker — open infrastructure through distributed collabo
 <meta name="theme-color" content="#08080A">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://drayker.com/">
+<link rel="icon" href="./assets/logo/drayker-favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./assets/logo/kit/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Drayker — open infrastructure through distributed collaboration">
 <meta property="og:description" content="A volunteer, non-profit organization building Dk and the protocol behind it.">
