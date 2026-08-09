@@ -1,11 +1,9 @@
-// Headless render check for the Design Component.
+// Static contract and headless state checks for the Drayker Design Component.
 //
-//   node tools/render-check.js ../index.html    (or just: node tools/render-check.js)
+//   node tools/render-check.js [index.html]
 //
-// Stubs React, DCLogic and window, evaluates the `text/x-dc` script block from the page
-// and calls renderVals() for every {site, page} pair. Fails if any bound value comes back
-// empty or containing `undefined` — which is what a missing `.com` variant, a renamed
-// project key or a broken relation looks like before it reaches a browser.
+// No browser or package install is required. The component script is evaluated
+// twice, exactly as it is deployed for .org and generated for .com.
 
 const fs = require('fs');
 const path = require('path');
@@ -13,77 +11,233 @@ const path = require('path');
 const file = process.argv[2] || path.join(__dirname, '..', 'index.html');
 const src = fs.readFileSync(file, 'utf8');
 const block = src.match(/<script type="text\/x-dc"[^>]*>([\s\S]*?)<\/script>/);
-if (!block) {
-  console.error('No <script type="text/x-dc"> block found in ' + file);
-  process.exit(1);
-}
+if (!block) throw new Error('No <script type="text/x-dc"> block found in ' + file);
 
-global.React = { createRef: () => ({ current: null }), createElement: (t, p, c) => ({ t, p, c }) };
-global.DCLogic = class DCLogic { setState() {} };
-global.window = { location: { hash: '', pathname: '/', search: '' }, history: {}, addEventListener() {}, scrollTo() {} };
-global.performance = { now: () => 0 };
-global.fetch = () => Promise.resolve({ ok: true, json: () => Promise.resolve({ items: [] }) });
-
-// SITE is a build constant, so each presentation is checked by evaluating the script with
-// that constant flipped — the same substitution `make-com.js` performs to generate the
-// institutional build.
 const SITE_CONST = /const SITE = '(org|com)';/;
-if (!SITE_CONST.test(block[1])) {
-  console.error('SITE build constant not found — has the header of the script changed?');
-  process.exit(1);
+const CROSS_CONST = /const CROSS_SITE_URL = '[^']*';/;
+if (!SITE_CONST.test(block[1]) || !CROSS_CONST.test(block[1])) {
+  throw new Error('Deployment constants not found in the component script.');
 }
-const load = (site) => eval(block[1].replace(SITE_CONST, "const SITE = '" + site + "';") + '\n;Component');
 
-const PAGES = [
-  'home', 'manifesto', 'dfm', 'dk', 'eco', 'org', 'fn', 'docs', 'join',
-  'bsdk', 'dk-network', 'lcrypt', 'uid', 'daf', 'metadfmp', 'emergence',
-  'dknowledger', 'dk-personal', 'distributed-support', 'open-science', 'value-unit'
-];
+const memory = new Map();
+global.React = {
+  createRef: () => ({ current: null }),
+  createElement: (type, props, ...children) => ({ type, props, children })
+};
+global.DCLogic = class DCLogic {
+  setState(update) {
+    const patch = typeof update === 'function' ? update(this.state) : update;
+    this.state = Object.assign({}, this.state, patch || {});
+  }
+};
+global.performance = { now: () => 0 };
+global.document = { title: '', documentElement: { setAttribute() {} } };
+global.localStorage = {
+  getItem: (key) => memory.has(key) ? memory.get(key) : null,
+  setItem: (key, value) => memory.set(key, String(value)),
+  clear: () => memory.clear()
+};
+global.requestAnimationFrame = () => 1;
+global.cancelAnimationFrame = () => {};
 
-const BOUND = [
-  'domain', 'switchLabel', 'heroTitle', 'heroBody', 'ecoTitle', 'ecoLead', 'orgTitle',
-  'orgLead', 'orgDaoTitle', 'orgDaoBody', 'dfmTitleTop', 'dfmLead', 'docsTitle', 'docsLead',
-  'docsFoot', 'dkHeroBody', 'fnEmptyKicker', 'fnEmptyBody', 'crossSiteUrl', 'switchLabel', 'switchAriaLabel'
-];
+let assigned = [];
+const resetWindow = (hash = '') => {
+  assigned = [];
+  global.window = {
+    location: {
+      hash,
+      pathname: '/',
+      search: '',
+      assign: (url) => assigned.push(url)
+    },
+    history: {},
+    addEventListener() {},
+    removeEventListener() {},
+    scrollTo() {},
+    matchMedia: () => ({ matches: false, addEventListener() {} })
+  };
+};
+resetWindow();
+
+const load = (site) => {
+  const cross = site === 'org' ? 'https://drayker.com' : 'https://drayker.org';
+  const code = block[1]
+    .replace(SITE_CONST, "const SITE = '" + site + "';")
+    .replace(CROSS_CONST, "const CROSS_SITE_URL = '" + cross + "';");
+  return eval(code + '\n;({ Component, PROJECTS, CONCEPTS, JOIN_STEPS, TRACKS, LAYER_GROUPS })');
+};
 
 const problems = [];
-let checked = 0;
+let checks = 0;
+const check = (condition, message) => {
+  checks++;
+  if (!condition) problems.push(message);
+};
+const noPlaceholders = (value, label, seen = new WeakSet()) => {
+  if (typeof value === 'string') {
+    check(!/undefined|\[object Object\]/.test(value), label + ' contains a placeholder');
+    return;
+  }
+  if (!value || typeof value !== 'object' || seen.has(value)) return;
+  seen.add(value);
+  Object.keys(value).forEach((key) => noPlaceholders(value[key], label + '.' + key, seen));
+};
+const make = (bundle, state = {}) => {
+  const component = new bundle.Component();
+  component.props = {};
+  component.state = Object.assign({}, component.state, state);
+  return component;
+};
+
+const org = load('org');
+const com = load('com');
+
+// Package design: the animated 3D mark and the two site presentations remain
+// in the static Design Component, not in a framework reconstruction.
+check(src.includes('class="dk-core"'), 'animated mark core is missing');
+check(src.includes('ringBackRef') && src.includes('ringOverRef') && src.includes('ringOutRef'), '3D ring layers are missing');
+check(src.includes('@keyframes dk-surf') && src.includes('@keyframes dk-breathe'), 'mark animations are missing');
+check(src.includes('Dk Global') && src.includes('Dk Personal') && src.includes('Dk Local'), 'Dk scopes are not explained separately');
+
+check(org.PROJECTS.length === 17, 'expected 17 curated repositories, got ' + org.PROJECTS.length);
+check(org.CONCEPTS.length === 3, 'expected 3 no-repository concepts, got ' + org.CONCEPTS.length);
+check(new Set(org.PROJECTS.map((p) => p.key)).size === org.PROJECTS.length, 'repository keys must be unique');
+check(org.CONCEPTS.every((p) => p.concept && !p.repo), 'every concept must explicitly have no repository');
+check(org.PROJECTS.every((p) => p.vision && p.tagline && p.layer && p.arch.length && p.contribute.length), 'every repository needs a complete page model');
 
 for (const site of ['org', 'com']) {
-  const Component = load(site);
-  for (const page of PAGES) {
-    const c = new Component();
-    c.props = { site };
-    c.state = Object.assign({}, c.state, { site, page });
-    let v;
-    try {
-      v = c.renderVals();
-    } catch (e) {
-      problems.push(site + '/' + page + ': threw ' + e.message);
-      continue;
-    }
-    checked++;
-    for (const key of BOUND) {
-      const val = v[key];
-      if (val === undefined || val === null || val === '') problems.push(site + '/' + page + ': empty ' + key);
-      else if (typeof val === 'string' && /undefined|\[object Object\]/.test(val)) problems.push(site + '/' + page + ': placeholder in ' + key);
-    }
-    if (v.isProject) {
-      for (const key of ['kicker', 'title', 'lead', 'thesis', 'role', 'body']) {
-        if (!v.project[key]) problems.push(site + '/' + page + ': project.' + key + ' empty');
-      }
-      if (!v.project.focus || !v.project.focus.length) problems.push(site + '/' + page + ': project.focus empty');
-      if (!v.projectRelations.length) problems.push(site + '/' + page + ': no relations');
-      for (const r of v.projectRelations) {
-        if (!r.label) problems.push(site + '/' + page + ': relation without a label');
-      }
-    }
+  const bundle = site === 'org' ? org : com;
+  for (const page of ['home', 'manifesto', 'dfm', 'dk', 'eco', 'org', 'docs']) {
+    const component = make(bundle, { page });
+    let values;
+    try { values = component.renderVals(); }
+    catch (error) { problems.push(site + '/' + page + ' threw: ' + error.message); continue; }
+    check(values.domain === 'drayker.' + site, site + '/' + page + ' has the wrong domain');
+    check(values.heroTitle && values.heroBody, site + '/' + page + ' has incomplete hero content');
+    noPlaceholders(values, site + '/' + page);
   }
 }
 
-if (problems.length) {
-  console.error(problems.join('\n'));
-  console.error('\n' + problems.length + ' problem(s) across ' + checked + ' screens.');
-  process.exit(1);
+const orgHome = make(org).renderVals();
+const comHome = make(com).renderVals();
+check(orgHome.isOrgSite && !orgHome.isComSite, '.org presentation flags are wrong');
+check(comHome.isComSite && !comHome.isOrgSite, '.com presentation flags are wrong');
+check(orgHome.nav.some((n) => n.label === 'Contribute'), '.org navigation must expose contribution');
+check(!comHome.nav.some((n) => n.label === 'Contribute'), '.com navigation must not expose contribution');
+
+for (const project of org.PROJECTS.concat(org.CONCEPTS)) {
+  const values = make(org, { page: 'contrib', tab: 'project', proj: project.key }).renderVals();
+  check(values.cProject && values.pd && values.pd.key === project.key, 'missing project page: ' + project.key);
+  check(values.pd.vision && values.pd.tagline && values.pd.layer, 'incomplete project page: ' + project.key);
+  check(values.pdHasArch && values.pdHasContribute, 'project is not connected to architecture/contribution: ' + project.key);
+  check(values.pdIsConcept === !!project.concept, 'repository status is wrong for ' + project.key);
+  noPlaceholders(values, 'org/project/' + project.key);
 }
-console.log(checked + ' screens rendered clean (' + PAGES.length + ' pages x 2 presentations).');
+const missing = make(org, { page: 'contrib', tab: 'project', proj: 'does-not-exist' }).renderVals();
+check(missing.cProjectMissing && missing.missingKey === 'does-not-exist', 'unknown project route needs an explicit fallback');
+
+// Direct-route and cross-domain contracts.
+resetWindow('#org/project/dk');
+const orgRoute = make(org);
+orgRoute.readHash();
+check(orgRoute.state.page === 'contrib' && orgRoute.state.tab === 'project' && orgRoute.state.proj === 'dk', 'direct .org project route failed');
+check(assigned.length === 0, 'local .org route must not leave the domain');
+
+resetWindow('#com/project/dk');
+make(com).readHash();
+check(assigned[0] === 'https://drayker.org/#org/project/dk', '.com contribution route must hand off to .org');
+
+resetWindow('#com/home');
+make(org).readHash();
+check(assigned[0] === 'https://drayker.com/#com/home', 'foreign .com hash on .org must hand off to .com');
+
+resetWindow();
+comHome.goJoin();
+check(assigned[0] === 'https://drayker.org/#org/join', '.com volunteer CTA must hand off to .org');
+resetWindow();
+orgHome.toggleSite();
+check(assigned[0] === 'https://drayker.com/#com/home', 'site switch must use the other public domain');
+
+// Volunteer journey: single-choice steps require an answer; multiple-choice
+// steps deliberately allow "none" and must never trap the visitor.
+resetWindow();
+const journey = make(org, { page: 'join' });
+for (let index = 0; index < org.JOIN_STEPS.length; index++) {
+  const step = org.JOIN_STEPS[index];
+  let values = journey.renderVals();
+  const before = journey.state.jStep;
+  if (step.multi) {
+    check(values.jNextOp === '1', 'multi-select step must allow an empty answer: ' + step.id);
+  } else {
+    values.jNext();
+    check(journey.state.jStep === before, 'single-select step advanced without an answer: ' + step.id);
+    values = journey.renderVals();
+    values.jOpts[0].onClick();
+  }
+  journey.renderVals().jNext();
+  check(journey.state.jStep === index + 1, 'journey could not advance past ' + step.id);
+}
+const result = journey.renderVals();
+check(result.jIsResult, 'journey did not reach its result');
+check(result.resProjects.length === 3, 'journey result must recommend three projects');
+check(result.resSteps.length > 0 && result.resTrackTitle, 'journey result needs a track and first steps');
+check(result.mapRows.length === 5, 'journey map must expose all system layers');
+check(result.mapRows.filter((row) => row.you === 'YOU ARE HERE').length === 1, 'journey map must have exactly one YOU ARE HERE marker');
+check(result.mapRows.flatMap((row) => row.nodes).filter((node) => node.tag === 'YOUR TRACK').length > 0, 'journey map has no YOUR TRACK marker');
+check(result.mapRows.flatMap((row) => row.nodes).length === 17, 'journey map must contain all 17 repositories');
+noPlaceholders(result, 'org/join/result');
+
+const resultNode = result.mapRows.flatMap((row) => row.nodes).filter((node) => node.tag === 'YOUR TRACK')[0];
+resultNode.open();
+check(journey.state.page === 'contrib' && journey.state.tab === 'project' && journey.state.returnToJoin, 'map node did not open its project with result provenance');
+const projectFromResult = journey.renderVals();
+check(projectFromResult.backProjectLabel === '← YOUR RESULT', 'project opened from the map has the wrong back destination');
+projectFromResult.backToProjects();
+check(journey.state.page === 'join' && journey.state.jStep === org.JOIN_STEPS.length, 'project back action did not restore the Volunteer result');
+
+const combinations = [
+  { why: 'build', skills: ['code'], parts: ['kernel'], style: 'deep', time: '4–8' },
+  { why: 'understand', skills: ['research'], parts: ['protocol'], style: 'review', time: '15+' },
+  { why: 'legible', skills: ['design'], parts: ['portal'], style: 'teach', time: '9–15' }
+];
+const resultTracks = combinations.map((jAns) => {
+  const candidate = make(org, { page: 'join', jStep: org.JOIN_STEPS.length, jAns });
+  const resolved = candidate.renderVals();
+  check(resolved.resProjects.length === 3, 'every Volunteer combination must recommend three projects');
+  check(resolved.mapRows.filter((row) => row.you === 'YOU ARE HERE').length === 1, 'every Volunteer combination needs exactly one entry layer');
+  return resolved.resTrackLabel;
+});
+check(new Set(resultTracks).size === 3, 'three distinct Volunteer profiles should resolve to three distinct tracks');
+
+// Cached and offline GitHub states both retain curated content.
+(async () => {
+  resetWindow();
+  memory.clear();
+  memory.set('drayker-gh-v1', JSON.stringify({
+    t: Date.now(),
+    repos: [{ name: 'dk', full: 'draykerdk/dk', desc: 'Dk', lang: 'Python', stars: 1, forks: 0, issues: 2, url: 'https://github.com/draykerdk/dk', home: '', push: new Date().toISOString() }],
+    issues: [], people: []
+  }));
+  global.fetch = () => Promise.reject(new Error('cache should prevent fetch'));
+  const cached = make(org);
+  await cached.loadGH(false);
+  check(cached.state.ghState === 'ready' && cached.state.ghRepos.length === 1, 'fresh GitHub cache was not used');
+
+  memory.clear();
+  global.fetch = () => Promise.reject(new Error('offline'));
+  const offline = make(org);
+  await offline.loadGH(false);
+  check(offline.state.ghState === 'error', 'offline GitHub request did not enter fallback state');
+  const fallback = offline.renderVals();
+  check(fallback.projCards.length === 17 && fallback.fallbackFn.length > 0, 'offline mode lost curated projects or functions');
+
+  if (problems.length) {
+    console.error(problems.join('\n'));
+    console.error('\n' + problems.length + ' problem(s) across ' + checks + ' checks.');
+    process.exit(1);
+  }
+  console.log(checks + ' static checks passed: design, .org/.com, routes, 20 project pages, Volunteer and GitHub fallback.');
+})().catch((error) => {
+  console.error(error.stack || error.message);
+  process.exit(1);
+});
