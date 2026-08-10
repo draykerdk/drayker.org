@@ -39,4 +39,4 @@ body:
     id: review
     attributes:
       label: Who reviews it
-      description: Optional. A person, a council, or the community review branch.
+      description: Optional. A person, a relevant maintainer, or another contributor who can review the result before merge to master.

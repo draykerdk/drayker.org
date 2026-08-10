@@ -41,11 +41,12 @@ global.requestAnimationFrame = () => 1;
 global.cancelAnimationFrame = () => {};
 
 let assigned = [];
-const resetWindow = (hash = '') => {
+const resetWindow = (hash = '', hostname = 'localhost') => {
   assigned = [];
   global.window = {
     location: {
       hash,
+      hostname,
       pathname: '/',
       search: '',
       assign: (url) => assigned.push(url)
@@ -75,7 +76,7 @@ const check = (condition, message) => {
 };
 const noPlaceholders = (value, label, seen = new WeakSet()) => {
   if (typeof value === 'string') {
-    check(!/undefined|\[object Object\]/.test(value), label + ' contains a placeholder');
+    check(!/^\s*undefined\s*$|\[object Object\]/.test(value), label + ' contains a placeholder');
     return;
   }
   if (!value || typeof value !== 'object' || seen.has(value)) return;
@@ -98,6 +99,10 @@ check(src.includes('class="dk-core"'), 'animated mark core is missing');
 check(src.includes('ringBackRef') && src.includes('ringOverRef') && src.includes('ringOutRef'), '3D ring layers are missing');
 check(src.includes('@keyframes dk-surf') && src.includes('@keyframes dk-breathe'), 'mark animations are missing');
 check(src.includes('Dk Global') && src.includes('Dk Personal') && src.includes('Dk Local'), 'Dk scopes are not explained separately');
+check(src.includes("font-family:'Archivo'") && !src.includes('Space Grotesk'), 'v3 must use Archivo rather than Space Grotesk');
+check(!/FN-\d{3,}/.test(src), 'fictional open-function rows must not be published');
+check(!src.includes('community review branch'), 'the retired community-review flow is still described');
+check(src.includes("template=volunteer-introduction.yml") && src.includes("template=partnership.yml"), 'the two general-forum forms are not wired');
 
 check(org.PROJECTS.length === 17, 'expected 17 curated repositories, got ' + org.PROJECTS.length);
 check(org.CONCEPTS.length === 3, 'expected 3 no-repository concepts, got ' + org.CONCEPTS.length);
@@ -125,6 +130,12 @@ check(comHome.isComSite && !comHome.isOrgSite, '.com presentation flags are wron
 check(orgHome.nav.some((n) => n.label === 'Contribute'), '.org navigation must expose contribution');
 check(!comHome.nav.some((n) => n.label === 'Contribute'), '.com navigation must not expose contribution');
 
+for (const [site, bundle] of [['org', org], ['com', com]]) {
+  const mobile = make(bundle, { vw: 390 }).renderVals();
+  check(mobile.navFlex === '0 0 100%' && mobile.navWidth === '100%', site + ' mobile navigation does not occupy its own row');
+  check(mobile.navOrder === 3 && mobile.ctrlOrder === 2 && mobile.subTop === '95px', site + ' mobile header order is wrong');
+}
+
 for (const project of org.PROJECTS.concat(org.CONCEPTS)) {
   const values = make(org, { page: 'contrib', tab: 'project', proj: project.key }).renderVals();
   check(values.cProject && values.pd && values.pd.key === project.key, 'missing project page: ' + project.key);
@@ -136,27 +147,56 @@ for (const project of org.PROJECTS.concat(org.CONCEPTS)) {
 const missing = make(org, { page: 'contrib', tab: 'project', proj: 'does-not-exist' }).renderVals();
 check(missing.cProjectMissing && missing.missingKey === 'does-not-exist', 'unknown project route needs an explicit fallback');
 
+// The same twenty parts have institutional case pages on .com. The technical
+// record stays on .org and is reached through explicit deep links.
+for (const project of com.PROJECTS.concat(com.CONCEPTS)) {
+  const values = make(com, { page: 'part', proj: project.key }).renderVals();
+  check(values.isPart && values.ptHas && values.ptName === project.name, 'missing .com component case: ' + project.key);
+  check(values.ptClaim && values.ptToday && values.ptShift && values.ptFeel && values.ptStake, 'incomplete .com component case: ' + project.key);
+  check(values.ptDeep.length === (project.concept ? 3 : 4), 'wrong technical deep-link count for ' + project.key);
+  noPlaceholders(values, 'com/project/' + project.key);
+}
+const missingCom = make(com, { page: 'part', proj: 'does-not-exist' }).renderVals();
+check(missingCom.ptMissing && !missingCom.ptHas, 'unknown .com component route needs an explicit fallback');
+
 // Direct-route and cross-domain contracts.
-resetWindow('#org/project/dk');
+resetWindow('#org/project/dk', 'drayker.org');
 const orgRoute = make(org);
 orgRoute.readHash();
 check(orgRoute.state.page === 'contrib' && orgRoute.state.tab === 'project' && orgRoute.state.proj === 'dk', 'direct .org project route failed');
 check(assigned.length === 0, 'local .org route must not leave the domain');
 
-resetWindow('#com/project/dk');
-make(com).readHash();
-check(assigned[0] === 'https://drayker.org/#org/project/dk', '.com contribution route must hand off to .org');
+resetWindow('#com/project/dk', 'drayker.com');
+const comRoute = make(com);
+comRoute.readHash();
+check(comRoute.state.page === 'part' && comRoute.state.proj === 'dk', 'direct .com component route failed');
+check(assigned.length === 0, 'local .com component route must not leave the domain');
 
-resetWindow('#com/home');
+resetWindow('', 'drayker.com');
+const comDk = make(com, { page: 'part', proj: 'dk' }).renderVals();
+comDk.ptDeep[0].open();
+check(assigned[0] === 'https://drayker.org/#org/project/dk/arch', '.com technical deep link must target the exact .org section');
+
+resetWindow('#com/home', 'drayker.org');
 make(org).readHash();
 check(assigned[0] === 'https://drayker.com/#com/home', 'foreign .com hash on .org must hand off to .com');
 
-resetWindow();
+resetWindow('', 'drayker.com');
 comHome.goJoin();
 check(assigned[0] === 'https://drayker.org/#org/join', '.com volunteer CTA must hand off to .org');
-resetWindow();
+resetWindow('', 'drayker.org');
 orgHome.toggleSite();
 check(assigned[0] === 'https://drayker.com/#com/home', 'site switch must use the other public domain');
+
+resetWindow('#org/partnerships', 'drayker.org');
+make(org).readHash();
+check(assigned[0] === 'https://drayker.com/#com/partnerships', '.org partnerships route must hand off to .com');
+
+const partnership = make(com, { page: 'partnerships', pType: 'institutional', pNote: 'A public research collaboration.' }).renderVals();
+const partnershipUrl = decodeURIComponent(partnership.partnerUrl);
+check(partnership.isPartnerships && partnership.partnerOutcomes.length > 0, '.com partnerships page is incomplete');
+check(partnershipUrl.includes('general-forum/issues/new?template=partnership.yml'), 'partnership form points at the wrong issue template');
+check(partnershipUrl.includes('&proposal=') && partnershipUrl.includes('&boundaries='), 'partnership form is missing its field values');
 
 // Volunteer journey: single-choice steps require an answer; multiple-choice
 // steps deliberately allow "none" and must never trap the visitor.
@@ -185,6 +225,9 @@ check(result.mapRows.length === 5, 'journey map must expose all system layers');
 check(result.mapRows.filter((row) => row.you === 'YOU ARE HERE').length === 1, 'journey map must have exactly one YOU ARE HERE marker');
 check(result.mapRows.flatMap((row) => row.nodes).filter((node) => node.tag === 'YOUR TRACK').length > 0, 'journey map has no YOUR TRACK marker');
 check(result.mapRows.flatMap((row) => row.nodes).length === 17, 'journey map must contain all 17 repositories');
+const volunteerUrl = decodeURIComponent(result.volUrl);
+check(volunteerUrl.includes('general-forum/issues/new?template=volunteer-introduction.yml'), 'Volunteer result points at the wrong issue template');
+check(volunteerUrl.includes('&interests=') && volunteerUrl.includes('&contribution=') && volunteerUrl.includes('&starting_point='), 'Volunteer result is missing its form fields');
 noPlaceholders(result, 'org/join/result');
 
 const resultNode = result.mapRows.flatMap((row) => row.nodes).filter((node) => node.tag === 'YOUR TRACK')[0];
@@ -229,7 +272,9 @@ check(new Set(resultTracks).size === 3, 'three distinct Volunteer profiles shoul
   await offline.loadGH(false);
   check(offline.state.ghState === 'error', 'offline GitHub request did not enter fallback state');
   const fallback = offline.renderVals();
-  check(fallback.projCards.length === 17 && fallback.fallbackFn.length > 0, 'offline mode lost curated projects or functions');
+  check(fallback.projCards.length === 17, 'offline mode lost curated projects');
+  check(fallback.ghDown && fallback.liveFn.length === 0, 'offline mode must not invent open functions');
+  check(fallback.fnEmptyTitle === 'GitHub is not reachable from here.', 'offline board needs the honest unavailable state');
 
   if (problems.length) {
     console.error(problems.join('\n'));
