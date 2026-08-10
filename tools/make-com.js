@@ -4,8 +4,7 @@
 //
 // One component, two sites. The institutional presentation is not maintained as a second
 // copy that slowly drifts — it is produced from this file by changing exactly four things:
-// the SITE build constant, the cross-site link, the document head, and (until the domain is
-// pointed at GitHub Pages) a robots noindex.
+// the SITE build constant, the cross-site link, and the document head.
 //
 // Everything else — layout, tokens, component logic, and the `com*` copy of every project —
 // is shared. When the content of a .com page changes, it changes in this repository and is
@@ -26,16 +25,16 @@ if (!target) {
 // the CNAME file was added to that repository.
 const STAGING = false;
 
-const HEAD = `<title>Drayker — open infrastructure through distributed collaboration</title>
-<meta name="description" content="Drayker is a volunteer, non-profit organization building Dk — a unified system of intelligence, organization and computing — and the protocol that lets the whole world build it together.">
+const HEAD = `<title>Drayker.com — intelligence, organization and computing</title>
+<meta name="description" content="Drayker is an open, volunteer-led research initiative designing distributed intelligence, coordination and computing infrastructure.">
 <meta name="theme-color" content="#08080A">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://drayker.com/">
 <link rel="icon" href="./assets/logo/drayker-favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="./assets/logo/kit/apple-touch-icon.png">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Drayker — open infrastructure through distributed collaboration">
-<meta property="og:description" content="A volunteer, non-profit organization building Dk and the protocol behind it.">
+<meta property="og:title" content="Drayker.com — intelligence, organization and computing">
+<meta property="og:description" content="An open research initiative designing distributed intelligence, coordination and computing infrastructure.">
 <meta property="og:url" content="https://drayker.com/">
 <meta property="og:image" content="https://drayker.com/og.png">
 <meta property="og:image:width" content="1200">
