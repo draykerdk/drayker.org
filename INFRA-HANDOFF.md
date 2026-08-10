@@ -1,7 +1,6 @@
 # Infra — SEO estático e dados da organização
 
-Duas peças de infraestrutura desenhadas neste pacote, prontas para entrar no
-repositório no próximo publish. Ambas seguem a mesma regra do resto do projeto:
+Duas peças de infraestrutura publicadas com o pacote 3.4.1. Ambas seguem a mesma regra do resto do projeto:
 **estático primeiro, rede é enriquecimento** — e nada de build, bundler ou dependência
 de runtime.
 
@@ -13,14 +12,15 @@ duas. Os arquivos abaixo são o lado do repositório.
 ## 1. SEO por rota — `tools/prerender.js`
 
 **Problema.** O site é um Design Component renderizado no cliente, com rotas por hash.
-Um rastreador vê **uma** página: um título, uma descrição, uma URL canônica. Todo o
+Sem prerender, um rastreador vê **uma** página: um título, uma descrição, uma URL canônica. Todo o
 conteúdo — vinte páginas de componente, manifesto, DFM, Dknowledger — é invisível para
 busca e para preview de link.
 
 **O que foi feito no componente.** Tabela `ROUTE_META` (título + descrição por rota) e
 `setMeta()`, chamado a cada mudança de rota: atualiza `<title>`, `meta[name=description]`,
-`link[rel=canonical]`, `og:title`, `og:description` e `og:url`. Isso já corrige link
-compartilhado e aba do navegador em navegação real.
+`link[rel=canonical]`, `og:title`, `og:description` e `og:url`. Canônica e `og:url`
+continuam nas rotas limpas mesmo depois de o componente carregar; o hash existe só
+como compatibilidade de navegação.
 
 **O que o script faz.** Emite **um documento HTML de verdade por rota**, sem headless
 browser:
@@ -74,21 +74,21 @@ não dispara nada; só a primeira visita tenta uma rodada de atualização.
 
 ---
 
-## Ordem sugerida no próximo publish
+## Ordem de publicação
 
 1. Copiar o componente para `index.html` e regenerar o `.com` (`tools/make-com.js`).
 2. `node tools/render-check.js` — a suíte estática precisa continuar passando.
 3. `node tools/prerender.js --site=org` no repositório do `.org`; o mesmo com
    `--site=com` no repositório do `.com`.
-4. Copiar `.github/workflows/org-snapshot.yml` para o repositório do `.org` e rodar uma
-   vez à mão (`workflow_dispatch`) para criar o primeiro `data/org.json`.
+4. Manter `.github/workflows/org-snapshot.yml` no repositório do `.org`; o primeiro
+   `data/org.json` já foi publicado e as atualizações seguem por branch automatizada.
 5. Conferir: `drayker.org/knowledge/` abre o panorama do Dknowledger com título próprio, e
    `#org/fn` continua funcionando.
 
-## O que ainda não foi feito
+## O que ficou deliberadamente fora
 
 - Um `og:image` por rota. Hoje todas usam o `og.png` da organização; imagem por página
   exigiria geração de imagem no CI, e o ganho é estético.
-- Regra de `render-check.js` para as duas peças novas (verificar que cada rota
-  prerenderizada tem título único e que `data/org.json` casa com o schema esperado).
-  Vale acrescentar quando isso entrar no repositório.
+
+`render-check.js` e `prerender-check.js` já cobrem metadados em execução, títulos
+únicos, URLs limpas, favicons e o schema do snapshot.

@@ -3616,7 +3616,12 @@ class Component extends DCLogic {
       if (el && el.getAttribute(attr) !== val) el.setAttribute(attr, val);
     };
     const base = org ? 'https://drayker.org/' : 'https://drayker.com/';
-    const url = base + (path === 'home' ? '' : '#' + this.site + '/' + path);
+    // Hash routes remain as backwards-compatible application state, but the public
+    // document identity is always the clean, prerendered URL. Keeping canonical and
+    // og:url fragment-free after the component mounts prevents the client from
+    // undoing the metadata emitted by tools/prerender.js.
+    const cleanPath = path === 'home' ? '' : String(path).replace(/^\/+|\/+$/g, '') + '/';
+    const url = base + cleanPath;
     set('meta[name="description"]', 'content', m.d);
     set('link[rel="canonical"]', 'href', url);
     set('meta[property="og:title"]', 'content', title);
