@@ -1,0 +1,34 @@
+schema_version: 1
+component:
+  id: drayker.org
+  name: drayker.org
+  layer: PORTAL
+  artifact_type: portal
+  problem: Provide the public participation portal and connected map of the Drayker ecosystem.
+  scope:
+    - Static public portal for organization, documentation and contribution routes.
+    - Live aggregation of open functions from public GitHub issues.
+  non_scope:
+    - Private project management data.
+    - A claim that every documented ecosystem concept is implemented.
+  dependencies:
+    - general-forum
+    - dknowledge
+  implementation:
+    level: operational
+    scope: The static site and its public GitHub-backed contribution routes are deployed; component implementation claims remain bounded by their own evidence.
+    evidence:
+      - type: deployment
+        ref: https://drayker.org
+      - type: test
+        ref: tools/render-check.js
+  risks:
+    - Cached issue data can temporarily differ from GitHub.
+    - Narrative changes can accidentally overstate early-stage components.
+  contributions:
+    availability: open
+    entrypoint: https://github.com/draykerdk/drayker.org/issues
+  source_of_truth:
+    repository: https://github.com/draykerdk/drayker.org
+    path: index.html
+  last_reviewed: "2026-08-10"
