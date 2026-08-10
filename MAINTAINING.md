@@ -7,7 +7,7 @@ da v3; `Drayker v2.dc.html` e `Drayker.dc.html` são históricos e não devem se
 
 Publicação: HTML estático em GitHub Pages, repositório `draykerdk/drayker.org`.
 
-**Fonte de verdade decidida (2026-08-10): o Design Component v3 do pacote 3.0.** Design estático
+**Fonte de verdade decidida (2026-08-10): o Design Component v3 do pacote 3.4.1.** Design estático
 próprio, sem framework e com o mínimo de biblioteca externa. Qualquer port
 React/Next é experimento e não manda no conteúdo — se algo divergir, o certo é o
 que está aqui. Nada de reintroduzir build, bundler ou dependência de runtime.
@@ -25,6 +25,8 @@ muda de cor, e só com as cores de escopo já listadas (§7). Não invente cor n
 `#org/join`. Qualquer mudança de navegação tem de manter esses hashes vivos:
 `#<site>/<page>`, `#org/contrib/<tab>`, `#org/project/<key>`, `#com/<page>`.
 Quebrar uma rota quebra links públicos que já estão em produção.
+As rotas limpas geradas (`/knowledge/`, `/project/<key>/` etc.) são a superfície de SEO;
+canônicas e sitemap nunca podem conter `#`.
 
 **Conteúdo vem dos READMEs.** Descrição de projeto e lacunas saem do README real do
 repositório (leia com as ferramentas de GitHub). Não invente funcionalidade, prazo
@@ -42,9 +44,10 @@ escrevê-lo" é convite, e é o motivo de o `.org` existir. Mantenha em prosa, s
 de pontos do DAF indefinida, conselhos indefinidos, templates do DFMPProject não
 publicados.
 
-**GitHub API.** Só endpoints públicos, sem token, cache de 30 min em memória. Nunca
-deixe a página depender da rede para renderizar: projetos e contratos curados continuam
-visíveis; funções abertas usam um estado vazio honesto e nunca linhas de exemplo.
+**GitHub API.** Só endpoints públicos no navegador, sem token, cache de 30 min. O
+`data/org.json` versionado é carregado antes da API e usa URL absoluta nas rotas
+prerenderizadas. Nunca deixe a página depender da rede: projetos e contratos curados
+continuam visíveis; funções abertas usam snapshot ou estado vazio honesto, nunca exemplos.
 
 **Label do board.** É `open-function`. Não é "good first issue".
 
@@ -55,6 +58,8 @@ visíveis; funções abertas usam um estado vazio honesto e nunca linhas de exem
 - Revisão grande = criar a próxima versão do Design Component e manter a v3 como histórico.
 - Atualize `github.md` (Last sync + Screen map) sempre que mudar conteúdo derivado
   do repositório.
+- Depois de editar o componente: rode `render-check`, regenere `.com`, execute
+  `prerender.js` nos dois repositórios e valide com `prerender-check.js`.
 
 ## Idioma
 Site em inglês. Conversa e documentação interna em português.

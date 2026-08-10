@@ -1,0 +1,33 @@
+{
+  "generated_at": "2026-08-10T13:00:00Z",
+  "source": "Public GitHub data bootstrapped for the static portal; maintained by .github/workflows/org-snapshot.yml",
+  "repos": [
+    { "name": "advices", "full": "draykerdk/advices", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 1, "url": "https://github.com/draykerdk/advices", "home": "", "push": null },
+    { "name": "bsdk", "full": "draykerdk/bsdk", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 1, "url": "https://github.com/draykerdk/bsdk", "home": "https://bsdk.drayker.org", "push": null },
+    { "name": "daf", "full": "draykerdk/daf", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 1, "url": "https://github.com/draykerdk/daf", "home": "https://daf.drayker.org", "push": null },
+    { "name": "dfmp", "full": "draykerdk/dfmp", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 3, "url": "https://github.com/draykerdk/dfmp", "home": "https://dfmp.drayker.org", "push": null },
+    { "name": "dfmpproject", "full": "draykerdk/dfmpproject", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/dfmpproject", "home": "https://dfmpproject.drayker.org", "push": null },
+    { "name": "dk", "full": "draykerdk/dk", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 1, "url": "https://github.com/draykerdk/dk", "home": "https://dk.drayker.org", "push": null },
+    { "name": "dk-network", "full": "draykerdk/dk-network", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/dk-network", "home": "https://dknetwork.drayker.org", "push": null },
+    { "name": "dknowledge", "full": "draykerdk/dknowledge", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/dknowledge", "home": "https://dknowledger.drayker.org", "push": null },
+    { "name": "drayker.com", "full": "draykerdk/drayker.com", "desc": "", "lang": "HTML", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/drayker.com", "home": "https://drayker.com", "push": null },
+    { "name": "drayker-theme", "full": "draykerdk/drayker-theme", "desc": "", "lang": "SCSS", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/drayker-theme", "home": "", "push": null },
+    { "name": "drayker.org", "full": "draykerdk/drayker.org", "desc": "", "lang": "HTML", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/drayker.org", "home": "https://drayker.org", "push": null },
+    { "name": "emergence-initiative", "full": "draykerdk/emergence-initiative", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/emergence-initiative", "home": "", "push": null },
+    { "name": "general-forum", "full": "draykerdk/general-forum", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/general-forum", "home": "", "push": null },
+    { "name": "living-cryptography", "full": "draykerdk/living-cryptography", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/living-cryptography", "home": "https://lc.drayker.org", "push": null },
+    { "name": "metadfmp", "full": "draykerdk/metadfmp", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/metadfmp", "home": "", "push": null },
+    { "name": "osdk", "full": "draykerdk/osdk", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/osdk", "home": "", "push": null },
+    { "name": "uid", "full": "draykerdk/uid", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/uid", "home": "", "push": null }
+  ],
+  "issues": [
+    { "num": 1, "title": "Specify federative points and the voting procedure", "url": "https://github.com/draykerdk/daf/issues/1", "repo": "daf", "labels": ["open-function"], "user": "", "avatar": "", "comments": 0, "at": null, "assigned": false },
+    { "num": 2, "title": "Publish the first motion for resolution on the base structure", "url": "https://github.com/draykerdk/bsdk/issues/2", "repo": "bsdk", "labels": ["open-function"], "user": "", "avatar": "", "comments": 0, "at": null, "assigned": false },
+    { "num": 1, "title": "Write how a council works", "url": "https://github.com/draykerdk/advices/issues/1", "repo": "advices", "labels": ["open-function"], "user": "", "avatar": "", "comments": 0, "at": null, "assigned": false },
+    { "num": 2, "title": "Expand the ethical code of Dk", "url": "https://github.com/draykerdk/dk/issues/2", "repo": "dk", "labels": ["open-function"], "user": "", "avatar": "", "comments": 0, "at": null, "assigned": false },
+    { "num": 3, "title": "Bring the Spanish protocol README up to date", "url": "https://github.com/draykerdk/dfmp/issues/3", "repo": "dfmp", "labels": ["open-function", "translation"], "user": "", "avatar": "", "comments": 0, "at": null, "assigned": false },
+    { "num": 2, "title": "Bring the Portuguese protocol README up to date", "url": "https://github.com/draykerdk/dfmp/issues/2", "repo": "dfmp", "labels": ["open-function", "translation"], "user": "", "avatar": "", "comments": 0, "at": null, "assigned": false },
+    { "num": 1, "title": "Write DFMP-000, the proposal process paper", "url": "https://github.com/draykerdk/dfmp/issues/1", "repo": "dfmp", "labels": ["open-function"], "user": "", "avatar": "", "comments": 0, "at": null, "assigned": false }
+  ],
+  "people": []
+}

@@ -3,8 +3,8 @@
 //   node tools/make-com.js ../drayker.com-site/index.html
 //
 // One component, two sites. The institutional presentation is not maintained as a second
-// copy that slowly drifts — it is produced from this file by changing exactly four things:
-// the SITE build constant, the cross-site link, and the document head.
+// copy that slowly drifts — it is produced from this file by changing the SITE build
+// constant, the Design Component's default site prop, the cross-site link and the head.
 //
 // Everything else — layout, tokens, component logic, and the `com*` copy of every project —
 // is shared. When the content of a .com page changes, it changes in this repository and is
@@ -52,6 +52,13 @@ const fail = (what) => { console.error('make-com: could not rewrite ' + what + '
 const before = out;
 out = out.replace(/const SITE = 'org';/, "const SITE = 'com';");
 if (out === before) fail('the SITE build constant');
+
+// The runtime materializes defaults declared in data-props as real component props.
+// If this remains `org`, it overrides SITE on the clean root URL; hash routes appear to
+// work only because #com/<page> subsequently switches state in place.
+const beforeDefault = out;
+out = out.replace(/(&quot;site&quot;:[\s\S]*?&quot;default&quot;:&quot;)org(&quot;)/, '$1com$2');
+if (out === beforeDefault) fail('the Design Component site default');
 
 const beforeCross = out;
 out = out.replace(/const CROSS_SITE_URL = '[^']*';/, "const CROSS_SITE_URL = 'https://drayker.org';");
