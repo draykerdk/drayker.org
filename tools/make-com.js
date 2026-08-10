@@ -30,7 +30,10 @@ const HEAD = `<title>Drayker.com — intelligence, organization and computing</t
 <meta name="theme-color" content="#08080A">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://drayker.com/">
+<link rel="shortcut icon" href="./favicon.ico">
 <link rel="icon" href="./assets/logo/drayker-favicon.svg" type="image/svg+xml">
+<link rel="icon" href="./assets/logo/kit/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="./assets/logo/kit/favicon-16.png" type="image/png" sizes="16x16">
 <link rel="apple-touch-icon" href="./assets/logo/kit/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Drayker.com — intelligence, organization and computing">
