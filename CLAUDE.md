@@ -1,13 +1,13 @@
 # Drayker — instruções do projeto
 
 ## O que é este projeto
-Site institucional da Drayker em **um único Design Component**: `Drayker v2.dc.html`
-cobre drayker.com e drayker.org com um switch .com/.org. `Drayker.dc.html` é a versão
-anterior — não edite, serve de histórico.
+Site institucional da Drayker em **um único Design Component**: `design/Drayker v3.dc.html`
+cobre drayker.com e drayker.org com um switch .com/.org. `index.html` é a cópia publicada
+da v3; `Drayker v2.dc.html` e `Drayker.dc.html` são históricos e não devem ser promovidos.
 
 Publicação: HTML estático em GitHub Pages, repositório `draykerdk/drayker.org`.
 
-**Fonte de verdade decidida (2026-08-08): este Design Component.** Design estático
+**Fonte de verdade decidida (2026-08-10): o Design Component v3 do pacote 3.0.** Design estático
 próprio, sem framework e com o mínimo de biblioteca externa. Qualquer port
 React/Next é experimento e não manda no conteúdo — se algo divergir, o certo é o
 que está aqui. Nada de reintroduzir build, bundler ou dependência de runtime.
@@ -42,9 +42,9 @@ escrevê-lo" é convite, e é o motivo de o `.org` existir. Mantenha em prosa, s
 de pontos do DAF indefinida, conselhos indefinidos, templates do DFMPProject não
 publicados.
 
-**GitHub API.** Só endpoints públicos, sem token, cache de 30 min em memória, e
-fallback curado quando a API falhar ou estourar o limite. Nunca deixe a página
-depender da rede para renderizar: o conteúdo curado é o estado base.
+**GitHub API.** Só endpoints públicos, sem token, cache de 30 min em memória. Nunca
+deixe a página depender da rede para renderizar: projetos e contratos curados continuam
+visíveis; funções abertas usam um estado vazio honesto e nunca linhas de exemplo.
 
 **Label do board.** É `open-function`. Não é "good first issue".
 
@@ -52,7 +52,7 @@ depender da rede para renderizar: o conteúdo curado é o estado base.
 - Edite com `dc_html_str_replace` / `dc_js_str_replace`; nada de reescrever o DC inteiro.
 - Estilo inline, sempre. Sem classes, sem folha de estilo (só `@font-face`,
   `@keyframes` e reset no `<helmet>`).
-- Revisão grande = copiar para `Drayker v3.dc.html` e editar a cópia.
+- Revisão grande = criar a próxima versão do Design Component e manter a v3 como histórico.
 - Atualize `github.md` (Last sync + Screen map) sempre que mudar conteúdo derivado
   do repositório.
 
@@ -87,10 +87,9 @@ visual e interativa quando o fluxo ou o runtime mudar.
 7. **Links internos.** Nos cards do Ecosystem e nos componentes da página do Dk, o
    clique no card abre a página interna e o clique no link de repo/docs abre o
    externo **sem** também abrir a página interna.
-8. **Split .com/.org.** No `.com`: sem Contribute na navegação, sem botão
-   Volunteer, cards do Ecosystem marcados `FULL PAGE ON DRAYKER.ORG`, seção-ponte
-   na home e título do documento com `.com`. Clicar em qualquer rota de
-   participação tem de levar ao `.org`.
+8. **Split .com/.org.** No `.com`: sem Contribute na navegação, sem botão Volunteer,
+   com `#com/partnerships` e uma página institucional própria para cada componente.
+   Links técnicos profundos e qualquer rota de participação levam ao `.org`.
 9. **Sem rede.** Repetir 3–8 com a API do GitHub bloqueada: tudo continua
    renderizando pelo conteúdo curado, sem tela vazia nem erro de console.
 10. **Limite de API.** Confirmar que uma sessão inteira do fluxo não dispara mais de

@@ -21,7 +21,7 @@ This repository is the first deployment of the Drayker web pattern: a dark, open
 | Muted text | `#8585A0` |
 | Accent | `#FF5500` |
 | Accent hover | `#FF7A33` |
-| Display face | Space Grotesk |
+| Display face | Archivo |
 | Technical face | JetBrains Mono |
 | Content width | `1320px` |
 
@@ -38,14 +38,14 @@ This repository is the first deployment of the Drayker web pattern: a dark, open
 - Home
 - Manifesto
 - DFM Protocol
-- Dk Global
-- Dk Personal
+- Dk, with Dk Global, Dk Personal and Dk Local explained separately
 - Ecosystem
 - Organization
+- Funding & partnerships (`.com`)
 - Open functions
 - Docs & papers
 - Volunteer application
-- Project pages for the Dk components, organizational projects and application domains
+- Twenty component/concept pages on both domains, with institutional cases on `.com` and technical records on `.org`
 
 ## Interaction contract
 
@@ -57,7 +57,7 @@ This repository is the first deployment of the Drayker web pattern: a dark, open
 - Public pages do not expose private project-management statuses. A project page describes purpose, role, relationships and sources independently of its internal execution state.
 - The `.org` presentation is the cooperation and documentation layer: it emphasizes open functions, organization, project pages, source trails and ways to continue the work.
 - The `.com` presentation is the institutional layer: it emphasizes the overall Drayker map and explains where each part fits without exposing private project-management state.
-- The `.com` and `.org` presentations share the public project directory and relationship graph, but each project page changes its framing and call to action for the selected domain.
+- The `.com` and `.org` presentations share the public component directory and relationship graph, but each page changes its framing and call to action for the selected domain. Deep links from `.com` open the exact technical section on `.org`.
 
 ## Data read at runtime
 
@@ -66,7 +66,8 @@ The component is static, but two things are read from GitHub in the browser so t
 | What | Source | Failure behaviour |
 | --- | --- | --- |
 | Open-functions board | `GET api.github.com/search/issues` for `org:draykerdk is:issue is:open label:open-function`, fetched only when the board is opened | Falls back to the same honest empty state; never to sample rows |
-| Volunteer application | A prefilled `issues/new` URL on `draykerdk/drayker.org`, opened in a new tab | The confirmation screen also prints the link |
+| Volunteer introduction | A prefilled `volunteer-introduction.yml` issue in `draykerdk/general-forum`, opened in a new tab | The confirmation screen also prints the link |
+| Partnership proposal | A prefilled `partnership.yml` issue in `draykerdk/general-forum`, opened in a new tab | The confirmation screen also prints the link |
 
 Issue labels that shape a row: `skill:*` (drives the filters), `level:*` (badge), `effort:*` (estimate).
 
@@ -85,7 +86,7 @@ python3 -m http.server 8766
 
 Then confirm the `.org` default, `#org/home` route, domain switch to `#com/home`, internal navigation, external links, filter buttons and the volunteer flow in a browser.
 
-All 21 screens are also rendered headlessly in both presentations by:
+The shared screens, all twenty component/concept pages, cross-domain routes, GitHub forms and offline states are also checked headlessly by:
 
 ```bash
 node tools/render-check.js
