@@ -1,12 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- The site is a single Design Component with hash routes (#org/dk, #com/eco …).
-     Search engines do not treat a fragment as a separate URL, so this deployment has
-     exactly one indexable address. The documentation sites at *.drayker.org carry the
-     rest of the crawlable surface, each with its own generated sitemap. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://drayker.org/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
+  <url><loc>https://drayker.org/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/manifesto/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/dfm/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/dk/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/eco/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/org/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/knowledge/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/docs/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/contrib/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/fn/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/join/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/contrib/overview/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/contrib/tracks/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/contrib/projects/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/contrib/guide/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/project/dfmp/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/project/dfmpproject/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/project/metadfmp/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/project/dk/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/project/bsdk/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/project/dknetwork/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/project/lc/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/project/uid/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/project/osdk/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/project/dsupport/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/project/daf/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/project/advices/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/project/valueunit/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/project/openscience/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/project/dknowledge/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/project/general/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/project/emergence/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/project/org/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/project/com/</loc><lastmod>2026-08-10</lastmod></url>
+  <url><loc>https://drayker.org/project/theme/</loc><lastmod>2026-08-10</lastmod></url>
 </urlset>
