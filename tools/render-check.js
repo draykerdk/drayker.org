@@ -10,6 +10,7 @@ const path = require('path');
 
 const file = process.argv[2] || path.join(__dirname, '..', 'index.html');
 const src = fs.readFileSync(file, 'utf8');
+const snapshotFile = path.join(__dirname, '..', 'data', 'org.json');
 const block = src.match(/<script type="text\/x-dc"[^>]*>([\s\S]*?)<\/script>/);
 if (!block) throw new Error('No <script type="text/x-dc"> block found in ' + file);
 
@@ -18,6 +19,8 @@ const CROSS_CONST = /const CROSS_SITE_URL = '[^']*';/;
 if (!SITE_CONST.test(block[1]) || !CROSS_CONST.test(block[1])) {
   throw new Error('Deployment constants not found in the component script.');
 }
+const deployedSite = (block[1].match(SITE_CONST) || [])[1];
+const propDefault = (src.match(/&quot;site&quot;:[\s\S]*?&quot;default&quot;:&quot;(org|com)&quot;/) || [])[1];
 
 const memory = new Map();
 global.React = {
@@ -65,7 +68,7 @@ const load = (site) => {
   const code = block[1]
     .replace(SITE_CONST, "const SITE = '" + site + "';")
     .replace(CROSS_CONST, "const CROSS_SITE_URL = '" + cross + "';");
-  return eval(code + '\n;({ Component, PROJECTS, CONCEPTS, JOIN_STEPS, TRACKS, LAYER_GROUPS })');
+  return eval(code + '\n;({ Component, PROJECTS, CONCEPTS, JOIN_STEPS, TRACKS, LAYER_GROUPS, CASE_LAYERS, ROUTE_META, KN_NODES, KN_EDGES, KN_TRUST, KN_TODAY })');
 };
 
 const problems = [];
@@ -111,6 +114,20 @@ check(org.CONCEPTS.length === 3, 'expected 3 no-repository concepts, got ' + org
 check(new Set(org.PROJECTS.map((p) => p.key)).size === org.PROJECTS.length, 'repository keys must be unique');
 check(org.CONCEPTS.every((p) => p.concept && !p.repo), 'every concept must explicitly have no repository');
 check(org.PROJECTS.every((p) => p.vision && p.tagline && p.layer && p.arch.length && p.contribute.length), 'every repository needs a complete page model');
+check(org.CASE_LAYERS.length === 4, 'the home argument must have exactly four layers');
+check(org.CASE_LAYERS.map((layer) => layer.id).join(',') === 'method,system,org,transition', 'the four layers are out of order');
+check(org.ROUTE_META.knowledge && org.ROUTE_META.knowledge.t.includes('Dknowledger'), 'Dknowledger route metadata is missing');
+check(new Set(Object.values(org.ROUTE_META).map((meta) => meta.t)).size === Object.keys(org.ROUTE_META).length, 'route titles must be unique');
+check(org.KN_NODES.length === 6 && org.KN_EDGES.length === 7 && org.KN_TRUST.length === 5, 'the proposed knowledge model is incomplete');
+check(org.KN_TODAY.filter((row) => row.t === 't4').length === 3, 'the public inventory must expose all three open paper groups');
+check(src.includes("SITE === 'org' ? '/data/org.json' : 'https://drayker.org/data/org.json'"), 'snapshot URL must work from clean routes on both domains');
+check(propDefault === deployedSite, 'Design Component site default (' + propDefault + ') overrides deployed SITE (' + deployedSite + ')');
+if (fs.existsSync(snapshotFile)) {
+  const snapshot = JSON.parse(fs.readFileSync(snapshotFile, 'utf8'));
+  check(snapshot.repos.length === 17, 'the organization snapshot must contain the 17 public component repositories');
+  check(!snapshot.repos.some((repo) => repo.name === '.github'), 'the governance repository must not appear as an eighteenth component');
+  check(Array.isArray(snapshot.issues) && Array.isArray(snapshot.people), 'the organization snapshot shape is incomplete');
+}
 
 for (const site of ['org', 'com']) {
   const bundle = site === 'org' ? org : com;
@@ -267,6 +284,29 @@ check(new Set(resultTracks).size === 3, 'three distinct Volunteer profiles shoul
   const cached = make(org);
   await cached.loadGH(false);
   check(cached.state.ghState === 'ready' && cached.state.ghRepos.length === 1, 'fresh GitHub cache was not used');
+
+  memory.clear();
+  const snapshot = { generated_at: new Date().toISOString(), repos: [{ name: 'dk' }], issues: [], people: [] };
+  const orgCalls = [];
+  global.fetch = (url) => {
+    orgCalls.push(url);
+    if (url === '/data/org.json') return Promise.resolve({ ok: true, json: () => Promise.resolve(snapshot) });
+    return Promise.reject(new Error('live API offline'));
+  };
+  const snapOrg = make(org);
+  await snapOrg.loadGH(false);
+  check(orgCalls[0] === '/data/org.json' && snapOrg.state.ghState === 'ready', '.org did not retain its root snapshot');
+
+  memory.clear();
+  const comCalls = [];
+  global.fetch = (url) => {
+    comCalls.push(url);
+    if (url === 'https://drayker.org/data/org.json') return Promise.resolve({ ok: true, json: () => Promise.resolve(snapshot) });
+    return Promise.reject(new Error('live API offline'));
+  };
+  const snapCom = make(com);
+  await snapCom.loadGH(false);
+  check(comCalls[0] === 'https://drayker.org/data/org.json' && snapCom.state.ghState === 'ready', '.com did not reuse the canonical organization snapshot');
 
   memory.clear();
   global.fetch = () => Promise.reject(new Error('offline'));
