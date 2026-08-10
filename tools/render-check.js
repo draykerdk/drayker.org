@@ -34,7 +34,20 @@ global.DCLogic = class DCLogic {
   }
 };
 global.performance = { now: () => 0 };
-global.document = { title: '', documentElement: { setAttribute() {} } };
+const headAttrs = {};
+global.document = {
+  title: '',
+  documentElement: { setAttribute() {} },
+  head: {
+    querySelector(selector) {
+      if (!headAttrs[selector]) headAttrs[selector] = {};
+      return {
+        getAttribute: (attribute) => headAttrs[selector][attribute] || null,
+        setAttribute: (attribute, value) => { headAttrs[selector][attribute] = value; }
+      };
+    }
+  }
+};
 global.localStorage = {
   getItem: (key) => memory.has(key) ? memory.get(key) : null,
   setItem: (key, value) => memory.set(key, String(value)),
@@ -122,6 +135,12 @@ check(org.KN_NODES.length === 6 && org.KN_EDGES.length === 7 && org.KN_TRUST.len
 check(org.KN_TODAY.filter((row) => row.t === 't4').length === 3, 'the public inventory must expose all three open paper groups');
 check(src.includes("SITE === 'org' ? '/data/org.json' : 'https://drayker.org/data/org.json'"), 'snapshot URL must work from clean routes on both domains');
 check(propDefault === deployedSite, 'Design Component site default (' + propDefault + ') overrides deployed SITE (' + deployedSite + ')');
+make(org).setMeta('knowledge');
+check(headAttrs['link[rel="canonical"]'].href === 'https://drayker.org/knowledge/', '.org runtime canonical must stay on the clean route');
+check(headAttrs['meta[property="og:url"]'].content === 'https://drayker.org/knowledge/', '.org runtime og:url must stay on the clean route');
+make(com).setMeta('project/dk');
+check(headAttrs['link[rel="canonical"]'].href === 'https://drayker.com/project/dk/', '.com runtime canonical must stay on the clean route');
+check(headAttrs['meta[property="og:url"]'].content === 'https://drayker.com/project/dk/', '.com runtime og:url must stay on the clean route');
 if (fs.existsSync(snapshotFile)) {
   const snapshot = JSON.parse(fs.readFileSync(snapshotFile, 'utf8'));
   check(snapshot.repos.length === 17, 'the organization snapshot must contain the 17 public component repositories');
