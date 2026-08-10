@@ -5,7 +5,7 @@ The public entry point for people who want to work on Drayker: what the organiza
 Live at **[drayker.org](https://drayker.org)**.
 
 This repository publishes the static Design Component supplied in the Drayker
-2.3 package. Its visual system, page composition, animated mark and content are
+3.0 package. Its visual system, page composition, animated mark and content are
 package-native; there is no React/Vinext application or reconstructed design.
 
 ## What is in this repository
@@ -16,11 +16,12 @@ package-native; there is no React/Vinext application or reconstructed design.
 | `support.js` | The generated Design Component runtime. **Do not edit by hand.** |
 | `drayker-mark.js` / `DRAYKER-MARK.md` | Reusable official mark implementation and its contract. |
 | `assets/logo/` | Complete logo kit supplied with the package. |
-| `design/` | Unmodified package references: the v2 component and logo variations. |
+| `design/` | Package references: the deployed v3 component, historical v2 component and logo variations. |
+| `V3-HANDOFF.md` | Design-to-implementation record for the 3.0 delivery. |
 | `.nojekyll` | Keeps GitHub Pages from interpreting `{{ … }}` component bindings as Liquid. |
 | `CNAME` | The custom domain. |
 | `SITE_PATTERN.md` | The Drayker web pattern: tokens, structure, interaction contract, how to reuse it. |
-| `tools/render-check.js` | Dependency-free checks for both domains, routes, all project pages, Volunteer and GitHub fallback. |
+| `tools/render-check.js` | Dependency-free checks for both domains, routes, all component pages, GitHub forms, Volunteer and offline behaviour. |
 | `tools/make-com.js` | Generates the institutional `.com` artifact from the same component. |
 
 There is no build step and no dependency to install. The page loads React and its fonts through the runtime's existing CDN path.
@@ -47,16 +48,17 @@ node tools/make-com.js /tmp/drayker-com.html
 node tools/render-check.js /tmp/drayker-com.html
 ```
 
-## Two things the site reads from GitHub
+## GitHub integration
 
 - **Open functions** are read live from the public issues of the [`draykerdk`](https://github.com/draykerdk) organization: an issue becomes an open function when it carries the `open-function` label. Optional `skill:*`, `level:*` and `effort:*` labels fill in the filters, badge and estimate. Nothing on that board is written by hand — if the search returns nothing, the board says so.
-- **Volunteer guidance** is resolved locally in the browser. It recommends a track, projects and first steps without transmitting the visitor's answers.
+- **Volunteer guidance** is resolved locally in the browser. It recommends a track, projects and first steps without transmitting the visitor's answers. The visitor may then review and publish a prefilled public issue in [`general-forum`](https://github.com/draykerdk/general-forum/issues/new?template=volunteer-introduction.yml).
+- **Partnership proposals** are composed locally on `.com` and opened as a prefilled public issue in `general-forum`; the site does not collect contact information.
 
 ## Contributing
 
 Open an issue in this repository. If you want to work on the site itself, keep the runtime contract and the visual tokens in `SITE_PATTERN.md` intact, and never publish internal project-management state — a project page describes purpose, role, relationships and sources, not execution status.
 
-Drayker is organized through the [DFMP](https://dfmp.drayker.org) process, its resources are governed by the non-profit [DAF](https://daf.drayker.org), and the work is primarily voluntary.
+The current founding phase and direct-integration limits are written in the organization-wide [GOVERNANCE.md](https://github.com/draykerdk/.github/blob/master/GOVERNANCE.md). DFMP is the documented proposal method; DAF and its resource-governance mechanics are proposed architecture, not an operational federation. The work is primarily voluntary and remains open to contribution through the normal GitHub flow.
 
 [Steemit](https://steemit.com/@drayker) · [Medium](https://medium.com/drayker) · [Twitter](https://twitter.com/Draykerdk)
 
