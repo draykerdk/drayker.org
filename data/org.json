@@ -1,33 +1,707 @@
 {
-  "generated_at": "2026-08-10T13:00:00Z",
-  "source": "Public GitHub data bootstrapped for the static portal; maintained by .github/workflows/org-snapshot.yml",
+  "generated_at": "2026-08-11T12:21:36Z",
+  "source": "github api, reconciled before .github/workflows/org-snapshot.yml",
   "repos": [
-    { "name": "advices", "full": "draykerdk/advices", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 1, "url": "https://github.com/draykerdk/advices", "home": "", "push": null },
-    { "name": "bsdk", "full": "draykerdk/bsdk", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 1, "url": "https://github.com/draykerdk/bsdk", "home": "https://bsdk.drayker.org", "push": null },
-    { "name": "daf", "full": "draykerdk/daf", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 1, "url": "https://github.com/draykerdk/daf", "home": "https://daf.drayker.org", "push": null },
-    { "name": "dfmp", "full": "draykerdk/dfmp", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 3, "url": "https://github.com/draykerdk/dfmp", "home": "https://dfmp.drayker.org", "push": null },
-    { "name": "dfmpproject", "full": "draykerdk/dfmpproject", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/dfmpproject", "home": "https://dfmpproject.drayker.org", "push": null },
-    { "name": "dk", "full": "draykerdk/dk", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 1, "url": "https://github.com/draykerdk/dk", "home": "https://dk.drayker.org", "push": null },
-    { "name": "dk-network", "full": "draykerdk/dk-network", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/dk-network", "home": "https://dknetwork.drayker.org", "push": null },
-    { "name": "dknowledge", "full": "draykerdk/dknowledge", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/dknowledge", "home": "https://dknowledge.drayker.org", "push": null },
-    { "name": "drayker.com", "full": "draykerdk/drayker.com", "desc": "", "lang": "HTML", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/drayker.com", "home": "https://drayker.com", "push": null },
-    { "name": "drayker-theme", "full": "draykerdk/drayker-theme", "desc": "", "lang": "SCSS", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/drayker-theme", "home": "", "push": null },
-    { "name": "drayker.org", "full": "draykerdk/drayker.org", "desc": "", "lang": "HTML", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/drayker.org", "home": "https://drayker.org", "push": null },
-    { "name": "emergence-initiative", "full": "draykerdk/emergence-initiative", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/emergence-initiative", "home": "", "push": null },
-    { "name": "general-forum", "full": "draykerdk/general-forum", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/general-forum", "home": "", "push": null },
-    { "name": "living-cryptography", "full": "draykerdk/living-cryptography", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/living-cryptography", "home": "https://lc.drayker.org", "push": null },
-    { "name": "metadfmp", "full": "draykerdk/metadfmp", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/metadfmp", "home": "", "push": null },
-    { "name": "osdk", "full": "draykerdk/osdk", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/osdk", "home": "", "push": null },
-    { "name": "uid", "full": "draykerdk/uid", "desc": "", "lang": "", "stars": 0, "forks": 0, "issues": 0, "url": "https://github.com/draykerdk/uid", "home": "", "push": null }
+    {
+      "name": "value-unit",
+      "full": "draykerdk/value-unit",
+      "desc": "Value unit: the initial public home for this part of the Drayker architecture.",
+      "lang": "",
+      "stars": 0,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/value-unit",
+      "home": "https://value.drayker.org/",
+      "push": "2026-08-11T10:41:52Z"
+    },
+    {
+      "name": "drayker.org",
+      "full": "draykerdk/drayker.org",
+      "desc": "volunteers portal ",
+      "lang": "HTML",
+      "stars": 0,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/drayker.org",
+      "home": "https://drayker.org/",
+      "push": "2026-08-11T10:58:02Z"
+    },
+    {
+      "name": "drayker.com",
+      "full": "draykerdk/drayker.com",
+      "desc": "Drayker institutional site — generated from the component in draykerdk/drayker.org",
+      "lang": "HTML",
+      "stars": 0,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/drayker.com",
+      "home": "https://drayker.com/",
+      "push": "2026-08-11T10:42:01Z"
+    },
+    {
+      "name": "dk-academy",
+      "full": "draykerdk/dk-academy",
+      "desc": "Dk Academy: the initial public home for learning routes around Dk.",
+      "lang": "",
+      "stars": 0,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/dk-academy",
+      "home": "https://academy.drayker.org/",
+      "push": "2026-08-11T10:41:32Z"
+    },
+    {
+      "name": "stations",
+      "full": "draykerdk/stations",
+      "desc": "Stations & embassies: the initial public home for Drayker entry and local coordination points.",
+      "lang": "",
+      "stars": 0,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/stations",
+      "home": "https://stations.drayker.org/",
+      "push": "2026-08-11T10:41:28Z"
+    },
+    {
+      "name": "drayker-propagation",
+      "full": "draykerdk/drayker-propagation",
+      "desc": "A source-led propagation toolkit and canonical Drayker design library for volunteers.",
+      "lang": "HTML",
+      "stars": 0,
+      "forks": 0,
+      "issues": 0,
+      "url": "https://github.com/draykerdk/drayker-propagation",
+      "home": "https://propagation.drayker.org/",
+      "push": "2026-08-11T10:31:56Z"
+    },
+    {
+      "name": "distributed-support",
+      "full": "draykerdk/distributed-support",
+      "desc": "Distributed support: the initial public home for this part of the Drayker architecture.",
+      "lang": "",
+      "stars": 0,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/distributed-support",
+      "home": "https://support.drayker.org/",
+      "push": "2026-08-11T10:22:48Z"
+    },
+    {
+      "name": "open-science",
+      "full": "draykerdk/open-science",
+      "desc": "Open science & health: the initial public home for this Drayker research area.",
+      "lang": "",
+      "stars": 0,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/open-science",
+      "home": "https://science.drayker.org/",
+      "push": "2026-08-11T10:22:33Z"
+    },
+    {
+      "name": "pap",
+      "full": "draykerdk/pap",
+      "desc": "Projects & Applications: the initial public home for Drayker projects and applications.",
+      "lang": "",
+      "stars": 0,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/pap",
+      "home": "https://pap.drayker.org/",
+      "push": "2026-08-11T10:22:13Z"
+    },
+    {
+      "name": "dk-personal",
+      "full": "draykerdk/dk-personal",
+      "desc": "Dk Personal: the initial public home for the personal context of Dk.",
+      "lang": "",
+      "stars": 0,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/dk-personal",
+      "home": "https://personal.drayker.org/",
+      "push": "2026-08-11T10:22:29Z"
+    },
+    {
+      "name": "dknowledge",
+      "full": "draykerdk/dknowledge",
+      "desc": "Roadmap, papers and Drayker Knowledge ",
+      "lang": "JavaScript",
+      "stars": 1,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/dknowledge",
+      "home": "https://dknowledge.drayker.org",
+      "push": "2026-08-11T09:41:16Z"
+    },
+    {
+      "name": "osdk",
+      "full": "draykerdk/osdk",
+      "desc": "The OSDK serves as a universal coupler that connects all devices to the network and provides instant application to things.",
+      "lang": "",
+      "stars": 0,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/osdk",
+      "home": "https://osdk.drayker.org/",
+      "push": "2026-08-11T09:40:34Z"
+    },
+    {
+      "name": "dfmp",
+      "full": "draykerdk/dfmp",
+      "desc": "The distributed function modularization / modeling protocol is the basis of structured collaboration in Drayker, with different interpretations for different types of projects.",
+      "lang": "",
+      "stars": 1,
+      "forks": 0,
+      "issues": 3,
+      "url": "https://github.com/draykerdk/dfmp",
+      "home": "https://dfmp.drayker.org",
+      "push": "2026-08-11T09:40:08Z"
+    },
+    {
+      "name": "metadfmp",
+      "full": "draykerdk/metadfmp",
+      "desc": "Meta DFM — the engineering and functional-modeling framework of Drayker: the DFM protocols formalized, and the cognitive swarms that apply them",
+      "lang": "",
+      "stars": 1,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/metadfmp",
+      "home": "https://metadfmp.drayker.org/",
+      "push": "2026-08-11T09:40:31Z"
+    },
+    {
+      "name": "living-cryptography",
+      "full": "draykerdk/living-cryptography",
+      "desc": "The entire network is based on authentication and encryption, when someone tries to access an encrypted data, must perform a calculation for the distributed system in order to be authenticated and access the data, if the authentication is not successful, all the encryption of the data is changed.",
+      "lang": "",
+      "stars": 1,
+      "forks": 0,
+      "issues": 2,
+      "url": "https://github.com/draykerdk/living-cryptography",
+      "home": "https://lc.drayker.org/",
+      "push": "2026-08-11T09:40:28Z"
+    },
+    {
+      "name": "bsdk",
+      "full": "draykerdk/bsdk",
+      "desc": "Base Structure DK - DNA Kernel FM ",
+      "lang": "",
+      "stars": 3,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/bsdk",
+      "home": "https://bsdk.drayker.org/",
+      "push": "2026-08-11T09:40:03Z"
+    },
+    {
+      "name": "uid",
+      "full": "draykerdk/uid",
+      "desc": "Universal Identity Drayker - The primary system design, super app that will serve as the basis for the platform applications.",
+      "lang": "",
+      "stars": 1,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/uid",
+      "home": "https://uid.drayker.org/",
+      "push": "2026-08-11T09:40:36Z"
+    },
+    {
+      "name": "emergence-initiative",
+      "full": "draykerdk/emergence-initiative",
+      "desc": "We are a collaborative initiative within Drayker, this repository, we will simplify the main collaboration needs.",
+      "lang": "",
+      "stars": 1,
+      "forks": 0,
+      "issues": 0,
+      "url": "https://github.com/draykerdk/emergence-initiative",
+      "home": "https://ei.drayker.org",
+      "push": "2026-08-11T09:40:24Z"
+    },
+    {
+      "name": "dk-network",
+      "full": "draykerdk/dk-network",
+      "desc": "The Drayker network is based on 2 networks. main network and test / interaction network with 3 layers.",
+      "lang": "",
+      "stars": 1,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/dk-network",
+      "home": "https://dknetwork.drayker.org/",
+      "push": "2026-08-11T09:40:18Z"
+    },
+    {
+      "name": "dk",
+      "full": "draykerdk/dk",
+      "desc": "In this repository, we will discuss designer proposals, and critical issues for a generic A.I.",
+      "lang": "",
+      "stars": 2,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/dk",
+      "home": "https://dk.drayker.org",
+      "push": "2026-08-11T09:40:15Z"
+    },
+    {
+      "name": "daf",
+      "full": "draykerdk/daf",
+      "desc": "Decentralized Autonomous Federation - The alliance basis between Drayker DAOs and DACs - Organization and Governance ",
+      "lang": "",
+      "stars": 1,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/daf",
+      "home": "https://daf.drayker.org",
+      "push": "2026-08-11T09:40:06Z"
+    },
+    {
+      "name": "dfmpproject",
+      "full": "draykerdk/dfmpproject",
+      "desc": "Project Proposals through DFM",
+      "lang": "",
+      "stars": 1,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/dfmpproject",
+      "home": "https://dfmpproject.drayker.org/",
+      "push": "2026-08-11T09:40:11Z"
+    },
+    {
+      "name": "advices",
+      "full": "draykerdk/advices",
+      "desc": "Interested employees may participate in different councils, according to their areas of study, interest and prominence.",
+      "lang": "",
+      "stars": 1,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/advices",
+      "home": "https://advices.drayker.org/",
+      "push": "2026-08-11T09:40:00Z"
+    },
+    {
+      "name": "drayker-theme",
+      "full": "draykerdk/drayker-theme",
+      "desc": "The Drayker documentation theme — one dark Jekyll layout shared by every drayker.org documentation site",
+      "lang": "HTML",
+      "stars": 0,
+      "forks": 0,
+      "issues": 0,
+      "url": "https://github.com/draykerdk/drayker-theme",
+      "home": "",
+      "push": "2026-08-11T09:39:03Z"
+    },
+    {
+      "name": "general-forum",
+      "full": "draykerdk/general-forum",
+      "desc": "Drayker public forum: issues and merged decisions across the organization, read in one place.",
+      "lang": "HTML",
+      "stars": 0,
+      "forks": 0,
+      "issues": 0,
+      "url": "https://github.com/draykerdk/general-forum",
+      "home": "https://forum.drayker.org/",
+      "push": "2026-08-11T04:29:26Z"
+    }
   ],
   "issues": [
-    { "num": 1, "title": "Specify federative points and the voting procedure", "url": "https://github.com/draykerdk/daf/issues/1", "repo": "daf", "labels": ["open-function"], "user": "", "avatar": "", "comments": 0, "at": null, "assigned": false },
-    { "num": 2, "title": "Publish the first motion for resolution on the base structure", "url": "https://github.com/draykerdk/bsdk/issues/2", "repo": "bsdk", "labels": ["open-function"], "user": "", "avatar": "", "comments": 0, "at": null, "assigned": false },
-    { "num": 1, "title": "Write how a council works", "url": "https://github.com/draykerdk/advices/issues/1", "repo": "advices", "labels": ["open-function"], "user": "", "avatar": "", "comments": 0, "at": null, "assigned": false },
-    { "num": 2, "title": "Expand the ethical code of Dk", "url": "https://github.com/draykerdk/dk/issues/2", "repo": "dk", "labels": ["open-function"], "user": "", "avatar": "", "comments": 0, "at": null, "assigned": false },
-    { "num": 3, "title": "Bring the Spanish protocol README up to date", "url": "https://github.com/draykerdk/dfmp/issues/3", "repo": "dfmp", "labels": ["open-function", "translation"], "user": "", "avatar": "", "comments": 0, "at": null, "assigned": false },
-    { "num": 2, "title": "Bring the Portuguese protocol README up to date", "url": "https://github.com/draykerdk/dfmp/issues/2", "repo": "dfmp", "labels": ["open-function", "translation"], "user": "", "avatar": "", "comments": 0, "at": null, "assigned": false },
-    { "num": 1, "title": "Write DFMP-000, the proposal process paper", "url": "https://github.com/draykerdk/dfmp/issues/1", "repo": "dfmp", "labels": ["open-function"], "user": "", "avatar": "", "comments": 0, "at": null, "assigned": false }
+    {
+      "num": 1,
+      "title": "Specify an experimental ledger of contributions and accountability",
+      "url": "https://github.com/draykerdk/value-unit/issues/1",
+      "repo": "value-unit",
+      "labels": [
+        "open-function",
+        "skill:governance",
+        "level:advanced",
+        "effort:~12h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-11T10:46:37Z",
+      "assigned": false
+    },
+    {
+      "num": 1,
+      "title": "Build one pilot learning experience",
+      "url": "https://github.com/draykerdk/dk-academy/issues/1",
+      "repo": "dk-academy",
+      "labels": [
+        "open-function",
+        "skill:docs",
+        "level:entry",
+        "effort:~8h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-11T10:46:34Z",
+      "assigned": false
+    },
+    {
+      "num": 1,
+      "title": "Design one pilot activity, with no place required",
+      "url": "https://github.com/draykerdk/stations/issues/1",
+      "repo": "stations",
+      "labels": [
+        "open-function",
+        "skill:governance",
+        "level:entry",
+        "effort:~6h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-11T10:46:10Z",
+      "assigned": false
+    },
+    {
+      "num": 1,
+      "title": "Write what a support node is, in both tiers",
+      "url": "https://github.com/draykerdk/distributed-support/issues/1",
+      "repo": "distributed-support",
+      "labels": [
+        "open-function",
+        "skill:research",
+        "level:intermediate",
+        "effort:~8h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-11T10:46:06Z",
+      "assigned": false
+    },
+    {
+      "num": 1,
+      "title": "Demonstrate evidence organization on one non-clinical question",
+      "url": "https://github.com/draykerdk/open-science/issues/1",
+      "repo": "open-science",
+      "labels": [
+        "open-function",
+        "skill:research",
+        "level:intermediate",
+        "effort:~10h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-11T10:45:44Z",
+      "assigned": false
+    },
+    {
+      "num": 1,
+      "title": "Write one concrete personal use case",
+      "url": "https://github.com/draykerdk/dk-personal/issues/1",
+      "repo": "dk-personal",
+      "labels": [
+        "open-function",
+        "skill:docs",
+        "level:entry",
+        "effort:~4h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-11T10:45:41Z",
+      "assigned": false
+    },
+    {
+      "num": 1,
+      "title": "Describe the minimum project lifecycle, without an economy",
+      "url": "https://github.com/draykerdk/pap/issues/1",
+      "repo": "pap",
+      "labels": [
+        "open-function",
+        "skill:research",
+        "level:intermediate",
+        "effort:~8h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-11T10:45:17Z",
+      "assigned": false
+    },
+    {
+      "num": 1,
+      "title": "Write the identity requirements",
+      "url": "https://github.com/draykerdk/uid/issues/1",
+      "repo": "uid",
+      "labels": [
+        "open-function",
+        "skill:research",
+        "level:intermediate",
+        "effort:~8h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-10T01:31:15Z",
+      "assigned": false
+    },
+    {
+      "num": 1,
+      "title": "Write the research charter for Meta DFM",
+      "url": "https://github.com/draykerdk/metadfmp/issues/1",
+      "repo": "metadfmp",
+      "labels": [
+        "open-function",
+        "skill:research",
+        "level:advanced",
+        "effort:~10h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-10T01:31:13Z",
+      "assigned": false
+    },
+    {
+      "num": 1,
+      "title": "Specify federative points and the voting procedure",
+      "url": "https://github.com/draykerdk/daf/issues/1",
+      "repo": "daf",
+      "labels": [
+        "open-function",
+        "skill:governance",
+        "level:advanced",
+        "effort:~16h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-10T01:31:11Z",
+      "assigned": false
+    },
+    {
+      "num": 2,
+      "title": "Publish the first motion for resolution on the base structure",
+      "url": "https://github.com/draykerdk/bsdk/issues/2",
+      "repo": "bsdk",
+      "labels": [
+        "open-function",
+        "skill:research",
+        "level:advanced",
+        "effort:~12h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-10T01:31:09Z",
+      "assigned": false
+    },
+    {
+      "num": 1,
+      "title": "Write how a council works",
+      "url": "https://github.com/draykerdk/advices/issues/1",
+      "repo": "advices",
+      "labels": [
+        "open-function",
+        "skill:governance",
+        "level:intermediate",
+        "effort:~6h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-10T01:31:07Z",
+      "assigned": false
+    },
+    {
+      "num": 1,
+      "title": "Recover or rewrite the Initial Network Architecture",
+      "url": "https://github.com/draykerdk/dk-network/issues/1",
+      "repo": "dk-network",
+      "labels": [
+        "open-function",
+        "skill:research",
+        "level:advanced",
+        "effort:~16h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-10T01:31:06Z",
+      "assigned": false
+    },
+    {
+      "num": 2,
+      "title": "Write a threat model for re-encryption on failed authentication",
+      "url": "https://github.com/draykerdk/living-cryptography/issues/2",
+      "repo": "living-cryptography",
+      "labels": [
+        "open-function",
+        "skill:research",
+        "level:advanced",
+        "effort:~10h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-10T01:31:04Z",
+      "assigned": false
+    },
+    {
+      "num": 1,
+      "title": "Specify the uPOW: inputs, cost and verification",
+      "url": "https://github.com/draykerdk/living-cryptography/issues/1",
+      "repo": "living-cryptography",
+      "labels": [
+        "open-function",
+        "skill:research",
+        "level:advanced",
+        "effort:~12h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-10T01:31:02Z",
+      "assigned": false
+    },
+    {
+      "num": 1,
+      "title": "Publish a worked example of a project proposal model",
+      "url": "https://github.com/draykerdk/dfmpproject/issues/1",
+      "repo": "dfmpproject",
+      "labels": [
+        "open-function",
+        "skill:docs",
+        "level:entry",
+        "effort:~5h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-10T01:31:01Z",
+      "assigned": false
+    },
+    {
+      "num": 2,
+      "title": "Expand the ethical code of Dk",
+      "url": "https://github.com/draykerdk/dk/issues/2",
+      "repo": "dk",
+      "labels": [
+        "open-function",
+        "skill:research",
+        "level:intermediate",
+        "effort:~8h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-10T01:30:59Z",
+      "assigned": false
+    },
+    {
+      "num": 1,
+      "title": "Decide whether OSDK is active architecture",
+      "url": "https://github.com/draykerdk/osdk/issues/1",
+      "repo": "osdk",
+      "labels": [
+        "open-function",
+        "skill:research",
+        "level:entry",
+        "effort:~4h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-10T01:30:57Z",
+      "assigned": false
+    },
+    {
+      "num": 6,
+      "title": "Date-audit the papers and the roadmap",
+      "url": "https://github.com/draykerdk/dknowledge/issues/6",
+      "repo": "dknowledge",
+      "labels": [
+        "open-function",
+        "skill:docs",
+        "level:entry",
+        "effort:~6h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-10T01:30:55Z",
+      "assigned": false
+    },
+    {
+      "num": 3,
+      "title": "Bring the Spanish protocol README up to date",
+      "url": "https://github.com/draykerdk/dfmp/issues/3",
+      "repo": "dfmp",
+      "labels": [
+        "open-function",
+        "skill:translation",
+        "level:entry",
+        "effort:~3h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-10T01:30:53Z",
+      "assigned": false
+    },
+    {
+      "num": 2,
+      "title": "Bring the Portuguese protocol README up to date",
+      "url": "https://github.com/draykerdk/dfmp/issues/2",
+      "repo": "dfmp",
+      "labels": [
+        "open-function",
+        "skill:translation",
+        "level:entry",
+        "effort:~3h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-10T01:30:52Z",
+      "assigned": false
+    },
+    {
+      "num": 1,
+      "title": "Write DFMP-000, the proposal process paper",
+      "url": "https://github.com/draykerdk/dfmp/issues/1",
+      "repo": "dfmp",
+      "labels": [
+        "open-function",
+        "skill:docs",
+        "level:intermediate",
+        "effort:~8h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-10T01:30:49Z",
+      "assigned": false
+    },
+    {
+      "num": 1,
+      "title": "Write the first-time contributor guide",
+      "url": "https://github.com/draykerdk/drayker.org/issues/1",
+      "repo": "drayker.org",
+      "labels": [
+        "open-function",
+        "skill:docs",
+        "level:entry",
+        "effort:~5h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-08-10T01:30:48Z",
+      "assigned": false
+    }
   ],
-  "people": []
+  "people": [
+    {
+      "login": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "url": "https://github.com/Hyadhuad",
+      "n": 77
+    }
+  ]
 }
