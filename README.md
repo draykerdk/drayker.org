@@ -59,6 +59,7 @@ node tools/render-check.js /tmp/drayker-com.html
 - **Organization data** loads from the committed `data/org.json` snapshot first and is then enriched by the public API. Clean subroutes use an absolute snapshot URL, so `/docs/` and `/project/dk/` work exactly like the root.
 - **Volunteer guidance** is resolved locally in the browser. It recommends a track, projects and first steps without transmitting the visitor's answers. The visitor may then review and publish a prefilled public issue in [`general-forum`](https://github.com/draykerdk/general-forum/issues/new?template=volunteer-introduction.yml).
 - **Partnership proposals** are composed locally on `.com` and opened as a prefilled public issue in `general-forum`; the site does not collect contact information.
+- **Forum** is an independent static reading surface at [forum.drayker.org](https://forum.drayker.org/). Both domains link to it, while every post and reply remains in its source repository on GitHub.
 - **Dknowledger** has one official repository-backed surface at [dknowledger.drayker.org](https://dknowledger.drayker.org). The footer, Docs vocabulary and didactic system map link there directly; the retired `/knowledge/` and `/project/dknowledge/` URLs are compatibility redirects only.
 
 ## Contributing

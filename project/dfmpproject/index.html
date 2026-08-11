@@ -2653,7 +2653,7 @@ const PROJECTS = [
     arch: ['Project proposal models', 'Functions and modules', 'Link to DAF as an autonomous unit', 'Relation to the main-project queues'],
     contribute: ['Write one worked example of a proposal', 'Draft the model template', 'Propose your own project through it'] },
 
-  { key: 'general', name: 'General Forum', repo: 'general-forum', layer: 'COMMUNITY', site: 'https://github.com/draykerdk/general-forum',
+  { key: 'general', name: 'General Forum', repo: 'general-forum', layer: 'COMMUNITY', site: 'https://forum.drayker.org/',
     tagline: 'When you are not sure where it belongs.',
     vision: 'Announcements, ideas and work related to Drayker that do not fit the topic of any other repository. If it turns out to belong to a project, it moves there.',
     problem: 'People stay silent when they cannot tell which repository a thought belongs in. This is the reasonable place to say it out loud.',
@@ -3352,6 +3352,10 @@ const CONTRIB_TABS = [
 const SITE = 'org';
 const CROSS_SITE_URL = 'https://drayker.com';
 
+// Public conversation has its own static reading surface. Posts and replies still
+// live in their source repositories on GitHub; the main sites only link to it.
+const FORUM_SITE = 'https://forum.drayker.org/';
+
 // Public GitHub entry points for the two "open it yourself" flows. Both compose a
 // prefilled issue that the person reads, edits and publishes under their own
 // account — nothing on this site transmits anything.
@@ -3380,7 +3384,7 @@ const START_POINT = {
 
 const NAV_COM = [
   { id: 'manifesto', label: 'Manifesto' }, { id: 'dk', label: 'Dk' }, { id: 'dfm', label: 'DFM' },
-  { id: 'eco', label: 'Ecosystem' }, { id: 'org', label: 'Organization' },
+  { id: 'eco', label: 'Ecosystem' }, { id: 'org', label: 'Organization' }, { id: 'forum', label: 'Forum', ext: FORUM_SITE },
   { id: 'partnerships', label: 'Partnerships' }, { id: 'docs', label: 'Docs' }
 ];
 // ============================================================================
@@ -3405,7 +3409,7 @@ const ROUTE_META = {
 };
 
 const NAV_ORG = [
-  { id: 'contrib', label: 'Contribute' }, { id: 'org', label: 'Organization' }, { id: 'dfm', label: 'DFM' },
+  { id: 'contrib', label: 'Contribute' }, { id: 'forum', label: 'Forum', ext: FORUM_SITE }, { id: 'org', label: 'Organization' }, { id: 'dfm', label: 'DFM' },
   { id: 'eco', label: 'Ecosystem' }, { id: 'docs', label: 'Docs' }, { id: 'manifesto', label: 'Manifesto' }
 ];
 
@@ -4184,7 +4188,8 @@ class Component extends DCLogic {
     const ecoShown = ECO.filter((c) => s.ecoF === 'all' || c.filter === s.ecoF);
 
     const nav = (org ? NAV_ORG : NAV_COM).map((n) => ({
-      label: n.label, onClick: n.id === 'contrib' ? this.goTab('overview') : this.go(n.id),
+      label: n.label, onClick: n.ext ? () => window.location.assign(n.ext)
+        : (n.id === 'contrib' ? this.goTab('overview') : this.go(n.id)),
       color: (p === n.id || (n.id === 'contrib' && p === 'contrib')) ? 'var(--tx)' : '#8585A0',
       line: (p === n.id || (n.id === 'contrib' && p === 'contrib')) ? A : 'transparent'
     }));

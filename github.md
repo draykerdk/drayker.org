@@ -7,6 +7,7 @@ Related repos read for content: draykerdk/dfmp
 date: 2026-08-10T12:55:41Z
 
 ### Updated in this project
+- **Independent public forum linked from both domains:** the header navigation on `drayker.org` and `drayker.com` now opens `forum.drayker.org`, the static reading surface published from `draykerdk/general-forum`. The portal does not duplicate the conversation; issues, replies and merged decisions remain in their source repositories on GitHub.
 - **Dknowledger consolidated into one official surface:** `dknowledger.drayker.org` is now the canonical public home for its orientation, knowledge model, papers, roadmap, repository catalog and contribution path. The duplicate Knowledge route has been removed from both main-site menus and sitemaps; the footer and the didactic system map link to the official surface, every Dknowledger project card opens it directly, and the old `/knowledge/`, `/project/dknowledge/` and hash URLs remain compatibility redirects.
 - Package 3.4.1 is published on the official `master` branches: `drayker.org` (`9ec7efd`), `drayker.com` (`22ec959`), Dknowledger (`aa1f5bf`) and the shared documentation theme (`59e22fb`). Production routes, icons, redirects and Pages builds were verified after publication.
 - Pulled the deployed component changes back into `design/Drayker v3.dc.html` before prerendering. The published `index.html` additionally carries the generated root document block; both sources retain the same component, favicon set and launch-state wording.

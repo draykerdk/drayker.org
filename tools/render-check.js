@@ -171,6 +171,10 @@ check(comHome.isComSite && !comHome.isOrgSite, '.com presentation flags are wron
 check(orgHome.nav.some((n) => n.label === 'Contribute'), '.org navigation must expose contribution');
 check(!comHome.nav.some((n) => n.label === 'Contribute'), '.com navigation must not expose contribution');
 check(!orgHome.nav.some((n) => n.label === 'Knowledge') && !comHome.nav.some((n) => n.label === 'Knowledge'), 'Dknowledger must not have a duplicate navigation route');
+check(orgHome.nav.some((n) => n.label === 'Forum') && comHome.nav.some((n) => n.label === 'Forum'), 'both domains must link to the public forum');
+resetWindow('', 'drayker.org');
+orgHome.nav.filter((n) => n.label === 'Forum')[0].onClick();
+check(assigned[0] === 'https://forum.drayker.org/', 'Forum navigation must open the independent forum site');
 check(src.includes('href="https://dknowledger.drayker.org/"') && src.includes('Dknowledger ↗'), 'footer must link directly to the official Dknowledger site');
 
 const dknowledgerTile = orgHome.sysLayers.flatMap((layer) => layer.parts).filter((part) => part.key === 'dknowledge')[0];
