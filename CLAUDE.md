@@ -1,16 +1,17 @@
 # Drayker — instruções do projeto
 
 ## O que é este projeto
-Site institucional da Drayker em **um único Design Component**: `design/Drayker v3.dc.html`
-cobre drayker.com e drayker.org com um switch .com/.org. `index.html` é a cópia publicada
-da v3; `Drayker v2.dc.html` e `Drayker.dc.html` são históricos e não devem ser promovidos.
+Site institucional da Drayker em **um único Design Component**: `index.html` cobre
+drayker.com e drayker.org com um switch .com/.org e é a fonte atual das rotas publicadas.
+`design/Drayker v3.dc.html` preserva a base do pacote 3.4.1; a v2 é histórica. Os arquivos
+em `design/` documentam a proveniência e não são uma segunda cópia editável do conteúdo.
 
 Publicação: HTML estático em GitHub Pages, repositório `draykerdk/drayker.org`.
 
-**Fonte de verdade decidida (2026-08-10): o Design Component v3 do pacote 3.4.1.** Design estático
-próprio, sem framework e com o mínimo de biblioteca externa. Qualquer port
-React/Next é experimento e não manda no conteúdo — se algo divergir, o certo é o
-que está aqui. Nada de reintroduzir build, bundler ou dependência de runtime.
+**Fonte de verdade decidida (2026-08-11): `index.html`, mantendo o contrato visual e de
+runtime do Design Component v3 do pacote 3.4.1.** Design estático próprio, sem framework
+e com o mínimo de biblioteca externa. Qualquer port React/Next é experimento e não manda
+no conteúdo. Nada de reintroduzir build, bundler ou dependência de runtime.
 
 ## Regras não negociáveis
 
@@ -28,9 +29,10 @@ Quebrar uma rota quebra links públicos que já estão em produção.
 As rotas limpas geradas (`/knowledge/`, `/project/<key>/` etc.) são a superfície de SEO;
 canônicas e sitemap nunca podem conter `#`.
 
-**Conteúdo vem dos READMEs.** Descrição de projeto e lacunas saem do README real do
-repositório (leia com as ferramentas de GitHub). Não invente funcionalidade, prazo
-ou número.
+**Conteúdo vem das superfícies públicas.** Descrição, escopo, relações e lacunas saem do
+README, da documentação publicada e de `.drayker/component.yml` no repositório correspondente
+(leia com as ferramentas de GitHub). Não use material privado como evidência pública e não
+invente funcionalidade, prazo ou número.
 
 **Selo de gestão não é conteúdo público.** Fora da camada pública: `IN RESEARCH`,
 `ACTIVE`, `IN DESIGN`, `CONCEPT`, legendas de status, e trilhos `NOW / NEXT / DONE
@@ -52,10 +54,10 @@ continuam visíveis; funções abertas usam snapshot ou estado vazio honesto, nu
 **Label do board.** É `open-function`. Não é "good first issue".
 
 ## Ao mexer no arquivo
-- Edite com `dc_html_str_replace` / `dc_js_str_replace`; nada de reescrever o DC inteiro.
+- Faça substituições localizadas em `index.html`; nada de reescrever o DC inteiro.
 - Estilo inline, sempre. Sem classes, sem folha de estilo (só `@font-face`,
   `@keyframes` e reset no `<helmet>`).
-- Revisão grande = criar a próxima versão do Design Component e manter a v3 como histórico.
+- Revisão visual grande = criar a próxima versão do Design Component e manter a v3 como histórico.
 - Atualize `github.md` (Last sync + Screen map) sempre que mudar conteúdo derivado
   do repositório.
 - Depois de editar o componente: rode `render-check`, regenere `.com`, execute
