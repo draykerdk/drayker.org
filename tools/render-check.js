@@ -116,8 +116,11 @@ check(src.includes('ringBackRef') && src.includes('ringOverRef') && src.includes
 check(src.includes('@keyframes dk-surf') && src.includes('@keyframes dk-breathe'), 'mark animations are missing');
 check(src.includes('Dk Global') && src.includes('Dk Personal') && src.includes('Dk Local'), 'Dk scopes are not explained separately');
 check(src.includes("font-family:'Archivo'") && !src.includes('Space Grotesk'), 'v3 must use Archivo rather than Space Grotesk');
-check(src.includes('rel="shortcut icon" href="./favicon.ico"'), 'legacy favicon fallback is missing');
+check(src.includes('rel="shortcut icon" href="./favicon.ico?v=20260811"'), 'versioned legacy favicon fallback is missing');
+check(src.includes('rel="icon" href="./favicon.ico?v=20260811" type="image/x-icon" sizes="32x32"'), 'standard ICO favicon is missing');
+check(src.includes('drayker-favicon.svg?v=20260811') && src.includes('sizes="any"'), 'scalable favicon is not versioned or sized');
 check(src.includes('favicon-32.png') && src.includes('favicon-16.png'), 'PNG favicon fallbacks are missing');
+check(src.includes('apple-touch-icon.png?v=20260811') && src.includes('sizes="180x180"'), 'Apple touch icon is not versioned or sized');
 check(!/FN-\d{3,}/.test(src), 'fictional open-function rows must not be published');
 check(!src.includes('community review branch'), 'the retired community-review flow is still described');
 check(src.includes("template=volunteer-introduction.yml") && src.includes("template=partnership.yml"), 'the two general-forum forms are not wired');
