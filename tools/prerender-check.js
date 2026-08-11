@@ -46,9 +46,11 @@ for (const url of urls) {
 
   for (const icon of ['favicon.ico', 'assets/logo/drayker-favicon.svg', 'assets/logo/kit/favicon-32.png', 'assets/logo/kit/favicon-16.png', 'assets/logo/kit/apple-touch-icon.png']) {
     const basename = path.basename(icon).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const href = value(html, new RegExp('<link[^>]+href="([^"]*' + basename + ')"'));
+    const href = value(html, new RegExp('<link[^>]+href="([^"]*' + basename + '[^"]*)"'));
     check(Boolean(href), url + ' does not reference ' + icon);
-    if (href && !/^https?:/.test(href)) check(fs.existsSync(path.resolve(path.dirname(file), href)), url + ' resolves missing icon ' + href);
+    check(href.includes('?v=20260811'), url + ' does not cache-bust ' + icon);
+    const assetHref = href.split(/[?#]/)[0];
+    if (assetHref && !/^https?:/.test(assetHref)) check(fs.existsSync(path.resolve(path.dirname(file), assetHref)), url + ' resolves missing icon ' + href);
   }
 }
 
