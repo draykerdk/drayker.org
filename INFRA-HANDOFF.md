@@ -83,7 +83,7 @@ não dispara nada; só a primeira visita tenta uma rodada de atualização.
 4. Manter `.github/workflows/org-snapshot.yml` no repositório do `.org`; o primeiro
    `data/org.json` já foi publicado e as atualizações seguem por branch automatizada.
 5. Conferir: `drayker.org/knowledge/` e `drayker.org/project/dknowledge/` redirecionam para
-   `dknowledger.drayker.org`, e `#org/fn` continua funcionando.
+   `dknowledge.drayker.org`, e `#org/fn` continua funcionando.
 
 ## O que ficou deliberadamente fora
 
