@@ -123,7 +123,7 @@ check(src.includes('favicon-32.png') && src.includes('favicon-16.png'), 'PNG fav
 check(src.includes('apple-touch-icon.png?v=20260811') && src.includes('sizes="180x180"'), 'Apple touch icon is not versioned or sized');
 check(!/FN-\d{3,}/.test(src), 'fictional open-function rows must not be published');
 
-// The mark engine is served from this domain and the twenty documentation sites load it
+// The mark engine is served from this domain and the documentation sites load it
 // from here, but the canonical, source-preserving copy lives in the design library at
 // draykerdk/drayker-propagation, which pins this same hash in its own tools/check.js.
 // Two domains serving one engine only stays true if something says so out loud.
@@ -173,9 +173,11 @@ check(headAttrs['link[rel="canonical"]'].href === 'https://drayker.com/project/d
 check(headAttrs['meta[property="og:url"]'].content === 'https://drayker.com/project/dk/', '.com runtime og:url must stay on the clean route');
 if (fs.existsSync(snapshotFile)) {
   const snapshot = JSON.parse(fs.readFileSync(snapshotFile, 'utf8'));
-  check(snapshot.repos.length === 17, 'the organization snapshot must contain the 17 public component repositories');
-  check(!snapshot.repos.some((repo) => repo.name === '.github'), 'the governance repository must not appear as an eighteenth component');
+  const expectedRepos = new Set(org.PROJECTS.map((project) => project.repo));
+  check(snapshot.repos.length === expectedRepos.size, 'the organization snapshot must contain all ' + expectedRepos.size + ' public component repositories');
+  check(snapshot.repos.every((repo) => expectedRepos.has(repo.name)), 'the organization snapshot contains an unknown or governance repository');
   check(Array.isArray(snapshot.issues) && Array.isArray(snapshot.people), 'the organization snapshot shape is incomplete');
+  check(Array.isArray(snapshot.issues) && !snapshot.issues.some((issue) => /\/pull\/\d+$/.test(issue.url || '')), 'the organization snapshot must never classify pull requests as issues');
 }
 
 for (const site of ['org', 'com']) {
@@ -223,7 +225,7 @@ for (const project of org.PROJECTS.concat(org.CONCEPTS).filter((project) => proj
 const missing = make(org, { page: 'contrib', tab: 'project', proj: 'does-not-exist' }).renderVals();
 check(missing.cProjectMissing && missing.missingKey === 'does-not-exist', 'unknown project route needs an explicit fallback');
 
-// The same twenty parts have institutional case pages on .com. The technical
+// The same twenty-five parts have institutional case pages on .com. The technical
 // record stays on .org and is reached through explicit deep links.
 for (const project of com.PROJECTS.concat(com.CONCEPTS).filter((project) => project.key !== 'dknowledge')) {
   const values = make(com, { page: 'part', proj: project.key }).renderVals();
