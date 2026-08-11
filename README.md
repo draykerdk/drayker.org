@@ -56,10 +56,10 @@ node tools/render-check.js /tmp/drayker-com.html
 ## GitHub integration
 
 - **Open functions** are read live from the public issues of the [`draykerdk`](https://github.com/draykerdk) organization: an issue becomes an open function when it carries the `open-function` label. Optional `skill:*`, `level:*` and `effort:*` labels fill in the filters, badge and estimate. Nothing on that board is written by hand — if the search returns nothing, the board says so.
-- **Organization data** loads from the committed `data/org.json` snapshot first and is then enriched by the public API. Clean subroutes use an absolute snapshot URL, so `/knowledge/` and `/project/dk/` work exactly like the root.
+- **Organization data** loads from the committed `data/org.json` snapshot first and is then enriched by the public API. Clean subroutes use an absolute snapshot URL, so `/docs/` and `/project/dk/` work exactly like the root.
 - **Volunteer guidance** is resolved locally in the browser. It recommends a track, projects and first steps without transmitting the visitor's answers. The visitor may then review and publish a prefilled public issue in [`general-forum`](https://github.com/draykerdk/general-forum/issues/new?template=volunteer-introduction.yml).
 - **Partnership proposals** are composed locally on `.com` and opened as a prefilled public issue in `general-forum`; the site does not collect contact information.
-- **Dknowledger** is summarized in the shared component and continues in its own repository-backed surface at [dknowledger.drayker.org](https://dknowledger.drayker.org).
+- **Dknowledger** has one official repository-backed surface at [dknowledger.drayker.org](https://dknowledger.drayker.org). The footer, Docs vocabulary and didactic system map link there directly; the retired `/knowledge/` and `/project/dknowledge/` URLs are compatibility redirects only.
 
 ## Contributing
 
