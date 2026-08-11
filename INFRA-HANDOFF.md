@@ -13,7 +13,7 @@ duas. Os arquivos abaixo são o lado do repositório.
 
 **Problema.** O site é um Design Component renderizado no cliente, com rotas por hash.
 Sem prerender, um rastreador vê **uma** página: um título, uma descrição, uma URL canônica. Todo o
-conteúdo — vinte páginas de componente, manifesto, DFM, Dknowledger — é invisível para
+conteúdo — as páginas dos componentes, manifesto, DFM e Docs — é invisível para
 busca e para preview de link.
 
 **O que foi feito no componente.** Tabela `ROUTE_META` (título + descrição por rota) e
@@ -26,7 +26,7 @@ como compatibilidade de navegação.
 browser:
 
 ```
-node tools/prerender.js --site=org          # ./manifesto/index.html, ./knowledge/index.html, ./project/dk/index.html, ...
+node tools/prerender.js --site=org          # ./manifesto/index.html, ./docs/index.html, ./project/dk/index.html, ...
 node tools/prerender.js --site=com --out=dist
 ```
 
@@ -82,8 +82,8 @@ não dispara nada; só a primeira visita tenta uma rodada de atualização.
    `--site=com` no repositório do `.com`.
 4. Manter `.github/workflows/org-snapshot.yml` no repositório do `.org`; o primeiro
    `data/org.json` já foi publicado e as atualizações seguem por branch automatizada.
-5. Conferir: `drayker.org/knowledge/` abre o panorama do Dknowledger com título próprio, e
-   `#org/fn` continua funcionando.
+5. Conferir: `drayker.org/knowledge/` e `drayker.org/project/dknowledge/` redirecionam para
+   `dknowledger.drayker.org`, e `#org/fn` continua funcionando.
 
 ## O que ficou deliberadamente fora
 

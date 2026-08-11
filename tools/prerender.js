@@ -82,15 +82,16 @@ function metaFor(r) {
 
 const ORG_ONLY = ['contrib', 'fn', 'join'];
 const COM_ONLY = ['partnerships'];
-const SHARED = ['manifesto', 'dfm', 'dk', 'eco', 'org', 'knowledge', 'docs'];
+const SHARED = ['manifesto', 'dfm', 'dk', 'eco', 'org', 'docs'];
 const TABS = ['overview', 'tracks', 'projects', 'guide'];
+const DKNOWLEDGER_ALIASES = ['knowledge', 'project/dknowledge'];
 
 function routes() {
   const list = [{ path: '', key: 'home' }];
   SHARED.forEach((k) => list.push({ path: k, key: k }));
   (SITE === 'org' ? ORG_ONLY : COM_ONLY).forEach((k) => list.push({ path: k, key: k }));
   if (SITE === 'org') TABS.forEach((t) => list.push({ path: 'contrib/' + t, key: 'contrib' }));
-  KEYS.forEach((k) => list.push({ path: 'project/' + k, key: 'project' }));
+  KEYS.filter((k) => k !== 'dknowledge').forEach((k) => list.push({ path: 'project/' + k, key: 'project' }));
   return list;
 }
 
@@ -143,6 +144,25 @@ function sitemap(all) {
     + urls + '\n</urlset>\n';
 }
 
+function dknowledgerRedirect(pathname) {
+  const prefix = '../'.repeat(pathname.split('/').length);
+  const target = 'https://dknowledger.drayker.org/';
+  return '<!doctype html><html lang="en"><head><meta charset="utf-8">'
+    + '<meta name="viewport" content="width=device-width,initial-scale=1">'
+    + '<title>Dknowledger — official knowledge base</title>'
+    + '<meta name="description" content="Dknowledger is Drayker’s official public knowledge base, connecting current orientation, architecture, papers, decisions and evidence to their sources.">'
+    + '<link rel="canonical" href="' + target + '">'
+    + '<link rel="shortcut icon" href="' + prefix + 'favicon.ico?v=20260811">'
+    + '<link rel="icon" href="' + prefix + 'favicon.ico?v=20260811" type="image/x-icon" sizes="32x32">'
+    + '<link rel="icon" href="' + prefix + 'assets/logo/drayker-favicon.svg?v=20260811" type="image/svg+xml" sizes="any">'
+    + '<link rel="icon" href="' + prefix + 'assets/logo/kit/favicon-32.png?v=20260811" type="image/png" sizes="32x32">'
+    + '<link rel="icon" href="' + prefix + 'assets/logo/kit/favicon-16.png?v=20260811" type="image/png" sizes="16x16">'
+    + '<link rel="apple-touch-icon" href="' + prefix + 'assets/logo/kit/apple-touch-icon.png?v=20260811" sizes="180x180">'
+    + '<meta http-equiv="refresh" content="0; url=' + target + '">'
+    + '<script>location.replace(' + JSON.stringify(target) + ');</script>'
+    + '</head><body><p>Dknowledger now has one official home. <a href="' + target + '">Continue to dknowledger.drayker.org</a>.</p></body></html>\n';
+}
+
 const all = routes();
 let n = 0;
 all.forEach((r) => {
@@ -151,6 +171,11 @@ all.forEach((r) => {
   fs.writeFileSync(path.join(dir, 'index.html'), documentFor(all, r));
   n++;
 });
+DKNOWLEDGER_ALIASES.forEach((pathname) => {
+  const dir = path.join(OUT, pathname);
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, 'index.html'), dknowledgerRedirect(pathname));
+});
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), sitemap(all));
-console.log('prerendered ' + n + ' routes for drayker.' + SITE + ' into ' + path.resolve(OUT));
+console.log('prerendered ' + n + ' routes and ' + DKNOWLEDGER_ALIASES.length + ' compatibility redirects for drayker.' + SITE + ' into ' + path.resolve(OUT));
 console.log('sitemap.xml written with ' + all.length + ' urls');

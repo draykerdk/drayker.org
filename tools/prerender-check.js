@@ -25,9 +25,11 @@ function value(html, regex) { const match = html.match(regex); return match ? ma
 check(fs.existsSync(sitemapPath), 'sitemap.xml is missing');
 const sitemap = read(sitemapPath);
 const urls = Array.from(sitemap.matchAll(/<loc>([^<]+)<\/loc>/g), (m) => m[1]);
-check(urls.length >= 28, 'too few prerendered routes: ' + urls.length);
+const expectedRoutes = site === 'org' ? 33 : 27;
+check(urls.length === expectedRoutes, 'expected ' + expectedRoutes + ' canonical routes, got ' + urls.length);
 check(urls.every((url) => url.startsWith(base) && !url.includes('#')), 'sitemap must contain clean canonical URLs only');
 check(new Set(urls).size === urls.length, 'sitemap contains duplicate URLs');
+check(!urls.some((url) => /\/(knowledge|project\/dknowledge)\/$/.test(url)), 'retired Dknowledger aliases must not appear in the sitemap');
 
 for (const url of urls) {
   const relative = decodeURIComponent(url.slice(base.length));
@@ -60,6 +62,16 @@ const titles = urls.map((url) => {
   return fs.existsSync(file) ? value(read(file), /<title>([\s\S]*?)<\/title>/) : '';
 });
 check(new Set(titles).size === titles.length, 'route titles are not unique');
+
+for (const alias of ['knowledge', 'project/dknowledge']) {
+  const file = path.join(root, alias, 'index.html');
+  check(fs.existsSync(file), 'missing Dknowledger compatibility redirect: ' + alias);
+  if (!fs.existsSync(file)) continue;
+  const html = read(file);
+  check(value(html, /<link rel="canonical" href="([^"]*)">/) === 'https://dknowledger.drayker.org/', alias + ' has the wrong canonical target');
+  check(html.includes('location.replace("https://dknowledger.drayker.org/")'), alias + ' has no JavaScript redirect');
+  check(html.includes('content="0; url=https://dknowledger.drayker.org/"'), alias + ' has no no-script redirect');
+}
 
 if (failures.length) {
   failures.forEach((failure) => console.error('FAIL: ' + failure));

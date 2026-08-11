@@ -276,6 +276,9 @@
                       <div style="font-size:15px;font-weight:600;letter-spacing:-0.015em;line-height:1.2">{{ p.name }}</div>
                       <div style="font-size:12.5px;line-height:1.5;color:var(--tx3)">{{ p.tagline }}</div>
                       <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.12em;color:{{ p.fg }}">{{ p.stand }}</div>
+                      <sc-if value="{{ p.official }}" hint-placeholder-val="{{ false }}">
+                        <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.08em;color:#FF5500">OFFICIAL SITE ↗</div>
+                      </sc-if>
                     </div>
                   </sc-for>
                 </div>
@@ -2306,6 +2309,7 @@
         <div onClick="{{ goDk }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Dk</div>
         <div onClick="{{ goEco }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Ecosystem</div>
         <div onClick="{{ goDocs }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Docs</div>
+        <a href="https://dknowledger.drayker.org/" style="font-size:13.5px;color:var(--tx2)" style-hover="color:#FF5500">Dknowledger ↗</a>
         <div onClick="{{ goPartnerships }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Funding &amp; partnership</div>
       </div>
       <div style="display:flex;flex-direction:column;gap:9px">
@@ -2342,6 +2346,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;site&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;com&quot;,&quot;org&quot;],&quot;default&quot;:&quot;org&quot;,&quot;tsType&quot;:&quot;'com' | 'org'&quot;,&quot;section&quot;:&quot;Site&quot;},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;dark&quot;,&quot;light&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;'auto' | 'dark' | 'light'&quot;,&quot;section&quot;:&quot;Site&quot;}}">
 const A = '#FF5500';
+const DKNOWLEDGER_URL = 'https://dknowledger.drayker.org/';
 
 const PRINCIPLES = [
   { n: '01', title: 'Simplicity and cleanliness', body: 'The smallest structure that solves the problem is the correct one. Complexity has to justify itself.' },
@@ -3374,7 +3379,7 @@ const START_POINT = {
 const NAV_COM = [
   { id: 'manifesto', label: 'Manifesto' }, { id: 'dk', label: 'Dk' }, { id: 'dfm', label: 'DFM' },
   { id: 'eco', label: 'Ecosystem' }, { id: 'org', label: 'Organization' },
-  { id: 'partnerships', label: 'Partnerships' }, { id: 'knowledge', label: 'Knowledge' }, { id: 'docs', label: 'Docs' }
+  { id: 'partnerships', label: 'Partnerships' }, { id: 'docs', label: 'Docs' }
 ];
 // ============================================================================
 // PER-ROUTE METADATA — one title, description and canonical per route, on both
@@ -3389,7 +3394,6 @@ const ROUTE_META = {
   dk: { t: 'Dk — the distributed system — Drayker', d: 'Kernel, base structure, network, cryptography, identity and devices as one distributed architecture meant to be inhabited rather than operated.' },
   eco: { t: 'Ecosystem — every part, one by one — Drayker', d: 'The seventeen public repositories and three declared concepts that make up the system, each with its role, relations and what is still open.' },
   org: { t: 'Organization & resources — Drayker', d: 'Governance built to become distributed: autonomous units, a federation designed to hold resources, and weight that accumulates from delivered work.' },
-  knowledge: { t: 'Dknowledger — the brain of the system — Drayker', d: 'Not a wiki: a network of requirements, motions, decisions and evidence, with trust levels derived from evidence rather than assigned.' },
   docs: { t: 'Docs & papers — Drayker', d: 'Every documentation site, the vocabulary the system uses, and what is current, historical or not written yet.' },
   partnerships: { t: 'Funding & partnership — Drayker', d: 'How research funding, compute, infrastructure and institutional partnership work with a volunteer, non-profit organization in its founding phase.' },
   contrib: { t: 'Contribute — Drayker volunteers portal', d: 'Every project, what each one is missing, the contribution process and the real board of open functions.' },
@@ -3400,7 +3404,7 @@ const ROUTE_META = {
 
 const NAV_ORG = [
   { id: 'contrib', label: 'Contribute' }, { id: 'org', label: 'Organization' }, { id: 'dfm', label: 'DFM' },
-  { id: 'eco', label: 'Ecosystem' }, { id: 'knowledge', label: 'Knowledge' }, { id: 'docs', label: 'Docs' }, { id: 'manifesto', label: 'Manifesto' }
+  { id: 'eco', label: 'Ecosystem' }, { id: 'docs', label: 'Docs' }, { id: 'manifesto', label: 'Manifesto' }
 ];
 
 class Component extends DCLogic {
@@ -3553,6 +3557,10 @@ class Component extends DCLogic {
   routeTo = (site, path) => {
     const rest = String(path || 'home').split('/').filter(Boolean);
     const p = rest[0] || 'home';
+    if (p === 'knowledge' || (p === 'project' && rest[1] === 'dknowledge')) {
+      this.openDknowledger();
+      return;
+    }
     const st = { site: site };
     if (p === 'fn' || p === 'contrib' || p === 'contribute') {
       st.site = 'org';
@@ -3582,6 +3590,10 @@ class Component extends DCLogic {
     const site = (parts[0] === 'com' || parts[0] === 'org') ? parts[0] : null;
     const rest = site ? parts.slice(1) : parts;
     const p = rest[0] || 'home';
+    if (p === 'knowledge' || (p === 'project' && rest[1] === 'dknowledge')) {
+      this.openDknowledger();
+      return;
+    }
     const participation = p === 'fn' || p === 'contrib' || p === 'contribute' || p === 'join';
     const institutional = p === 'partnerships';
     if ((site && site !== this.site) || (this.site === 'com' && participation) || (this.site === 'org' && institutional)) {
@@ -3717,7 +3729,13 @@ class Component extends DCLogic {
     if (this.site !== 'org') return this.crossTo('org', tab === 'fn' ? 'fn' : 'contrib/' + tab);
     this.setState({ site: 'org', page: 'contrib', tab, proj: null, returnToJoin: false }); window.scrollTo(0, 0);
   };
+  openDknowledger = () => {
+    if (typeof window === 'undefined') return;
+    if (window.location.assign) window.location.assign(DKNOWLEDGER_URL);
+    else window.location.href = DKNOWLEDGER_URL;
+  };
   openProj = (key, returnToJoin) => () => {
+    if (key === 'dknowledge') return this.openDknowledger();
     // On the institutional domain the same click opens the case for the part; the
     // technical page stays on the portal and is reached by an explicit deep link.
     if (this.site !== 'org') {
@@ -3752,7 +3770,7 @@ class Component extends DCLogic {
     id: l.id, label: l.label, line: l.line,
     parts: this.allParts().filter((p) => (CASE_LAYER_OF[p.key] || 'transition') === l.id).map((p) => {
       const st = this.standOf(p.key);
-      return { key: p.key, name: p.name, tagline: p.tagline, stand: st.label, fg: st.fg, open: this.openProj(p.key) };
+      return { key: p.key, name: p.name, tagline: p.tagline, stand: st.label, fg: st.fg, official: p.key === 'dknowledge', open: this.openProj(p.key) };
     })
   })).filter((l) => l.parts.length > 0);
 
@@ -3794,7 +3812,7 @@ class Component extends DCLogic {
 
   // A .com page never repeats the engineering: it hands the reader to the exact
   // section of the portal page that answers the question they just formed.
-  openDeep = (key, focus) => () => this.crossTo('org', 'project/' + key + (focus ? '/' + focus : ''));
+  openDeep = (key, focus) => () => key === 'dknowledge' ? this.openDknowledger() : this.crossTo('org', 'project/' + key + (focus ? '/' + focus : ''));
   goJoin = () => {
     if (this.site !== 'org') return this.crossTo('org', 'join');
     this.setState({ site: 'org', page: 'join' }); window.scrollTo(0, 0);
@@ -4317,21 +4335,6 @@ class Component extends DCLogic {
 
       isHome: p === 'home', isManifesto: p === 'manifesto', isDfm: p === 'dfm', isDk: p === 'dk',
       isEco: p === 'eco', isOrgPage: p === 'org', isDocs: p === 'docs', isJoin: p === 'join',
-      isKnowledge: p === 'knowledge', goKnowledge: this.go('knowledge'),
-
-      // Dknowledger: the designed model, and the inventory as it actually stands.
-      knNodes: KN_NODES, knEdges: KN_EDGES,
-      knTrust: KN_TRUST.map((l) => ({ ...l, on: s.knT === l.id, bg: s.knT === l.id ? 'var(--surf2)' : 'var(--bg)', pick: this.pickKnT(l.id) })),
-      knFilters: [{ id: null, t: 'ALL' }].concat(KN_TRUST.map((l) => ({ id: l.id, t: l.t }))).map((f) => ({
-        t: f.t, on: s.knT === f.id,
-        bg: s.knT === f.id ? '#FF5500' : 'var(--bg)', fg: s.knT === f.id ? '#0A0A0C' : 'var(--tx2)',
-        pick: this.setKnT(f.id)
-      })),
-      knRows: KN_TODAY.filter((r) => !s.knT || r.t === s.knT).map((r) => {
-        const lv = KN_TRUST.filter((l) => l.id === r.t)[0] || KN_TRUST[2];
-        return { name: r.name, where: r.where, d: r.d, href: r.href, level: lv.t, fg: lv.fg };
-      }),
-      knEmpty: KN_TODAY.filter((r) => !s.knT || r.t === s.knT).length === 0,
       isContrib: p === 'contrib', isPartnerships: p === 'partnerships',
       goPartnerships: this.goPartnerships,
       partnerOutcomes: PARTNER_OUTCOMES,

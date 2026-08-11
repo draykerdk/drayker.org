@@ -132,15 +132,15 @@ check(org.CONCEPTS.every((p) => p.concept && !p.repo), 'every concept must expli
 check(org.PROJECTS.every((p) => p.vision && p.tagline && p.layer && p.arch.length && p.contribute.length), 'every repository needs a complete page model');
 check(org.CASE_LAYERS.length === 4, 'the home argument must have exactly four layers');
 check(org.CASE_LAYERS.map((layer) => layer.id).join(',') === 'method,system,org,transition', 'the four layers are out of order');
-check(org.ROUTE_META.knowledge && org.ROUTE_META.knowledge.t.includes('Dknowledger'), 'Dknowledger route metadata is missing');
+check(!org.ROUTE_META.knowledge, 'the retired internal Knowledge route must not publish metadata');
 check(new Set(Object.values(org.ROUTE_META).map((meta) => meta.t)).size === Object.keys(org.ROUTE_META).length, 'route titles must be unique');
 check(org.KN_NODES.length === 6 && org.KN_EDGES.length === 7 && org.KN_TRUST.length === 5, 'the proposed knowledge model is incomplete');
 check(org.KN_TODAY.filter((row) => row.t === 't4').length === 3, 'the public inventory must expose all three open paper groups');
 check(src.includes("SITE === 'org' ? '/data/org.json' : 'https://drayker.org/data/org.json'"), 'snapshot URL must work from clean routes on both domains');
 check(propDefault === deployedSite, 'Design Component site default (' + propDefault + ') overrides deployed SITE (' + deployedSite + ')');
-make(org).setMeta('knowledge');
-check(headAttrs['link[rel="canonical"]'].href === 'https://drayker.org/knowledge/', '.org runtime canonical must stay on the clean route');
-check(headAttrs['meta[property="og:url"]'].content === 'https://drayker.org/knowledge/', '.org runtime og:url must stay on the clean route');
+make(org).setMeta('docs');
+check(headAttrs['link[rel="canonical"]'].href === 'https://drayker.org/docs/', '.org runtime canonical must stay on the clean route');
+check(headAttrs['meta[property="og:url"]'].content === 'https://drayker.org/docs/', '.org runtime og:url must stay on the clean route');
 make(com).setMeta('project/dk');
 check(headAttrs['link[rel="canonical"]'].href === 'https://drayker.com/project/dk/', '.com runtime canonical must stay on the clean route');
 check(headAttrs['meta[property="og:url"]'].content === 'https://drayker.com/project/dk/', '.com runtime og:url must stay on the clean route');
@@ -170,6 +170,14 @@ check(orgHome.isOrgSite && !orgHome.isComSite, '.org presentation flags are wron
 check(comHome.isComSite && !comHome.isOrgSite, '.com presentation flags are wrong');
 check(orgHome.nav.some((n) => n.label === 'Contribute'), '.org navigation must expose contribution');
 check(!comHome.nav.some((n) => n.label === 'Contribute'), '.com navigation must not expose contribution');
+check(!orgHome.nav.some((n) => n.label === 'Knowledge') && !comHome.nav.some((n) => n.label === 'Knowledge'), 'Dknowledger must not have a duplicate navigation route');
+check(src.includes('href="https://dknowledger.drayker.org/"') && src.includes('Dknowledger ↗'), 'footer must link directly to the official Dknowledger site');
+
+const dknowledgerTile = orgHome.sysLayers.flatMap((layer) => layer.parts).filter((part) => part.key === 'dknowledge')[0];
+check(dknowledgerTile && dknowledgerTile.official, 'the didactic system map must mark Dknowledger as an official external surface');
+resetWindow('', 'drayker.org');
+dknowledgerTile.open();
+check(assigned[0] === 'https://dknowledger.drayker.org/', 'the didactic Dknowledger tile must open the official site');
 
 for (const [site, bundle] of [['org', org], ['com', com]]) {
   const mobile = make(bundle, { vw: 390 }).renderVals();
@@ -177,7 +185,7 @@ for (const [site, bundle] of [['org', org], ['com', com]]) {
   check(mobile.navOrder === 3 && mobile.ctrlOrder === 2 && mobile.subTop === '95px', site + ' mobile header order is wrong');
 }
 
-for (const project of org.PROJECTS.concat(org.CONCEPTS)) {
+for (const project of org.PROJECTS.concat(org.CONCEPTS).filter((project) => project.key !== 'dknowledge')) {
   const values = make(org, { page: 'contrib', tab: 'project', proj: project.key }).renderVals();
   check(values.cProject && values.pd && values.pd.key === project.key, 'missing project page: ' + project.key);
   check(values.pd.vision && values.pd.tagline && values.pd.layer, 'incomplete project page: ' + project.key);
@@ -190,7 +198,7 @@ check(missing.cProjectMissing && missing.missingKey === 'does-not-exist', 'unkno
 
 // The same twenty parts have institutional case pages on .com. The technical
 // record stays on .org and is reached through explicit deep links.
-for (const project of com.PROJECTS.concat(com.CONCEPTS)) {
+for (const project of com.PROJECTS.concat(com.CONCEPTS).filter((project) => project.key !== 'dknowledge')) {
   const values = make(com, { page: 'part', proj: project.key }).renderVals();
   check(values.isPart && values.ptHas && values.ptName === project.name, 'missing .com component case: ' + project.key);
   check(values.ptClaim && values.ptToday && values.ptShift && values.ptFeel && values.ptStake, 'incomplete .com component case: ' + project.key);
@@ -212,6 +220,13 @@ const comRoute = make(com);
 comRoute.readHash();
 check(comRoute.state.page === 'part' && comRoute.state.proj === 'dk', 'direct .com component route failed');
 check(assigned.length === 0, 'local .com component route must not leave the domain');
+
+for (const [hash, host] of [['#org/knowledge', 'drayker.org'], ['#org/project/dknowledge', 'drayker.org'], ['#com/knowledge', 'drayker.com'], ['#com/project/dknowledge', 'drayker.com']]) {
+  resetWindow(hash, host);
+  const bundle = host === 'drayker.org' ? org : com;
+  make(bundle).readHash();
+  check(assigned[0] === 'https://dknowledger.drayker.org/', hash + ' must redirect to the official Dknowledger site');
+}
 
 resetWindow('', 'drayker.com');
 const comDk = make(com, { page: 'part', proj: 'dk' }).renderVals();
