@@ -479,6 +479,7 @@
           <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#FF5500;margin-bottom:22px">DFM Protocol</div>
           <h1 style="font-size:clamp(36px,5.4vw,72px);line-height:1;letter-spacing:-0.04em;font-weight:700;margin:0 0 26px;max-width:24ch;text-wrap:balance">A problem, cut small enough for the world to solve.</h1>
           <p style="font-size:clamp(16px,1.3vw,19px);line-height:1.62;color:var(--tx2);max-width:62ch;margin:0;text-wrap:pretty">Distributed Functional Modeling is the collaboration paradigm behind every Drayker project: model the problem first, then modularize it into functions. It adapts to different domains, but the logic is always the same — model, fragment, distribute, review.</p>
+          <p style="font-size:16px;line-height:1.66;color:var(--tx2);max-width:62ch;margin:18px 0 0;text-wrap:pretty">It is also the reason the rest of Drayker is possible. If people are going to keep the creating and the discovering while machines carry everything else, the work has to be cut so that a person and an agent can claim the same function on the same terms — and so that finishing one never requires holding the whole system in your head.</p>
         </div>
         <div style="display:flex;flex-direction:column;align-items:center;gap:20px;padding:clamp(6px,2vw,26px)">
 <!-- Same physics-driven mark as the hero (suffix "3" gradients), in liquid-metal silver. -->
@@ -574,7 +575,7 @@
         <div>
           <h2 style="font-size:clamp(23px,2.8vw,36px);line-height:1.08;letter-spacing:-0.03em;font-weight:600;margin:0 0 18px">Self-assessed, validated, re-evaluated.</h2>
           <p style="font-size:16px;line-height:1.68;color:var(--tx2);margin:0 0 16px;text-wrap:pretty">The protocol ensures that every paper is self-assessed, validated and re-evaluated. Validation walks alongside development — ideas are discussed with communities and councils, then shaped into a detailed, widely revised paper that passes through the DAOs and councils before adoption.</p>
-          <p style="font-size:16px;line-height:1.68;color:var(--tx2);margin:0">All ideas, goals and purposes must be in line with Drayker.</p>
+          <p style="font-size:16px;line-height:1.68;color:var(--tx2);margin:0">A proposal is argued with, not approved: what it has to survive is people who read it properly.</p>
         </div>
         <div style="border-left:1px solid var(--line);padding-left:clamp(20px,3vw,40px)">
           <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;color:#FF5500;margin-bottom:20px">DFMP — THE PROPOSAL PROCESS, AS DESIGNED</div>
@@ -1214,6 +1215,7 @@
         <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#FF5500;margin-bottom:20px">Contribute · drayker.org</div>
         <h1 style="font-size:clamp(34px,5vw,68px);line-height:0.98;letter-spacing:-0.04em;font-weight:700;margin:0 0 20px;max-width:20ch">Everything you need to start today.</h1>
         <p style="font-size:clamp(16px,1.3vw,19px);line-height:1.62;color:var(--tx2);max-width:60ch;margin:0;text-wrap:pretty">One portal for the whole collaboration: what each project is for, what it is missing, what is open on GitHub right now, which track fits you, and exactly how work travels from an issue to a merge.</p>
+          <p style="font-size:15.5px;line-height:1.66;color:var(--tx2);max-width:62ch;margin:16px 0 0;text-wrap:pretty">Reviewing, translating and writing a page count the same as code here. What the work is for is on the <span onClick="{{ goManifesto }}" style="color:#FF5500;font-weight:500;cursor:pointer">manifesto</span>; what it earns you is on the <span onClick="{{ goEconomy }}" style="color:#FF5500;font-weight:500;cursor:pointer">economy page</span>, stated plainly, including what it does not.</p>
       </section>
 
       <div style="position:sticky;top:{{ subTop }};z-index:40;background:var(--hdr);backdrop-filter:blur(14px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
@@ -4638,9 +4640,9 @@ class Component extends DCLogic {
       goContrib: this.goTab('overview'), goTracks: this.goTab('tracks'), goProjects: this.goTab('projects'), goGuide: this.goTab('guide'),
 
       heroKicker: org ? 'Volunteers portal · drayker.org' : 'A different way to live and work',
-      heroTitle: org ? 'Nobody hands out the work. You take the piece you can finish.' : 'People go on creating and discovering. The machines carry the rest.',
+      heroTitle: org ? 'A system where people keep discovering. Take the piece you can finish.' : 'People go on creating and discovering. The machines carry the rest.',
       heroBody: org
-        ? 'Drayker is designing a way of working where people keep creating, discovering and learning while intelligence carries what nobody should have to carry — and where what comes out of it reaches the work that produced it, under rules anyone can read. Seventeen public repositories, the papers behind them, and the gaps each one names out loud. Take the piece you can finish.'
+        ? 'That arrangement has to be built, and this is where it is being built: nobody hands out the work, and nobody needs permission. Twenty-five public repositories, the papers behind them, and the gap each one names out loud — pick one and finish it.'
         : 'Drayker is a volunteer, non-profit effort designing that arrangement: human, collective and artificial intelligence working as one rather than one supervising the other, and the resources that result distributed by rules anyone can read, with incentives that follow delivered work instead of position. A method, a distributed system, and an organization built to outgrow whoever started it.',
       heroPrimary: org ? this.goTab('overview') : this.go('dk'),
       heroPrimaryLabel: org ? 'Find where to contribute' : 'Inside the system',
