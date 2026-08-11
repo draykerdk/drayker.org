@@ -45,7 +45,7 @@ This repository is the first deployment of the Drayker web pattern: a dark, open
 - Funding & partnerships (`.com`)
 - Open functions
 - Docs & papers
-- Dknowledger overview, with the dedicated public base linked at `dknowledger.drayker.org`
+- Dknowledger overview, with the dedicated public base linked at `dknowledge.drayker.org`
 - Volunteer application
 - Twenty component/concept pages on both domains, with institutional cases on `.com` and technical records on `.org`
 
