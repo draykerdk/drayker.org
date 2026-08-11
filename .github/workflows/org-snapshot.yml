@@ -28,9 +28,16 @@ jobs:
           mkdir -p data
 
           gh api 'orgs/draykerdk/repos?per_page=100&sort=updated' > /tmp/repos.json
-          gh api -X GET search/issues \
-            -f q='org:draykerdk is:issue is:open' -f sort=updated -f order=desc -f per_page=60 \
-            > /tmp/issues.json
+          # The repository issues endpoint also returns pull requests. Query every
+          # public component repository and discard objects carrying `pull_request`
+          # explicitly; relying on a search qualifier previously put a PR on the
+          # volunteers' open-functions board.
+          while IFS= read -r r; do
+            file="/tmp/i-$(echo "$r" | tr '/' '-').json"
+            gh api "repos/$r/issues?state=open&per_page=100" > "$file"
+          done < <(jq -r '.[] | select(.archived == false and .name != ".github") | .full_name' /tmp/repos.json)
+          jq -s 'add | map(select(has("pull_request") | not)) | sort_by(.updated_at) | reverse' \
+            /tmp/i-*.json > /tmp/issues.json
 
           # Contributors of the four most recently pushed repositories, same as the site.
           echo '[]' > /tmp/people.json
@@ -55,7 +62,7 @@ jobs:
                 name, full: .full_name, desc: (.description // ""), lang: (.language // ""),
                 stars: .stargazers_count, forks: .forks_count, issues: .open_issues_count,
                 url: .html_url, home: (.homepage // ""), push: .pushed_at }],
-              issues: [$issues[0].items[]? | {
+              issues: [$issues[0][]? | {
                 num: .number, title, url: .html_url,
                 repo: (.repository_url | split("/") | last),
                 labels: [.labels[]?.name | ascii_downcase],
@@ -76,6 +83,7 @@ jobs:
             cp /tmp/org.json data/org.json
           fi
 
+          jq -e 'all(.issues[]; (.url | test("/issues/[0-9]+$")))' data/org.json >/dev/null
           jq -r '"repos: \(.repos | length) · issues: \(.issues | length) · people: \(.people | length)"' data/org.json
 
       - name: Commit if changed
@@ -95,13 +103,10 @@ jobs:
           git commit -m "data: organization snapshot $(date -u +%Y-%m-%d)"
           git push --force origin "HEAD:$branch"
 
-          # The pull request is not a review step — the ruleset on master requires one,
-          # and this file is a mechanical readout of the public GitHub API with no
-          # judgement in it for a reviewer to exercise. Left to a human it simply went
-          # stale: the run of 2026-08-11 sat unmerged while the portal reported seventeen
-          # repositories out of twenty-six. Auto-merge lands it as soon as the contract
-          # check passes, which keeps the rule intact and the board honest.
-          # Requires "Allow auto-merge" on the repository; master needs no approvals.
+          # Keep this change behind the protected-branch contract. GitHub may require a
+          # maintainer to approve the check on a pull request opened by github-actions;
+          # auto-merge then lands it as soon as that check passes. Do not bypass the
+          # ruleset or push the snapshot directly to master.
           pr=$(gh pr list --head "$branch" --base master --state open --json number --jq '.[0].number // empty')
           if [ -z "$pr" ]; then
             pr=$(gh pr create \

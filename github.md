@@ -1,12 +1,19 @@
 repo: draykerdk/drayker.org
 branch: master
 
-Related repos read for content: draykerdk/dfmp
+Related repositories read for content: all 25 public component repositories in `PROJECTS`, including their READMEs and public component contracts.
 
 ## Last sync
-date: 2026-08-11T04:15:00Z
+date: 2026-08-11T12:21:36Z
 
 ### Updated in this project
+- **Public topology reconciled:** the portal model, validation and committed snapshot now agree on 25 public component repositories. The snapshot contains the current 23 open issues and rejects any `/pull/` URL so a pull request can never appear as an open function.
+- **Snapshot collection made deterministic:** the workflow reads each public repository's issues endpoint and filters objects carrying `pull_request`; it keeps the protected-branch PR and contract check instead of granting GitHub Actions a broad ruleset bypass.
+- **Public naming repaired in repository guidance:** the public surface is Dknowledge; Dknowledger means the private local vault. `README.md` no longer presents the private name as the public product.
+- **Source ownership clarified:** `index.html` is the current component and route source. The package files under `design/` remain preserved provenance and visual baselines, rather than a second editable copy that silently drifts from production.
+- **Cross-repository audit:** the 25 public READMEs were reread through GitHub before these corrections. The eight components that were previously only concepts now have repositories, public charters, contracts, documentation domains and first open functions; their portal records already reflect that published material.
+
+### Previous sync (2026-08-11T04:15:00Z)
 - **The thesis the site argues was rewritten to Drayker's own.** The home no longer opens on intelligence concentration; it opens on the arrangement Drayker is designing — people going on creating, discovering and learning while machines carry the rest, with the resources that result reaching the work that produced them under readable incentives. `Why now` was rebuilt around latent human capacity and the conditions of organization and action, with the A.I. moment supporting the urgency rather than leading the argument. New hero copy on both domains and matching `ROUTE_META` for home and manifesto.
 - **The chain the system is arranged around** is now stated on the home, under the four layers: `problem -> model -> functions -> project -> application -> value -> learning -> evolution`, with the note that the method covers the first three links and the organization and its economy are how the last four are meant to return to the people who did the work.
 - **Manifesto rebuilt in three movements** — potential, moment, design — plus two new sections: `IN THE FIRST PERSON`, the only place on the site written in a human voice, and `What this is not` (not a company, not a crypto project, not a job, not a finished system), which answers what a stranger actually asks first.
@@ -107,13 +114,13 @@ date: 2026-08-11T04:15:00Z
 | Organization | drayker.org README.md (DFMP + DAF), draykerdk/daf |
 | Contribute · Overview | GitHub API: orgs/draykerdk repos, contributors |
 | Contribute · Tracks | curated — volunteer tracks, not repo-derived |
-| Contribute · Projects | READMEs of all 17 draykerdk repos + live GitHub API repo data |
-| Contribute · Open functions | GitHub API issue search (org:draykerdk is:issue is:open) |
+| Contribute · Projects | READMEs and component contracts of all 25 public component repositories + live GitHub API repo data |
+| Contribute · Open functions | Per-repository GitHub issues endpoints, with pull-request objects rejected explicitly |
 | Contribute · Guide | draykerdk/.github CONTRIBUTING.md + GOVERNANCE.md + labels.yml |
-| Contribute · Join (wizard + map) | curated — questionnaire logic and track match, mapped onto the 17 draykerdk repos |
+| Contribute · Join (wizard + map) | curated — questionnaire logic and track match, mapped onto the 25 public component repositories |
 | Docs | doc subdomains + github.com/draykerdk + .drayker/component.yml |
-| Dknowledger (knowledge layer) | draykerdk/dknowledge README.md · CURRENT.md · generated `data/catalog.json` · papers/ and roadmap/ trees · .drayker/component.yml · dedicated `dknowledge.drayker.org` surface |
+| Dknowledge (public knowledge layer) | draykerdk/dknowledge README.md · CURRENT.md · generated `data/catalog.json` · papers/ and roadmap/ trees · .drayker/component.yml · dedicated `dknowledge.drayker.org` surface |
 | Component page · the case (.com) | curated — practical case per part, derived from the same contracts and READMEs, no repo copy duplicated |
-| Project page · contract block | `.drayker/component.yml` of each of the 17 repositories (schema in draykerdk/.github) |
+| Project page · contract block | `.drayker/component.yml` of each of the 25 repositories (schema in draykerdk/.github) |
 | Volunteer intake CTA | general-forum/.github/ISSUE_TEMPLATE/volunteer-introduction.yml |
 | Partnership CTA | general-forum/.github/ISSUE_TEMPLATE/partnership.yml |
