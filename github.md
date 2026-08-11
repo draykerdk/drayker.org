@@ -4,9 +4,15 @@ branch: master
 Related repositories read for content: all 25 public component repositories in `PROJECTS`, including their READMEs and public component contracts.
 
 ## Last sync
-date: 2026-08-11T12:21:36Z
+date: 2026-08-11T16:05:00Z
 
 ### Updated in this project
+- **The DAF gap moved, and every page that named it was corrected.** `draykerdk/daf` published `dafp/daf-000` (the constitution, independent of platform) and `dafp/daf-001` (Phase 0, running on a repository), plus the `federation/` record. The point mechanics and the voting procedure are no longer unspecified — they are drafts. Eight surfaces asserted the old gap and now state the new one: the Economy page, the ecosystem card, the DAF project page (`state`, `arch`, `contribute`), the component-contract mirror (`scope`, `nonScope`, `levelScope`, `evidence`, `risks`), the `Named and still to come` list, the `Federative points` status chip, the `daf`, `daodac` and `points` vocabulary entries, and the value-unit overlap note.
+- **The distinction the pages now hold** is three states, not two: specified (the rules exist as drafts), structured (`federation/` exists, empty), operational (nothing — no unit recorded, no point issued, no assembly held, no contract deployed). The component contract remains `implementation: none`, which is the correct reading.
+- **ICP is recorded as the stated direction** for the phase after a repository, without a date and without a deployment claim. The condition that would trigger the move is what remains undecided, and the pages say that rather than implying a schedule.
+- **Board rows follow the real issues:** `daf#1` closed as delivered; `daf#2` (run the first assembly), `daf#3` (design the ICP migration) and `daf#4` (Português README) opened in its place, so the project keeps a claimable path instead of a declared gap with nothing to claim.
+
+### Previous sync (2026-08-11T12:21:36Z)
 - **Public topology reconciled:** the portal model, validation and committed snapshot now agree on 25 public component repositories. The snapshot contains the current 23 open issues and rejects any `/pull/` URL so a pull request can never appear as an open function.
 - **Snapshot collection made deterministic:** the workflow reads each public repository's issues endpoint and filters objects carrying `pull_request`; it keeps the protected-branch PR and contract check instead of granting GitHub Actions a broad ruleset bypass.
 - **Public naming repaired in repository guidance:** the public surface is Dknowledge; Dknowledger means the private local vault. `README.md` no longer presents the private name as the public product.
