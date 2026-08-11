@@ -4,19 +4,21 @@ The public entry point for people who want to work on Drayker: what the organiza
 
 Live at **[drayker.org](https://drayker.org)**.
 
-This repository publishes the static Design Component supplied in the Drayker
-3.4.1 package. Its visual system, page composition, animated mark and content are
-package-native; there is no React/Vinext application or reconstructed design.
+This repository publishes the current static Drayker Design Component. Its visual
+system, page composition, runtime and animated mark come from the Drayker 3.4.1
+package; the public copy and component records continue to evolve here as the
+repositories publish better material. There is no React/Vinext application or
+reconstructed design.
 
 ## What is in this repository
 
 | File | Role |
 | --- | --- |
-| `index.html` | The whole site — a single Design Component, deployed as-is by GitHub Pages. |
+| `index.html` | The current whole site — a single Design Component and the source used to generate every public route. |
 | `support.js` | The generated Design Component runtime. **Do not edit by hand.** |
 | `drayker-mark.js` / `DRAYKER-MARK.md` | Reusable official mark implementation and its contract. |
 | `assets/logo/` | Complete logo kit supplied with the package. |
-| `design/` | Package references: the deployed v3 component, historical v2 component and logo variations. |
+| `design/` | Preserved package references: the v3 baseline, historical v2 component and logo variations. These are provenance, not a second editable copy of current content. |
 | `V3-HANDOFF.md` | Design-to-implementation record for the 3.0 delivery. |
 | `.nojekyll` | Keeps GitHub Pages from interpreting `{{ … }}` component bindings as Liquid. |
 | `CNAME` | The custom domain. |
@@ -59,7 +61,7 @@ node tools/render-check.js /tmp/drayker-com.html
 - **Organization data** loads from the committed `data/org.json` snapshot first and is then enriched by the public API. Clean subroutes use an absolute snapshot URL, so `/docs/` and `/project/dk/` work exactly like the root.
 - **Volunteer guidance** is resolved locally in the browser. It recommends a track, projects and first steps without transmitting the visitor's answers. The visitor may then review and publish a prefilled public issue in [`general-forum`](https://github.com/draykerdk/general-forum/issues/new?template=volunteer-introduction.yml).
 - **Partnership proposals** are composed locally on `.com` and opened as a prefilled public issue in `general-forum`; the site does not collect contact information.
-- **Dknowledger** has one official repository-backed surface at [dknowledge.drayker.org](https://dknowledge.drayker.org). The footer, Docs vocabulary and didactic system map link there directly; the retired `/knowledge/` and `/project/dknowledge/` URLs are compatibility redirects only.
+- **Dknowledge** has one official repository-backed surface at [dknowledge.drayker.org](https://dknowledge.drayker.org). The footer, Docs vocabulary and didactic system map link there directly; the retired `/knowledge/` and `/project/dknowledge/` URLs are compatibility redirects only. **Dknowledger** is the private local vault, not the public site.
 
 ## Contributing
 
