@@ -122,10 +122,19 @@ check(src.includes('drayker-favicon.svg?v=20260811') && src.includes('sizes="any
 check(src.includes('favicon-32.png') && src.includes('favicon-16.png'), 'PNG favicon fallbacks are missing');
 check(src.includes('apple-touch-icon.png?v=20260811') && src.includes('sizes="180x180"'), 'Apple touch icon is not versioned or sized');
 check(!/FN-\d{3,}/.test(src), 'fictional open-function rows must not be published');
+
+// The mark engine is served from this domain and the twenty documentation sites load it
+// from here, but the canonical, source-preserving copy lives in the design library at
+// draykerdk/drayker-propagation, which pins this same hash in its own tools/check.js.
+// Two domains serving one engine only stays true if something says so out loud.
+const ENGINE_SHA256 = '0a421c6b10ade43a6e45e03ba1a5e7a690ea1e9cb29ebc5827321385e37c380c';
+const engineHash = require('crypto').createHash('sha256')
+  .update(fs.readFileSync(path.join(__dirname, '..', 'drayker-mark.js'))).digest('hex');
+check(engineHash === ENGINE_SHA256, 'drayker-mark.js has drifted from the canonical engine in the design library');
 check(!src.includes('community review branch'), 'the retired community-review flow is still described');
 check(src.includes("template=volunteer-introduction.yml") && src.includes("template=partnership.yml"), 'the two general-forum forms are not wired');
 
-check(org.PROJECTS.length === 24, 'expected 24 curated repositories, got ' + org.PROJECTS.length);
+check(org.PROJECTS.length === 25, 'expected 25 curated repositories, got ' + org.PROJECTS.length);
 check(org.CONCEPTS.length === 0, 'every part now has a repository; CONCEPTS must be empty, got ' + org.CONCEPTS.length);
 check(org.PROJECTS.every((p) => p.repo && p.site), 'every repository record needs a repo and a documentation site');
 check(new Set(org.PROJECTS.map((p) => p.key)).size === org.PROJECTS.length, 'repository keys must be unique');
