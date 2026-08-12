@@ -41,13 +41,19 @@ jobs:
 
           # Contributors of the four most recently pushed repositories, same as the site.
           echo '[]' > /tmp/people.json
+          # Each contributor carries the repository it came from, because the portal
+          # renders `repos` as a label. Dropping it here shipped a snapshot the
+          # component could not render at all on a first visit.
           for r in $(jq -r '[.[] | select(.archived == false and .name != ".github")] | sort_by(.pushed_at) | reverse | .[0:4] | .[].full_name' /tmp/repos.json); do
-            gh api "repos/$r/contributors?per_page=10" > "/tmp/c-$(echo "$r" | tr '/' '-').json" || echo '[]' > "/tmp/c-$(echo "$r" | tr '/' '-').json"
+            file="/tmp/c-$(echo "$r" | tr '/' '-').json"
+            gh api "repos/$r/contributors?per_page=10" \
+              | jq --arg n "${r#*/}" 'map(. + {repo: $n})' > "$file" || echo '[]' > "$file"
           done
           jq -s 'add | map(select(.type != "Bot"))
                  | group_by(.login)
                  | map({login: .[0].login, avatar: .[0].avatar_url, url: .[0].html_url,
-                        n: (map(.contributions) | add)})
+                        n: (map(.contributions) | add),
+                        repos: (map(.repo) | unique)})
                  | sort_by(-.n) | .[0:12]' /tmp/c-*.json > /tmp/people.json
 
           jq -n \
@@ -84,6 +90,8 @@ jobs:
           fi
 
           jq -e 'all(.issues[]; (.url | test("/issues/[0-9]+$")))' data/org.json >/dev/null
+          # The board reads person.repos directly — never publish a person without it.
+          jq -e 'all(.people[]; (.repos | type) == "array")' data/org.json >/dev/null
           jq -r '"repos: \(.repos | length) · issues: \(.issues | length) · people: \(.people | length)"' data/org.json
 
       - name: Commit if changed
