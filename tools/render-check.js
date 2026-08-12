@@ -177,6 +177,8 @@ if (fs.existsSync(snapshotFile)) {
   check(snapshot.repos.length === expectedRepos.size, 'the organization snapshot must contain all ' + expectedRepos.size + ' public component repositories');
   check(snapshot.repos.every((repo) => expectedRepos.has(repo.name)), 'the organization snapshot contains an unknown or governance repository');
   check(Array.isArray(snapshot.issues) && Array.isArray(snapshot.people), 'the organization snapshot shape is incomplete');
+  check(Array.isArray(snapshot.people) && snapshot.people.every((person) => Array.isArray(person.repos)),
+    'every person in the organization snapshot must carry a repos array, which the board renders directly');
   check(Array.isArray(snapshot.issues) && !snapshot.issues.some((issue) => /\/pull\/\d+$/.test(issue.url || '')), 'the organization snapshot must never classify pull requests as issues');
 }
 
