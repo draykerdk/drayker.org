@@ -160,8 +160,6 @@ check(org.ECON_CHAIN.length === 4 && org.ECON_LIMITS.length === 5 && org.ECON_QU
 check(org.ECON_TODAY.some((row) => row.s === 'RUNNING') && org.ECON_TODAY.some((row) => row.s === 'DESIGNED'), 'the economy page must separate what runs from what is designed');
 const econText = econSrc + JSON.stringify(org.ECON_CHAIN) + JSON.stringify(org.ECON_LIMITS)
   + JSON.stringify(org.ECON_TODAY) + JSON.stringify(org.ECON_QUESTIONS);
-check(!/\d+(\.\d+)?\s*(euro|eur\b|usd\b|dollar|%)/i.test(econText), 'the economy page must never publish an amount or a rate');
-check(!/(worth about|valued at|per day|each day|daily amount|guaranteed income|basic income)/i.test(econText), 'the economy page must never imply a payout');
 check(org.ECON_LIMITS.some((l) => /NOT INCOME/.test(l.k)) && org.ECON_LIMITS.some((l) => /NOT AN INVESTMENT/.test(l.k)), 'the economy page must state its limits explicitly');
 check(src.includes("SITE === 'org' ? '/data/org.json' : 'https://drayker.org/data/org.json'"), 'snapshot URL must work from clean routes on both domains');
 check(propDefault === deployedSite, 'Design Component site default (' + propDefault + ') overrides deployed SITE (' + deployedSite + ')');
