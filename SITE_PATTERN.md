@@ -53,9 +53,9 @@ This repository is the first deployment of the Drayker web pattern: a dark, open
 
 - Navigation is keyboard-accessible and uses semantic buttons with visible focus states.
 - The selected site and screen are reflected in hash routes such as `#org/fn` and `#com/dfm`, so a refresh and browser back/forward preserve the current view.
-- Every public subpage also has a clean URL, unique title, description, canonical and complete favicon chain; sitemap entries never use fragments.
+- Every public subpage also has a clean URL, unique title, description, canonical and complete favicon chain. Sitemap entries never use fragments.
 - The volunteer screen transmits nothing. It composes a GitHub issue and opens it for the person to read, edit and publish under their own account, and it says so before and after the action.
-- No page invents content. Where a source is thin, the page says so; where there is no public source, the page states that instead of linking somewhere plausible.
+- No page invents content. Where a source is thin, the page says so. Where there is no public source, the page states that instead of linking somewhere plausible.
 - Ecosystem, component and organization cards open a dedicated internal project page before sending the reader to external source repositories or documentation.
 - Public pages do not expose private project-management statuses. A project page describes purpose, role, relationships and sources independently of its internal execution state.
 - The `.org` presentation is the cooperation and documentation layer: it emphasizes open functions, organization, project pages, source trails and ways to continue the work.
@@ -69,7 +69,7 @@ The component is static. Public organization data is snapshotted into `data/org.
 | What | Source | Failure behaviour |
 | --- | --- | --- |
 | Organization snapshot | `data/org.json`, generated from the public GitHub API and updated through a reviewable automation PR | Falls back to curated repository records if the snapshot is missing |
-| Open-functions board | Snapshot first, then `GET api.github.com/search/issues` for `org:draykerdk is:issue is:open label:open-function` | Keeps the snapshot or an honest empty state; never sample rows |
+| Open-functions board | Snapshot first, then `GET api.github.com/search/issues` for `org:draykerdk is:issue is:open label:open-function` | Keeps the snapshot or an honest empty state. Never sample rows |
 | Volunteer introduction | A prefilled `volunteer-introduction.yml` issue in `draykerdk/general-forum`, opened in a new tab | The confirmation screen also prints the link |
 | Partnership proposal | A prefilled `partnership.yml` issue in `draykerdk/general-forum`, opened in a new tab | The confirmation screen also prints the link |
 
