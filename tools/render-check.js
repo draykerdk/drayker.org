@@ -182,7 +182,7 @@ if (fs.existsSync(snapshotFile)) {
 
 for (const site of ['org', 'com']) {
   const bundle = site === 'org' ? org : com;
-  for (const page of ['home', 'manifesto', 'dfm', 'dk', 'eco', 'org', 'economy', 'docs']) {
+  for (const page of ['home', 'manifesto', 'dfm', 'dk', 'eco', 'org', 'economy', 'direction', 'docs']) {
     const component = make(bundle, { page });
     let values;
     try { values = component.renderVals(); }
