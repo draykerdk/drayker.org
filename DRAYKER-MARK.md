@@ -1,10 +1,10 @@
-# drayker-mark.js — base do símbolo Drayker
+# drayker-mark.js. Base do símbolo Drayker
 
 Motor único do símbolo: **corpo + estrutura orbital + efeito nos dois quartos**.
 Serve para páginas vivas (animado, reage ao cursor), para SVG estático
 (favicon, e-mail, PDF, corte) e como matemática pura para outros meios.
 
-Arquivo: `drayker-mark.js` — sem dependências, sem build. Um `<script src>` basta.
+Arquivo: `drayker-mark.js`. Sem dependências, sem build. Um `<script src>` basta.
 
 ---
 
@@ -59,7 +59,7 @@ mark.stop(); mark.start(); // controla o rAF
 ## 2.5 A MARCA OFICIAL (é esta, não invente outra)
 
 Duas cores e só: **preto** (#000000) nos aros, na borda e na sombra; **o globo**
-muda de cor por escopo — laranja neon `#FF5500` no principal. Olhar travado em
+muda de cor por escopo. Laranja neon `#FF5500` no principal. Olhar travado em
 `0, 0.34`: simetria de eixo vertical, ponta focal da cunha abaixo do centro.
 Estática, sem gradiente, sem halo, sem noite.
 
@@ -77,12 +77,12 @@ Estática, sem gradiente, sem halo, sem noite.
 | órbita larga | `ringRadius:152, weight:3.4, fit:1.78` |
 
 **O ícone é a logo.** Não existe versão de ícone "simplificada" para uso normal:
-favicon 32/48, app icon, avatar, aba, botão, marcador de mapa — todos são
+favicon 32/48, app icon, avatar, aba, botão, marcador de mapa. Todos são
 `drayker-marca.svg` sem alteração. `drayker-icone.svg` (compacto) e
 `drayker-favicon.svg` (monoBare) só entram quando a marca é renderizada abaixo
 de 20 px e os aros fecham; se der para usar a logo, usa a logo.
 
-### Arquivos prontos — `assets/logo/`
+### Arquivos prontos · `assets/logo/`
 
 ```
 drayker-marca.svg  drayker-icone.svg  drayker-favicon.svg
@@ -99,28 +99,28 @@ kit/  favicon-16/32/48.png · apple-touch-icon.png (180, fundo #08080A, marca es
       icon-512-branco.png · icon-512-escuro.png
 ```
 
-A assinatura é **“Drayker” em caixa alta e baixa** — só o D maiúsculo — em
+A assinatura é **“Drayker” em caixa alta e baixa**, só o D maiúsculo, em
 **Archivo 600, tracking −0.012em** (horizontal) e **Archivo 500, tracking ~0**
 (vertical: caixa baixa não se espaça). Nunca `lengthAdjust="spacingAndGlyphs"`: a
 letra não é esticada nem comprimida em nenhuma aplicação. Archivo entrou no lugar
-do Space Grotesk porque `r`, `k` e `y` são formas simples — haste e diagonal, sem
+do Space Grotesk porque `r`, `k` e `y` são formas simples. Haste e diagonal, sem
 perninha decorativa.
 
 Existe **uma segunda assinatura, a técnica**: `DRAYKER` em Archivo 500 com
-tracking **+0.22em**, sempre menor que o símbolo — placa, casco, lombada, régua
+tracking **+0.22em**, sempre menor que o símbolo. Placa, casco, lombada, régua
 de rodapé. Ela nunca substitui a titular em peça de marca, e maiúscula colada
 (sem tracking) não existe. No escuro, só a palavra muda de cor: aros e borda
 continuam preto.
 
-**Archivo é o único tipo da marca** — 600 para marca e título, 500 para técnica e
+**Archivo é o único tipo da marca**. 600 para marca e título, 500 para técnica e
 rótulo, 400 para texto. Sem fonte alternativa para peça grande, sem par de
-fontes. O texto ainda é `<text>` vivo — converta para
+fontes. O texto ainda é `<text>` vivo. Converta para
 curvas no Illustrator/Figma antes de mandar para gráfica. Área de respiro já
 embutida no arquivo: **X = metade do raio do globo**. Mínimos: 24 mm / 110 px
 (horizontal), 16 mm / 72 px (vertical); abaixo disso, só o símbolo.
 
 ### A tinta segue o fundo
-O aro é **uma peça só e tem uma cor só** — na frente do globo, atrás dele e no
+O aro é **uma peça só e tem uma cor só**. Na frente do globo, atrás dele e no
 trecho que o cruza. A borda do limbo acompanha o aro.
 
 | elemento | no claro | no escuro |
@@ -133,7 +133,7 @@ A cunha é a única exceção, e por um motivo: em branco ela desapareceria sobr
 globos claros (`uid #E8ECF5` daria 1,18:1) e é ela que conta o que a estrutura faz
 com o planeta. São dois arquivos da mesma geometria: `assets/logo/` para fundo
 claro, `assets/logo/escuro/` para fundo escuro, gerados com
-`toMonoSVG({ ink: '#FFFFFF' })` — `ink` é a tinta do aro e da borda, `inkOnBody`
+`toMonoSVG({ ink: '#FFFFFF' })`. `ink` é a tinta do aro e da borda, `inkOnBody`
 (preto por padrão) a da cunha. Nos modos `ink` e `knockout` há uma tinta só.
 Sobre cor cheia, foto ou vídeo, nenhum dos dois serve: ali é o
 `mono/drayker-vazado-*.svg`.
@@ -143,7 +143,7 @@ Ordem de pintura: globo, cunha, `over`, `back`, `out`, borda.
 ### Emenda do aro com o globo
 `geom.hoop` classifica o aro em `over` / `out` / `back` e a troca de classe é
 resolvida por **bissecção** no ângulo exato do cruzamento, não na amostra mais
-próxima — depois cada trecho avança ~3 px além da fronteira. Sem isso aparecia
+próxima. Depois cada trecho avança ~3 px além da fronteira. Sem isso aparecia
 um corte branco onde o aro encontra o limbo. Se mexer em `hoop`, mantenha as
 duas coisas: ângulo exato **e** costura sobreposta.
 
@@ -166,7 +166,7 @@ Drayker.toMonoSVG({ accent: '#FF5500', ringRadius: 106, weight: 7, fit: 1.24 });
 `'color'` (padrão, globo colorido + preto) · `'ink'` (uma tinta só: o globo vira
 o papel) · `'knockout'` (disco cheio com a cunha furada, `fill-rule="evenodd"`),
 mais `ink` para a cor da tinta. É o gerador de todos os arquivos em
-`assets/logo/` — para gerar de novo, rode-o e grave a string.
+`assets/logo/`. Para gerar de novo, rode-o e grave a string.
 
 ---
 
@@ -199,7 +199,7 @@ O olhar é **um só na página** (`window.__dkGaze`): todas as marcas viram junt
 `geo` (casca geodésica icosaédrica) · `weave` (trança de dois sentidos) ·
 `star` (plumas radiais) · `voidBody` (horizonte de eventos).
 
-**Estruturas** `mono` (**a marca oficial** — duas cores, chapada, estática) ·
+**Estruturas** `mono` (**a marca oficial**, duas cores, chapada, estática) ·
 `monoBare` (mono sem aros: globo + borda + cunha) ·
 `hairline` (fita de cromo) · `hull` (casco habitado: costuras, vigas, módulos, luzes) ·
 `collector` (painéis escuros + bocas de captação) ·
@@ -209,7 +209,7 @@ O olhar é **um só na página** (`window.__dkGaze`): todas as marcas viram junt
 **Quartos** `none` · `extract` (fluxo de energia para o ponto de captação) ·
 `shield` (malha de blindagem + varredura) · `terraform` (parcelas e placas acesas).
 
-Qualquer combinação é válida — 6 × 6 × 4. Pares que já foram testados juntos:
+Qualquer combinação é válida. 6 × 6 × 4. Pares que já foram testados juntos:
 `hull+terraform`, `collector+extract`, `shieldRing+shield`, `drydock+none`.
 
 ---
@@ -220,8 +220,8 @@ Qualquer combinação é válida — 6 × 6 × 4. Pares que já foram testados j
 
 ```js
 Drayker.bodies.myBody = {
-  sphere: 'ice',            // gradiente base (palette.spheres) — opcional
-  hotLimb: false,           // limbo quente (estrelas) — opcional
+  sphere: 'ice',            // gradiente base (palette.spheres), opcional
+  hotLimb: false,           // limbo quente (estrelas), opcional
   build(ctx) {              // cria os nós UMA vez
     return { g: ctx.layers.body.appendChild(Drayker.mk('path', {
       fill: 'none', stroke: ctx.accent, 'stroke-width': 1
