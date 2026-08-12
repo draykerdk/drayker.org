@@ -25,7 +25,7 @@ function value(html, regex) { const match = html.match(regex); return match ? ma
 check(fs.existsSync(sitemapPath), 'sitemap.xml is missing');
 const sitemap = read(sitemapPath);
 const urls = Array.from(sitemap.matchAll(/<loc>([^<]+)<\/loc>/g), (m) => m[1]);
-const expectedRoutes = site === 'org' ? 39 : 33;
+const expectedRoutes = site === 'org' ? 40 : 34;
 check(urls.length === expectedRoutes, 'expected ' + expectedRoutes + ' canonical routes, got ' + urls.length);
 check(urls.every((url) => url.startsWith(base) && !url.includes('#')), 'sitemap must contain clean canonical URLs only');
 check(new Set(urls).size === urls.length, 'sitemap contains duplicate URLs');

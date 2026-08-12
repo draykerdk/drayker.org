@@ -82,7 +82,7 @@ function metaFor(r) {
 
 const ORG_ONLY = ['contrib', 'fn', 'join'];
 const COM_ONLY = ['partnerships'];
-const SHARED = ['manifesto', 'dfm', 'dk', 'eco', 'org', 'economy', 'docs'];
+const SHARED = ['manifesto', 'dfm', 'dk', 'eco', 'org', 'economy', 'direction', 'docs'];
 const TABS = ['overview', 'tracks', 'projects', 'guide'];
 const DKNOWLEDGE_ALIASES = ['knowledge', 'project/dknowledge'];
 
