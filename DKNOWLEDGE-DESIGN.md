@@ -1,4 +1,4 @@
-# Dknowledger — base de design e sugestões de engenharia
+# Dknowledger. Base de design e sugestões de engenharia
 
 Interlocutor: o agente que vai fazer a implementação estática interna. Este arquivo é
 a ponte entre o que já está desenhado no site (`Drayker v3.dc.html`, rota
@@ -7,7 +7,7 @@ a ponte entre o que já está desenhado no site (`Drayker v3.dc.html`, rota
 Nada aqui é status de gestão. Tudo é evidência: o que existe, o que está vazio, e
 como um nível de confiança é **calculado** em vez de atribuído.
 
-Dknowledger é **o cérebro do sistema** — não um segundo cérebro, não um espelho da
+Dknowledger é **o cérebro do sistema**. Não um segundo cérebro, não um espelho da
 documentação. É de lá que o sistema pensa.
 
 ## 0. Antes de implementar: leia a área da Drayker inteira
@@ -21,7 +21,7 @@ que o que está aqui, e você provavelmente tem acesso a ela. Então:
    descreva a estrutura inteligente e os níveis de confiança em detalhe.
 2. **Compare com as seções 2, 3 e 5 deste arquivo.** Se a documentação extensa já
    define tipos de nó, tipos de aresta ou uma escala de confiança, a definição dela
-   manda — ajuste o schema e avise, em vez de manter a proposta daqui.
+   manda. Ajuste o schema e avise, em vez de manter a proposta daqui.
 3. Onde a documentação for mais rica (ontologias, camadas pública/federada/privada,
    sensores, oráculos, processos), estenda: os seis tipos de nó são o mínimo viável,
    não um limite.
@@ -29,7 +29,7 @@ que o que está aqui, e você provavelmente tem acesso a ela. Então:
    modelo em `KN_NODES` / `KN_EDGES` / `KN_TRUST`, no componente. Página e repositório
    divergindo é o único erro grave possível aqui.
 5. Se algo da documentação interna não for público, não traga o conteúdo para a
-   página — traga só a estrutura, e diga na página que a fonte é privada.
+   página. Traga só a estrutura, e diga na página que a fonte é privada.
 
 ---
 
@@ -47,7 +47,7 @@ que o que está aqui, e você provavelmente tem acesso a ela. Então:
   título** (dk 8 · ecosystem 7 · organization 1, arquivos de 7 a 130 bytes), roadmap
   histórico, e traduções PT/ES atrás do inglês.
 
-Se a implementação mudar qualquer um desses fatos, a página tem de mudar junto — o
+Se a implementação mudar qualquer um desses fatos, a página tem de mudar junto. O
 inventário está hoje em `KN_TODAY` no componente.
 
 ---
@@ -75,7 +75,7 @@ written_at: 2021-05-02                # data do conteúdo, não do commit
 ```
 
 Regras que evitam dívida: `id` no plural do caminho (`<projeto>/<slug>`), sem
-acentos; front-matter obrigatório inclusive nos arquivos vazios — é exatamente o que
+acentos. Front-matter obrigatório inclusive nos arquivos vazios, é exatamente o que
 transforma "arquivo de 78 bytes" em nó `T4 EMPTY` rastreável.
 
 ## 3. Confiança é derivada, nunca escrita à mão
@@ -97,7 +97,7 @@ e o relatório de `T4` é automaticamente a lista de trabalho aberto.
 ```
 tools/build-graph.js      # varre **/*.md, valida front-matter, resolve arestas
   → data/graph.json       # { nodes: [...], edges: [...] }
-  → data/trust.json       # { id: level } — saída da função da seção 3
+  → data/trust.json       # { id: level }. Saída da função da seção 3
   → data/openings.json    # todos os T4 + requisitos sem nenhuma moção que os responda
 ```
 
@@ -106,7 +106,7 @@ Os sites leem JSON estático: instantâneo, funciona offline, sem limite de API.
 viva do GitHub fica só para o que muda por hora (issues), como já é hoje.
 
 No componente do site, `KN_TODAY` sai e entra um fetch de `data/graph.json` +
-`data/trust.json` com o inventário atual como fallback curado — o mesmo padrão do
+`data/trust.json` com o inventário atual como fallback curado. O mesmo padrão do
 board: **conteúdo curado é o estado base, rede é enriquecimento.**
 
 ## 5. Validação em CI (o que impede a rede de apodrecer)
@@ -116,7 +116,7 @@ board: **conteúdo curado é o estado base, rede é enriquecimento.**
 - aresta apontando para `id` inexistente → falha.
 - `requirement` sem nenhuma moção que o responda → aviso, entra em `openings.json`.
 - `translation_of` cujo original mudou depois da tradução → aviso de tradução atrasada
-  (hoje README diz "PT/ES atrás do inglês"; isso passa a ser medido).
+  (hoje README diz "PT/ES atrás do inglês". Isso passa a ser medido).
 - ciclo em `depends_on` → falha.
 
 ## 6. Ordem sugerida de implementação
@@ -131,6 +131,6 @@ board: **conteúdo curado é o estado base, rede é enriquecimento.**
 ## 7. Fora de escopo, de propósito
 
 Sem framework, sem bundler, sem banco. Sem selo de maturidade, sem `NOW/NEXT/DONE`,
-sem status de gestão — a página só diz finalidade, estrutura, nível de evidência e
+sem status de gestão. A página só diz finalidade, estrutura, nível de evidência e
 como participar. O workspace privado continua fora do público, como o
 `component.yml` do repositório já declara.

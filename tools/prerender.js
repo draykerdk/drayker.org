@@ -68,12 +68,12 @@ const PARTS = (() => {
 /** The head a route claims: a part route speaks for itself, others use ROUTE_META. */
 function metaFor(r) {
   const part = r.path.indexOf('project/') === 0 ? PARTS[r.path.split('/')[1]] : null;
-  if (part) return { t: part.name + ' — ' + part.tagline.replace(/\.$/, ''), d: part.vision.slice(0, 300) };
+  if (part) return { t: part.name + ' · ' + part.tagline.replace(/\.$/, ''), d: part.vision.slice(0, 300) };
   if (r.path.indexOf('contrib/') === 0) {
     const tab = r.path.split('/')[1];
     const labels = { overview: 'Overview', tracks: 'Contribution tracks', projects: 'Projects', guide: 'Contribution guide' };
     return {
-      t: (labels[tab] || tab) + ' — Contribute to Drayker',
+      t: (labels[tab] || tab) + ' · Contribute to Drayker',
       d: ROUTE_META.contrib.d + ' This page opens the ' + (labels[tab] || tab).toLowerCase() + ' view directly.'
     };
   }
@@ -116,7 +116,7 @@ function documentFor(all, r) {
   const m = metaFor(r);
   const url = cleanUrl(r);
   const title = (r.key === 'home' && SITE === 'org')
-    ? 'Drayker Organization — volunteers portal'
+    ? 'Drayker Organization · volunteers portal'
     : m.t + (SITE === 'org' ? ' · drayker.org' : ' · drayker.com');
   let out = html
     .replace(/<title>[\s\S]*?<\/title>/, '<title>' + esc(title) + '</title>')
@@ -149,7 +149,7 @@ function dknowledgeRedirect(pathname) {
   const target = 'https://dknowledge.drayker.org/';
   return '<!doctype html><html lang="en"><head><meta charset="utf-8">'
     + '<meta name="viewport" content="width=device-width,initial-scale=1">'
-    + '<title>Dknowledge — official knowledge base</title>'
+    + '<title>Dknowledge · official knowledge base</title>'
     + '<meta name="description" content="Dknowledge is Drayker’s official public knowledge base, connecting current orientation, architecture, papers, decisions and evidence to their sources.">'
     + '<link rel="canonical" href="' + target + '">'
     + '<link rel="shortcut icon" href="' + prefix + 'favicon.ico?v=20260811">'
