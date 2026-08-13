@@ -48,11 +48,25 @@ node tools/prerender-check.js --site=org
 git diff --check
 ```
 
+The scheduled ecosystem smoke test can also be run manually when network access is
+available:
+
+```bash
+node tools/ecosystem-link-check.js
+```
+
 To verify the generated `.com` presentation too:
 
 ```bash
 node tools/make-com.js /tmp/drayker-com.html
 node tools/render-check.js /tmp/drayker-com.html
+```
+
+For a production checkout, use `--sync` so the generated repository also receives
+the canonical runtime, mark engine, assets and validation tools:
+
+```bash
+node tools/make-com.js ../drayker.com/index.html --sync
 ```
 
 ## GitHub integration
