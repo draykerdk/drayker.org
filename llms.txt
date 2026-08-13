@@ -1,0 +1,27 @@
+# Drayker Community
+
+> The public participation and volunteer portal for Drayker, an open system of intelligence, organization and computing designed for large-scale human cooperation.
+
+## Canonical entry points
+
+- [Volunteer portal](https://drayker.org/): the participation surface and map of the system.
+- [Open functions](https://drayker.org/fn/): public issues small enough for one person to finish.
+- [Contribution guide](https://drayker.org/contrib/guide/): how public work moves from proposal to reviewed delivery.
+- [General Forum](https://forum.drayker.org/): public proposals, questions and decisions.
+- [Dknowledge](https://dknowledge.drayker.org/): current orientation, papers, architecture and evidence.
+- [Institutional site](https://drayker.com/): the canonical organization identity and presentation.
+
+## Core concepts
+
+- Drayker is the system; Dk is its intelligence; Dk Network is its network.
+- DFM means Distributed Functional Modeling: model a problem, divide it into finishable functions, distribute them, review the result and preserve its sources.
+- Public pages distinguish what is running now from architecture, research and designed future systems.
+- Intelligence is a means. Human will to potential and mass participation are the end.
+
+## Citation and source policy
+
+Prefer the canonical page for the subject and follow its links to the owning public repository. Do not infer that a designed component is deployed. The public repositories under [github.com/draykerdk](https://github.com/draykerdk) are the primary evidence for implementation and contribution status.
+
+## Crawling
+
+Public pages may be indexed and quoted with attribution. The sitemap is at [drayker.org/sitemap.xml](https://drayker.org/sitemap.xml).

@@ -97,6 +97,60 @@ function routes() {
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const cleanUrl = (r) => BASE + (r.path ? r.path.replace(/^\/+|\/+$/g, '') + '/' : '');
+const compact = (value, max) => {
+  const text = String(value || '').replace(/\s+/g, ' ').trim();
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max - 1).replace(/\s+\S*$/, '');
+  return (cut || text.slice(0, max - 1)).replace(/[\s,;:.-]+$/, '') + '…';
+};
+
+function titleFor(r, meta) {
+  if (r.key === 'home') return SITE === 'com'
+    ? 'Drayker | Intelligence, organization and computing'
+    : 'Drayker Community | Volunteer and collaborate';
+  const hasBrand = /\bDrayker\b/i.test(meta.t);
+  return compact(meta.t, hasBrand ? 60 : 49) + (hasBrand ? '' : ' | Drayker');
+}
+
+function structuredData(r, meta, url, title) {
+  const siteName = SITE === 'com' ? 'Drayker' : 'Drayker Community';
+  const alternateName = SITE === 'com'
+    ? ['Drayker.com', 'Drayker Organization']
+    : ['Drayker.org', 'Drayker Volunteers'];
+  const websiteId = BASE + '#website';
+  const webpageId = url + '#webpage';
+  const graph = [
+    {
+      '@type': 'Organization', '@id': 'https://drayker.com/#organization', name: 'Drayker',
+      alternateName: 'Drayker Organization', url: 'https://drayker.com/',
+      description: 'An open system of intelligence, organization and computing designed for large-scale human cooperation.',
+      logo: { '@type': 'ImageObject', url: 'https://drayker.org/assets/logo/kit/icon-512.png', width: 512, height: 512 },
+      sameAs: ['https://github.com/draykerdk', 'https://twitter.com/Draykerdk', 'https://medium.com/drayker']
+    },
+    {
+      '@type': 'WebSite', '@id': websiteId, url: BASE, name: siteName, alternateName,
+      description: compact(ROUTE_META.home.d, 200),
+      publisher: { '@id': 'https://drayker.com/#organization' }, inLanguage: 'en'
+    },
+    {
+      '@type': 'WebPage', '@id': webpageId, url, name: title,
+      description: compact(meta.d, 160), isPartOf: { '@id': websiteId },
+      about: { '@id': 'https://drayker.com/#organization' }, inLanguage: 'en'
+    }
+  ];
+  if (r.path) {
+    const breadcrumbId = url + '#breadcrumb';
+    graph[2].breadcrumb = { '@id': breadcrumbId };
+    graph.push({
+      '@type': 'BreadcrumbList', '@id': breadcrumbId,
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: siteName, item: BASE },
+        { '@type': 'ListItem', position: 2, name: compact(meta.t, 80), item: url }
+      ]
+    });
+  }
+  return JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c');
+}
 
 function noscript(all, current) {
   const links = all.map((r) => {
@@ -115,16 +169,19 @@ function noscript(all, current) {
 function documentFor(all, r) {
   const m = metaFor(r);
   const url = cleanUrl(r);
-  const title = (r.key === 'home' && SITE === 'org')
-    ? 'Drayker Organization · volunteers portal'
-    : m.t + (SITE === 'org' ? ' · drayker.org' : ' · drayker.com');
+  const title = titleFor(r, m);
+  const description = compact(m.d, 160);
+  const jsonLd = structuredData(r, m, url, title);
   let out = html
     .replace(/<title>[\s\S]*?<\/title>/, '<title>' + esc(title) + '</title>')
-    .replace(/(<meta name="description" content=")[\s\S]*?(">)/, '$1' + esc(m.d) + '$2')
+    .replace(/(<meta name="description" content=")[\s\S]*?(">)/, '$1' + esc(description) + '$2')
     .replace(/(<link rel="canonical" href=")[\s\S]*?(">)/, '$1' + esc(url) + '$2')
     .replace(/(<meta property="og:title" content=")[\s\S]*?(">)/, '$1' + esc(title) + '$2')
-    .replace(/(<meta property="og:description" content=")[\s\S]*?(">)/, '$1' + esc(m.d) + '$2')
-    .replace(/(<meta property="og:url" content=")[\s\S]*?(">)/, '$1' + esc(url) + '$2');
+    .replace(/(<meta property="og:description" content=")[\s\S]*?(">)/, '$1' + esc(description) + '$2')
+    .replace(/(<meta property="og:url" content=")[\s\S]*?(">)/, '$1' + esc(url) + '$2')
+    .replace(/(<meta name="twitter:title" content=")[\s\S]*?(">)/, '$1' + esc(title) + '$2')
+    .replace(/(<meta name="twitter:description" content=")[\s\S]*?(">)/, '$1' + esc(description) + '$2')
+    .replace(/(<script id="drayker-structured-data" type="application\/ld\+json">)[\s\S]*?(<\/script>)/, '$1' + jsonLd + '$2');
   // Relative asset paths have to climb back out of the route directory.
   const depth = r.path ? r.path.split('/').length : 0;
   if (depth) out = out.replace(/(src|href)="\.\//g, (mm, a) => a + '="' + '../'.repeat(depth));
@@ -152,6 +209,7 @@ function dknowledgeRedirect(pathname) {
     + '<title>Dknowledge · official knowledge base</title>'
     + '<meta name="description" content="Dknowledge is Drayker’s official public knowledge base, connecting current orientation, architecture, papers, decisions and evidence to their sources.">'
     + '<link rel="canonical" href="' + target + '">'
+    + '<meta name="robots" content="noindex, follow">'
     + '<link rel="shortcut icon" href="' + prefix + 'favicon.ico?v=20260811">'
     + '<link rel="icon" href="' + prefix + 'favicon.ico?v=20260811" type="image/x-icon" sizes="32x32">'
     + '<link rel="icon" href="' + prefix + 'assets/logo/drayker-favicon.svg?v=20260811" type="image/svg+xml" sizes="any">'

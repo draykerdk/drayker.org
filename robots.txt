@@ -1,4 +1,15 @@
 User-agent: *
 Allow: /
 
+# OpenAI search and user-requested browsing. These are already covered by *, but
+# explicit groups make the public crawling policy unambiguous to operators.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
 Sitemap: https://drayker.org/sitemap.xml
