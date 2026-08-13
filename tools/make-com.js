@@ -1,6 +1,6 @@
 // Generates the drayker.com build from this repository's index.html.
 //
-//   node tools/make-com.js ../drayker.com-site/index.html
+//   node tools/make-com.js ../drayker.com-site/index.html --sync
 //
 // One component, two sites. The institutional presentation is not maintained as a second
 // copy that slowly drifts — it is produced from this file by changing the SITE build
@@ -15,8 +15,9 @@ const path = require('path');
 
 const source = path.join(__dirname, '..', 'index.html');
 const target = process.argv[2];
+const syncPackage = process.argv.slice(3).includes('--sync');
 if (!target) {
-  console.error('usage: node tools/make-com.js <path to drayker.com index.html>');
+  console.error('usage: node tools/make-com.js <path to drayker.com index.html> [--sync]');
   process.exit(1);
 }
 
@@ -75,4 +76,25 @@ out = out.replace(headBlock, HEAD + (STAGING ? '\n<meta name="robots" content="n
 
 fs.mkdirSync(path.dirname(target), { recursive: true });
 fs.writeFileSync(target, out, 'utf8');
+
+// Production generation is a package operation, not only an index rewrite. The .com
+// checkout must be independently testable, which means it needs the exact runtime,
+// mark engine, design assets and validation tools used by the canonical .org source.
+// Temporary one-file renders keep the old behaviour unless --sync is explicit.
+if (syncPackage) {
+  const root = path.join(__dirname, '..');
+  const targetRoot = path.dirname(target);
+  const files = [
+    'support.js', 'drayker-mark.js', 'favicon.ico', 'og.png',
+    'tools/prerender.js', 'tools/prerender-check.js', 'tools/render-check.js'
+  ];
+  files.forEach((entry) => {
+    const destination = path.join(targetRoot, entry);
+    fs.mkdirSync(path.dirname(destination), { recursive: true });
+    fs.copyFileSync(path.join(root, entry), destination);
+  });
+  fs.cpSync(path.join(root, 'assets'), path.join(targetRoot, 'assets'), { recursive: true });
+  console.log('synced runtime, mark, assets and validation tools into ' + targetRoot);
+}
+
 console.log('wrote ' + target + (STAGING ? '  (staging: noindex is on)' : '  (indexable)'));

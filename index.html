@@ -90,12 +90,12 @@
 
       <div style="display:flex;align-items:center;gap:12px;flex-shrink:0;order:{{ ctrlOrder }};margin-left:{{ ctrlPush }}">
         <div onClick="{{ toggleTheme }}" title="Switch light / dark" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;color:var(--tx3);border:1px solid var(--line2);padding:6px 10px;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">{{ themeLabel }}</div>
-        <div onClick="{{ toggleSite }}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;color:var(--tx3);border:1px solid var(--line2);padding:6px 10px;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">{{ switchLabel }}</div>
+        <a href="{{ switchUrl }}" onClick="{{ toggleSite }}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;color:var(--tx3);border:1px solid var(--line2);padding:6px 10px;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">{{ switchLabel }}</a>
         <sc-if value="{{ isOrgSite }}" hint-placeholder-val="{{ true }}">
-          <div onClick="{{ goJoin }}" style="background:#FF5500;color:#0A0A0C;padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 0 16px rgba(255,85,0,0.2)" style-hover="background:#FF7A33;box-shadow:0 0 24px rgba(255,85,0,0.35)">Volunteer</div>
+          <a href="{{ joinUrl }}" onClick="{{ goJoin }}" style="background:#FF5500;color:#0A0A0C;padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 0 16px rgba(255,85,0,0.2)" style-hover="background:#FF7A33;box-shadow:0 0 24px rgba(255,85,0,0.35)">Volunteer</a>
         </sc-if>
         <sc-if value="{{ isComSite }}" hint-placeholder-val="{{ false }}">
-          <div onClick="{{ goJoin }}" style="border:1px solid #FF5500;color:#FF5500;padding:8px 17px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap" style-hover="background:#FF5500;color:#0A0A0C">Take part on .org →</div>
+          <a href="{{ joinUrl }}" onClick="{{ goJoin }}" style="border:1px solid #FF5500;color:#FF5500;padding:8px 17px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap" style-hover="background:#FF5500;color:#0A0A0C">Take part on .org →</a>
         </sc-if>
       </div>
     </div>
@@ -375,18 +375,18 @@
             <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#FF5500;margin-bottom:18px">Two ways this moves</div>
             <h2 style="font-size:clamp(24px,3vw,40px);line-height:1.08;letter-spacing:-0.03em;font-weight:600;margin:0 0 40px;max-width:22ch;text-wrap:balance">It goes further with money, and it goes further with people.</h2>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)">
-              <div onClick="{{ goPartnerships }}" style="background:var(--surf);padding:34px 30px;display:flex;flex-direction:column;gap:14px;min-height:280px;cursor:pointer" style-hover="background:var(--surf2)">
+              <a href="{{ partnershipsUrl }}" onClick="{{ goPartnerships }}" style="background:var(--surf);padding:34px 30px;display:flex;flex-direction:column;gap:14px;min-height:280px;cursor:pointer;color:var(--tx)" style-hover="background:var(--surf2)">
                 <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.14em;color:var(--tx3)">FUNDING &amp; PARTNERSHIP</div>
                 <div style="font-size:26px;font-weight:600;letter-spacing:-0.025em;line-height:1.1">Support the research</div>
                 <p style="font-size:15px;line-height:1.64;color:var(--tx2);margin:0;flex:1;text-wrap:pretty">Funding, research collaboration, infrastructure and compute, institutional partnership. What is written can keep being written on volunteer time; implementation at scale cannot.</p>
                 <div style="font-size:13.5px;color:#FF5500;font-weight:600">How partnership works →</div>
-              </div>
-              <div onClick="{{ goJoin }}" style="background:var(--surf);padding:34px 30px;display:flex;flex-direction:column;gap:14px;min-height:280px;cursor:pointer" style-hover="background:var(--surf2)">
+              </a>
+              <a href="{{ joinUrl }}" onClick="{{ goJoin }}" style="background:var(--surf);padding:34px 30px;display:flex;flex-direction:column;gap:14px;min-height:280px;cursor:pointer;color:var(--tx)" style-hover="background:var(--surf2)">
                 <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.14em;color:var(--tx3)">PARTICIPATION · DRAYKER.ORG</div>
                 <div style="font-size:26px;font-weight:600;letter-spacing:-0.025em;line-height:1.1">Work on it</div>
                 <p style="font-size:15px;line-height:1.64;color:var(--tx2);margin:0;flex:1;text-wrap:pretty">This site explains the system; the volunteers portal is where it gets built. Every project, what each one is missing, the contribution process, and a guided way in that ends with a track and a first step.</p>
                 <div style="font-size:13.5px;color:#FF5500;font-weight:600">Take part → drayker.org</div>
-              </div>
+              </a>
             </div>
             <div onClick="{{ goContrib }}" style="display:inline-block;margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.12em;color:var(--tx3);cursor:pointer;border-bottom:1px solid var(--line3);padding-bottom:3px" style-hover="color:#FF5500;border-color:#FF5500">SEE THE OPEN WORK FIRST</div>
           </div>
@@ -1005,12 +1005,12 @@
           <p style="font-size:15px;line-height:1.66;color:var(--tx2);margin:0 0 clamp(24px,3.2vw,36px);max-width:62ch;text-wrap:pretty">Nothing below is repeated here. Each link opens the section of the drayker.org page for {{ ptName }} that answers exactly that question — architecture, declared scope, or what is still missing.</p>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px">
             <sc-for list="{{ ptDeep }}" as="d" hint-placeholder-count="4">
-              <div onClick="{{ d.open }}" style="background:var(--surf);border:1px solid var(--line);padding:26px 22px;display:flex;flex-direction:column;gap:10px;min-height:170px;cursor:pointer" style-hover="background:var(--surf2)">
+              <a href="{{ d.href }}" onClick="{{ d.open }}" style="background:var(--surf);border:1px solid var(--line);padding:26px 22px;display:flex;flex-direction:column;gap:10px;min-height:170px;cursor:pointer;color:var(--tx)" style-hover="background:var(--surf2)">
                 <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.14em;color:var(--tx3)">{{ d.tag }}</div>
                 <div style="font-size:18px;font-weight:600;letter-spacing:-0.02em;line-height:1.16">{{ d.label }}</div>
                 <div style="font-size:13.5px;line-height:1.56;color:var(--tx2);flex:1">{{ d.desc }}</div>
                 <div style="font-size:12.5px;font-weight:600;color:#FF5500">DRAYKER.ORG →</div>
-              </div>
+              </a>
             </sc-for>
           </div>
         </div>
@@ -1018,18 +1018,18 @@
 
       <section style="border-top:1px solid var(--line);background:var(--surf)">
         <div style="max-width:1320px;margin:0 auto;padding:clamp(34px,5vw,58px) clamp(16px,4vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)">
-          <div onClick="{{ goPartnerships }}" style="background:var(--surf);padding:32px 28px;display:flex;flex-direction:column;gap:12px;min-height:190px;cursor:pointer" style-hover="background:var(--surf2)">
+          <a href="{{ partnershipsUrl }}" onClick="{{ goPartnerships }}" style="background:var(--surf);padding:32px 28px;display:flex;flex-direction:column;gap:12px;min-height:190px;cursor:pointer;color:var(--tx)" style-hover="background:var(--surf2)">
             <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--tx3)">FUNDING &amp; PARTNERSHIP</div>
             <div style="font-size:23px;font-weight:600;letter-spacing:-0.025em;line-height:1.12">Support the research</div>
             <div style="font-size:14px;line-height:1.6;color:var(--tx2);flex:1">Work of this size moves faster with resources behind it. What that means here, and what it will not buy.</div>
             <div style="font-size:13px;font-weight:600;color:#FF5500">Funding &amp; partnership →</div>
-          </div>
-          <div onClick="{{ ptOpenOrg }}" style="background:var(--surf);padding:32px 28px;display:flex;flex-direction:column;gap:12px;min-height:190px;cursor:pointer" style-hover="background:var(--surf2)">
+          </a>
+          <a href="{{ ptOpenOrgUrl }}" onClick="{{ ptOpenOrg }}" style="background:var(--surf);padding:32px 28px;display:flex;flex-direction:column;gap:12px;min-height:190px;cursor:pointer;color:var(--tx)" style-hover="background:var(--surf2)">
             <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--tx3)">VOLUNTEERS PORTAL</div>
             <div style="font-size:23px;font-weight:600;letter-spacing:-0.025em;line-height:1.12">Work on this part</div>
             <div style="font-size:14px;line-height:1.6;color:var(--tx2);flex:1">The full page for {{ ptName }} on drayker.org: what it is made of, what is unfinished, and how to take a piece of it.</div>
             <div style="font-size:13px;font-weight:600;color:#FF5500">The whole page →</div>
-          </div>
+          </a>
         </div>
       </section>
 
@@ -1829,7 +1829,7 @@
               <p style="font-size:15px;line-height:1.66;color:var(--tx2);margin:0;max-width:44ch;text-wrap:pretty">Tell us what you are good at and what you care about. We will point you at functions that match — and nothing stops you from claiming one today anyway.</p>
             </div>
             <div style="display:flex;gap:12px;flex-wrap:wrap">
-              <div onClick="{{ goJoin }}" style="background:#FF5500;color:#0A0A0C;padding:16px 28px;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 0 24px rgba(255,85,0,0.25)" style-hover="background:#FF7A33;box-shadow:0 0 36px rgba(255,85,0,0.4)">Volunteer</div>
+            <a href="{{ joinUrl }}" onClick="{{ goJoin }}" style="background:#FF5500;color:#0A0A0C;padding:16px 28px;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 0 24px rgba(255,85,0,0.25)" style-hover="background:#FF7A33;box-shadow:0 0 36px rgba(255,85,0,0.4)">Volunteer</a>
               <div onClick="{{ goTracks }}" style="border:1px solid var(--line3);color:var(--tx);padding:16px 28px;font-size:14px;font-weight:500;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">Compare the tracks</div>
             </div>
           </div>
@@ -1957,7 +1957,7 @@
           </div>
           <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:28px">
             <div onClick="{{ econOpenStations }}" style="border:1px solid var(--line3);color:var(--tx);padding:14px 26px;font-size:13.5px;font-weight:500;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">Where resources become places →</div>
-            <div onClick="{{ goPartnerships }}" style="border:1px solid var(--line3);color:var(--tx);padding:14px 26px;font-size:13.5px;font-weight:500;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">How funding actually works today →</div>
+            <a href="{{ partnershipsUrl }}" onClick="{{ goPartnerships }}" style="border:1px solid var(--line3);color:var(--tx);padding:14px 26px;font-size:13.5px;font-weight:500;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">How funding actually works today →</a>
           </div>
         </div>
       </section>
@@ -2484,7 +2484,7 @@
         <div onClick="{{ goEconomy }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Economy &amp; reputation</div>
         <div onClick="{{ goDocs }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Docs</div>
         <a href="https://dknowledge.drayker.org/" style="font-size:13.5px;color:var(--tx2)" style-hover="color:#FF5500">Dknowledge ↗</a>
-        <div onClick="{{ goPartnerships }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Funding &amp; partnership</div>
+        <a href="{{ partnershipsUrl }}" onClick="{{ goPartnerships }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Funding &amp; partnership</a>
       </div>
       <div style="display:flex;flex-direction:column;gap:9px">
         <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--tx3);margin-bottom:4px">PARTICIPATE</div>
@@ -2493,12 +2493,12 @@
           <div onClick="{{ goFn }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Open functions</div>
           <div onClick="{{ goProjects }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Projects</div>
           <div onClick="{{ goGuide }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Contribution guide</div>
-          <div onClick="{{ goJoin }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Volunteer</div>
+          <a href="{{ joinUrl }}" onClick="{{ goJoin }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Volunteer</a>
         </sc-if>
         <a href="https://forum.drayker.org" target="_blank" rel="noreferrer" style="font-size:13.5px;color:var(--tx2)" style-hover="color:#FF5500">Forum ↗</a>
         <sc-if value="{{ isComSite }}" hint-placeholder-val="{{ false }}">
           <div style="font-size:13px;color:var(--tx3);line-height:1.6;max-width:26ch;margin-bottom:2px">Taking part happens on the volunteers portal.</div>
-          <div onClick="{{ goJoin }}" style="font-size:13.5px;color:#FF5500;font-weight:500;cursor:pointer" style-hover="color:#FF7A33">drayker.org →</div>
+          <a href="{{ joinUrl }}" onClick="{{ goJoin }}" style="font-size:13.5px;color:#FF5500;font-weight:500;cursor:pointer" style-hover="color:#FF7A33">drayker.org →</a>
         </sc-if>
         <div onClick="{{ goOrgPage }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Organization</div>
         <a href="https://github.com/draykerdk" target="_blank" rel="noreferrer" style="font-size:13.5px;color:var(--tx2)" style-hover="color:#FF5500">GitHub</a>
@@ -3949,9 +3949,24 @@ class Component extends DCLogic {
   // document, a local server, staging. There the .com/.org switch changes the
   // presentation in place instead of navigating to a site that is not there.
   get inPlaceSwitch() {
-    if (this.props.site) return true;
     try { return !/(^|\.)drayker\.(com|org)$/i.test(window.location.hostname); } catch (e) { return false; }
   }
+
+  // A navigation target is always a real, clean document on the public domains.
+  // Preview hosts keep the hash-only route so both presentations can still be
+  // reviewed from one local document. Focused project sections do not have their
+  // own prerendered directories, so they keep the clean project URL plus a hash.
+  crossUrl = (site, path) => {
+    const target = site === 'com' ? 'com' : 'org';
+    const clean = String(path || 'home').replace(/^\/+|\/+$/g, '');
+    if (this.inPlaceSwitch) return '#' + target + '/' + (clean || 'home');
+    const base = target === 'org' ? 'https://drayker.org' : 'https://drayker.com';
+    const parts = clean.split('/').filter(Boolean);
+    const focusedProject = parts[0] === 'project' && parts.length > 2;
+    const publicPath = clean === 'home' ? '' : (focusedProject ? parts.slice(0, 2).join('/') : clean);
+    const url = base + (publicPath ? '/' + publicPath + '/' : '/');
+    return focusedProject ? url + '#' + target + '/' + clean : url;
+  };
 
   crossTo = (site, path) => {
     if (this.inPlaceSwitch) { // design document / local / staging
@@ -3962,7 +3977,7 @@ class Component extends DCLogic {
       window.scrollTo(0, 0);
       return;
     }
-    const url = CROSS_SITE_URL.replace(/\/$/, '') + '/#' + site + '/' + (path || 'home');
+    const url = this.crossUrl(site, path);
     if (window.location.assign) window.location.assign(url);
     else window.location.href = url;
   };
@@ -4703,10 +4718,10 @@ class Component extends DCLogic {
     const ptUsedKeys = ptOk ? Object.keys(CONTRACTS).filter((k) => k !== ptRec.key && CONTRACTS[k].deps.indexOf(ptRec.key) >= 0) : [];
     const ptSeq = ptOk ? TRAIL.indexOf(ptRec.key) : -1;
     const ptDeep = ptOk ? [
-      { tag: 'ARCHITECTURE', label: 'How it is put together', desc: 'Every piece of the architecture, each one expanding into what it means and why it is there.', open: this.openDeep(ptRec.key, 'arch') },
-      { tag: 'WHAT IS OPEN', label: 'What is still missing', desc: 'The gaps stated plainly: the unwritten documents and undecided mechanics anyone may take on.', open: this.openDeep(ptRec.key, 'open') },
-      { tag: 'DEPENDENCIES', label: 'Where it sits among the parts', desc: 'The map: what it cannot be specified without, and what cannot be specified without it.', open: this.openDeep(ptRec.key, 'map') }
-    ].concat(ptC ? [{ tag: 'COMPONENT CONTRACT', label: 'What the repository declares', desc: 'Scope, what is explicitly out of scope, the evidence behind the claim, and what could be misread.', open: this.openDeep(ptRec.key, 'contract') }] : []) : [];
+      { tag: 'ARCHITECTURE', label: 'How it is put together', desc: 'Every piece of the architecture, each one expanding into what it means and why it is there.', href: this.crossUrl('org', 'project/' + ptRec.key + '/arch'), open: this.openDeep(ptRec.key, 'arch') },
+      { tag: 'WHAT IS OPEN', label: 'What is still missing', desc: 'The gaps stated plainly: the unwritten documents and undecided mechanics anyone may take on.', href: this.crossUrl('org', 'project/' + ptRec.key + '/open'), open: this.openDeep(ptRec.key, 'open') },
+      { tag: 'DEPENDENCIES', label: 'Where it sits among the parts', desc: 'The map: what it cannot be specified without, and what cannot be specified without it.', href: this.crossUrl('org', 'project/' + ptRec.key + '/map'), open: this.openDeep(ptRec.key, 'map') }
+    ].concat(ptC ? [{ tag: 'COMPONENT CONTRACT', label: 'What the repository declares', desc: 'Scope, what is explicitly out of scope, the evidence behind the claim, and what could be misread.', href: this.crossUrl('org', 'project/' + ptRec.key + '/contract'), open: this.openDeep(ptRec.key, 'contract') }] : []) : [];
 
     const tabCounts = { projects: String(allProjects.length), fn: live ? String(issues.length) : '—', tracks: String(TRACKS.length), overview: '', guide: '' };
 
@@ -4718,6 +4733,9 @@ class Component extends DCLogic {
       ringBackRef: this.ringBackRef,
       domain: org ? 'drayker.org' : 'drayker.com',
       switchLabel: org ? 'GO TO .COM' : 'GO TO .ORG',
+      switchUrl: this.crossUrl(org ? 'com' : 'org', 'home'),
+      joinUrl: this.crossUrl('org', 'join'),
+      partnershipsUrl: this.crossUrl('com', 'partnerships'),
 
       themeLabel: s.resolved === 'dark' ? 'LIGHT' : 'DARK',
       toggleTheme: () => this.setTheme(s.resolved === 'dark' ? 'light' : 'dark'),
@@ -5053,6 +5071,7 @@ class Component extends DCLogic {
       ptUsedNone: ptOk && ptUsedKeys.length === 0,
       ptDeep,
       ptOpenOrg: ptOk ? this.openDeep(ptRec.key, null) : null,
+      ptOpenOrgUrl: ptOk ? this.crossUrl('org', 'project/' + ptRec.key) : '#',
       ptSeqHas: ptSeq >= 0,
       ptSeqPos: ptSeq >= 0 ? 'PART ' + ('0' + (ptSeq + 1)).slice(-2) + ' OF ' + TRAIL.length : '',
       ptSeqHasPrev: ptSeq > 0,

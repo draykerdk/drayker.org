@@ -133,6 +133,8 @@ const engineHash = require('crypto').createHash('sha256')
 check(engineHash === ENGINE_SHA256, 'drayker-mark.js has drifted from the canonical engine in the design library');
 check(!src.includes('community review branch'), 'the retired community-review flow is still described');
 check(src.includes("template=volunteer-introduction.yml") && src.includes("template=partnership.yml"), 'the two general-forum forms are not wired');
+check(src.includes('href="{{ switchUrl }}"') && src.includes('href="{{ joinUrl }}"'), 'cross-site controls must expose semantic hrefs');
+check(src.includes('href="{{ d.href }}"') && src.includes('href="{{ ptOpenOrgUrl }}"'), 'component hand-offs must expose semantic hrefs');
 
 check(org.PROJECTS.length === 25, 'expected 25 curated repositories, got ' + org.PROJECTS.length);
 check(org.CONCEPTS.length === 0, 'every part now has a repository; CONCEPTS must be empty, got ' + org.CONCEPTS.length);
@@ -260,22 +262,31 @@ for (const [hash, host] of [['#org/knowledge', 'drayker.org'], ['#org/project/dk
 resetWindow('', 'drayker.com');
 const comDk = make(com, { page: 'part', proj: 'dk' }).renderVals();
 comDk.ptDeep[0].open();
-check(assigned[0] === 'https://drayker.org/#org/project/dk/arch', '.com technical deep link must target the exact .org section');
+check(comDk.ptDeep[0].href === 'https://drayker.org/project/dk/#org/project/dk/arch', '.com technical deep href must target the clean .org project route');
+check(assigned[0] === 'https://drayker.org/project/dk/#org/project/dk/arch', '.com technical deep link must target the exact .org section');
 
 resetWindow('#com/home', 'drayker.org');
 make(org).readHash();
-check(assigned[0] === 'https://drayker.com/#com/home', 'foreign .com hash on .org must hand off to .com');
+check(assigned[0] === 'https://drayker.com/', 'foreign .com hash on .org must hand off to the clean .com route');
 
 resetWindow('', 'drayker.com');
 comHome.goJoin();
-check(assigned[0] === 'https://drayker.org/#org/join', '.com volunteer CTA must hand off to .org');
+check(assigned[0] === 'https://drayker.org/join/', '.com volunteer CTA must hand off to the clean .org route');
 resetWindow('', 'drayker.org');
 orgHome.toggleSite();
-check(assigned[0] === 'https://drayker.com/#com/home', 'site switch must use the other public domain');
+check(assigned[0] === 'https://drayker.com/', 'site switch must use the other public domain');
 
 resetWindow('#org/partnerships', 'drayker.org');
 make(org).readHash();
-check(assigned[0] === 'https://drayker.com/#com/partnerships', '.org partnerships route must hand off to .com');
+check(assigned[0] === 'https://drayker.com/partnerships/', '.org partnerships route must hand off to the clean .com route');
+
+resetWindow('', 'localhost');
+const previewSwitch = make(org, { page: 'home' });
+const previewValues = previewSwitch.renderVals();
+check(previewValues.switchUrl === '#com/home', 'local preview switch must stay hash-only');
+previewSwitch.crossTo('com', 'project/daf');
+check(assigned.length === 0 && previewSwitch.state.site === 'com',
+  'local preview must switch presentations without leaving the preview host');
 
 const partnership = make(com, { page: 'partnerships', pType: 'institutional', pNote: 'A public research collaboration.' }).renderVals();
 const partnershipUrl = decodeURIComponent(partnership.partnerUrl);
