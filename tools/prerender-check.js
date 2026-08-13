@@ -67,11 +67,11 @@ for (const url of urls) {
   check(graph.some((entry) => entry['@type'] === 'WebPage' && entry.url === url), url + ' has no matching WebPage entity');
   check(html.includes('<noscript>') && html.includes('DRAYKER_PRERENDER_START'), url + ' has no readable no-script fallback');
 
-  for (const icon of ['favicon.ico', 'assets/logo/drayker-favicon.svg', 'assets/logo/kit/favicon-32.png', 'assets/logo/kit/favicon-16.png', 'assets/logo/kit/apple-touch-icon.png']) {
+  for (const icon of ['assets/logo/drayker-icone.svg', 'assets/logo/escuro/drayker-icone.svg', 'assets/logo/kit/icon-512.png', 'assets/logo/kit/icon-512-escuro.png', 'assets/logo/kit/apple-touch-icon.png']) {
     const basename = path.basename(icon).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const href = value(html, new RegExp('<link[^>]+href="([^"]*' + basename + '[^"]*)"'));
     check(Boolean(href), url + ' does not reference ' + icon);
-    check(href.includes('?v=20260811'), url + ' does not cache-bust ' + icon);
+    check(href.includes(icon.includes('apple-touch') ? '?v=20260811' : '?v=20260813'), url + ' does not cache-bust ' + icon);
     const assetHref = href.split(/[?#]/)[0];
     if (assetHref && !/^https?:/.test(assetHref)) check(fs.existsSync(path.resolve(path.dirname(file), assetHref)), url + ' resolves missing icon ' + href);
   }
