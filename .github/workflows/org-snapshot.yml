@@ -78,6 +78,28 @@ jobs:
               people: $people[0]
             }' > /tmp/org.json
 
+          # A scheduled token can occasionally see the organization but return no
+          # repository issues or contributors. Treat that as an API failure, not as
+          # a real empty board: a zeroed snapshot would erase every open function
+          # from the public portal until a maintainer noticed the pull request.
+          next_repos=$(jq '.repos | length' /tmp/org.json)
+          next_issues=$(jq '.issues | length' /tmp/org.json)
+          next_people=$(jq '.people | length' /tmp/org.json)
+          current_issues=$(jq '.issues | length' data/org.json 2>/dev/null || echo 0)
+          current_people=$(jq '.people | length' data/org.json 2>/dev/null || echo 0)
+          if [ "$next_repos" -lt 24 ]; then
+            echo "refusing incomplete snapshot: only $next_repos repositories" >&2
+            exit 1
+          fi
+          if [ "$current_issues" -gt 0 ] && [ "$next_issues" -eq 0 ]; then
+            echo "refusing empty issue snapshot: current record has $current_issues" >&2
+            exit 1
+          fi
+          if [ "$current_people" -gt 0 ] && [ "$next_people" -eq 0 ]; then
+            echo "refusing empty contributor snapshot: current record has $current_people" >&2
+            exit 1
+          fi
+
           # Keep the committed timestamp stable when the public data did not change.
           # Otherwise the workflow would open a content-free update every day.
           if [ -f data/org.json ] && jq -e -s '
