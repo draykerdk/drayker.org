@@ -2100,6 +2100,39 @@
           <p style="font-size:13.5px;color:var(--tx3);margin:20px 0 0;line-height:1.6;max-width:64ch">Full text with detail: <a href="https://dknowledge.drayker.org/roadmap/DIRECTION/" style="color:#FF5500">Direction — Dknowledge</a>. Historical material, preserved as context: the <a href="https://dknowledge.drayker.org/roadmap/global-main-roadmap/" style="color:#FF5500">Global Main Roadmap</a>.</p>
         </div>
       </section>
+
+      <section style="border-top:1px solid var(--line)">
+        <div style="max-width:1320px;margin:0 auto;padding:clamp(38px,5.5vw,72px) clamp(16px,4vw,44px)">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#FF5500;margin-bottom:18px">Sources &amp; further reading</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)">
+            <div style="background:var(--bg);padding:24px 22px;display:flex;flex-direction:column;gap:9px">
+              <div style="font-size:16px;font-weight:600;letter-spacing:-0.02em">The roadmaps</div>
+              <div style="font-size:13.5px;line-height:1.65;color:var(--tx2);display:flex;flex-direction:column;gap:6px">
+                <a href="https://dknowledge.drayker.org/roadmap/global-main-roadmap/" style="color:var(--tx)" style-hover="color:#FF5500">Global Main Roadmap</a>
+                <a href="https://dknowledge.drayker.org/roadmap/" style="color:var(--tx)" style-hover="color:#FF5500">Project roadmaps — Dk, ecosystem, organization</a>
+                <a href="https://dknowledge.drayker.org/CURRENT/" style="color:var(--tx)" style-hover="color:#FF5500">Current orientation</a>
+              </div>
+            </div>
+            <div style="background:var(--bg);padding:24px 22px;display:flex;flex-direction:column;gap:9px">
+              <div style="font-size:16px;font-weight:600;letter-spacing:-0.02em">The phases, by component</div>
+              <div style="font-size:13.5px;line-height:1.65;color:var(--tx2);display:flex;flex-direction:column;gap:6px">
+                <span onClick="{{ openProjB }}" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">BSDK — the super equation</span>
+                <span onClick="{{ openProjMeta }}" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">Meta DFM — the researcher</span>
+                <span onClick="{{ openProjDk }}" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">Dk — the intelligence</span>
+                <span onClick="{{ openProjPap }}" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">PAP — the platform</span>
+              </div>
+            </div>
+            <div style="background:var(--bg);padding:24px 22px;display:flex;flex-direction:column;gap:9px">
+              <div style="font-size:16px;font-weight:600;letter-spacing:-0.02em">Related pages</div>
+              <div style="font-size:13.5px;line-height:1.65;color:var(--tx2);display:flex;flex-direction:column;gap:6px">
+                <span onClick="{{ goEco }}" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">Ecosystem — every part, one by one</span>
+                <span onClick="{{ goManifesto }}" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">The manifesto</span>
+                <span onClick="{{ goEconomy }}" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">Economy &amp; reputation</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       </div>
     </sc-if>
 
@@ -4725,6 +4758,8 @@ class Component extends DCLogic {
       econOpenDaf: this.openProj('daf'),
       econOpenValue: this.openProj('valueunit'),
       econOpenStations: this.openProj('stations'),
+      openProjB: this.openProj('bsdk'), openProjMeta: this.openProj('metadfmp'),
+      openProjDk: this.openProj('dk'), openProjPap: this.openProj('pap'),
       isContrib: p === 'contrib', isPartnerships: p === 'partnerships',
       goPartnerships: this.goPartnerships,
       partnerOutcomes: PARTNER_OUTCOMES,
