@@ -11,6 +11,7 @@ const path = require('path');
 const file = process.argv[2] || path.join(__dirname, '..', 'index.html');
 const src = fs.readFileSync(file, 'utf8');
 const snapshotFile = path.join(__dirname, '..', 'data', 'org.json');
+const snapshotWorkflowFile = path.join(__dirname, '..', '.github', 'workflows', 'org-snapshot.yml');
 const block = src.match(/<script type="text\/x-dc"[^>]*>([\s\S]*?)<\/script>/);
 if (!block) throw new Error('No <script type="text/x-dc"> block found in ' + file);
 
@@ -180,6 +181,12 @@ if (fs.existsSync(snapshotFile)) {
   check(Array.isArray(snapshot.people) && snapshot.people.every((person) => Array.isArray(person.repos)),
     'every person in the organization snapshot must carry a repos array, which the board renders directly');
   check(Array.isArray(snapshot.issues) && !snapshot.issues.some((issue) => /\/pull\/\d+$/.test(issue.url || '')), 'the organization snapshot must never classify pull requests as issues');
+}
+if (fs.existsSync(snapshotWorkflowFile)) {
+  const workflow = fs.readFileSync(snapshotWorkflowFile, 'utf8');
+  check(workflow.includes('refusing empty issue snapshot'), 'the snapshot workflow must reject an unexpectedly empty board');
+  check(workflow.includes('refusing empty contributor snapshot'), 'the snapshot workflow must reject unexpectedly empty contributors');
+  check(workflow.includes('refusing incomplete snapshot'), 'the snapshot workflow must reject an incomplete repository list');
 }
 
 for (const site of ['org', 'com']) {
