@@ -12,6 +12,8 @@ const site = args.site === 'com' ? 'com' : 'org';
 const root = path.resolve(args.root || '.');
 const base = 'https://drayker.' + site + '/';
 const sitemapPath = path.join(root, 'sitemap.xml');
+const robotsPath = path.join(root, 'robots.txt');
+const llmsPath = path.join(root, 'llms.txt');
 const failures = [];
 let checks = 0;
 
@@ -23,6 +25,14 @@ function read(file) { return fs.readFileSync(file, 'utf8'); }
 function value(html, regex) { const match = html.match(regex); return match ? match[1] : ''; }
 
 check(fs.existsSync(sitemapPath), 'sitemap.xml is missing');
+check(fs.existsSync(robotsPath), 'robots.txt is missing');
+check(fs.existsSync(llmsPath), 'llms.txt is missing');
+if (fs.existsSync(robotsPath)) {
+  const robots = read(robotsPath);
+  check(robots.includes('OAI-SearchBot') && robots.includes('ChatGPT-User'), 'AI search crawlers are not explicitly allowed');
+  check(robots.includes('Sitemap: ' + base + 'sitemap.xml'), 'robots.txt has the wrong sitemap');
+}
+if (fs.existsSync(llmsPath)) check(read(llmsPath).includes(base), 'llms.txt does not identify the canonical site');
 const sitemap = read(sitemapPath);
 const urls = Array.from(sitemap.matchAll(/<loc>([^<]+)<\/loc>/g), (m) => m[1]);
 const expectedRoutes = site === 'org' ? 40 : 34;
@@ -41,9 +51,20 @@ for (const url of urls) {
   const description = value(html, /<meta name="description" content="([^"]*)">/);
   const canonical = value(html, /<link rel="canonical" href="([^"]*)">/);
   check(title.length > 18, url + ' has a weak title');
+  check(title.length <= 65, url + ' title is longer than 65 characters');
   check(description.length > 70, url + ' has a weak description');
+  check(description.length <= 160, url + ' description is longer than 160 characters');
   check(canonical === url, url + ' has the wrong canonical: ' + canonical);
   check(value(html, /<meta property="og:url" content="([^"]*)">/) === url, url + ' has the wrong og:url');
+  check(Boolean(value(html, /<meta property="og:site_name" content="([^"]*)">/)), url + ' has no og:site_name');
+  check(value(html, /<meta name="twitter:title" content="([^"]*)">/) === title, url + ' Twitter title differs from the page title');
+  check(value(html, /<meta name="twitter:description" content="([^"]*)">/) === description, url + ' Twitter description differs from the page description');
+  const structured = value(html, /<script id="drayker-structured-data" type="application\/ld\+json">([\s\S]*?)<\/script>/);
+  let graph = [];
+  try { graph = JSON.parse(structured)['@graph'] || []; } catch (error) { check(false, url + ' has invalid JSON-LD: ' + error.message); }
+  check(graph.some((entry) => entry['@type'] === 'Organization'), url + ' has no Organization entity');
+  check(graph.some((entry) => entry['@type'] === 'WebSite'), url + ' has no WebSite entity');
+  check(graph.some((entry) => entry['@type'] === 'WebPage' && entry.url === url), url + ' has no matching WebPage entity');
   check(html.includes('<noscript>') && html.includes('DRAYKER_PRERENDER_START'), url + ' has no readable no-script fallback');
 
   for (const icon of ['favicon.ico', 'assets/logo/drayker-favicon.svg', 'assets/logo/kit/favicon-32.png', 'assets/logo/kit/favicon-16.png', 'assets/logo/kit/apple-touch-icon.png']) {
@@ -69,6 +90,7 @@ for (const alias of ['knowledge', 'project/dknowledge']) {
   if (!fs.existsSync(file)) continue;
   const html = read(file);
   check(value(html, /<link rel="canonical" href="([^"]*)">/) === 'https://dknowledge.drayker.org/', alias + ' has the wrong canonical target');
+  check(html.includes('content="noindex, follow"'), alias + ' compatibility page must be noindex');
   check(html.includes('location.replace("https://dknowledge.drayker.org/")'), alias + ' has no JavaScript redirect');
   check(html.includes('content="0; url=https://dknowledge.drayker.org/"'), alias + ' has no no-script redirect');
 }
