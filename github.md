@@ -1,12 +1,22 @@
 repo: draykerdk/drayker.org
 branch: master
 
-Related repositories read for content: all 25 public component repositories in `PROJECTS`, including their READMEs and public component contracts.
+Related repositories read for content: all 25 public component repositories in `PROJECTS`, including their READMEs and public component contracts. Constitutional alignment in this sync also reads the organization-wide `.github/GOVERNANCE.md` and profile.
 
 ## Last sync
-date: 2026-08-11T16:05:00Z
+date: 2026-08-17T00:00:00Z
 
 ### Updated in this project
+- **Dk's name and role are no longer collapsed.** `Distributed Kernel` remains the technical name and architectural principle. Public copy now states equally clearly that Dk is the distributed intelligence of Drayker across personal representation, local intelligence and global synthesis; the name describes how it is built, not the whole of what it is.
+- **Members replace the implicit product-user model.** Drayker is described as infrastructure constituted and stewarded in common by members. The site remains honest about the founding phase: contribution is the public entry today and no operational membership process or member-rights charter is claimed yet.
+- **People and agents share a functional grammar, not constitutional status.** The `same terms` / `identical terms` language was removed. Agents may carry functions and Dk may model or recommend; responsibility, consent, resource decisions and constitutional authority remain human and accountable to members.
+- **DAF is explicitly transitional.** The organization page, ecosystem, project record and economy no longer present DAF as the designed final successor. It is a provisional scaffold for auditable cooperation while PAP, councils and member governance are specified and proven.
+- **PAP and Dknowledge moved to their systemic roles.** PAP is the environment where an intention gains a body and becomes a durable project or application. Dknowledge is distributed memory repeated at personal, project, local and global scales, with the public repository as the visible shared surface rather than a container for private context.
+- **The economy is framed as common capacity.** Contribution creates evidence, not membership, human worth or an automatic claim. Reputation may inform deliberation; transparent member governance decides. Dk is advisory, never sovereign.
+- **The two domains now have distinct front doors.** `.com` leads with the civilizational thesis and institutional architecture; `.org` leads with participation and the path from contribution toward constitution.
+- **Dependent public surfaces were synchronized.** Dk, DAF, Dknowledge, Dk Personal, PAP, DFMP, Value Unit, Distributed Support, the organization profile/governance and General Forum now carry the same boundaries. The Forum's retired `dknowledger.drayker.org` link and `Dknowledger` public label were corrected to `dknowledge.drayker.org` and `Dknowledge`.
+
+### Previous sync (2026-08-11T16:05:00Z)
 - **The DAF gap moved, and every page that named it was corrected.** `draykerdk/daf` published `dafp/daf-000` (the constitution, independent of platform) and `dafp/daf-001` (Phase 0, running on a repository), plus the `federation/` record. The point mechanics and the voting procedure are no longer unspecified. They are drafts. Eight surfaces asserted the old gap and now state the new one: the Economy page, the ecosystem card, the DAF project page (`state`, `arch`, `contribute`), the component-contract mirror (`scope`, `nonScope`, `levelScope`, `evidence`, `risks`), the `Named and still to come` list, the `Federative points` status chip, the `daf`, `daodac` and `points` vocabulary entries, and the value-unit overlap note.
 - **The distinction the pages now hold** is three states, not two: specified (the rules exist as drafts), structured (`federation/` exists, empty), operational (nothing. No unit recorded, no point issued, no assembly held, no contract deployed). The component contract remains `implementation: none`, which is the correct reading.
 - **ICP is recorded as the stated direction** for the phase after a repository, without a date and without a deployment claim. The condition that would trigger the move is what remains undecided, and the pages say that rather than implying a schedule.

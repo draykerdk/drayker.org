@@ -106,24 +106,24 @@ const compact = (value, max) => {
 
 function titleFor(r, meta) {
   if (r.key === 'home') return SITE === 'com'
-    ? 'Drayker | Intelligence, organization and computing'
-    : 'Drayker Community | Volunteer and collaborate';
+    ? 'Drayker | Common intelligence, memory and action'
+    : 'Drayker | Participate and help constitute it';
   const hasBrand = /\bDrayker\b/i.test(meta.t);
   return compact(meta.t, hasBrand ? 60 : 49) + (hasBrand ? '' : ' | Drayker');
 }
 
 function structuredData(r, meta, url, title) {
-  const siteName = SITE === 'com' ? 'Drayker' : 'Drayker Community';
+  const siteName = SITE === 'com' ? 'Drayker' : 'Drayker Participation';
   const alternateName = SITE === 'com'
     ? ['Drayker.com', 'Drayker Organization']
-    : ['Drayker.org', 'Drayker Volunteers'];
+    : ['Drayker.org', 'Drayker Participation'];
   const websiteId = BASE + '#website';
   const webpageId = url + '#webpage';
   const graph = [
     {
       '@type': 'Organization', '@id': 'https://drayker.com/#organization', name: 'Drayker',
       alternateName: 'Drayker Organization', url: 'https://drayker.com/',
-      description: 'An open system of intelligence, organization and computing designed for large-scale human cooperation.',
+      description: 'Civilizational infrastructure constituted by members: distributed intelligence, memory, representation, coordination and common capacity.',
       logo: { '@type': 'ImageObject', url: 'https://drayker.org/assets/logo/kit/icon-512.png', width: 512, height: 512 },
       sameAs: ['https://github.com/draykerdk', 'https://twitter.com/Draykerdk', 'https://medium.com/drayker']
     },
