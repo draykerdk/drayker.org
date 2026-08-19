@@ -26,8 +26,8 @@ if (!target) {
 // the CNAME file was added to that repository.
 const STAGING = false;
 
-const HEAD = `<title>Drayker | Intelligence, organization and computing</title>
-<meta name="description" content="Drayker is an open system of intelligence, organization and computing designed for large-scale human cooperation.">
+const HEAD = `<title>Drayker | Common intelligence, memory and action</title>
+<meta name="description" content="Civilizational infrastructure constituted by members: distributed intelligence, memory, representation, coordination and resources held as common capacity.">
 <meta name="theme-color" content="#08080A">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="canonical" href="https://drayker.com/">
@@ -39,16 +39,16 @@ const HEAD = `<title>Drayker | Intelligence, organization and computing</title>
 <link rel="alternate" type="text/plain" href="/llms.txt" title="AI-readable site summary">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Drayker">
-<meta property="og:title" content="Drayker | Intelligence, organization and computing">
-<meta property="og:description" content="Drayker is an open system of intelligence, organization and computing designed for large-scale human cooperation.">
+<meta property="og:title" content="Drayker | Common intelligence, memory and action">
+<meta property="og:description" content="Civilizational infrastructure constituted by members: distributed intelligence, memory, representation, coordination and resources held as common capacity.">
 <meta property="og:url" content="https://drayker.com/">
 <meta property="og:image" content="https://drayker.com/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The Drayker mark: an orange sphere crossed by two rings.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Drayker | Intelligence, organization and computing">
-<meta name="twitter:description" content="Drayker is an open system of intelligence, organization and computing designed for large-scale human cooperation.">
+<meta name="twitter:title" content="Drayker | Common intelligence, memory and action">
+<meta name="twitter:description" content="Civilizational infrastructure constituted by members: distributed intelligence, memory, representation, coordination and resources held as common capacity.">
 <meta name="twitter:image" content="https://drayker.com/og.png">`;
 
 let out = fs.readFileSync(source, 'utf8');

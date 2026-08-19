@@ -1,6 +1,6 @@
 # drayker.org. Static Drayker system
 
-The public entry point for people who want to work on Drayker: what the organization is, how the DFM protocol shapes the work, what each part of the ecosystem does, which functions are open, and how to volunteer.
+The public participation and constitution entry point for Drayker: what the member-constituted organization is meant to become, how DFM shapes the work, what each part of the ecosystem does, which functions are open and how someone can contribute during the founding phase.
 
 Live at **[drayker.org](https://drayker.org)**.
 
@@ -81,7 +81,9 @@ node tools/make-com.js ../drayker.com/index.html --sync
 
 Open an issue in this repository. If you want to work on the site itself, keep the runtime contract and the visual tokens in `SITE_PATTERN.md` intact, and never publish internal project-management state. A project page describes purpose, role, relationships and sources, not execution status.
 
-The current founding phase and direct-integration limits are written in the organization-wide [GOVERNANCE.md](https://github.com/draykerdk/.github/blob/master/GOVERNANCE.md). DFMP is the documented proposal method. DAF and its resource-governance mechanics are proposed architecture, not an operational federation. The work is primarily voluntary and remains open to contribution through the normal GitHub flow.
+The current founding phase and direct-integration limits are written in the organization-wide [GOVERNANCE.md](https://github.com/draykerdk/.github/blob/master/GOVERNANCE.md). DFMP is the documented proposal method. DAF is a transitional governance scaffold, not an operational federation or Drayker's final constitution. Membership rules are not operational yet; the public entry today is voluntary contribution through the normal GitHub flow.
+
+On vocabulary: **volunteer** is the operating role of the current founding phase — someone contributing through the open flow today, with no membership status implied. **Member** is the intended constitutional unit of Drayker — someone who participates as a constituent part of the system once membership rules become operational. A volunteer may become a member, and Drayker's future is not simply "an organization of volunteers"; but "volunteer" names a present working relationship, not a permanent classification of the person.
 
 [Steemit](https://steemit.com/@drayker) · [Medium](https://medium.com/drayker) · [Twitter](https://twitter.com/Draykerdk)
 

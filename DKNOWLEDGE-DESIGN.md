@@ -1,4 +1,4 @@
-# Dknowledger. Base de design e sugestões de engenharia
+# Dknowledge. Base de design e sugestões de engenharia
 
 Interlocutor: o agente que vai fazer a implementação estática interna. Este arquivo é
 a ponte entre o que já está desenhado no site (`Drayker v3.dc.html`, rota
@@ -7,8 +7,11 @@ a ponte entre o que já está desenhado no site (`Drayker v3.dc.html`, rota
 Nada aqui é status de gestão. Tudo é evidência: o que existe, o que está vazio, e
 como um nível de confiança é **calculado** em vez de atribuído.
 
-Dknowledger é **o cérebro do sistema**. Não um segundo cérebro, não um espelho da
-documentação. É de lá que o sistema pensa.
+Dknowledge é a **memória e camada de conhecimento** do sistema, não a sua
+inteligência. A divisão é deliberada: o Dk interpreta e age; o Dknowledge
+conserva e relaciona aquilo que foi decidido, tentado e aprendido. Neste
+repositório, "Dknowledger" nomeia o vault privado local usado para trabalhar o
+material — não um cérebro, não uma camada de inteligência com função própria.
 
 ## 0. Antes de implementar: leia a área da Drayker inteira
 
@@ -35,7 +38,7 @@ que o que está aqui, e você provavelmente tem acesso a ela. Então:
 
 ## 1. O que a página já afirma (e portanto o que a implementação tem de sustentar)
 
-- Dknowledger **não é wiki**: é rede. Requisito → moções que o respondem → decisões que
+- Dknowledge **não é wiki**: é rede. Requisito → moções que o respondem → decisões que
   os mudaram → evidência de cada um, ligados às fontes.
 - Seis tipos de nó: `REQUIREMENT`, `MOTION`, `CONTRACT`, `DECISION`, `TERM`, `RECORD`.
 - Sete tipos de aresta: `answers`, `depends on`, `supersedes`, `evidenced by`,
