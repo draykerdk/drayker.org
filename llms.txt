@@ -1,10 +1,10 @@
-# Drayker Community
+# Drayker Participation
 
-> The public participation and volunteer portal for Drayker, an open system of intelligence, organization and computing designed for large-scale human cooperation.
+> The public participation and constitution entry point for Drayker, civilizational infrastructure meant to be constituted and stewarded in common by its members.
 
 ## Canonical entry points
 
-- [Volunteer portal](https://drayker.org/): the participation surface and map of the system.
+- [Participation portal](https://drayker.org/): the public surface and map of the system; contribution is the entry during the founding phase.
 - [Open functions](https://drayker.org/fn/): public issues small enough for one person to finish.
 - [Contribution guide](https://drayker.org/contrib/guide/): how public work moves from proposal to reviewed delivery.
 - [General Forum](https://forum.drayker.org/): public proposals, questions and decisions.
@@ -14,7 +14,16 @@
 ## Core concepts
 
 - Drayker is the system; Dk is its intelligence; Dk Network is its network.
+- Distributed Kernel is Dk's technical name and architectural principle; it does not reduce Dk to a low-level kernel.
 - DFM means Distributed Functional Modeling: model a problem, divide it into finishable functions, distribute them, review the result and preserve its sources.
+- Members are the intended constitutional subjects. Agents may carry delegated functions and Dk may perform contextual synthesis, but neither acquires member rights or sovereign authority.
+- Drayker's internal economy circulates capacity contextually; money, contracts and markets remain part of its external interface.
+- Reputation is multidimensional operational memory, not a price, a currency, human worth or one global moral score.
+- Dk performs contextual synthesis; systemic safeguards — constitutional constraints, security, permissions, integrity, reserves and risk — bound what can be executed; accountable member institutions authorize consequential allocations.
+- Decisions do not end the loop: effects, refusals and consequences return through members' personal Dks as new evidence, without a universal individual veto; a decision can be maintained, adapted, excepted, suspended or reversed.
+- Security conditions normal decisions, not only attacks. Legitimate criticism is not infiltration; internal error is not sabotage; extraordinary measures leave memory for later review.
+- Dknowledge is a multiscale operational ontology with contextual permissions. Auditability does not mean total exposure.
+- DAF is transitional scaffolding; PAP is the environment where intentions become projects and durable applications.
 - Public pages distinguish what is running now from architecture, research and designed future systems.
 - Intelligence is a means. Human will to potential and mass participation are the end.
 

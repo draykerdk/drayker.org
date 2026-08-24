@@ -80,7 +80,7 @@ visual e interativa quando o fluxo ou o runtime mudar.
    e os três primeiros passos aparecem preenchidos. Nada de `undefined`, string
    vazia ou rótulo genérico. Testar pelo menos três combinações de respostas que
    deveriam dar tracks diferentes e confirmar que dão.
-4. **Mapa.** Os 17 repositórios têm de estar visíveis e agrupados por domínio.
+4. **Mapa.** Os 25 repositórios públicos de componentes têm de estar visíveis e agrupados por domínio.
    Exatamente uma linha marcada `YOU ARE HERE` e os nós do track casado com
    `YOUR TRACK` em `#FF5500`. O resto neutro. Nenhum nó duplicado ou faltando.
 5. **Saída.** Clicar num nó do mapa abre `#org/project/<key>` da página certa, com
@@ -88,9 +88,10 @@ visual e interativa quando o fluxo ou o runtime mudar.
    (regressão já vista antes). Voltar do projeto tem de devolver ao resultado, não
    ao início do questionário.
 6. **Rotas de projeto.** Abrir `#org/project/nope-123`: tem de aparecer o bloco
-   "no page for this key" com saída para a lista, nunca página em branco. Abrir as
-   três páginas de conceito (`dsupport`, `openscience`, `valueunit`): sem barra de
-   estatísticas, sem link de repositório, com o aviso `NO REPOSITORY YET`.
+   "no page for this key" com saída para a lista, nunca página em branco. Abrir
+   componentes recém-publicados (`dsupport`, `openscience`, `valueunit`, `pap`,
+   `personal`, `academy`, `stations`): todos devem mostrar seu repositório e contrato,
+   sem regressar ao antigo aviso `NO REPOSITORY YET`.
 7. **Links internos.** Nos cards do Ecosystem e nos componentes da página do Dk, o
    clique no card abre a página interna e o clique no link de repo/docs abre o
    externo **sem** também abrir a página interna.

@@ -31,7 +31,7 @@ jobs:
           # The repository issues endpoint also returns pull requests. Query every
           # public component repository and discard objects carrying `pull_request`
           # explicitly; relying on a search qualifier previously put a PR on the
-          # volunteers' open-functions board.
+          # contributors' open-functions board.
           while IFS= read -r r; do
             file="/tmp/i-$(echo "$r" | tr '/' '-').json"
             gh api "repos/$r/issues?state=open&per_page=100" > "$file"
@@ -143,7 +143,7 @@ jobs:
               --base master \
               --head "$branch" \
               --title 'data: refresh organization snapshot' \
-              --body 'Automated public GitHub snapshot for the static volunteers portal. Merges itself once the component-contract check passes.' \
+              --body 'Automated public GitHub snapshot for the static participation portal. Merges itself once the component-contract check passes.' \
               | grep -oE '[0-9]+$')
           fi
           gh pr merge "$pr" --squash --auto
