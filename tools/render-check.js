@@ -127,7 +127,7 @@ check(!/FN-\d{3,}/.test(src), 'fictional open-function rows must not be publishe
 // from here, but the canonical, source-preserving copy lives in the design library at
 // draykerdk/drayker-propagation, which pins this same hash in its own tools/check.js.
 // Two domains serving one engine only stays true if something says so out loud.
-const ENGINE_SHA256 = '0a421c6b10ade43a6e45e03ba1a5e7a690ea1e9cb29ebc5827321385e37c380c';
+const ENGINE_SHA256 = 'aa208322b5910b7355d0336091547caa41525d949f76e244f865f1b3df78b8f8';
 const engineHash = require('crypto').createHash('sha256')
   .update(fs.readFileSync(path.join(__dirname, '..', 'drayker-mark.js'))).digest('hex');
 check(engineHash === ENGINE_SHA256, 'drayker-mark.js has drifted from the canonical engine in the design library');
