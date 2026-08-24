@@ -295,6 +295,6 @@ Emergence `#FF5500`. **Não invente cor nova** — puxe daqui.
 
 ## 8. Acessibilidade e limites
 - A marca é decorativa: `aria-hidden="true"` quando houver texto ao lado.
-- `prefers-reduced-motion`: chame `mark.stop()` — o primeiro quadro já é válido.
+- `prefers-reduced-motion`: a engine respeita sozinha — com movimento reduzido ativo no sistema, a marca não anima por conta própria e permanece no primeiro quadro válido. `mark.start()` continua disponível para quem quiser animar explicitamente mesmo assim.
 - Abaixo de ~40 px use `rings: 'seal'` e `wedge: 'none'`.
 - Não gire a cunha de forma independente dos aros: ela **é** a sombra deles.
