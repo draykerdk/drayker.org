@@ -60,6 +60,8 @@
   .dk-surf{animation:dk-surf 9s linear infinite}
   .dk-core{animation:dk-breathe 8s ease-in-out infinite;transform-box:view-box;transform-origin:0 0}
   .dk-page{animation:dk-fade .34s ease both}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}}
+[tabindex]:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid #FF5500;outline-offset:2px;border-radius:4px}
 </style>
 </helmet>
 
@@ -67,7 +69,7 @@
 
   <header style="position:sticky;top:0;z-index:50;background:var(--hdr);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)">
     <div style="max-width:1320px;margin:0 auto;padding:13px clamp(16px,4vw,44px);display:flex;align-items:center;gap:clamp(14px,2.6vw,36px);flex-wrap:wrap">
-      <div onClick="{{ goHome }}" style="display:flex;align-items:center;gap:10px;cursor:pointer;flex-shrink:0">
+      <div onClick="{{ goHome }}" tabindex="0" role="button" style="display:flex;align-items:center;gap:10px;cursor:pointer;flex-shrink:0">
 <!-- Flat mark (header, small size): two static crossed ellipses = the ring (stroke #8585A0, greyscale to
            match dkring above), solid circle = sphere body (fill #FF5500, keep in sync with dkball's base hue),
            path below = fixed shadow wedge (fill #000000, keep in sync with dkdark). No JS, no gradients. -->
@@ -84,12 +86,12 @@
 
       <nav style="display:flex;align-items:center;gap:clamp(9px,1.5vw,20px);flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;min-width:0;flex:{{ navFlex }};order:{{ navOrder }};width:{{ navWidth }}">
         <sc-for list="{{ nav }}" as="item" hint-placeholder-count="7">
-          <div onClick="{{ item.onClick }}" style="font-size:13.5px;font-weight:500;cursor:pointer;padding:5px 0;border-bottom:1px solid transparent;white-space:nowrap;color:{{ item.color }};border-bottom-color:{{ item.line }}" style-hover="color:var(--tx)">{{ item.label }}</div>
+          <div onClick="{{ item.onClick }}" tabindex="0" role="button" style="font-size:13.5px;font-weight:500;cursor:pointer;padding:5px 0;border-bottom:1px solid transparent;white-space:nowrap;color:{{ item.color }};border-bottom-color:{{ item.line }}" style-hover="color:var(--tx)">{{ item.label }}</div>
         </sc-for>
       </nav>
 
       <div style="display:flex;align-items:center;gap:12px;flex-shrink:0;order:{{ ctrlOrder }};margin-left:{{ ctrlPush }}">
-        <div onClick="{{ toggleTheme }}" title="Switch light / dark" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;color:var(--tx3);border:1px solid var(--line2);padding:6px 10px;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">{{ themeLabel }}</div>
+        <div onClick="{{ toggleTheme }}" tabindex="0" role="button" title="Switch light / dark" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;color:var(--tx3);border:1px solid var(--line2);padding:6px 10px;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">{{ themeLabel }}</div>
         <a href="{{ switchUrl }}" onClick="{{ toggleSite }}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;color:var(--tx3);border:1px solid var(--line2);padding:6px 10px;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">{{ switchLabel }}</a>
         <sc-if value="{{ isOrgSite }}" hint-placeholder-val="{{ true }}">
           <a href="{{ joinUrl }}" onClick="{{ goJoin }}" style="background:#FF5500;color:#0A0A0C;padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;box-shadow:0 0 16px rgba(255,85,0,0.2)" style-hover="background:#FF7A33;box-shadow:0 0 24px rgba(255,85,0,0.35)">Volunteer</a>
@@ -111,8 +113,8 @@
           <h1 class="dk-glow" style="font-size:clamp(42px,6.2vw,88px);line-height:0.93;letter-spacing:-0.04em;font-weight:700;margin:0 0 26px;text-wrap:balance">{{ heroTitle }}</h1>
           <p style="font-size:clamp(16px,1.3vw,19px);line-height:1.62;color:var(--tx2);max-width:52ch;margin:0 0 34px;text-wrap:pretty">{{ heroBody }}</p>
           <div style="display:flex;gap:12px;flex-wrap:wrap">
-            <div onClick="{{ heroPrimary }}" style="background:#FF5500;color:#0A0A0C;padding:16px 30px;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 0 24px rgba(255,85,0,0.25)" style-hover="background:#FF7A33;box-shadow:0 0 36px rgba(255,85,0,0.4)">{{ heroPrimaryLabel }}</div>
-            <div onClick="{{ goManifesto }}" style="border:1px solid var(--line3);color:var(--tx);padding:16px 30px;font-size:14px;font-weight:500;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">Read the manifesto</div>
+            <div onClick="{{ heroPrimary }}" tabindex="0" role="button" style="background:#FF5500;color:#0A0A0C;padding:16px 30px;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 0 24px rgba(255,85,0,0.25)" style-hover="background:#FF7A33;box-shadow:0 0 36px rgba(255,85,0,0.4)">{{ heroPrimaryLabel }}</div>
+            <div onClick="{{ goManifesto }}" tabindex="0" role="button" style="border:1px solid var(--line3);color:var(--tx);padding:16px 30px;font-size:14px;font-weight:500;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">Read the manifesto</div>
           </div>
         </div>
 
@@ -242,27 +244,27 @@
           </div>
           <p style="font-size:14.5px;line-height:1.64;color:var(--tx2);margin:0;text-wrap:pretty">The method covers the first three links and is the part in use today. The organization and its economy are how the last four are meant to come back to the people who did the work — and they are the parts still being written.</p>
         </div>
-        <div onClick="{{ goDocs }}" style="display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:var(--tx3);cursor:pointer;border-bottom:1px solid var(--line3);padding-bottom:3px;margin:0 0 40px" style-hover="color:#FF5500;border-color:#FF5500">EVERY TERM DEFINED IN THE VOCABULARY →</div>
+        <div onClick="{{ goDocs }}" tabindex="0" role="button" style="display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:var(--tx3);cursor:pointer;border-bottom:1px solid var(--line3);padding-bottom:3px;margin:0 0 40px" style-hover="color:#FF5500;border-color:#FF5500">EVERY TERM DEFINED IN THE VOCABULARY →</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)">
-          <div onClick="{{ goDfm }}" style="background:var(--surf);padding:32px 28px 28px;cursor:pointer;display:flex;flex-direction:column;gap:12px;min-height:250px" style-hover="background:var(--surf2)">
+          <div onClick="{{ goDfm }}" tabindex="0" role="button" style="background:var(--surf);padding:32px 28px 28px;cursor:pointer;display:flex;flex-direction:column;gap:12px;min-height:250px" style-hover="background:var(--surf2)">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tx3)">01</div>
             <div style="font-size:24px;font-weight:700;letter-spacing:-0.02em">DFM Protocol</div>
             <p style="font-size:15px;line-height:1.6;color:var(--tx2);margin:0;flex:1">Model a problem, break it into small functions, distribute them worldwide through decentralized peer review. A person and an agent claim a function on identical terms — that is what makes human and machine intelligence one workforce instead of two.</p>
             <div style="font-size:13px;color:#FF5500;font-weight:500">Open the protocol map →</div>
           </div>
-          <div onClick="{{ goDk }}" style="background:var(--surf);padding:32px 28px 28px;cursor:pointer;display:flex;flex-direction:column;gap:12px;min-height:250px" style-hover="background:var(--surf2)">
+          <div onClick="{{ goDk }}" tabindex="0" role="button" style="background:var(--surf);padding:32px 28px 28px;cursor:pointer;display:flex;flex-direction:column;gap:12px;min-height:250px" style-hover="background:var(--surf2)">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tx3)">02</div>
             <div style="font-size:24px;font-weight:700;letter-spacing:-0.02em">Dk — the intelligence</div>
             <p style="font-size:15px;line-height:1.6;color:var(--tx2);margin:0;flex:1">The intelligence that stands on the kernel and its base structure, the network, cryptography, identity and the devices that attach to them: an agentic A.I. that runs from a personal agent to a collective intelligence as one distributed architecture. A substrate meant to be inhabited rather than operated, where an agent, a person and a machine hold the same system and none of them owns it — the means, never the master.</p>
             <div style="font-size:13px;color:#FF5500;font-weight:500">Inside the system →</div>
           </div>
-          <div onClick="{{ goOrgPage }}" style="background:var(--surf);padding:32px 28px 28px;cursor:pointer;display:flex;flex-direction:column;gap:12px;min-height:250px" style-hover="background:var(--surf2)">
+          <div onClick="{{ goOrgPage }}" tabindex="0" role="button" style="background:var(--surf);padding:32px 28px 28px;cursor:pointer;display:flex;flex-direction:column;gap:12px;min-height:250px" style-hover="background:var(--surf2)">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tx3)">03</div>
             <div style="font-size:24px;font-weight:700;letter-spacing:-0.02em">Organization &amp; resources</div>
             <p style="font-size:15px;line-height:1.6;color:var(--tx2);margin:0;flex:1">Decisions and means held distributed, transparent and intelligent: autonomous units, weight that accumulates from delivered work rather than appointment, and a unit of value meant to carry its own rules. The specifications this layer needs are the emptiest pages in the system.</p>
             <div style="font-size:13px;color:#FF5500;font-weight:500">How it is meant to govern →</div>
           </div>
-          <div onClick="{{ goEco }}" style="background:var(--surf);padding:32px 28px 28px;cursor:pointer;display:flex;flex-direction:column;gap:12px;min-height:250px" style-hover="background:var(--surf2)">
+          <div onClick="{{ goEco }}" tabindex="0" role="button" style="background:var(--surf);padding:32px 28px 28px;cursor:pointer;display:flex;flex-direction:column;gap:12px;min-height:250px" style-hover="background:var(--surf2)">
             <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tx3)">04</div>
             <div style="font-size:24px;font-weight:700;letter-spacing:-0.02em">Transition &amp; emergence</div>
             <p style="font-size:15px;line-height:1.6;color:var(--tx2);margin:0;flex:1">The layer that is actually being built, with the resources that exist: the DAF, the organization running on GitHub, the public sites and knowledge base, and whatever tool serves best until an evolutionary platform of its own can replace it. Emergent work belongs here before it has a home.</p>
@@ -285,7 +287,7 @@
                 </div>
                 <div style="grid-column:span 2;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px">
                   <sc-for list="{{ l.parts }}" as="p" hint-placeholder-count="3">
-                    <div onClick="{{ p.open }}" style="border:1px solid var(--line2);padding:13px 14px;cursor:pointer;display:flex;flex-direction:column;gap:5px;background:var(--bg)" style-hover="border-color:#FF5500;background:var(--surf2)">
+                    <div onClick="{{ p.open }}" tabindex="0" role="button" style="border:1px solid var(--line2);padding:13px 14px;cursor:pointer;display:flex;flex-direction:column;gap:5px;background:var(--bg)" style-hover="border-color:#FF5500;background:var(--surf2)">
                       <div style="font-size:15px;font-weight:600;letter-spacing:-0.015em;line-height:1.2">{{ p.name }}</div>
                       <div style="font-size:12.5px;line-height:1.5;color:var(--tx3)">{{ p.tagline }}</div>
                       <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.12em;color:{{ p.fg }}">{{ p.stand }}</div>
@@ -309,7 +311,7 @@
             <p style="font-size:16px;line-height:1.68;color:var(--tx2);margin:0 0 26px;max-width:64ch;text-wrap:pretty">These chains are computed from the dependencies each repository declares in its own component contract. A part appears as a blocker when it is not running yet, and the gap under it is the one its own page states — so every line here is work somebody could take.</p>
             <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:26px">
               <sc-for list="{{ blkParts }}" as="b" hint-placeholder-count="20">
-                <div onClick="{{ b.pick }}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.08em;padding:8px 12px;cursor:pointer;border:1px solid var(--line2);background:{{ b.bg }};color:{{ b.fg }}" style-hover="border-color:#FF5500">{{ b.name }}</div>
+                <div onClick="{{ b.pick }}" tabindex="0" role="button" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.08em;padding:8px 12px;cursor:pointer;border:1px solid var(--line2);background:{{ b.bg }};color:{{ b.fg }}" style-hover="border-color:#FF5500">{{ b.name }}</div>
               </sc-for>
             </div>
             <sc-if value="{{ blkNone }}" hint-placeholder-val="{{ true }}">
@@ -323,7 +325,7 @@
                     <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:{{ blkStandC }}">{{ blkStand }}</div>
                   </div>
                   <p style="font-size:14.5px;line-height:1.62;color:var(--tx2);margin:0;max-width:70ch;text-wrap:pretty">{{ blkOwn }}</p>
-                  <div onClick="{{ blkOpen }}" style="font-size:13px;color:#FF5500;font-weight:500;cursor:pointer;align-self:flex-start" style-hover="color:#FF7A33">Open its page →</div>
+                  <div onClick="{{ blkOpen }}" tabindex="0" role="button" style="font-size:13px;color:#FF5500;font-weight:500;cursor:pointer;align-self:flex-start" style-hover="color:#FF7A33">Open its page →</div>
                 </div>
                 <sc-if value="{{ blkHasChain }}" hint-placeholder-val="{{ true }}">
                   <div style="padding:clamp(18px,2.4vw,26px) clamp(20px,2.6vw,30px) 6px">
@@ -331,7 +333,7 @@
                   </div>
                   <div style="display:flex;flex-direction:column">
                     <sc-for list="{{ blkChain }}" as="c" hint-placeholder-count="3">
-                      <div onClick="{{ c.open }}" style="padding:18px clamp(20px,2.6vw,30px);border-top:1px solid var(--line);cursor:pointer;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px" style-hover="background:var(--surf2)">
+                      <div onClick="{{ c.open }}" tabindex="0" role="button" style="padding:18px clamp(20px,2.6vw,30px);border-top:1px solid var(--line);cursor:pointer;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px" style-hover="background:var(--surf2)">
                         <div style="display:flex;flex-direction:column;gap:6px">
                           <div style="font-size:17px;font-weight:600;letter-spacing:-0.02em">{{ c.name }}</div>
                           <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.12em;color:{{ c.fg }}">{{ c.stand }}</div>
@@ -365,7 +367,7 @@
       <section style="border-top:1px solid var(--line);background:var(--surf)">
         <div style="max-width:1320px;margin:0 auto;padding:clamp(52px,8vw,116px) clamp(16px,4vw,44px)">
           <p class="dk-glow" style="font-size:clamp(25px,3.6vw,48px);line-height:1.14;letter-spacing:-0.03em;font-weight:500;margin:0;max-width:30ch;text-wrap:pretty">Humanity has immense latent capacity. We exist to create the conditions — of organization and action — that unlock it.</p>
-          <div onClick="{{ goManifesto }}" style="display:inline-block;margin-top:32px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;color:#FF5500;cursor:pointer;border-bottom:1px solid #FF5500;padding-bottom:3px">THE MANIFESTO</div>
+          <div onClick="{{ goManifesto }}" tabindex="0" role="button" style="display:inline-block;margin-top:32px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.12em;color:#FF5500;cursor:pointer;border-bottom:1px solid #FF5500;padding-bottom:3px">THE MANIFESTO</div>
         </div>
       </section>
 
@@ -388,7 +390,7 @@
                 <div style="font-size:13.5px;color:#FF5500;font-weight:600">Take part → drayker.org</div>
               </a>
             </div>
-            <div onClick="{{ goContrib }}" style="display:inline-block;margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.12em;color:var(--tx3);cursor:pointer;border-bottom:1px solid var(--line3);padding-bottom:3px" style-hover="color:#FF5500;border-color:#FF5500">SEE THE OPEN WORK FIRST</div>
+            <div onClick="{{ goContrib }}" tabindex="0" role="button" style="display:inline-block;margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:0.12em;color:var(--tx3);cursor:pointer;border-bottom:1px solid var(--line3);padding-bottom:3px" style-hover="color:#FF5500;border-color:#FF5500">SEE THE OPEN WORK FIRST</div>
           </div>
         </section>
       </sc-if>
@@ -551,7 +553,7 @@
 
             <div style="border-right:1px solid var(--line)">
               <sc-for list="{{ dfmSteps }}" as="s" hint-placeholder-count="5">
-                <div onClick="{{ s.onClick }}" style="padding:24px 26px;cursor:pointer;border-bottom:1px solid var(--line);border-left:2px solid {{ s.mark }};background:{{ s.bg }}" style-hover="background:var(--surf2)">
+                <div onClick="{{ s.onClick }}" tabindex="0" role="button" style="padding:24px 26px;cursor:pointer;border-bottom:1px solid var(--line);border-left:2px solid {{ s.mark }};background:{{ s.bg }}" style-hover="background:var(--surf2)">
                   <div style="display:flex;gap:16px;align-items:flex-start">
                     <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tx3);padding-top:5px;flex-shrink:0">{{ s.n }}</div>
                     <div>
@@ -641,7 +643,7 @@
 
           <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin-top:26px">
             <sc-if value="{{ isOrgSite }}" hint-placeholder-val="{{ true }}">
-              <div onClick="{{ goGuide }}" style="font-size:13.5px;font-weight:600;color:#FF5500;cursor:pointer" style-hover="color:#FF7A33">The step-by-step guide, with commands →</div>
+              <div onClick="{{ goGuide }}" tabindex="0" role="button" style="font-size:13.5px;font-weight:600;color:#FF5500;cursor:pointer" style-hover="color:#FF7A33">The step-by-step guide, with commands →</div>
             </sc-if>
             <a href="https://github.com/draykerdk" target="_blank" rel="noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--tx3)" style-hover="color:#FF5500">GITHUB.COM/DRAYKERDK →</a>
           </div>
@@ -792,7 +794,7 @@
         <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#FF5500;margin-bottom:38px">Components</div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)">
           <sc-for list="{{ dkParts }}" as="c" hint-placeholder-count="4">
-            <div onClick="{{ c.open }}" style="background:var(--surf);padding:30px 26px;display:flex;flex-direction:column;gap:12px;min-height:226px;cursor:pointer" style-hover="background:var(--surf2)">
+            <div onClick="{{ c.open }}" tabindex="0" role="button" style="background:var(--surf);padding:30px 26px;display:flex;flex-direction:column;gap:12px;min-height:226px;cursor:pointer" style-hover="background:var(--surf2)">
               <div style="font-size:21px;font-weight:600;letter-spacing:-0.02em">{{ c.name }}</div>
               <div style="font-size:15px;line-height:1.6;color:var(--tx2);flex:1">{{ c.desc }}</div>
               <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:baseline">
@@ -822,7 +824,7 @@
           <p style="font-size:clamp(16px,1.3vw,19px);line-height:1.62;color:var(--tx2);max-width:60ch;margin:0 0 34px;text-wrap:pretty">Each part below is meant to be public, replaceable and owned by nobody — the protocol, the kernel and the network, the federation, and the applications they are meant to carry. Most of them are still an argument rather than a program, and every page says which.</p>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <sc-for list="{{ ecoFilters }}" as="f" hint-placeholder-count="5">
-              <div onClick="{{ f.onClick }}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;padding:8px 13px;cursor:pointer;border:1px solid {{ f.bd }};background:{{ f.bg }};color:{{ f.fg }}">{{ f.label }}</div>
+              <div onClick="{{ f.onClick }}" tabindex="0" role="button" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;padding:8px 13px;cursor:pointer;border:1px solid {{ f.bd }};background:{{ f.bg }};color:{{ f.fg }}">{{ f.label }}</div>
             </sc-for>
           </div>
         </div>
@@ -885,7 +887,7 @@
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)">
           <sc-for list="{{ ecoCards }}" as="p" hint-placeholder-count="10">
-            <div onClick="{{ p.open }}" style="background:var(--surf);padding:28px 24px;display:flex;flex-direction:column;gap:10px;min-height:218px;cursor:pointer" style-hover="background:var(--surf2)">
+            <div onClick="{{ p.open }}" tabindex="0" role="button" style="background:var(--surf);padding:28px 24px;display:flex;flex-direction:column;gap:10px;min-height:218px;cursor:pointer" style-hover="background:var(--surf2)">
               <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--tx3)">{{ p.layerLine }}</div>
               <div style="font-size:21px;font-weight:600;letter-spacing:-0.02em;line-height:1.15">{{ p.name }}</div>
               <div style="font-size:14px;line-height:1.6;color:var(--tx2);flex:1">{{ p.desc }}</div>
@@ -910,7 +912,7 @@
             <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.16em;color:#FF5500">NO PAGE FOR THIS KEY</div>
             <h2 style="font-size:clamp(22px,2.6vw,32px);line-height:1.1;letter-spacing:-0.03em;font-weight:600;margin:0">Nothing here answers to <span style="font-family:'JetBrains Mono',monospace;font-size:0.72em;color:#FF5500">{{ ptMissingKey }}</span>.</h2>
             <p style="font-size:15px;line-height:1.66;color:var(--tx2);margin:0;text-wrap:pretty">The part may have been renamed, or the page for it has not been written yet. Every part that does have one is a click away.</p>
-            <div onClick="{{ goEco }}" style="background:#FF5500;color:#0A0A0C;padding:13px 24px;font-size:14px;font-weight:600;cursor:pointer;align-self:flex-start;margin-top:4px" style-hover="background:#FF7A33">The ecosystem</div>
+            <div onClick="{{ goEco }}" tabindex="0" role="button" style="background:#FF5500;color:#0A0A0C;padding:13px 24px;font-size:14px;font-weight:600;cursor:pointer;align-self:flex-start;margin-top:4px" style-hover="background:#FF7A33">The ecosystem</div>
           </div>
         </section>
       </sc-if>
@@ -918,7 +920,7 @@
       <sc-if value="{{ ptHas }}" hint-placeholder-val="{{ true }}">
       <div>
       <section style="max-width:1320px;margin:0 auto;padding:clamp(28px,4vw,48px) clamp(16px,4vw,44px) clamp(34px,4.5vw,58px)">
-        <div onClick="{{ goEco }}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;color:var(--tx3);cursor:pointer;margin-bottom:26px" style-hover="color:#FF5500">← ECOSYSTEM</div>
+        <div onClick="{{ goEco }}" tabindex="0" role="button" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;color:var(--tx3);cursor:pointer;margin-bottom:26px" style-hover="color:#FF5500">← ECOSYSTEM</div>
         <div style="display:flex;gap:16px;align-items:baseline;flex-wrap:wrap;margin-bottom:22px">
           <h1 style="font-size:clamp(34px,4.6vw,62px);line-height:1;letter-spacing:-0.04em;font-weight:700;margin:0">{{ ptName }}</h1>
           <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.14em;color:#FF5500">{{ ptLayerLabel }}</div>
@@ -974,7 +976,7 @@
               <sc-if value="{{ ptNeedsHas }}" hint-placeholder-val="{{ true }}">
                 <div style="display:flex;gap:8px;flex-wrap:wrap">
                   <sc-for list="{{ ptNeeds }}" as="n" hint-placeholder-count="3">
-                    <div onClick="{{ n.open }}" style="border:1px solid var(--line3);padding:9px 14px;font-size:13.5px;cursor:pointer;color:var(--tx)" style-hover="border-color:#FF5500;color:#FF5500">{{ n.label }}</div>
+                    <div onClick="{{ n.open }}" tabindex="0" role="button" style="border:1px solid var(--line3);padding:9px 14px;font-size:13.5px;cursor:pointer;color:var(--tx)" style-hover="border-color:#FF5500;color:#FF5500">{{ n.label }}</div>
                   </sc-for>
                 </div>
               </sc-if>
@@ -987,7 +989,7 @@
               <sc-if value="{{ ptUsedHas }}" hint-placeholder-val="{{ true }}">
                 <div style="display:flex;gap:8px;flex-wrap:wrap">
                   <sc-for list="{{ ptUsed }}" as="n" hint-placeholder-count="3">
-                    <div onClick="{{ n.open }}" style="border:1px solid var(--line3);padding:9px 14px;font-size:13.5px;cursor:pointer;color:var(--tx)" style-hover="border-color:#FF5500;color:#FF5500">{{ n.label }}</div>
+                    <div onClick="{{ n.open }}" tabindex="0" role="button" style="border:1px solid var(--line3);padding:9px 14px;font-size:13.5px;cursor:pointer;color:var(--tx)" style-hover="border-color:#FF5500;color:#FF5500">{{ n.label }}</div>
                   </sc-for>
                 </div>
               </sc-if>
@@ -1041,13 +1043,13 @@
             <p style="font-size:14.5px;line-height:1.62;color:var(--tx3);margin:0 0 22px;max-width:58ch;text-wrap:pretty">The parts are easier to read in order: the method first, then what it is being used to design, then how it would be governed, then what all of it is for.</p>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)">
               <sc-if value="{{ ptSeqHasPrev }}" hint-placeholder-val="{{ true }}">
-                <div onClick="{{ ptSeqPrevOpen }}" style="background:var(--bg);padding:22px 20px;cursor:pointer;display:flex;flex-direction:column;gap:7px" style-hover="background:var(--surf2)">
+                <div onClick="{{ ptSeqPrevOpen }}" tabindex="0" role="button" style="background:var(--bg);padding:22px 20px;cursor:pointer;display:flex;flex-direction:column;gap:7px" style-hover="background:var(--surf2)">
                   <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.14em;color:var(--tx3)">← BEFORE THIS</div>
                   <div style="font-size:18px;font-weight:600;letter-spacing:-0.02em">{{ ptSeqPrevName }}</div>
                 </div>
               </sc-if>
               <sc-if value="{{ ptSeqHasNext }}" hint-placeholder-val="{{ true }}">
-                <div onClick="{{ ptSeqNextOpen }}" style="background:var(--bg);padding:22px 20px;cursor:pointer;display:flex;flex-direction:column;gap:7px" style-hover="background:var(--surf2)">
+                <div onClick="{{ ptSeqNextOpen }}" tabindex="0" role="button" style="background:var(--bg);padding:22px 20px;cursor:pointer;display:flex;flex-direction:column;gap:7px" style-hover="background:var(--surf2)">
                   <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.14em;color:#FF5500">NEXT →</div>
                   <div style="font-size:18px;font-weight:600;letter-spacing:-0.02em">{{ ptSeqNextName }}</div>
                 </div>
@@ -1177,7 +1179,7 @@
           </div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">
             <sc-for list="{{ themeOptions }}" as="o" hint-placeholder-count="3">
-              <div onClick="{{ o.onClick }}" style="border:1px solid {{ o.line }};background:{{ o.bg }};padding:20px 18px;cursor:pointer;display:flex;flex-direction:column;gap:8px;min-height:132px" style-hover="border-color:#FF5500">
+              <div onClick="{{ o.onClick }}" tabindex="0" role="button" style="border:1px solid {{ o.line }};background:{{ o.bg }};padding:20px 18px;cursor:pointer;display:flex;flex-direction:column;gap:8px;min-height:132px" style-hover="border-color:#FF5500">
                 <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.16em;color:#FF5500;min-height:12px">{{ o.state }}</div>
                 <div style="font-size:17px;font-weight:600;letter-spacing:-0.015em;color:{{ o.tx }}">{{ o.label }}</div>
                 <div style="font-size:12.5px;line-height:1.5;color:var(--tx2)">{{ o.desc }}</div>
@@ -1193,7 +1195,7 @@
             <h2 style="font-size:clamp(23px,2.8vw,36px);line-height:1.08;letter-spacing:-0.03em;font-weight:600;margin:0 0 18px">Linking an autonomous unit — how it is meant to work.</h2>
             <p style="font-size:16px;line-height:1.68;color:var(--tx2);margin:0 0 16px;text-wrap:pretty">In the transitional federation experiment, a person, team or initiative can organize as an autonomous unit and link it to DAF, accumulating federative weight from delivered work rather than appointment. That weight is bounded to DAF; it is not general reputation or authority over support elsewhere.</p>
             <p style="font-size:16px;line-height:1.68;color:var(--tx2);margin:0;text-wrap:pretty">How a point is earned and how a decision is taken are now written down, as drafts open to argument. None of it is running: no unit is recorded, no point has been issued, no assembly has been held, and no contract is deployed. Until one is, a new initiative is proposed the way everything else is: in a public issue. Support is requested only where there is no other alternative; the main projects come first.</p>
-              <p style="font-size:15px;line-height:1.66;color:var(--tx2);margin:16px 0 0;text-wrap:pretty">This page is about who decides. What a delivery is worth, how it turns into standing, and how standing is meant to reach resources — including what the value layer explicitly is not — is <span onClick="{{ goEconomy }}" style="color:#FF5500;font-weight:500;cursor:pointer">on the economy page</span>.</p>
+              <p style="font-size:15px;line-height:1.66;color:var(--tx2);margin:16px 0 0;text-wrap:pretty">This page is about who decides. What a delivery is worth, how it turns into standing, and how standing is meant to reach resources — including what the value layer explicitly is not — is <span onClick="{{ goEconomy }}" tabindex="0" role="button" style="color:#FF5500;font-weight:500;cursor:pointer">on the economy page</span>.</p>
           </div>
           <div style="border-left:1px solid var(--line);padding-left:clamp(20px,3vw,40px);display:flex;flex-direction:column;gap:22px">
             <div>
@@ -1221,13 +1223,13 @@
         <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#FF5500;margin-bottom:20px">Contribute · drayker.org</div>
         <h1 style="font-size:clamp(34px,5vw,68px);line-height:0.98;letter-spacing:-0.04em;font-weight:700;margin:0 0 20px;max-width:20ch">Everything you need to start today.</h1>
         <p style="font-size:clamp(16px,1.3vw,19px);line-height:1.62;color:var(--tx2);max-width:60ch;margin:0;text-wrap:pretty">One portal for the whole collaboration: what each project is for, what it is missing, what is open on GitHub right now, which track fits you, and exactly how work travels from an issue to a merge.</p>
-          <p style="font-size:15.5px;line-height:1.66;color:var(--tx2);max-width:62ch;margin:16px 0 0;text-wrap:pretty">Reviewing, translating and writing a page count the same as code here. What the work is for is on the <span onClick="{{ goManifesto }}" style="color:#FF5500;font-weight:500;cursor:pointer">manifesto</span>; what it earns you is on the <span onClick="{{ goEconomy }}" style="color:#FF5500;font-weight:500;cursor:pointer">economy page</span>, stated plainly, including what it does not.</p>
+          <p style="font-size:15.5px;line-height:1.66;color:var(--tx2);max-width:62ch;margin:16px 0 0;text-wrap:pretty">Reviewing, translating and writing a page count the same as code here. What the work is for is on the <span onClick="{{ goManifesto }}" tabindex="0" role="button" style="color:#FF5500;font-weight:500;cursor:pointer">manifesto</span>; what it earns you is on the <span onClick="{{ goEconomy }}" tabindex="0" role="button" style="color:#FF5500;font-weight:500;cursor:pointer">economy page</span>, stated plainly, including what it does not.</p>
       </section>
 
       <div style="position:sticky;top:{{ subTop }};z-index:40;background:var(--hdr);backdrop-filter:blur(14px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
         <div style="max-width:1320px;margin:0 auto;padding:0 clamp(16px,4vw,44px);display:flex;gap:clamp(4px,1.4vw,18px);overflow-x:auto;scrollbar-width:none">
           <sc-for list="{{ contribTabs }}" as="t" hint-placeholder-count="5">
-            <div onClick="{{ t.onClick }}" style="display:flex;align-items:center;gap:8px;padding:14px 10px;cursor:pointer;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:{{ t.color }};border-bottom:2px solid {{ t.line }};background:{{ t.bg }}" style-hover="color:var(--tx)">
+            <div onClick="{{ t.onClick }}" tabindex="0" role="button" style="display:flex;align-items:center;gap:8px;padding:14px 10px;cursor:pointer;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:{{ t.color }};border-bottom:2px solid {{ t.line }};background:{{ t.bg }}" style-hover="color:var(--tx)">
               <span>{{ t.label }}</span>
               <span style="font-size:10px;color:var(--tx3)">{{ t.count }}</span>
             </div>
@@ -1240,7 +1242,7 @@
         <section style="border-bottom:1px solid var(--line)">
           <div style="max-width:1320px;margin:0 auto;padding:clamp(22px,3vw,30px) clamp(16px,4vw,44px);display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap">
             <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;color:var(--tx3)">{{ ghLabel }}</div>
-            <div onClick="{{ refreshGH }}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;color:var(--tx3);border:1px solid var(--line2);padding:7px 12px;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">REFRESH</div>
+            <div onClick="{{ refreshGH }}" tabindex="0" role="button" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;color:var(--tx3);border:1px solid var(--line2);padding:7px 12px;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">REFRESH</div>
           </div>
           <div style="max-width:1320px;margin:0 auto;padding:0 clamp(16px,4vw,44px) clamp(30px,4vw,44px)">
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)">
@@ -1259,7 +1261,7 @@
           <p style="font-size:15px;line-height:1.6;color:var(--tx2);margin:0 0 30px;max-width:56ch">You do not need to know the whole system to contribute to it — that is the entire point of the protocol.</p>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)">
             <sc-for list="{{ entrySteps }}" as="e" hint-placeholder-count="3">
-              <div onClick="{{ e.go }}" style="background:var(--surf);padding:30px 26px;display:flex;flex-direction:column;gap:12px;min-height:212px;cursor:pointer" style-hover="background:var(--surf2)">
+              <div onClick="{{ e.go }}" tabindex="0" role="button" style="background:var(--surf);padding:30px 26px;display:flex;flex-direction:column;gap:12px;min-height:212px;cursor:pointer" style-hover="background:var(--surf2)">
                 <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#FF5500;letter-spacing:0.14em">{{ e.n }}</div>
                 <div style="font-size:22px;font-weight:600;letter-spacing:-0.02em">{{ e.t }}</div>
                 <div style="font-size:14.5px;line-height:1.6;color:var(--tx2);flex:1">{{ e.d }}</div>
@@ -1297,7 +1299,7 @@
             <div>
               <h2 style="font-size:clamp(21px,2.4vw,30px);line-height:1.12;letter-spacing:-0.03em;font-weight:600;margin:0 0 14px">How work travels here.</h2>
               <p style="font-size:15px;line-height:1.66;color:var(--tx2);margin:0 0 22px;max-width:46ch;text-wrap:pretty">Issue → claim → fork and branch → pull request to master → checks and discussion → merge. Six steps, written out with the exact commands.</p>
-              <div onClick="{{ goGuide }}" style="display:inline-block;border:1px solid var(--line3);color:var(--tx);padding:13px 22px;font-size:14px;font-weight:500;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">Read the contribution guide</div>
+              <div onClick="{{ goGuide }}" tabindex="0" role="button" style="display:inline-block;border:1px solid var(--line3);color:var(--tx);padding:13px 22px;font-size:14px;font-weight:500;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">Read the contribution guide</div>
             </div>
             <div style="display:flex;flex-direction:column;gap:12px">
               <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--tx3)">WHERE WE WORK TODAY</div>
@@ -1331,7 +1333,7 @@
                     </div>
                   </sc-for>
                 </div>
-                <div onClick="{{ t.onClick }}" style="font-size:13px;font-weight:600;color:#FF5500;cursor:pointer" style-hover="color:#FF7A33">Open functions in this track →</div>
+                <div onClick="{{ t.onClick }}" tabindex="0" role="button" style="font-size:13px;font-weight:600;color:#FF5500;cursor:pointer" style-hover="color:#FF7A33">Open functions in this track →</div>
               </div>
             </sc-for>
           </div>
@@ -1345,7 +1347,7 @@
           <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;color:var(--tx3);margin-bottom:28px">{{ ghLabel }}</div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)">
             <sc-for list="{{ projCards }}" as="c" hint-placeholder-count="9">
-              <div onClick="{{ c.open }}" style="background:var(--surf);padding:28px 26px;display:flex;flex-direction:column;gap:13px;min-height:268px;cursor:pointer" style-hover="background:var(--surf2)">
+              <div onClick="{{ c.open }}" tabindex="0" role="button" style="background:var(--surf);padding:28px 26px;display:flex;flex-direction:column;gap:13px;min-height:268px;cursor:pointer" style-hover="background:var(--surf2)">
                 <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--tx3)">{{ c.layer }}</div>
                 <div style="font-size:24px;font-weight:700;letter-spacing:-0.03em">{{ c.name }}</div>
                 <div style="font-size:14.5px;line-height:1.58;color:var(--tx2);flex:1">{{ c.tagline }}</div>
@@ -1371,7 +1373,7 @@
             <p style="font-size:15px;line-height:1.6;color:var(--tx2);margin:0 0 24px;max-width:58ch;text-wrap:pretty">These are parts the system is designed around whose public description is still to be written. There is nothing to fork — which is exactly why the first page, the first model or the first honest objection counts as much here as code does anywhere else.</p>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)">
               <sc-for list="{{ conceptCards }}" as="c" hint-placeholder-count="3">
-                <div onClick="{{ c.open }}" style="background:var(--surf);padding:28px 26px;display:flex;flex-direction:column;gap:12px;min-height:210px;cursor:pointer" style-hover="background:var(--surf2)">
+                <div onClick="{{ c.open }}" tabindex="0" role="button" style="background:var(--surf);padding:28px 26px;display:flex;flex-direction:column;gap:12px;min-height:210px;cursor:pointer" style-hover="background:var(--surf2)">
                   <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--tx3)">{{ c.layer }} · NO REPOSITORY</div>
                   <div style="font-size:22px;font-weight:600;letter-spacing:-0.025em;line-height:1.15">{{ c.name }}</div>
                   <div style="font-size:14.5px;line-height:1.58;color:var(--tx2);flex:1">{{ c.tagline }}</div>
@@ -1390,7 +1392,7 @@
             <h2 style="font-size:clamp(22px,2.6vw,32px);line-height:1.1;letter-spacing:-0.03em;font-weight:600;margin:0">Nothing here answers to <span style="font-family:'JetBrains Mono',monospace;font-size:0.72em;color:#FF5500">{{ missingKey }}</span>.</h2>
             <p style="font-size:15px;line-height:1.66;color:var(--tx2);margin:0;text-wrap:pretty">The project may have been renamed, or the page for it has not been written yet — writing one is itself an open function. Every project that does have a page is one click away.</p>
             <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:4px">
-              <div onClick="{{ goProjects }}" style="background:#FF5500;color:#0A0A0C;padding:13px 24px;font-size:14px;font-weight:600;cursor:pointer" style-hover="background:#FF7A33">All projects</div>
+              <div onClick="{{ goProjects }}" tabindex="0" role="button" style="background:#FF5500;color:#0A0A0C;padding:13px 24px;font-size:14px;font-weight:600;cursor:pointer" style-hover="background:#FF7A33">All projects</div>
               <a href="https://github.com/draykerdk" target="_blank" rel="noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;color:var(--tx3)" style-hover="color:#FF5500">GITHUB.COM/DRAYKERDK →</a>
             </div>
           </div>
@@ -1400,7 +1402,7 @@
       <sc-if value="{{ cProject }}" hint-placeholder-val="{{ false }}">
         <div>
         <section style="max-width:1320px;margin:0 auto;padding:clamp(28px,4vw,48px) clamp(16px,4vw,44px) clamp(24px,3vw,36px)">
-          <div onClick="{{ backToProjects }}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;color:var(--tx3);cursor:pointer;margin-bottom:26px" style-hover="color:#FF5500">{{ backProjectLabel }}</div>
+          <div onClick="{{ backToProjects }}" tabindex="0" role="button" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;color:var(--tx3);cursor:pointer;margin-bottom:26px" style-hover="color:#FF5500">{{ backProjectLabel }}</div>
           <div style="display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;margin-bottom:18px">
             <h1 style="font-size:clamp(34px,4.6vw,62px);line-height:1;letter-spacing:-0.04em;font-weight:700;margin:0">{{ pd.name }}</h1>
             <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.14em;color:#FF5500">{{ pd.layer }}</div>
@@ -1426,8 +1428,8 @@
           <div style="max-width:1320px;margin:0 auto;padding:clamp(26px,3.6vw,44px) clamp(16px,4vw,44px) clamp(30px,4vw,52px)">
             <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:clamp(24px,3.2vw,38px)">
               <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;padding:9px 14px;border:1px solid #FF5500;background:#FF5500;color:var(--bg)">01 IN ONE SENTENCE</div>
-              <div onClick="{{ toggleT2 }}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;padding:9px 14px;cursor:pointer;border:1px solid {{ t2Bd }};color:{{ t2Fg }}" style-hover="border-color:#FF5500;color:#FF5500">{{ t2Label }}</div>
-              <div onClick="{{ toggleT3 }}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;padding:9px 14px;cursor:pointer;border:1px solid {{ t3Bd }};color:{{ t3Fg }}" style-hover="border-color:#FF5500;color:#FF5500">{{ t3Label }}</div>
+              <div onClick="{{ toggleT2 }}" tabindex="0" role="button" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;padding:9px 14px;cursor:pointer;border:1px solid {{ t2Bd }};color:{{ t2Fg }}" style-hover="border-color:#FF5500;color:#FF5500">{{ t2Label }}</div>
+              <div onClick="{{ toggleT3 }}" tabindex="0" role="button" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;padding:9px 14px;cursor:pointer;border:1px solid {{ t3Bd }};color:{{ t3Fg }}" style-hover="border-color:#FF5500;color:#FF5500">{{ t3Label }}</div>
               <sc-if value="{{ trailHas }}" hint-placeholder-val="{{ true }}">
                 <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--tx3);margin-left:auto">{{ trailPos }}</div>
               </sc-if>
@@ -1515,7 +1517,7 @@
                   <div style="font-size:16px;font-weight:600;letter-spacing:-0.02em;line-height:1.15">{{ mapCentre }}</div>
                 </div>
                 <sc-for list="{{ mapNodes }}" as="n" hint-placeholder-count="4">
-                  <div onClick="{{ n.open }}" style="position:absolute;left:{{ n.x }}%;top:{{ n.y }}%;transform:translate(-50%,-50%);background:var(--surf);border:1px solid var(--line3);padding:11px 15px;cursor:pointer;text-align:center;max-width:160px" style-hover="border-color:#FF5500">
+                  <div onClick="{{ n.open }}" tabindex="0" role="button" style="position:absolute;left:{{ n.x }}%;top:{{ n.y }}%;transform:translate(-50%,-50%);background:var(--surf);border:1px solid var(--line3);padding:11px 15px;cursor:pointer;text-align:center;max-width:160px" style-hover="border-color:#FF5500">
                     <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.14em;color:{{ n.fg }};margin-bottom:4px">{{ n.dir }}</div>
                     <div style="font-size:13.5px;font-weight:500;letter-spacing:-0.01em;line-height:1.2">{{ n.name }}</div>
                   </div>
@@ -1573,7 +1575,7 @@
                   <sc-if value="{{ pcHasDeps }}" hint-placeholder-val="{{ true }}">
                     <div style="display:flex;gap:8px;flex-wrap:wrap">
                       <sc-for list="{{ pcDeps }}" as="d" hint-placeholder-count="3">
-                        <div onClick="{{ d.open }}" style="border:1px solid var(--line3);padding:9px 14px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;color:var(--tx);cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">{{ d.label }}</div>
+                        <div onClick="{{ d.open }}" tabindex="0" role="button" style="border:1px solid var(--line3);padding:9px 14px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;color:var(--tx);cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">{{ d.label }}</div>
                       </sc-for>
                     </div>
                   </sc-if>
@@ -1634,7 +1636,7 @@
                 <div data-focus="arch" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.16em;color:#FF5500;margin-bottom:16px">ARCHITECTURE</div>
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)">
                   <sc-for list="{{ pdArch }}" as="a" hint-placeholder-count="4">
-                    <div onClick="{{ a.toggle }}" style="background:var(--bg);padding:20px 18px;min-height:76px;display:flex;flex-direction:column;gap:10px;cursor:pointer" style-hover="background:var(--surf2)">
+                    <div onClick="{{ a.toggle }}" tabindex="0" role="button" style="background:var(--bg);padding:20px 18px;min-height:76px;display:flex;flex-direction:column;gap:10px;cursor:pointer" style-hover="background:var(--surf2)">
                       <div style="display:flex;gap:12px;align-items:baseline;justify-content:space-between">
                         <div style="font-size:14px;line-height:1.5;color:var(--tx2)">{{ a.t }}</div>
                         <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#FF5500;flex-shrink:0">{{ a.mark }}</div>
@@ -1654,7 +1656,7 @@
                       <div style="border-left:1px solid var(--line3);padding-left:16px;font-size:15px;line-height:1.6;color:var(--tx2)">{{ c }}</div>
                     </sc-for>
                   </div>
-                  <div onClick="{{ goGuide }}" style="display:inline-block;margin-top:22px;font-size:13.5px;font-weight:600;color:#FF5500;cursor:pointer" style-hover="color:#FF7A33">How to claim and deliver →</div>
+                  <div onClick="{{ goGuide }}" tabindex="0" role="button" style="display:inline-block;margin-top:22px;font-size:13.5px;font-weight:600;color:#FF5500;cursor:pointer" style-hover="color:#FF7A33">How to claim and deliver →</div>
                 </div>
               </sc-if>
             </div>
@@ -1691,18 +1693,18 @@
               <p style="font-size:14.5px;line-height:1.62;color:var(--tx3);margin:0 0 22px;max-width:58ch;text-wrap:pretty">The twenty-five pages have a suggested order — the method first, then what it is being used to design, then how that would be governed, then the public surfaces. You can leave the trail at any point.</p>
               <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)">
                 <sc-if value="{{ trailHasPrev }}" hint-placeholder-val="{{ true }}">
-                  <div onClick="{{ trailPrevOpen }}" style="background:var(--bg);padding:22px 20px;cursor:pointer;display:flex;flex-direction:column;gap:7px" style-hover="background:var(--surf2)">
+                  <div onClick="{{ trailPrevOpen }}" tabindex="0" role="button" style="background:var(--bg);padding:22px 20px;cursor:pointer;display:flex;flex-direction:column;gap:7px" style-hover="background:var(--surf2)">
                     <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.14em;color:var(--tx3)">← BEFORE THIS</div>
                     <div style="font-size:18px;font-weight:600;letter-spacing:-0.02em">{{ trailPrevName }}</div>
                   </div>
                 </sc-if>
                 <sc-if value="{{ trailHasNext }}" hint-placeholder-val="{{ true }}">
-                  <div onClick="{{ trailNextOpen }}" style="background:var(--bg);padding:22px 20px;cursor:pointer;display:flex;flex-direction:column;gap:7px" style-hover="background:var(--surf2)">
+                  <div onClick="{{ trailNextOpen }}" tabindex="0" role="button" style="background:var(--bg);padding:22px 20px;cursor:pointer;display:flex;flex-direction:column;gap:7px" style-hover="background:var(--surf2)">
                     <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.14em;color:#FF5500">NEXT ON THE TRAIL →</div>
                     <div style="font-size:18px;font-weight:600;letter-spacing:-0.02em">{{ trailNextName }}</div>
                   </div>
                 </sc-if>
-                <div onClick="{{ goProjects }}" style="background:var(--bg);padding:22px 20px;cursor:pointer;display:flex;flex-direction:column;gap:7px" style-hover="background:var(--surf2)">
+                <div onClick="{{ goProjects }}" tabindex="0" role="button" style="background:var(--bg);padding:22px 20px;cursor:pointer;display:flex;flex-direction:column;gap:7px" style-hover="background:var(--surf2)">
                   <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.14em;color:var(--tx3)">OR LEAVE IT</div>
                   <div style="font-size:18px;font-weight:600;letter-spacing:-0.02em">All twenty-five components</div>
                 </div>
@@ -1721,12 +1723,12 @@
           <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.12em;color:var(--tx3);margin-bottom:26px">{{ ghLabel }}</div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
             <sc-for list="{{ trackFilters }}" as="f" hint-placeholder-count="8">
-              <div onClick="{{ f.onClick }}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;padding:8px 13px;cursor:pointer;border:1px solid {{ f.bd }};background:{{ f.bg }};color:{{ f.fg }}">{{ f.label }}</div>
+              <div onClick="{{ f.onClick }}" tabindex="0" role="button" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;padding:8px 13px;cursor:pointer;border:1px solid {{ f.bd }};background:{{ f.bg }};color:{{ f.fg }}">{{ f.label }}</div>
             </sc-for>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <sc-for list="{{ lvlFilters }}" as="f" hint-placeholder-count="3">
-              <div onClick="{{ f.onClick }}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;padding:8px 13px;cursor:pointer;border:1px solid {{ f.bd }};background:{{ f.bg }};color:{{ f.fg }}">{{ f.label }}</div>
+              <div onClick="{{ f.onClick }}" tabindex="0" role="button" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;padding:8px 13px;cursor:pointer;border:1px solid {{ f.bd }};background:{{ f.bg }};color:{{ f.fg }}">{{ f.label }}</div>
             </sc-for>
           </div>
         </section>
@@ -1754,13 +1756,13 @@
               <div style="font-size:clamp(20px,2.4vw,28px);font-weight:600;letter-spacing:-0.03em;line-height:1.12">{{ fnEmptyTitle }}</div>
               <p style="font-size:15px;line-height:1.66;color:var(--tx2);margin:0;text-wrap:pretty">{{ fnEmptyLabel }}</p>
               <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-top:4px">
-                <div onClick="{{ goProjects }}" style="background:#FF5500;color:#0A0A0C;padding:13px 24px;font-size:14px;font-weight:600;cursor:pointer" style-hover="background:#FF7A33">See what each project is missing</div>
+                <div onClick="{{ goProjects }}" tabindex="0" role="button" style="background:#FF5500;color:#0A0A0C;padding:13px 24px;font-size:14px;font-weight:600;cursor:pointer" style-hover="background:#FF7A33">See what each project is missing</div>
                 <a href="https://github.com/search?q=org%3Adraykerdk+is%3Aissue+is%3Aopen&amp;type=issues" target="_blank" rel="noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.1em;color:var(--tx3)" style-hover="color:#FF5500">ALL ISSUES ON GITHUB →</a>
               </div>
             </div>
           </sc-if>
           <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin-top:20px">
-            <div onClick="{{ goGuide }}" style="font-size:13.5px;font-weight:600;color:#FF5500;cursor:pointer" style-hover="color:#FF7A33">How to claim a function →</div>
+            <div onClick="{{ goGuide }}" tabindex="0" role="button" style="font-size:13.5px;font-weight:600;color:#FF5500;cursor:pointer" style-hover="color:#FF7A33">How to claim a function →</div>
             <a href="https://github.com/draykerdk" target="_blank" rel="noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--tx3);letter-spacing:0.08em" style-hover="color:#FF5500">ALL ISSUES ON GITHUB →</a>
           </div>
         </section>
@@ -1831,7 +1833,7 @@
             </div>
             <div style="display:flex;gap:12px;flex-wrap:wrap">
             <a href="{{ joinUrl }}" onClick="{{ goJoin }}" style="background:#FF5500;color:#0A0A0C;padding:16px 28px;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 0 24px rgba(255,85,0,0.25)" style-hover="background:#FF7A33;box-shadow:0 0 36px rgba(255,85,0,0.4)">Volunteer</a>
-              <div onClick="{{ goTracks }}" style="border:1px solid var(--line3);color:var(--tx);padding:16px 28px;font-size:14px;font-weight:500;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">Compare the tracks</div>
+              <div onClick="{{ goTracks }}" tabindex="0" role="button" style="border:1px solid var(--line3);color:var(--tx);padding:16px 28px;font-size:14px;font-weight:500;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">Compare the tracks</div>
             </div>
           </div>
         </section>
@@ -1883,8 +1885,8 @@
               <p style="font-size:15px;line-height:1.66;color:var(--tx2);margin:0 0 14px;text-wrap:pretty">Any future instrument must preserve provenance, purpose, permissions and review without becoming a route to buy member status, reputation, voting weight or scarce-capacity priority.</p>
               <p style="font-size:15px;line-height:1.66;color:var(--tx2);margin:0;text-wrap:pretty">Today none of it operates. Nothing is issued, priced or for sale, and holding anything would entitle you to nothing. Dktron is one designed unitary form for non-deterministic resource distribution, possible external-market currency use and conversion of worldwide donations into one Drayker unit. Its stabilization and economic mechanisms remain to be specified and validated.</p>
             </div>
-            <div onClick="{{ econOpenValue }}" style="display:inline-block;font-size:13.5px;color:#FF5500;font-weight:600;cursor:pointer;margin-right:18px" style-hover="color:#FF7A33">The value unit, as a component →</div>
-            <div onClick="{{ econOpenDaf }}" style="display:inline-block;font-size:13.5px;color:#FF5500;font-weight:600;cursor:pointer" style-hover="color:#FF7A33">Federative points in the DAF →</div>
+            <div onClick="{{ econOpenValue }}" tabindex="0" role="button" style="display:inline-block;font-size:13.5px;color:#FF5500;font-weight:600;cursor:pointer;margin-right:18px" style-hover="color:#FF7A33">The value unit, as a component →</div>
+            <div onClick="{{ econOpenDaf }}" tabindex="0" role="button" style="display:inline-block;font-size:13.5px;color:#FF5500;font-weight:600;cursor:pointer" style-hover="color:#FF7A33">Federative points in the DAF →</div>
           </div>
         </div>
       </section>
@@ -1957,7 +1959,7 @@
             </sc-for>
           </div>
           <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:28px">
-            <div onClick="{{ econOpenStations }}" style="border:1px solid var(--line3);color:var(--tx);padding:14px 26px;font-size:13.5px;font-weight:500;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">Where resources become places →</div>
+            <div onClick="{{ econOpenStations }}" tabindex="0" role="button" style="border:1px solid var(--line3);color:var(--tx);padding:14px 26px;font-size:13.5px;font-weight:500;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">Where resources become places →</div>
             <a href="{{ partnershipsUrl }}" onClick="{{ goPartnerships }}" style="border:1px solid var(--line3);color:var(--tx);padding:14px 26px;font-size:13.5px;font-weight:500;cursor:pointer" style-hover="border-color:#FF5500;color:#FF5500">How funding actually works today →</a>
           </div>
         </div>
@@ -1980,12 +1982,12 @@
           <p style="font-size:16px;line-height:1.68;color:var(--tx2);margin:0 0 28px;max-width:64ch;text-wrap:pretty">The system has its own words, and using them without defining them is how a reader gets lost. Open any term: the definition says what it means and, where the specification is still missing, says that too.</p>
           <div style="display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px">
             <sc-for list="{{ glossary }}" as="g" hint-placeholder-count="18">
-              <div onClick="{{ g.pick }}" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;padding:9px 13px;cursor:pointer;border:1px solid var(--line2);background:{{ g.bg }};color:{{ g.fg }}" style-hover="border-color:#FF5500;color:#FF5500">{{ g.t }}</div>
+              <div onClick="{{ g.pick }}" tabindex="0" role="button" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.06em;padding:9px 13px;cursor:pointer;border:1px solid var(--line2);background:{{ g.bg }};color:{{ g.fg }}" style-hover="border-color:#FF5500;color:#FF5500">{{ g.t }}</div>
             </sc-for>
           </div>
           <div style="display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line)">
             <sc-for list="{{ glossary }}" as="g" hint-placeholder-count="18">
-              <div onClick="{{ g.pick }}" style="background:{{ g.bg }};padding:18px clamp(18px,2.4vw,26px);cursor:pointer;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px" style-hover="background:var(--surf2)">
+              <div onClick="{{ g.pick }}" tabindex="0" role="button" style="background:{{ g.bg }};padding:18px clamp(18px,2.4vw,26px);cursor:pointer;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px" style-hover="background:var(--surf2)">
                 <div style="display:flex;flex-direction:column;gap:5px">
                   <div style="font-size:18px;font-weight:600;letter-spacing:-0.02em">{{ g.t }}</div>
                   <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--tx3)">{{ g.x }}</div>
@@ -2028,7 +2030,7 @@
               <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--tx3)">PER REPOSITORY</div>
               <div style="font-size:19px;font-weight:600;letter-spacing:-0.02em">The contract, not the prose</div>
               <div style="font-size:14px;line-height:1.6;color:var(--tx2);flex:1">Each repository declares its own boundaries in <span style="font-family:'JetBrains Mono',monospace;font-size:0.86em">.drayker/component.yml</span> — scope, non-scope, evidence, risks, review date — and a pull request that breaks the declaration does not pass. Every project page here shows it.</div>
-              <div onClick="{{ goProjects }}" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.08em;color:#FF5500;cursor:pointer" style-hover="color:#FF7A33">SEE THE COMPONENTS →</div>
+              <div onClick="{{ goProjects }}" tabindex="0" role="button" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.08em;color:#FF5500;cursor:pointer" style-hover="color:#FF7A33">SEE THE COMPONENTS →</div>
             </div>
           </div>
         </div>
@@ -2121,18 +2123,18 @@
             <div style="background:var(--bg);padding:24px 22px;display:flex;flex-direction:column;gap:9px">
               <div style="font-size:16px;font-weight:600;letter-spacing:-0.02em">The phases, by component</div>
               <div style="font-size:13.5px;line-height:1.65;color:var(--tx2);display:flex;flex-direction:column;gap:6px">
-                <span onClick="{{ openProjB }}" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">BSDK — the super equation</span>
-                <span onClick="{{ openProjMeta }}" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">Meta DFM — the researcher</span>
-                <span onClick="{{ openProjDk }}" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">Dk — the intelligence</span>
-                <span onClick="{{ openProjPap }}" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">PAP — the platform</span>
+                <span onClick="{{ openProjB }}" tabindex="0" role="button" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">BSDK — the super equation</span>
+                <span onClick="{{ openProjMeta }}" tabindex="0" role="button" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">Meta DFM — the researcher</span>
+                <span onClick="{{ openProjDk }}" tabindex="0" role="button" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">Dk — the intelligence</span>
+                <span onClick="{{ openProjPap }}" tabindex="0" role="button" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">PAP — the platform</span>
               </div>
             </div>
             <div style="background:var(--bg);padding:24px 22px;display:flex;flex-direction:column;gap:9px">
               <div style="font-size:16px;font-weight:600;letter-spacing:-0.02em">Related pages</div>
               <div style="font-size:13.5px;line-height:1.65;color:var(--tx2);display:flex;flex-direction:column;gap:6px">
-                <span onClick="{{ goEco }}" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">Ecosystem — every part, one by one</span>
-                <span onClick="{{ goManifesto }}" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">The manifesto</span>
-                <span onClick="{{ goEconomy }}" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">Economy &amp; reputation</span>
+                <span onClick="{{ goEco }}" tabindex="0" role="button" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">Ecosystem — every part, one by one</span>
+                <span onClick="{{ goManifesto }}" tabindex="0" role="button" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">The manifesto</span>
+                <span onClick="{{ goEconomy }}" tabindex="0" role="button" style="color:var(--tx);cursor:pointer" style-hover="color:#FF5500">Economy &amp; reputation</span>
               </div>
             </div>
           </div>
@@ -2186,7 +2188,7 @@
           <p style="font-size:15.5px;line-height:1.66;color:var(--tx2);margin:0 0 32px;max-width:58ch;text-wrap:pretty">Pick the one that describes what you are offering — it becomes the title of the public proposal you open at the end of this page.</p>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)">
             <sc-for list="{{ partnerWays }}" as="w" hint-placeholder-count="6">
-              <div onClick="{{ w.onClick }}" style="background:{{ w.bg }};padding:28px 24px;display:flex;flex-direction:column;gap:11px;min-height:216px;cursor:pointer;border-left:2px solid {{ w.mark }}" style-hover="background:var(--surf2)">
+              <div onClick="{{ w.onClick }}" tabindex="0" role="button" style="background:{{ w.bg }};padding:28px 24px;display:flex;flex-direction:column;gap:11px;min-height:216px;cursor:pointer;border-left:2px solid {{ w.mark }}" style-hover="background:var(--surf2)">
                 <div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline">
                   <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--tx3)">{{ w.label }}</div>
                   <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.16em;color:#FF5500;min-height:11px">{{ w.state }}</div>
@@ -2258,7 +2260,7 @@
                 </sc-for>
               </div>
             </div>
-            <div onClick="{{ openPartnership }}" style="background:#FF5500;color:#0A0A0C;padding:16px;font-size:14px;font-weight:600;cursor:pointer;text-align:center;opacity:{{ partnerOp }};box-shadow:0 0 24px rgba(255,85,0,0.25)" style-hover="background:#FF7A33;box-shadow:0 0 36px rgba(255,85,0,0.4)">Open a partnership proposal</div>
+            <div onClick="{{ openPartnership }}" tabindex="0" role="button" style="background:#FF5500;color:#0A0A0C;padding:16px;font-size:14px;font-weight:600;cursor:pointer;text-align:center;opacity:{{ partnerOp }};box-shadow:0 0 24px rgba(255,85,0,0.25)" style-hover="background:#FF7A33;box-shadow:0 0 36px rgba(255,85,0,0.4)">Open a partnership proposal</div>
             <sc-if value="{{ partnerOpened }}" hint-placeholder-val="{{ false }}">
               <div style="border-top:1px solid var(--line2);padding-top:16px;display:flex;flex-direction:column;gap:8px">
                 <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.16em;color:#FF5500">OPENED ON GITHUB</div>
@@ -2303,7 +2305,7 @@
             </div>
             <div style="display:flex;flex-direction:column;gap:10px">
               <sc-for list="{{ jOpts }}" as="o" hint-placeholder-count="4">
-                <div onClick="{{ o.onClick }}" style="display:flex;gap:16px;align-items:flex-start;border:1px solid {{ o.bd }};background:{{ o.bg }};padding:18px 20px;cursor:pointer" style-hover="border-color:#FF5500">
+                <div onClick="{{ o.onClick }}" tabindex="0" role="button" style="display:flex;gap:16px;align-items:flex-start;border:1px solid {{ o.bd }};background:{{ o.bg }};padding:18px 20px;cursor:pointer" style-hover="border-color:#FF5500">
                   <span style="width:9px;height:9px;border-radius:50%;background:{{ o.mark }};border:1px solid {{ o.bd }};flex-shrink:0;margin-top:6px"></span>
                   <span style="display:flex;flex-direction:column;gap:5px">
                     <span style="font-size:16px;font-weight:500;letter-spacing:-0.01em;color:{{ o.fg }}">{{ o.label }}</span>
@@ -2313,11 +2315,11 @@
               </sc-for>
             </div>
             <div style="display:flex;gap:12px;align-items:center;margin-top:26px;flex-wrap:wrap">
-              <div onClick="{{ jNext }}" style="background:#FF5500;color:#0A0A0C;padding:15px 28px;font-size:14px;font-weight:600;cursor:pointer;opacity:{{ jNextOp }};box-shadow:0 0 24px rgba(255,85,0,0.25)" style-hover="background:#FF7A33">{{ jNextLabel }}</div>
+              <div onClick="{{ jNext }}" tabindex="0" role="button" style="background:#FF5500;color:#0A0A0C;padding:15px 28px;font-size:14px;font-weight:600;cursor:pointer;opacity:{{ jNextOp }};box-shadow:0 0 24px rgba(255,85,0,0.25)" style-hover="background:#FF7A33">{{ jNextLabel }}</div>
               <sc-if value="{{ jBackShow }}" hint-placeholder-val="{{ false }}">
-                <div onClick="{{ jBack }}" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:var(--tx3);cursor:pointer;padding:15px 8px" style-hover="color:#FF5500">← BACK</div>
+                <div onClick="{{ jBack }}" tabindex="0" role="button" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:var(--tx3);cursor:pointer;padding:15px 8px" style-hover="color:#FF5500">← BACK</div>
               </sc-if>
-              <div onClick="{{ goFn }}" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:var(--tx3);cursor:pointer;padding:15px 8px;margin-left:auto" style-hover="color:#FF5500">SKIP TO THE BOARD</div>
+              <div onClick="{{ goFn }}" tabindex="0" role="button" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:var(--tx3);cursor:pointer;padding:15px 8px;margin-left:auto" style-hover="color:#FF5500">SKIP TO THE BOARD</div>
             </div>
           </div>
         </section>
@@ -2353,7 +2355,7 @@
           <p style="font-size:15px;line-height:1.6;color:var(--tx2);margin:0 0 22px;max-width:54ch">Each one names, on its own page, exactly what is missing from it. That is where a first contribution lands easiest.</p>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)">
             <sc-for list="{{ resProjects }}" as="p" hint-placeholder-count="3">
-              <div onClick="{{ p.open }}" style="background:var(--surf);padding:28px 24px;display:flex;flex-direction:column;gap:11px;min-height:230px;cursor:pointer" style-hover="background:var(--surf2)">
+              <div onClick="{{ p.open }}" tabindex="0" role="button" style="background:var(--surf);padding:28px 24px;display:flex;flex-direction:column;gap:11px;min-height:230px;cursor:pointer" style-hover="background:var(--surf2)">
                 <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--tx3)">{{ p.layer }}</div>
                 <div style="font-size:23px;font-weight:700;letter-spacing:-0.03em">{{ p.name }}</div>
                 <div style="font-size:14.5px;line-height:1.55;color:var(--tx2)">{{ p.tagline }}</div>
@@ -2386,8 +2388,8 @@
               <p style="font-size:15px;line-height:1.66;color:var(--tx2);margin:0;max-width:54ch;text-wrap:pretty">Nothing is open in this track at this exact moment — which is itself an opening. Take one of the gaps above and open the issue yourself; a well-modelled issue is how every function on the board started.</p>
             </sc-if>
             <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin-top:18px">
-              <div onClick="{{ goFn }}" style="font-size:13.5px;font-weight:600;color:#FF5500;cursor:pointer" style-hover="color:#FF7A33">See the whole board →</div>
-              <div onClick="{{ goGuide }}" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--tx3);cursor:pointer" style-hover="color:#FF5500">HOW TO CLAIM ONE →</div>
+              <div onClick="{{ goFn }}" tabindex="0" role="button" style="font-size:13.5px;font-weight:600;color:#FF5500;cursor:pointer" style-hover="color:#FF7A33">See the whole board →</div>
+              <div onClick="{{ goGuide }}" tabindex="0" role="button" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em;color:var(--tx3);cursor:pointer" style-hover="color:#FF5500">HOW TO CLAIM ONE →</div>
             </div>
           </div>
         </section>
@@ -2406,7 +2408,7 @@
                   </div>
                   <div style="grid-column:span 2;display:flex;gap:8px;flex-wrap:wrap;align-content:flex-start">
                     <sc-for list="{{ row.nodes }}" as="n" hint-placeholder-count="3">
-                      <div onClick="{{ n.open }}" style="border:1px solid {{ n.bd }};background:{{ n.bg }};padding:11px 14px;cursor:pointer;display:flex;flex-direction:column;gap:4px;min-width:150px" style-hover="border-color:#FF5500">
+                      <div onClick="{{ n.open }}" tabindex="0" role="button" style="border:1px solid {{ n.bd }};background:{{ n.bg }};padding:11px 14px;cursor:pointer;display:flex;flex-direction:column;gap:4px;min-width:150px" style-hover="border-color:#FF5500">
                         <div style="font-size:14.5px;font-weight:500;letter-spacing:-0.01em;color:{{ n.fg }}">{{ n.name }}</div>
                         <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.14em;color:#FF5500;min-height:11px">{{ n.tag }}</div>
                       </div>
@@ -2425,7 +2427,7 @@
               <h2 style="font-size:clamp(21px,2.4vw,30px);line-height:1.12;letter-spacing:-0.03em;font-weight:600;margin:0 0 14px">Introduce yourself in the open.</h2>
               <p style="font-size:15px;line-height:1.66;color:var(--tx2);margin:0 0 14px;max-width:44ch;text-wrap:pretty">Optional — everything above is already yours to take, and nobody has to approve you. But an introduction is how people in your track find you, and it is the fastest way to get a first function cut with someone.</p>
               <p style="font-size:14px;line-height:1.66;color:var(--tx3);margin:0 0 20px;max-width:44ch;text-wrap:pretty">This page sends nothing and asks for no email. It writes a public GitHub issue from your answers, opens it in a new tab, and leaves publishing entirely to you.</p>
-              <div onClick="{{ jRestart }}" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:var(--tx3);cursor:pointer" style-hover="color:#FF5500">↺ START THE PATH OVER</div>
+              <div onClick="{{ jRestart }}" tabindex="0" role="button" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;color:var(--tx3);cursor:pointer" style-hover="color:#FF5500">↺ START THE PATH OVER</div>
             </div>
             <div style="border:1px solid var(--line);background:var(--bg);padding:clamp(22px,3vw,34px);display:flex;flex-direction:column;gap:18px">
               <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--tx3)">YOUR INTRODUCTION, AS IT WILL READ</div>
@@ -2442,13 +2444,13 @@
                 <textarea value="{{ fWhy }}" onChange="{{ setWhy }}" rows="3" placeholder="A problem you want solved, a project you already follow…" style="background:var(--surf);border:1px solid var(--line2);color:var(--tx);padding:12px 14px;font-size:15px;outline:none;width:100%;resize:vertical;line-height:1.55" style-focus="border-color:#FF5500"></textarea>
               </div>
               <div style="font-size:13px;color:var(--tx3);line-height:1.6">No email, no handle, no contact detail is collected — the issue form asks for none either. You will be posting from your own GitHub account, and you can edit every word before you publish.</div>
-              <div onClick="{{ openVolunteer }}" style="background:#FF5500;color:#0A0A0C;padding:16px;font-size:14px;font-weight:600;cursor:pointer;text-align:center;box-shadow:0 0 24px rgba(255,85,0,0.25)" style-hover="background:#FF7A33;box-shadow:0 0 36px rgba(255,85,0,0.4)">Review my introduction on GitHub</div>
+              <div onClick="{{ openVolunteer }}" tabindex="0" role="button" style="background:#FF5500;color:#0A0A0C;padding:16px;font-size:14px;font-weight:600;cursor:pointer;text-align:center;box-shadow:0 0 24px rgba(255,85,0,0.25)" style-hover="background:#FF7A33;box-shadow:0 0 36px rgba(255,85,0,0.4)">Review my introduction on GitHub</div>
               <sc-if value="{{ volOpened }}" hint-placeholder-val="{{ false }}">
                 <div style="border-top:1px solid var(--line2);padding-top:16px;display:flex;flex-direction:column;gap:10px">
                   <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.16em;color:#FF5500">OPENED ON GITHUB</div>
                   <div style="font-size:14px;line-height:1.6;color:var(--tx2)">Nothing is published until you press submit there. If the tab did not open, use the link below.</div>
                   <a href="{{ volUrl }}" target="_blank" rel="noreferrer" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.08em">OPEN THE ISSUE FORM →</a>
-                  <div onClick="{{ goFn }}" style="align-self:flex-start;border:1px solid var(--line3);color:var(--tx);padding:13px 22px;font-size:14px;font-weight:500;cursor:pointer;margin-top:6px" style-hover="border-color:#FF5500;color:#FF5500">See open functions</div>
+                  <div onClick="{{ goFn }}" tabindex="0" role="button" style="align-self:flex-start;border:1px solid var(--line3);color:var(--tx);padding:13px 22px;font-size:14px;font-weight:500;cursor:pointer;margin-top:6px" style-hover="border-color:#FF5500;color:#FF5500">See open functions</div>
                 </div>
               </sc-if>
             </div>
@@ -2479,21 +2481,21 @@
       </div>
       <div style="display:flex;flex-direction:column;gap:9px">
         <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--tx3);margin-bottom:4px">SYSTEM</div>
-        <div onClick="{{ goDfm }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">DFM Protocol</div>
-        <div onClick="{{ goDk }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Dk</div>
-        <div onClick="{{ goEco }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Ecosystem</div>
-        <div onClick="{{ goEconomy }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Economy &amp; reputation</div>
-        <div onClick="{{ goDocs }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Docs</div>
+        <div onClick="{{ goDfm }}" tabindex="0" role="button" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">DFM Protocol</div>
+        <div onClick="{{ goDk }}" tabindex="0" role="button" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Dk</div>
+        <div onClick="{{ goEco }}" tabindex="0" role="button" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Ecosystem</div>
+        <div onClick="{{ goEconomy }}" tabindex="0" role="button" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Economy &amp; reputation</div>
+        <div onClick="{{ goDocs }}" tabindex="0" role="button" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Docs</div>
         <a href="https://dknowledge.drayker.org/" style="font-size:13.5px;color:var(--tx2)" style-hover="color:#FF5500">Dknowledge ↗</a>
         <a href="{{ partnershipsUrl }}" onClick="{{ goPartnerships }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Funding &amp; partnership</a>
       </div>
       <div style="display:flex;flex-direction:column;gap:9px">
         <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--tx3);margin-bottom:4px">PARTICIPATE</div>
         <sc-if value="{{ isOrgSite }}" hint-placeholder-val="{{ true }}">
-          <div onClick="{{ goContrib }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Contribute</div>
-          <div onClick="{{ goFn }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Open functions</div>
-          <div onClick="{{ goProjects }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Projects</div>
-          <div onClick="{{ goGuide }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Contribution guide</div>
+          <div onClick="{{ goContrib }}" tabindex="0" role="button" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Contribute</div>
+          <div onClick="{{ goFn }}" tabindex="0" role="button" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Open functions</div>
+          <div onClick="{{ goProjects }}" tabindex="0" role="button" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Projects</div>
+          <div onClick="{{ goGuide }}" tabindex="0" role="button" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Contribution guide</div>
           <a href="{{ joinUrl }}" onClick="{{ goJoin }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Volunteer</a>
         </sc-if>
         <a href="https://forum.drayker.org" target="_blank" rel="noreferrer" style="font-size:13.5px;color:var(--tx2)" style-hover="color:#FF5500">Forum ↗</a>
@@ -2501,7 +2503,7 @@
           <div style="font-size:13px;color:var(--tx3);line-height:1.6;max-width:26ch;margin-bottom:2px">Taking part happens on the volunteers portal.</div>
           <a href="{{ joinUrl }}" onClick="{{ goJoin }}" style="font-size:13.5px;color:#FF5500;font-weight:500;cursor:pointer" style-hover="color:#FF7A33">drayker.org →</a>
         </sc-if>
-        <div onClick="{{ goOrgPage }}" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Organization</div>
+        <div onClick="{{ goOrgPage }}" tabindex="0" role="button" style="font-size:13.5px;color:var(--tx2);cursor:pointer" style-hover="color:#FF5500">Organization</div>
         <a href="https://github.com/draykerdk" target="_blank" rel="noreferrer" style="font-size:13.5px;color:var(--tx2)" style-hover="color:#FF5500">GitHub</a>
       </div>
       <div style="display:flex;flex-direction:column;gap:9px">
@@ -3655,8 +3657,12 @@ const GLOSSARY = [
   { id: 'dzweck', t: 'Dzweck', x: 'A threshold of life dedication', d: 'The beginning of a specific integration level: a person has chosen to dedicate their life to Drayker and a specialized question, and that intention has been strongly validated by real continuity and consequences. Reputation still varies within the level; it is not superiority or automatic authority.' },
   { id: 'fn', t: 'Open function', x: 'A finishable piece of work', d: 'An issue cut small enough for one person to finish alone, carrying the real label open-function in the public boards. Claiming one is a comment in the thread; nobody assigns it.' },
   { id: 'contract', t: 'Component contract', x: '.drayker/component.yml', d: 'The file each repository publishes declaring what it is for, what is in and out of scope, what evidence backs its implementation level, and what could be misread. Validated on every pull request against a shared schema.' },
-  { id: 'dknowledge', t: 'Dknowledge', x: 'The knowledge base', d: 'Where vision, papers, architecture and roadmap stay connected instead of scattered. It is also the oldest material in the ecosystem, so dates matter when reading it.' }
-];
+  { id: 'dknowledge', t: 'Dknowledge', x: 'The knowledge base', d: 'Where vision, papers, architecture and roadmap stay connected instead of scattered. It is also the oldest material in the ecosystem, so dates matter when reading it.' },
+  { id: 'ech', t: 'E.C.H.', x: 'Expansion · Complexity · Harmony', d: 'The cognitive metabolism underneath Dknowledge and personal growth. Expansion brings experience, data and knowledge in without chasing accumulation; Complexity connects entries into useful relations rather than complication; Harmony keeps the state coherent enough to act on, preserving contradictions with their provenance instead of erasing them. The same cycle repeats at personal, project and global scale.' },
+  { id: 'safeguards', t: 'Systemic safeguards', x: 'The limits around what Dk may execute', d: 'Constitutional, security, permission, integrity, reserve and risk constraints that condition every synthesis. However contextual an allocation or action looks, it only becomes executable inside the space those safeguards permit — intelligence proposes; accountable people decide within the permitted space.' },
+  { id: 'capacity-economy', t: 'Economy of capacity', x: 'How resources circulate internally', d: 'The proposed internal economy: need, intention, history, knowledge, trust, project quality, risk, impact and availability are related so that capacity expands where it compounds. Money and markets belong to the external interface; members do not buy internal capacity from one another, and reputation is never currency.' },
+  { id: 'supersystem', t: 'Supersystem', x: 'A system of systems', d: 'A persistent circuit that perceives, remembers, coordinates and acts across domains by integrating human and artificial intelligences, memory, institutions and resources. Drayker is one proposed constitution for such a system — constituted by its members rather than administered above them.' },
+  { id: 'member-volunteer', t: 'Member & volunteer', x: 'Constitutional unit vs founding role', d: 'A member is the constitutional unit Drayker is meant to be constituted by; a volunteer is the operating role of the current founding phase. Contributing today does not silently create membership, and the plan is not to remain an organization of volunteers forever — the distinction is documented, not hidden.' } ];
 
 // Parts with no repository still have neighbours; these are read from the architecture,
 // not from a contract, because there is no contract to read.
@@ -4501,7 +4507,10 @@ class Component extends DCLogic {
       this.raf = requestAnimationFrame(tick);
     };
     this.paintMark();
-    this.raf = requestAnimationFrame(tick);
+    const prefersStill = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersStill) {
+      this.raf = requestAnimationFrame(tick);
+    }
     this.loadGH(false);
 
     this.onResize = () => {
@@ -5193,6 +5202,21 @@ class Component extends DCLogic {
     };
   }
 }
+</script>
+<script>
+  (function () {
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      var t = e.target;
+      if (!t || !t.getAttribute) return;
+      var tag = (t.tagName || '').toLowerCase();
+      if (tag === 'a' || tag === 'button' || tag === 'input' || tag === 'textarea' || tag === 'select' || tag === 'iframe') return;
+      var ti = t.getAttribute('tabindex');
+      if (ti === null || ti === '') return;
+      e.preventDefault();
+      t.click();
+    }, true);
+  })();
 </script>
 </body>
 </html>
