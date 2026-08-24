@@ -6,7 +6,7 @@ component:
   artifact_type: portal
   problem: Provide the public participation portal and connected map of the Drayker ecosystem.
   scope:
-    - Static public portal for organization, documentation and contribution routes.
+    - Static public portal for participation, organization, documentation and the founding path toward member constitution.
     - Live aggregation of open functions from public GitHub issues.
   non_scope:
     - Private project management data.
@@ -25,10 +25,11 @@ component:
   risks:
     - Cached issue data can temporarily differ from GitHub.
     - Narrative changes can accidentally overstate early-stage components.
+    - Contribution language can be mistaken for an operational membership process unless the boundary is explicit.
   contributions:
     availability: open
     entrypoint: https://github.com/draykerdk/drayker.org/issues
   source_of_truth:
     repository: https://github.com/draykerdk/drayker.org
     path: index.html
-  last_reviewed: "2026-08-10"
+  last_reviewed: "2026-08-17"
