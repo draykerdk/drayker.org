@@ -4,9 +4,16 @@ branch: master
 Related repositories read for content: all 25 public component repositories in `PROJECTS`, including their READMEs and public component contracts. Constitutional alignment in this sync also reads the organization-wide `.github/GOVERNANCE.md` and profile.
 
 ## Last sync
-date: 2026-08-17T00:00:00Z
+date: 2026-09-03T00:00:00Z
 
 ### Updated in this project
+- **The final author resolutions now reach the public portal.** The hero and manifesto state the "our own game" thesis directly; the six transversal principles now expose E.C.H., scale invariance, member agency, fiduciary relations and material rigour.
+- **The constitutional frame is affirmative and still evidence-bound.** The old defensive four-card section became four foundations — member sovereignty, capacity economy, autonomous engagement and evolutionary rigour — followed by an explicit current-state notice so designed institutions are not mistaken for operating services.
+- **Economic language is aligned across every rendered surface.** Dktron is an internal capacity-accounting and temporary-custody design with possible lawful fiat bridges, not an external-market currency or speculative asset. Reputation remains inspectable operational memory rather than transferable value or unreviewable authority.
+- **Dzweck no longer carries a life-vow formulation.** The glossary now defines it as a position of merit and focused technical responsibility established by sustained delivery, with no monastic pledge, employment status, superiority or automatic authority.
+- **The canonical component was repaired before publication.** The pending mirror had dropped the `ECON_DESIGNED` declaration; the source now passes the complete static render contract, and `.com` plus both prerender trees are regenerated from this corrected `.org` source.
+
+### Previous sync (2026-08-17T00:00:00Z)
 - **Dk's name and role are no longer collapsed.** `Distributed Kernel` remains the technical name and architectural principle. Public copy now states equally clearly that Dk is the distributed intelligence of Drayker across personal representation, local intelligence and global synthesis; the name describes how it is built, not the whole of what it is.
 - **Members replace the implicit product-user model.** Drayker is described as infrastructure constituted and stewarded in common by members. The site remains honest about the founding phase: contribution is the public entry today and no operational membership process or member-rights charter is claimed yet.
 - **People and agents share a functional grammar, not constitutional status.** The `same terms` / `identical terms` language was removed. Agents may carry delegated functions and Dk performs material contextual synthesis; members remain the constitutional subjects, and consequential decisions require accountable authorization and review.
