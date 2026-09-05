@@ -29,7 +29,7 @@ reconstructed design.
 | `data/org.json` | Committed public snapshot used before the live GitHub API. |
 | `.github/workflows/org-snapshot.yml` | Opens a focused update PR when the organization snapshot changes. |
 
-There is no dependency to install. The page loads React and its fonts through the runtime's existing CDN path. The dependency-free prerender step materializes clean URLs for search and link previews.
+There is no dependency to install. The page uses its own Design Component runtime; React is only loaded via the runtime's existing CDN path, not as an app framework. The dependency-free prerender step materializes clean URLs for search and link previews.
 
 ## Running it locally
 
