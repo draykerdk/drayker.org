@@ -1,12 +1,19 @@
 repo: draykerdk/drayker.org
-branch: master
+branch: sync/alinhamento-canonico
 
 Related repositories read for content: all 25 public component repositories in `PROJECTS`, including their READMEs and public component contracts. Constitutional alignment in this sync also reads the organization-wide `.github/GOVERNANCE.md` and profile.
 
 ## Last sync
-date: 2026-09-03T00:00:00Z
+date: 2026-09-09T00:00:00Z
 
-### Updated in this project
+### Editorial revision on the test branch
+
+- Developed distinct purpose, context, mechanism and examples for all 25 component records and institutional cases.
+- Aligned network tiers, UID delegation, adaptive-security research and the three Dktron accounting spheres with the revised component documentation.
+- Reworked home, manifesto, method and economy prose while preserving routes, layout and contribution behaviour.
+- Regenerated the institutional mirror and route metadata from the canonical component.
+
+### Previous canonical alignment
 - **The final author resolutions now reach the public portal.** The hero and manifesto state the "our own game" thesis directly; the six transversal principles now expose E.C.H., scale invariance, member agency, fiduciary relations and material rigour.
 - **The constitutional frame is affirmative and still evidence-bound.** The old defensive four-card section became four foundations — member sovereignty, capacity economy, autonomous engagement and evolutionary rigour — followed by an explicit current-state notice so designed institutions are not mistaken for operating services.
 - **Economic language is aligned across every rendered surface.** Dktron is an internal capacity-accounting and temporary-custody design with possible lawful fiat bridges, not an external-market currency or speculative asset. Reputation remains inspectable operational memory rather than transferable value or unreviewable authority.
@@ -138,8 +145,8 @@ date: 2026-09-03T00:00:00Z
 | Screen | Built from |
 | --- | --- |
 | Partnerships (.com) | curated. Funding and partnership brief, no repo source |
-| Home (.com / .org) | drayker.org README.md, drayker.com hero copy |
-| Manifesto | drayker.com "about" copy, dfmp README principles |
+| Home (.com / .org) | Canonical hero copy, public component READMEs and current organization governance |
+| Manifesto | Canonical explanatory copy, DFMP principles and current organization governance |
 | DFM Protocol | draykerdk/dfmp README.md, dfmpp/README.md |
 | Dk | drayker.com/dk, bsdk.drayker.org, lc.drayker.org, dknetwork.drayker.org |
 | Ecosystem | draykerdk repo list (bsdk, daf, uid, metadfmp, emergence-initiative) |
