@@ -1,10 +1,19 @@
 repo: draykerdk/drayker.org
-branch: sync/alinhamento-canonico
+branch: master
 
 Related repositories read for content: all 25 public component repositories in `PROJECTS`, including their READMEs and public component contracts. Constitutional alignment in this sync also reads the organization-wide `.github/GOVERNANCE.md` and profile.
 
 ## Last sync
 date: 2026-09-09T00:00:00Z
+
+### Interaction and teaching review before integration
+
+- Paired architecture labels with complete explanations and added disclosure regression checks for every component page.
+- Replaced the overlapping dependency layout with a responsive three-part map preserving declared relationships.
+- Added four-step worked examples for Dktron, network workloads and personal-agent consent, with action, result and boundary at each step.
+- Synced the displayed component contracts with the current repository sources, including per-component review dates. Documentation-only UID, Network and Advices records no longer imply executable prototypes.
+- Verified keyboard activation, mobile layout, direct section links and the volunteer flow; reset expanded state when moving to another component.
+- Preserved the canonical component and generated institutional mirror. No changes to the mark engine or historical design assets.
 
 ### Editorial revision on the test branch
 
@@ -153,6 +162,8 @@ date: 2026-09-09T00:00:00Z
 | Organization | drayker.org README.md (DFMP + DAF), draykerdk/daf |
 | Contribute · Overview | GitHub API: orgs/draykerdk repos, contributors |
 | Contribute · Tracks | curated. Volunteer tracks, not repo-derived |
+| Interactive examples | Public Value Unit, Dk Network and Dk Personal documentation; selectable stages explaining action, result and boundary |
+| Component relationship map | Current component-contract dependencies, grouped responsively with keyboard-accessible links |
 | Contribute · Projects | READMEs and component contracts of all 25 public component repositories + live GitHub API repo data |
 | Contribute · Open functions | Per-repository GitHub issues endpoints, with pull-request objects rejected explicitly |
 | Contribute · Guide | draykerdk/.github CONTRIBUTING.md + GOVERNANCE.md + labels.yml |
