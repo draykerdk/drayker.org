@@ -8,8 +8,18 @@ const args = process.argv.slice(2).reduce((out, value) => {
   if (match) out[match[1]] = match[2] || true;
   return out;
 }, {});
-const site = args.site === 'com' ? 'com' : 'org';
 const root = path.resolve(args.root || '.');
+function inferSite(dir) {
+  try {
+    const cname = fs.readFileSync(path.join(dir, 'CNAME'), 'utf8').trim();
+    return cname.endsWith('.com') ? 'com' : 'org';
+  } catch (error) {
+    return 'org';
+  }
+}
+// The site follows the repository CNAME so the check runs unflagged in either portal;
+// an explicit --site=org|com still wins.
+const site = args.site === 'com' || args.site === 'org' ? args.site : inferSite(root);
 const base = 'https://drayker.' + site + '/';
 const sitemapPath = path.join(root, 'sitemap.xml');
 const robotsPath = path.join(root, 'robots.txt');
