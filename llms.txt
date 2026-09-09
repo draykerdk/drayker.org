@@ -1,6 +1,6 @@
 # Drayker Participation
 
-> The public participation and constitution entry point for Drayker, civilizational infrastructure meant to be constituted and stewarded in common by its members.
+> The participation portal connects the public argument for Drayker with its repositories, component documentation and contribution paths.
 
 ## Canonical entry points
 
