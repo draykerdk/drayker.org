@@ -227,8 +227,36 @@ for (const project of org.PROJECTS.concat(org.CONCEPTS).filter((project) => proj
   check(values.cProject && values.pd && values.pd.key === project.key, 'missing project page: ' + project.key);
   check(values.pd.vision && values.pd.tagline && values.pd.layer, 'incomplete project page: ' + project.key);
   check(values.pdHasArch && values.pdHasContribute, 'project is not connected to architecture/contribution: ' + project.key);
+  const page = make(org, { page: 'contrib', tab: 'project', proj: project.key });
+  for (let index = 0; index < values.pdArch.length; index++) {
+    const item = values.pdArch[index];
+    check(typeof item.d === 'string' && item.d.trim().length > 40, 'architecture disclosure needs an explanation: ' + project.key + '/' + item.t);
+    page.renderVals().pdArch[index].toggle();
+    check(page.renderVals().pdArch[index].open, 'architecture disclosure must open: ' + project.key + '/' + index);
+    page.renderVals().pdArch[index].toggle();
+    check(!page.renderVals().pdArch[index].open, 'architecture disclosure must close: ' + project.key + '/' + index);
+  }
+  check(values.mapInputs.length + values.mapOutputs.length === values.mapNodes.length, 'responsive map must preserve every relationship: ' + project.key);
+  check(values.mapInputs.every((n) => n.dir === 'IT NEEDS') && values.mapOutputs.every((n) => n.dir === 'NEEDS IT'), 'map must preserve relationship direction: ' + project.key);
+  page.setState({ archOpen: 0 });
+  page.routeTo('org', 'project/' + project.key + '/arch');
+  check(page.state.archOpen === null && page.state.focus === 'arch', 'deep navigation must reset disclosures and retain the target section');
+
   check(values.pdIsConcept === !!project.concept, 'repository status is wrong for ' + project.key);
   noPlaceholders(values, 'org/project/' + project.key);
+}
+for (const key of ['valueunit', 'dknetwork', 'personal']) {
+  const page = make(org, { page: 'contrib', tab: 'project', proj: key });
+  check(page.renderVals().lessonHas, 'worked example must be available for ' + key);
+  const results = new Set();
+  page.renderVals().lessonSteps.forEach((step, index) => {
+    step.select();
+    const current = page.renderVals();
+    check(current.lessonSteps.filter((x) => x.selected).length === 1 && current.lessonSteps[index].selected, 'example must select exactly the requested step');
+    check(current.lessonAction && current.lessonResult && current.lessonBoundary, 'each example step must explain action, result and boundary');
+    results.add(current.lessonResult);
+  });
+  check(results.size === page.renderVals().lessonSteps.length, 'each example step must teach a distinct consequence');
 }
 const missing = make(org, { page: 'contrib', tab: 'project', proj: 'does-not-exist' }).renderVals();
 check(missing.cProjectMissing && missing.missingKey === 'does-not-exist', 'unknown project route needs an explicit fallback');
