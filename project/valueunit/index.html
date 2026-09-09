@@ -1444,7 +1444,7 @@
               </sc-if>
             </div>
             <p style="font-size:clamp(20px,2.5vw,33px);line-height:1.28;letter-spacing:-0.025em;font-weight:500;color:var(--tx);margin:0 0 14px;max-width:40ch;text-wrap:pretty">{{ pdPlain }}</p>
-            <p style="font-size:14px;line-height:1.6;color:var(--tx3);margin:0;max-width:56ch;text-wrap:pretty">That sentence is the whole thing, without jargon. Everything below is optional — fold a level away with the buttons above if you have read enough.</p>
+            <p style="font-size:14px;line-height:1.6;color:var(--tx3);margin:0;max-width:56ch;text-wrap:pretty">Start with the purpose, then explore the context and architecture. Expand a component to read its explanation, or collapse a level with the controls above.</p>
           </div>
         </section>
 
@@ -1513,24 +1513,30 @@
         <section style="border-top:1px solid var(--line);background:var(--surf)">
           <div style="max-width:1320px;margin:0 auto;padding:clamp(34px,5vw,58px) clamp(16px,4vw,44px)">
             <div data-focus="map" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.16em;color:#FF5500;margin-bottom:14px">WHERE IT SITS</div>
-            <p style="font-size:15px;line-height:1.66;color:var(--tx2);margin:0 0 clamp(22px,3vw,34px);max-width:60ch;text-wrap:pretty">Its neighbours, read from the declared dependencies rather than drawn by hand. On the left, what this part cannot be specified without. On the right, what cannot be specified without it. Any of them opens.</p>
+            <p style="font-size:15px;line-height:1.66;color:var(--tx2);margin:0 0 clamp(22px,3vw,34px);max-width:60ch;text-wrap:pretty">Read this map in three parts: the components this proposal needs, its own role, and the components that depend on it. Select a name to explore that relationship. Dependencies come from the published component contracts; they describe design relationships, not a strict construction schedule.</p>
             <sc-if value="{{ mapHas }}" hint-placeholder-val="{{ true }}">
-              <div style="position:relative;height:clamp(320px,32vw,400px);border:1px solid var(--line);background:var(--bg)">
-                <svg viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%">
-                  <sc-for list="{{ mapEdges }}" as="e" hint-placeholder-count="4">
-                    <line x1="50" y1="50" x2="{{ e.x }}" y2="{{ e.y }}" vector-effect="non-scaling-stroke" style="stroke:{{ e.stroke }};stroke-width:1;opacity:0.5"></line>
+              <div data-relationship-map="true" aria-label="Component dependency map" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:18px;align-items:start">
+                <div style="border:1px solid var(--line);padding:20px;background:var(--bg);min-width:0">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:#FF5500;margin-bottom:14px">01 · IT NEEDS</div>
+                  <p style="font-size:13px;line-height:1.5;color:var(--tx3);margin:0 0 16px">Components this proposal depends on.</p>
+                  <sc-for list="{{ mapInputs }}" as="n" hint-placeholder-count="3">
+                    <div onClick="{{ n.open }}" tabindex="0" role="button" style="border:1px solid var(--line3);padding:13px 15px;margin-top:8px;cursor:pointer;font-size:14px;line-height:1.4;color:var(--tx);overflow-wrap:anywhere" style-hover="border-color:#FF5500">{{ n.name }} →</div>
                   </sc-for>
-                </svg>
-                <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--surf);border:1px solid #FF5500;padding:14px 20px;text-align:center;max-width:180px">
-                  <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.14em;color:#FF5500;margin-bottom:5px">YOU ARE HERE</div>
-                  <div style="font-size:16px;font-weight:600;letter-spacing:-0.02em;line-height:1.15">{{ mapCentre }}</div>
+                  <sc-if value="{{ mapNoInputs }}" hint-placeholder-val="{{ false }}"><p style="font-size:13px;line-height:1.5;color:var(--tx3);margin:0">No prerequisite declared.</p></sc-if>
                 </div>
-                <sc-for list="{{ mapNodes }}" as="n" hint-placeholder-count="4">
-                  <div onClick="{{ n.open }}" tabindex="0" role="button" style="position:absolute;left:{{ n.x }}%;top:{{ n.y }}%;transform:translate(-50%,-50%);background:var(--surf);border:1px solid var(--line3);padding:11px 15px;cursor:pointer;text-align:center;max-width:160px" style-hover="border-color:#FF5500">
-                    <div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:0.14em;color:{{ n.fg }};margin-bottom:4px">{{ n.dir }}</div>
-                    <div style="font-size:13.5px;font-weight:500;letter-spacing:-0.01em;line-height:1.2">{{ n.name }}</div>
-                  </div>
-                </sc-for>
+                <div style="border:1px solid #FF5500;padding:24px 20px;background:var(--surf);min-width:0">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:#FF5500;margin-bottom:14px">02 · YOU ARE HERE</div>
+                  <div style="font-size:21px;font-weight:600;letter-spacing:-0.02em;line-height:1.2;margin-bottom:14px">{{ mapCentre }}</div>
+                  <p style="font-size:14px;line-height:1.6;color:var(--tx2);margin:0">{{ pd.tagline }}</p>
+                </div>
+                <div style="border:1px solid var(--line);padding:20px;background:var(--bg);min-width:0">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--tx3);margin-bottom:14px">03 · DEPENDS ON THIS</div>
+                  <p style="font-size:13px;line-height:1.5;color:var(--tx3);margin:0 0 16px">Components that declare this proposal as a dependency.</p>
+                  <sc-for list="{{ mapOutputs }}" as="n" hint-placeholder-count="3">
+                    <div onClick="{{ n.open }}" tabindex="0" role="button" style="border:1px solid var(--line3);padding:13px 15px;margin-top:8px;cursor:pointer;font-size:14px;line-height:1.4;color:var(--tx);overflow-wrap:anywhere" style-hover="border-color:#FF5500">{{ n.name }} →</div>
+                  </sc-for>
+                  <sc-if value="{{ mapNoOutputs }}" hint-placeholder-val="{{ false }}"><p style="font-size:13px;line-height:1.5;color:var(--tx3);margin:0">No dependent component declared.</p></sc-if>
+                </div>
               </div>
             </sc-if>
             <sc-if value="{{ mapNone }}" hint-placeholder-val="{{ false }}">
@@ -1638,6 +1644,24 @@
           </section>
         </sc-if>
 
+        <sc-if value="{{ lessonHas }}" hint-placeholder-val="{{ false }}">
+          <section aria-label="Interactive worked example" style="border-top:1px solid var(--line);max-width:1320px;margin:0 auto;padding:clamp(28px,4vw,48px) clamp(16px,4vw,44px)">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#FF5500;margin-bottom:14px">EXPLORE ONE EXAMPLE</div>
+            <h3 style="font-size:clamp(22px,2.6vw,32px);line-height:1.2;margin:0 0 14px;max-width:36ch">{{ lessonTitle }}</h3>
+            <p style="font-size:15px;line-height:1.6;color:var(--tx2);max-width:66ch;margin:0 0 22px">{{ lessonIntro }}</p>
+            <div aria-label="Example steps" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:10px;margin-bottom:20px">
+              <sc-for list="{{ lessonSteps }}" as="step" hint-placeholder-count="4">
+                <div onClick="{{ step.select }}" tabindex="0" role="button" aria-pressed="{{ step.selected }}" style="border:1px solid {{ step.border }};padding:15px 16px;color:{{ step.color }};font-size:14px;line-height:1.5;cursor:pointer;background:var(--surf)" style-hover="border-color:#FF5500">{{ step.label }}</div>
+              </sc-for>
+            </div>
+            <div aria-live="polite" aria-atomic="true" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:20px;border:1px solid var(--line);background:var(--surf);padding:22px">
+              <div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:#FF5500;margin-bottom:12px">WHAT HAPPENS</div><p style="font-size:15px;line-height:1.65;color:var(--tx);margin:0">{{ lessonAction }}</p></div>
+              <div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--tx3);margin-bottom:12px">WHAT CHANGES</div><p style="font-size:15px;line-height:1.65;color:var(--tx2);margin:0">{{ lessonResult }}</p></div>
+              <div><div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--tx3);margin-bottom:12px">BOUNDARY TO PRESERVE</div><p style="font-size:15px;line-height:1.65;color:var(--tx2);margin:0">{{ lessonBoundary }}</p></div>
+            </div>
+          </section>
+        </sc-if>
+
         <sc-if value="{{ pdHasArch }}" hint-placeholder-val="{{ true }}">
           <section style="border-top:1px solid var(--line);background:var(--surf)">
             <div style="max-width:1320px;margin:0 auto;padding:clamp(34px,5vw,58px) clamp(16px,4vw,44px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,4vw,64px)">
@@ -1645,7 +1669,7 @@
                 <div data-focus="arch" style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.16em;color:#FF5500;margin-bottom:16px">ARCHITECTURE</div>
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);border:1px solid var(--line)">
                   <sc-for list="{{ pdArch }}" as="a" hint-placeholder-count="4">
-                    <div onClick="{{ a.toggle }}" tabindex="0" role="button" style="background:var(--bg);padding:20px 18px;min-height:76px;display:flex;flex-direction:column;gap:10px;cursor:pointer" style-hover="background:var(--surf2)">
+                    <div onClick="{{ a.toggle }}" tabindex="0" role="button" aria-expanded="{{ a.open }}" style="background:var(--bg);padding:20px 18px;min-height:76px;display:flex;flex-direction:column;gap:10px;cursor:pointer" style-hover="background:var(--surf2)">
                       <div style="display:flex;gap:12px;align-items:baseline;justify-content:space-between">
                         <div style="font-size:14px;line-height:1.5;color:var(--tx2)">{{ a.t }}</div>
                         <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#FF5500;flex-shrink:0">{{ a.mark }}</div>
@@ -2415,7 +2439,7 @@
         <section style="border-top:1px solid var(--line)">
           <div style="max-width:1320px;margin:0 auto;padding:clamp(34px,5vw,60px) clamp(16px,4vw,44px)">
             <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.16em;color:#FF5500;margin-bottom:8px">THE MAP, FROM WHERE YOU STAND</div>
-            <p style="font-size:15px;line-height:1.6;color:var(--tx2);margin:0 0 26px;max-width:56ch;text-wrap:pretty">Five layers, twenty-five repositories. What you picked is lit; everything else stays visible, because nothing here is closed to you — you can cross layers whenever you want.</p>
+            <p style="font-size:15px;line-height:1.6;color:var(--tx2);margin:0 0 26px;max-width:56ch;text-wrap:pretty">Six groups, twenty-five repositories. What you picked is lit; everything else stays visible, because nothing here is closed to you — you can cross layers whenever you want.</p>
             <div style="display:flex;flex-direction:column;gap:1px;background:var(--line);border:1px solid var(--line)">
               <sc-for list="{{ mapRows }}" as="row" hint-placeholder-count="5">
                 <div style="background:var(--surf);padding:22px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;border-left:2px solid {{ row.line }}">
@@ -2683,7 +2707,7 @@ const JOIN_STEPS = [
   { id: 'parts', multi: true,
     kicker: 'WHAT IS BEING BUILT',
     lt: 'Twenty-five repositories, one system.',
-    lb: 'The kernel and its network, the protocol that coordinates everyone, the federation that governs resources, the knowledge base that keeps it traceable, the portal you are reading — and the parts the architecture names that have no repository yet. Each one has its own page and its own open gaps.',
+    lb: 'The kernel and its network, the protocol that coordinates everyone, the federation that governs resources, the knowledge base that keeps it traceable, the portal you are reading. Each component has a public repository, its own page and a documented scope for further contributions.',
     lf: 'Every project page names what is missing on purpose',
     q: 'Which part pulls you?',
     opts: [
@@ -2757,7 +2781,7 @@ const PROJECTS = [
     vision: 'Dk is the proposed intelligence of Drayker. It connects personal agents, specialised systems and collective synthesis so that knowledge can support decisions at the scale where they matter. The architecture connects specialised capabilities through shared interfaces while preserving the distinction between personal context, project knowledge and public evidence.',
     problem: 'Useful knowledge is often fragmented across tools, projects and institutions. Bringing it together requires permission, context and a way to trace how a conclusion was reached.',
     state: 'Dk is a set of designer proposals and critical issues under argument, not an implementation. Which questions a generic A.I. has to answer is still being written down, and every one of them is open. Documentation is published from docs/ to dk.drayker.org.',
-    arch: ['Agentic A.I., personal to collective', 'Distributed data structure', 'Intelligent network', 'Evolutionary intelligence layer', 'Algorithm integration'],
+    arch: ['Personal, local and collective intelligence', 'Distributed data structure', 'Intelligent network', 'Evolution through review', 'Algorithm integration'],
     contribute: ['Argue with an open designer proposal — review is contribution', 'Write down a critical issue the intelligence has to answer', 'Model one component as a Bayesian strategy'] },
 
   { key: 'bsdk', name: 'BSDK', repo: 'bsdk', layer: 'KERNEL', site: 'https://bsdk.drayker.org',
@@ -2773,7 +2797,7 @@ const PROJECTS = [
     vision: 'Dk Network proposes the infrastructure through which personal devices, community nodes and computing clusters cooperate. Work is placed according to its privacy requirements, urgency and hardware needs. Three computing tiers connect local and edge execution, regional coordination and specialised clusters through public interfaces and independently operated infrastructure.',
     problem: 'Personal computing and large scientific workloads need different resources. Depending on a single operator also concentrates decisions about access, continuity and cost.',
     state: 'The public documentation develops this architecture and its relationships. Protocols, worked cases and operational validation remain open contributions. See the component repository for the current scope and evidence.',
-    arch: ['Main network', 'Test / interaction network', 'Three-layer topology', 'Living Cryptography tunnel'],
+    arch: ['Local devices and edge execution', 'Regional nodes and community hubs', 'Shared computing clusters', 'Authenticated and public interaction networks', 'Authentication and fault recovery'],
     contribute: ['Simulate a routing strategy and publish the model', 'Question a requirement that cannot be met', 'Write the network primer for the docs subdomain'] },
 
   { key: 'lc', name: 'Living Cryptography', repo: 'living-cryptography', layer: 'SECURITY', site: 'https://lc.drayker.org',
@@ -2781,7 +2805,7 @@ const PROJECTS = [
     vision: 'Living Cryptography investigates how authentication, computational work and changes to encryption state might cooperate in a distributed network. Its proposals need an explicit threat model and reproducible evaluation. The research explores uPOW and responses to failed authentication, examining their computational cost, recovery behaviour and resistance to abuse.',
     problem: 'An open network must handle compromised credentials, hostile requests and ordinary mistakes while keeping legitimate access usable.',
     state: 'The re-encryption-on-failure model and the uPOW calculation are the open questions, and no threat model has been written against either. Documentation is published from docs/ to lc.drayker.org.',
-    arch: ['Evolutionary cipher state', 'uPOW authentication', 'End-to-end tunnel', 'Failure-driven mutation'],
+    arch: ['Adaptive encryption state', 'uPOW authentication', 'Secure communication', 'Response to failed authentication'],
     contribute: ['Peer-review the re-encryption model', 'Write the threat model', 'Translate the Living Cryptography paper'] },
 
   { key: 'osdk', name: 'OSDK', repo: 'osdk', layer: 'DEVICES', site: 'https://osdk.drayker.org',
@@ -2797,7 +2821,7 @@ const PROJECTS = [
     vision: 'UID separates the person, the agent authorised to act for them and the record of their contributions. It proposes identity and attribution that preserve personal authority across the ecosystem. The architecture distinguishes cryptographic identity, bounded and revocable proxy mandates, and reputation tied to a particular domain and its evidence.',
     problem: 'An account, an automated representative and a contribution history answer different questions. Combining them can obscure consent and turn a limited record into a judgement of the whole person.',
     state: 'The public documentation develops this architecture and its relationships. Protocols, worked cases and operational validation remain open contributions. See the component repository for the current scope and evidence.',
-    arch: ['Identity model', 'Authentication via LCrypt', 'Application shell', 'Recovery and delegation'],
+    arch: ['The person and cryptographic identity', 'Revocable agent mandates', 'Contextual contribution records', 'Privacy, recovery and human recourse'],
     contribute: ['Prototype the onboarding flow', 'Design the identity recovery path', 'Write the UID glossary'] },
 
   { key: 'dfmp', name: 'DFMP', repo: 'dfmp', layer: 'PROTOCOL', site: 'https://dfmp.drayker.org',
@@ -2821,7 +2845,7 @@ const PROJECTS = [
     vision: 'DAF explores coordination among participating groups while the broader member constitution and Projects & Applications develop. It provides a place to test federative rules in public. Documented proposals examine decision rules, a distinct federative points ledger and review procedures. Useful functions can later migrate into PAP and member governance.',
     problem: 'Groups need ways to make joint decisions, review contributions and allocate resources without losing sight of who is accountable for each commitment.',
     state: 'The mechanics are now specified as drafts: a point is one delivered function, non-transferable and it does not decay, and a decision needs 30% of active points to participate plus a simple majority. The first phase deliberately runs on a repository rather than a chain — no token, no treasury held. If a token-economy phase becomes necessary, ICP is only a probable provisional substrate for building and testing Drayker’s own infrastructure. DAF is expected to dissolve into PAP once that durable environment can absorb its useful functions and infrastructure. Nothing is running: no unit recorded, no point issued, no assembly held.',
-    arch: ['Federation constitution, independent of platform', 'Phase 0 on a public repository', 'Federative points and voting', 'Resource governance'],
+    arch: ['A transitional federation constitution', 'Phase 0 on a public repository', 'Federative points and voting', 'Resource governance'],
     contribute: ['Run the first assembly, against work that already happened', 'Specify the conditions and safeguards for a provisional ICP phase and the later absorption into PAP', 'Bring the Português README up to date'] },
 
   { key: 'advices', name: 'Councils', repo: 'advices', layer: 'ORGANIZATION', site: 'https://advices.drayker.org',
@@ -2829,7 +2853,7 @@ const PROJECTS = [
     vision: 'Advices develops two complementary institutions: councils that examine proposals and an independent member panel that reviews contested decisions and protects constitutional rights. The proposed design separates peer review from judicial recourse, with conflict-of-interest controls, member selection and independent means to suspend or remedy a contested action.',
     problem: 'Technical competence alone cannot settle every conflict about rights or authority. People affected by a decision need a review path with the means to act independently.',
     state: 'The public documentation develops this architecture and its relationships. Protocols, worked cases and operational validation remain open contributions. See the component repository for the current scope and evidence.',
-    arch: ['Councils by area of study', 'Validation alongside development', 'Papers routed to DAOs and/or councils', 'Recorded positions'],
+    arch: ['Technical advisory councils', 'Independent member judicial panel', 'Selection and conflicts of interest', 'Decisions and enforceable remedies'],
     contribute: ['Propose the first version of how a council is formed', 'Define how someone joins a council', 'Write how a council records its position'] },
 
   { key: 'emergence', name: 'Emergence Initiative', repo: 'emergence-initiative', layer: 'ORGANIZATION', site: 'https://ei.drayker.org',
@@ -2861,7 +2885,7 @@ const PROJECTS = [
     vision: 'General Forum brings public issues and merged pull requests into one reading surface. Discussions remain connected to their source repositories, where replies and decisions are recorded. Search, project filters and permanent discussion pages help readers follow the public record and return to the original thread for participation.',
     problem: 'Related conversations can be difficult to discover when they are spread across many projects. New participants may also need help finding where a question belongs.',
     state: 'The reading surface is deployed at forum.drayker.org and the routing table says which repository each kind of question belongs in. What neither can do is answer anyone — that still depends on somebody being there on a newcomer first day.',
-    arch: ['One reading surface over every public thread', 'Merged decisions, kept readable', 'Ideas without a home yet', 'Routing table to the right repository'],
+    arch: ['A shared reading surface', 'Recorded changes and decisions', 'Questions finding their place', 'Routing to a source repository'],
     contribute: ['Ask the question you could not place', 'Route an open thread to the repository it belongs in', 'Answer someone on their first day'] },
 
   { key: 'org', name: 'drayker.org', repo: 'drayker.org', layer: 'PORTAL', site: 'https://drayker.org',
@@ -2885,7 +2909,7 @@ const PROJECTS = [
     vision: 'Drayker Propagation gives volunteers source material, message starters and brand assets for introducing the initiative to relevant people and communities. The toolkit helps a contributor choose an audience, explain a relevant part of the work and connect the invitation to a public page or discussion.',
     problem: 'A complex proposal is easily reduced to a slogan. Useful communication gives readers a clear point of entry and a source they can examine themselves.',
     state: 'Deployed at propagation.drayker.org with the volunteer toolkit, the design catalogue and the downloadable kits. Its own checks pin the mark engine and the original variations sheet by hash, so the preserved source cannot be edited by accident.',
-    arch: ['Message starters that point back at primary sources', 'A mission matcher for a first small task', 'The canonical design library and its manifest', 'Official exports, preserved unmodified'],
+    arch: ['Messages connected to sources', 'A first-contribution matcher', 'The shared design library', 'Ready-to-use brand assets'],
     contribute: ['Write a message starter for a question you actually get asked', 'Translate the toolkit', 'Use the library on something and report what was missing'] },
 
   { key: 'theme', name: 'drayker-theme', repo: 'drayker-theme', layer: 'PORTAL', site: 'https://github.com/draykerdk/drayker-theme',
@@ -2911,7 +2935,7 @@ const PROJECTS = [
     vision: 'Open Science explores how Dk could support research and health through traceable methods, authorised data use and findings that others can examine. The proposed path connects consent, data provenance, analysis and review, keeping research claims distinguishable from validated applications.',
     problem: 'Research depends on reliable evidence and responsible access to data. Health applications also require consent and careful evaluation of their effect on people.',
     state: 'The repository was opened in August 2026 with a charter and nothing else. Drayker has internal material on autonomous health that is not published, and nothing public states which part of open science comes first, what a health application on Dk would actually do, or how DFM review relates to peer review. Anyone who works in either field is better placed to write that than we are. The internal assessment is deliberately severe and belongs in public: this is conceptual, high-risk work with no clinical protocol, no validation, no dataset, no device, no regulatory approval and no safety evidence — not held back, simply absent. Documentation is published from the repository to science.drayker.org.',
-    arch: ['Applications on the Dk kernel', 'Identity through UID, and consent as the entry condition', 'Professional review between assisted analysis and any person', 'DFM review alongside peer review', 'Data that belongs to the person', 'A verifiable record as an infrastructure hypothesis'],
+    arch: ['Research applications on Dk', 'Identity and specific consent', 'Qualified professional review', 'Method review and scientific review', 'Data under the person’s authority', 'A traceable research record'],
     contribute: ['Take one non-clinical research question and demonstrate only search or organization of evidence, on synthetic data, with specialist review', 'Write what open science on Dk would have to guarantee', 'Write where the professional review sits and what it may override', 'Compare DFM review with peer review honestly'] },
 
   { key: 'valueunit', name: 'Dktron & value units', layer: 'APPLICATION', repo: 'value-unit', site: 'https://value.drayker.org',
@@ -2919,8 +2943,8 @@ const PROJECTS = [
     vision: 'Value Unit develops Dktron as a proposed unit for accounting and accessing material capacity. It distinguishes common reserves, resources entrusted to projects and balances attributed to members. The design separates the three spheres and connects redemption to real available resources. Reputation and federative governance records remain distinct from financial holdings.',
     problem: 'An allocation record must make clear whose resources it represents, who may use them and what obligations attach to them. Those meanings differ between a project budget and a personal balance.',
     state: 'The public documentation develops this architecture and its relationships. Protocols, worked cases and operational validation remain open contributions. See the component repository for the current scope and evidence.',
-    arch: ["Common available reserves", "Temporary project custody", "Personal member balances", "Resource-backed redemption", "Separate reputation and federative records"],
-    contribute: ['Specify the experimental ledger first', 'Model one non-deterministic distribution end to end', 'Model donation conversion and external-market use', 'Threat-model stabilization, liquidity, governance and legal risks'] },
+    arch: ['Common available reserves', 'Temporary project custody', 'Personal member balances', 'Resource-backed redemption', 'Separate contribution and governance records'],
+    contribute: ['Specify the experimental ledger first', 'Model one non-deterministic distribution end to end', 'Demonstrate redemption limited by real reserves', 'Threat-model stabilization, liquidity, governance and legal risks'] },
 
   { key: 'pap', name: 'Projects & Applications', layer: 'PLATFORM', repo: 'pap', site: 'https://pap.drayker.org',
     tagline: 'Compose projects and carry successful work into lasting applications.',
@@ -2935,7 +2959,7 @@ const PROJECTS = [
     vision: 'Dk Personal proposes an agent that helps a member organise knowledge, make decisions, learn and act within their own context. Its authority comes from explicit and revisable delegation. The design distinguishes stated preferences from inferences, keeps private context within authorised boundaries and makes mandates revocable. Local operation depends on the available hardware and data.',
     problem: 'An assistant can infer a preference incorrectly or act beyond what a person intended. Continuity is useful only when the person can inspect, correct and limit that assistance.',
     state: 'The public documentation develops this architecture and its relationships. Protocols, worked cases and operational validation remain open contributions. See the component repository for the current scope and evidence.',
-    arch: ['One agent per member, bound to UID', 'Raw personal context stays local', 'Anonymous federated patterns with depersonalized metadata', 'Independent validation increases global weight', 'Deliberate authorized sharing remains distinct', 'Consent, refusal and re-identification safeguards'],
+    arch: ['A personal agent with a bounded mandate', 'Private context and local operation', 'Federated learning with explicit privacy tests', 'Evidence across instances', 'Deliberate sharing and attribution', 'Attention, correction and situated refusal'],
     contribute: ['Write one concrete personal use case', 'Specify which federated updates may leave and how metadata is depersonalized', 'Threat-model re-identification', 'Separate federated learning from deliberate authorized sharing'] },
 
   { key: 'academy', name: 'Dk Academy', layer: 'APPLICATION', repo: 'dk-academy', site: 'https://academy.drayker.org',
@@ -2943,7 +2967,7 @@ const PROJECTS = [
     vision: 'The Academy proposes continuous, personalised learning connected to questions people want to explore and work they want to undertake. Learning paths would connect concepts, practice and feedback to a person’s context, with projects offering opportunities to apply and deepen understanding.',
     problem: 'Open participation becomes more accessible when people can acquire the knowledge a contribution requires. Credentials alone do not describe every person’s ability or potential.',
     state: 'The repository was opened in August 2026 with a charter and nothing implemented. The canonical learning loop is now explicit: conceptual formation → contextual learning → real function → action and consequence → feedback and Dknowledge → improved formation. A first runnable path, the attachment between lesson and function, and material support while learning remain unspecified. Basic-needs support is not an Academy prize or the output of one profile. Documentation is published from the repository to academy.drayker.org.',
-    arch: ['Formation attached to real functions', 'A personalised path, bound to UID', 'Problem-led learning, with mentoring and feedback', 'Learning that returns to the knowledge base', 'Entry without credentials'],
+    arch: ['Learning connected to real functions', 'A path shaped by personal context', 'Practice, mentoring and feedback', 'Shared learning with permission', 'Accessible entry'],
     contribute: ['Build one pilot learning experience: a single problem, one observable delivery and one human review', 'Describe the first path someone should be able to take', 'Write how a function and a lesson attach to each other', 'Argue what makes an open project genuinely enterable'] },
 
   { key: 'stations', name: 'Stations & embassies', layer: 'PLATFORM', repo: 'stations', site: 'https://stations.drayker.org',
@@ -2951,7 +2975,7 @@ const PROJECTS = [
     vision: 'Stations proposes local spaces for learning, collaboration, tools, care and infrastructure. It also distinguishes those community functions from the separate proposal for institutional embassies. A station would be shaped around local activities and needs, linking people and resources to the wider network. Embassy proposals concern negotiated institutional cooperation.',
     problem: 'Participation depends on physical and social conditions as well as connectivity. People may need a place to meet, equipment to use or practical support to begin.',
     state: 'The repository was opened in August 2026 with a charter and nothing else. Drayker has internal material on stations, support centres and embassies that is not published yet; nothing public states what a station commits to, how one is proposed, or how it relates to the support layer of the network. That material describes possibilities, not a network of operating locations: there is no inventory of properties, no staff, no budget, no licences and no confirmed pilot, and this is long-term work rather than something waiting on a decision. Documentation is published from the repository to stations.drayker.org.',
-    arch: ['Stations as a project model', 'The distinction between support stations, centres and embassies', 'Activity first, and what evidence would justify a physical place', 'Production, research and service variants', 'Relation to distributed support, Academy and the economy', 'Local emergence inside one global body'],
+    arch: ['A station as a local project', 'Community spaces and institutional embassies', 'Activity before a permanent place', 'Production, research and service', 'Connections to support and learning', 'Local initiative and shared learning'],
     contribute: ['Design one pilot activity, local or remote: who coordinates, what support, how participation is measured and when it ends', 'Write what a station has to commit to', 'Write what evidence of demand and sustainability would justify a physical centre', 'Map a station onto the distributed support layer'] }
 ];
 
@@ -2984,7 +3008,7 @@ const ROLES = {
   dfmp: { role: 'The method the whole organization works by.', relations: 'Governs every repository · feeds DFMPProject and Meta DFM · councils and DAF depend on it for validation.' },
   metadfmp: { role: 'Where the method is formalised and improved.', relations: 'Formalises DFM · feeds research on Dk and BSDK.' },
   daf: { role: 'A transitional federation for testing governance and resource rules.', relations: 'Links DAOs and DACs · may provisionally use ICP in a token-economy phase · builds toward its own infrastructure · dissolves into PAP.' },
-  advices: { role: 'Where a proposal meets people who can argue with it.', relations: 'The validation step inside DFMP · referenced by DAF for decisions on resources.' },
+  advices: { role: 'Technical deliberation and an independent human review path.', relations: 'Councils review technical proposals · an independent member panel reviews contested decisions and rights claims.' },
   emergence: { role: 'The permeable border of the organization.', relations: 'Routes work onward to DFMP, DAF, Dk or a specific project.' },
   dknowledge: { role: 'The public knowledge base of the whole system.', relations: 'Holds papers and roadmap for every project · the source most portal pages are written from.' },
   dfmpproject: { role: 'How an intention becomes a project others can join.', relations: 'Uses DFMP · links a new unit to DAF.' },
@@ -2995,9 +3019,9 @@ const ROLES = {
   propagation: { role: 'How the system reaches people who have not heard of it.', relations: 'Holds the canonical design library the portal, the theme and every site draw the mark from · points every route back to the primary sources.' },
   dsupport: { role: 'The program for satisfying member needs locally and globally.', relations: 'Connects Dk Personal, UID, PAP, Academy and Stations · infrastructure is one branch · support remains distinct from reputation and ownership.' },
   openscience: { role: 'The first domain Dk is meant to serve.', relations: 'An application on Dk · identity through UID · review alongside DFM.' },
-  valueunit: { role: 'How Dktron can carry resource distributions and connect them to external economies.', relations: 'Separate from DAF points, reputation and allocation authority · external markets · worldwide donation conversion · stabilization.' },
+  valueunit: { role: 'Accounting that preserves the difference between common reserves, project custody and personal balances.', relations: 'Connects material support and accountable allocations · redemption depends on available reserves · reputation and federative points remain distinct.' },
   pap: { role: 'Where projects are composed, and where a project that works becomes an application.', relations: 'Uses DFMP and DFMPProject · attributed through UID · runs on Dk · progressively receives durable functions tested in DAF.' },
-  personal: { role: 'The scale of Dk that belongs to one person.', relations: 'Bound to UID · raw context stays local · anonymous federated patterns use depersonalized metadata · deliberate sharing remains authorized.' },
+  personal: { role: 'The scale of Dk that belongs to one person.', relations: 'Bounded delegation through UID · personal memory in Dknowledge · deliberate sharing by permission · federated learning requires privacy evaluation.' },
   academy: { role: 'How someone becomes able to take a function.', relations: 'Runs formation → context → real function → consequence → Dknowledge → improved formation · identity through UID.' },
   stations: { role: 'Where the ecosystem may exist physically.', relations: 'A model on the projects platform · may host distributed support and learning · resources belong to the capacity economy and member governance.' }
 };
@@ -3020,240 +3044,930 @@ const IMPL = {
 };
 
 const CONTRACTS = {
-  dk: { artifact: 'architecture', problem: 'Define an agentic intelligence able to compose data, algorithms and knowledge across the Drayker ecosystem.',
-    scope: ['Public architecture and conceptual boundaries of Dk.', 'Relationship between Dk Global, Dk Personal and Dk Local.'],
-    nonScope: ['A production-ready intelligence implementation.', 'Claims that Dk Global, Dk Personal or Dk Local are deployed services.'],
-    deps: ['bsdk', 'dknetwork', 'lc'],
-    levelScope: 'The repository currently publishes architecture documentation; it does not contain a released implementation.',
-    evidence: [{ t: 'document', ref: 'docs/README.md' }],
-    risks: ['Architecture language may be mistaken for implemented capability.', 'Boundaries among Global, Personal and Local remain incomplete.'],
-    path: 'docs/README.md' },
-
-  bsdk: { artifact: 'architecture', problem: 'Describe the base structure through which Dk functions and modules can be composed and revised.',
-    scope: ['Public proposal for the base structure of the Dk kernel.', 'Vocabulary for functions, modules and composition.'],
-    nonScope: ['A production implementation of the kernel.', 'A stable or complete module specification.'],
-    deps: ['dk'],
-    levelScope: 'The repository contains an architectural proposal and no executable BSDK implementation.',
-    evidence: [{ t: 'document', ref: 'docs/README.md' }],
-    risks: ['The proposed structure may change as the Dk architecture becomes testable.', 'Conceptual terms may be read as stable interfaces before they are specified.'],
-    path: 'docs/README.md' },
-
-  dknetwork: { artifact: 'architecture', problem: 'Define the network properties required for Dk components to communicate across public and interaction layers.',
-    scope: ['Public network requirements and proposed layer boundaries.', 'Main-network and test or interaction-network concepts.'],
-    nonScope: ['A deployed peer-to-peer network.', 'A finished initial network architecture or protocol implementation.'],
-    deps: ['dk', 'lc'],
-    levelScope: 'Network requirements are documented, but no running network or complete implementation is published here.',
-    evidence: [{ t: 'document', ref: 'docs/README.md' }],
-    risks: ['Requirements may be presented as an available network.', 'Security assumptions remain dependent on unfinished cryptography research.'],
-    path: 'docs/README.md' },
-
-  lc: { artifact: 'research-proposal', problem: 'Explore authentication and cryptographic mechanisms that can adapt after authentication failure.',
-    scope: ['Public research direction for adaptive authentication, uPOW and encryption.', 'Documentation of intended security properties and open questions.'],
-    nonScope: ['Audited cryptographic software.', 'A production authentication service or completed threat model.'],
-    deps: ['dknetwork'],
-    levelScope: 'The repository contains a research proposal; no safe production implementation is published.',
-    evidence: [{ t: 'document', ref: 'docs/README.md' }],
-    risks: ['Unspecified cryptography must not be treated as secure or production-ready.', 'Metaphorical descriptions can obscure concrete threat and trust assumptions.'],
-    path: 'docs/README.md' },
-
-  osdk: { artifact: 'architecture', problem: 'Define a universal coupling layer through which devices could connect to the Drayker network.',
-    scope: ['Public design intent for device-to-network coupling.', 'Questions and boundaries needed for a future specification.'],
-    nonScope: ['A released device adapter or operating system.', 'Guaranteed compatibility with existing hardware.'],
-    deps: ['dknetwork'],
-    levelScope: 'OSDK is currently a design intent without a published executable implementation.',
-    evidence: [{ t: 'document', ref: 'docs/README.md' }],
-    risks: ['The universal-coupler description may overstate an early concept.', 'Hardware and security constraints remain unspecified.'],
-    path: 'docs/README.md' },
-
-  uid: { artifact: 'architecture', problem: 'Define an identity layer and primary interface for applications in the proposed Drayker platform.',
-    scope: ['Public direction for identity and application interaction.', 'Interfaces that future UID specifications need to address.'],
-    nonScope: ['A deployed identity provider.', 'A stable identity protocol or application platform.'],
-    deps: ['dk', 'lc'],
-    levelScope: 'UID is a documented design direction and does not currently provide a service or executable protocol.',
-    evidence: [{ t: 'document', ref: 'docs/README.md' }],
-    risks: ['Identity claims have privacy and security consequences that are not yet specified.', 'Platform language may be confused with an available product.'],
-    path: 'docs/README.md' },
-
-  dfmp: { artifact: 'protocol', problem: 'Make complex collaborative work enterable through small functions that remain connected to a shared model.',
-    scope: ['Public description of the DFM method and DFMP proposal path.', 'Proposals and discussion for formalizing that method.'],
-    nonScope: ['An operational decentralized approval system.', 'A separate community-review branch or mandatory council gate in the founding phase.'],
-    deps: ['metadfmp'],
-    levelScope: 'The method is described, while DFMP-000 and the complete proposal protocol remain unspecified.',
-    evidence: [{ t: 'document', ref: 'README.md' }],
-    risks: ['Aspirational process language may be interpreted as enforced governance.', 'Missing proposal details can produce inconsistent contribution paths.'],
-    path: 'README.md' },
-
-  metadfmp: { artifact: 'research-proposal', problem: 'Formalize and improve the engineering and functional-modeling foundations beneath DFM.',
-    scope: ['Public research direction for modeling DFM itself.', 'Proposed foundations for future cognitive-swarm research.'],
-    nonScope: ['A running autonomous research agent.', 'A complete formal framework for DFM.'],
-    deps: ['dfmp'],
-    levelScope: 'The repository states a research direction but does not publish the proposed framework or an implementation.',
-    evidence: [{ t: 'document', ref: 'docs/README.md' }],
-    risks: ['Agent language may imply software that does not exist.', 'Circular dependencies with DFMP require careful specification.'],
-    path: 'docs/README.md' },
-
-  daf: { artifact: 'governance-proposal', problem: 'Describe how autonomous Drayker units can test cooperation and bounded shared-resource governance during the transition to member governance and PAP.',
-    scope: ['Public proposal for a transitional federation scaffold.', 'Specification of participation, federative points, decisions and resource evaluation.', 'A first phase designed to run on a public repository, with no chain and no token.', 'A probable provisional ICP substrate if a token-economy phase is needed.', 'Transition of useful functions and transitional infrastructure into PAP, with DAF expected to dissolve.'],
-    nonScope: ['An operating DAO federation.', 'A deployed smart contract or an enforced voting procedure.', 'A treasury held by the federation.', 'A transferable instrument, token or claim on pooled funds.', 'Drayker\'s final constitution or permanent organization.', 'ICP as Drayker\'s final infrastructure.', 'General reputation or support authority outside DAF.'],
-    deps: ['dfmp', 'advices', 'uid'],
-    levelScope: 'The points and voting mechanics are specified as drafts; no unit is recorded, no assembly has been held and no contract is deployed.',
-    evidence: [{ t: 'document', ref: 'README.md' }, { t: 'document', ref: 'dafp/daf-000-federation-constitution.md' }, { t: 'document', ref: 'dafp/daf-001-phase-0-github-federation.md' }],
-    risks: ['Governance language may incorrectly imply a legal or operational federation.', 'A written specification may be read as a deployed system.', 'Point and quorum parameters are untested starting values, not validated by use.', 'Unspecified resource rules can create expectations the project cannot meet.'],
-    path: 'README.md' },
-
-  advices: { artifact: 'governance-proposal', problem: 'Define how advisory and validation groups could contribute informed review to Drayker proposals.',
-    scope: ['Public proposal for the future role of councils.', 'Open questions about formation, participation and recorded positions.'],
-    nonScope: ['Active councils with binding authority.', 'A required approval gate during the founding phase.'],
-    deps: ['dfmp', 'daf'],
-    levelScope: 'The repository describes the council concept; formation and operating procedures remain undefined.',
-    evidence: [{ t: 'document', ref: 'README.md' }],
-    risks: ['Readers may mistake a proposed council system for a current institution.', 'Undefined membership and decision rules can create false legitimacy.'],
-    path: 'README.md' },
-
-  emergence: { artifact: 'community-entrypoint', problem: 'Provide an open route for useful proposals whose place in the Drayker ecosystem is not yet clear.',
-    scope: ['Public discussion of papers and proposals without an obvious repository.', 'Development of a transparent route into established components.'],
-    nonScope: ['A substitute for a component-specific contribution route.', 'An operational routing protocol with guaranteed outcomes.'],
-    deps: ['general', 'dfmp'],
-    levelScope: 'The open-edge concept is documented, while its routing procedure remains undefined.',
-    evidence: [{ t: 'document', ref: 'README.md' }],
-    risks: ['Proposals can stagnate when the onward route is not explicit.', 'Over-specification could undermine the deliberately permeable boundary.'],
-    path: 'README.md' },
-
-  dknowledge: { artifact: 'knowledge-base', problem: 'Keep the public vision, architecture, papers and historical roadmaps of Drayker connected to their sources.',
-    scope: ['Public documentation and knowledge history for Drayker and Dk.', 'Clear distinction between current orientation and historical material.', 'The E.C.H. cycle across personal, project and global knowledge, with provenance, permissions and authorized sharing.'],
-    nonScope: ['The private local Dknowledger vault.', 'An operational distributed data, sensor, oracle or ontology platform.'],
-    deps: ['dk', 'dfmp', 'pap'], level: 'operational',
-    levelScope: 'The public documentation site is deployed; the broader knowledge-system vision is not implemented.',
-    evidence: [{ t: 'deployment', ref: 'https://dknowledge.drayker.org' }, { t: 'document', ref: 'README.md' }],
-    risks: ['Historical roadmaps can be mistaken for current commitments.', 'The long-term knowledge-system vision can be confused with the deployed documentation site.'],
-    path: 'README.md' },
-
-  dfmpproject: { artifact: 'project-framework', problem: 'Give voluntary projects a clear, modular path from an initial intention to work that others can enter.',
-    scope: ['Public proposal for creating projects through DFM.', 'Future templates and examples for project proposals.'],
-    nonScope: ['A complete project-incubation service.', 'Published templates that do not yet exist in this repository.'],
-    deps: ['dfmp', 'daf'],
-    levelScope: 'The project framework is described, but its proposal templates and worked examples are not yet published.',
-    evidence: [{ t: 'document', ref: 'README.md' }],
-    risks: ['The absence of templates makes the public entry route ambiguous.', 'Governance relationships may be read as active processes before they exist.'],
-    path: 'README.md' },
-
-  general: { artifact: 'community-entrypoint', problem: 'Give questions, volunteer introductions and proposals a public starting point when no component-specific route is clear.',
-    scope: ['Structured public issue intake and routing.', 'Volunteer introductions and partnership proposals.', 'A static reading surface over public issues and merged pull requests across the Drayker organization.'],
-    nonScope: ['Private applications or guaranteed placement.', 'Binding governance decisions or project management.'],
-    deps: ['org', 'emergence'], level: 'operational',
-    levelScope: 'GitHub Issues provide public intake and routing; forum.drayker.org provides a static reading and composing surface while publication and follow-through remain on GitHub.',
-    evidence: [{ t: 'usage', ref: 'https://github.com/draykerdk/general-forum/issues' }, { t: 'document', ref: 'README.md' }, { t: 'deployment', ref: 'https://forum.drayker.org/' }],
-    risks: ['Public issue content can expose information contributors intended to keep private.', 'Unclear routing can leave submissions without a next action.'],
-    entry: 'https://github.com/draykerdk/general-forum/issues/new/choose',
-    path: 'README.md' },
-
-  org: { artifact: 'portal', problem: 'Provide the public participation portal and connected map of the Drayker ecosystem.',
-    scope: ['Static public portal for organization, documentation and contribution routes.', 'Live aggregation of open functions from public GitHub issues.'],
-    nonScope: ['Private project management data.', 'A claim that every documented ecosystem concept is implemented.'],
-    deps: ['general', 'dknowledge'], level: 'operational',
-    levelScope: 'The static site and its public GitHub-backed contribution routes are deployed; component implementation claims remain bounded by their own evidence.',
-    evidence: [{ t: 'deployment', ref: 'https://drayker.org' }, { t: 'test', ref: 'tools/render-check.js' }],
-    risks: ['Cached issue data can temporarily differ from GitHub.', 'Narrative changes can accidentally overstate early-stage components.'],
-    path: 'index.html' },
-
-  com: { artifact: 'portal', problem: 'Present Drayker institutionally and explain how the ecosystem architecture fits together.',
-    scope: ['Static institutional presentation and ecosystem overview.', 'Handoff to drayker.org for public participation.'],
-    nonScope: ['A duplicate contribution portal.', 'Independent editing of generated site content.'],
-    deps: ['org'], level: 'operational',
-    levelScope: 'The generated static institutional site is deployed at its canonical domain.',
-    evidence: [{ t: 'deployment', ref: 'https://drayker.com' }, { t: 'document', ref: 'README.md' }],
-    risks: ['Editing the generated artifact directly can cause drift from the source component.', 'Institutional language can overstate implementation if evidence boundaries are lost.'],
-    path: 'README.md' },
-
-  propagation: { artifact: 'portal', problem: 'Give volunteers a source-led way to explain, translate and connect people to Drayker while making the public design system reusable.',
-    scope: ['Public propagation guidance, message starters and volunteer mission selection.', 'Organized reuse of the Drayker logo variations, interactive mark engine, design tokens, examples and official exports.', 'Navigation to public documentation, discussion and contribution entrypoints.'],
-    nonScope: ['Governance decisions or authoritative technical claims about other Drayker components.', 'Private volunteer coordination, contact collection or campaign analytics.'],
-    deps: ['org'], level: 'operational',
-    levelScope: 'The toolkit and the design library are deployed; the material they publish describes other components rather than implementing them.',
-    evidence: [{ t: 'deployment', ref: 'https://propagation.drayker.org/' }, { t: 'document', ref: 'README.md' }],
-    risks: ['Outreach language can overstate components that are still proposals.', 'A copied asset can drift from the preserved original if the hashes stop being checked.'],
-    entry: 'https://github.com/draykerdk/drayker-propagation/issues',
-    path: 'README.md' },
-
-  theme: { artifact: 'theme', problem: 'Give Drayker documentation sites a consistent, accessible visual and navigation system.',
-    scope: ['Shared Jekyll layout and design tokens for documentation repositories.', 'Navigation back to source repositories and ecosystem entrypoints.'],
-    nonScope: ['The Design Component used by drayker.org and drayker.com.', 'Governance or content truth for consuming repositories.'],
-    deps: ['org'], level: 'operational',
-    levelScope: 'The theme is published as repository code and referenced by Drayker documentation sites.',
-    evidence: [{ t: 'usage', ref: 'https://github.com/draykerdk/dk/blob/master/docs/_config.yml' }, { t: 'document', ref: 'README.md' }],
-    risks: ['A breaking layout change can affect many documentation sites at once.', 'Shared styling can hide differences in content maturity between components.'],
-    path: '_layouts/default.html' }
-,
-
-  dsupport: { artifact: 'architecture', problem: 'A distributed system can decentralize its computers while leaving members without a path to satisfy needs across local and global capacities.',
-    scope: ['A member-support program and application across multiple levels of need.', 'Local responses connected to capacities available across the global system.', 'Material, social, educational, computational, community and other paths.', 'Consent, qualified-provider boundaries, review and contestability.', 'Relation to Dk Personal, UID, PAP, Academy, Stations and the capacity economy.', 'Infrastructure support as one branch.', 'Separation between needs, reputation, resource units and hardware contribution.'],
-    nonScope: ['A deployed support program, application, service network or resource commitment.', 'A welfare, health, housing, employment, emergency or benefits service available today.', 'A guarantee that any need will be satisfied.', 'Making support depend on hardware ownership, Academy history or one reputation score.'],
-    deps: ['personal', 'uid', 'pap', 'dknetwork', 'lc'],
-    levelScope: 'This repository publishes a charter and open questions; nothing is implemented.',
-    evidence: [{ t: 'document', ref: 'README.md' }],
-    risks: ['Design language may be mistaken for an available capability.', 'The absence of a specification can leave contributions without a clear target.'],
-    entry: 'https://github.com/draykerdk/distributed-support/issues',
-    path: 'README.md' },
-
-  openscience: { artifact: 'architecture', problem: 'Science that cannot be reproduced and health data that cannot be moved are two versions of the same failure — knowledge locked inside whoever collected it.',
-    scope: ['Public description of applications on the Dk kernel.', 'Public description of identity through UID, and consent as the entry condition.', 'Public description of professional review between assisted analysis and any person.', 'Public description of DFM review alongside peer review.', 'Public description of data that belongs to the person.', 'Public description of a verifiable record as an infrastructure hypothesis.'],
-    nonScope: ['A medical service, a diagnosis, a treatment recommendation, or advice of any kind.', 'Clinical autonomy of any kind, whatever the internal project name suggests.', 'A claim that any research or health application is running.', 'Any handling of real patient data.'],
-    deps: ['dk', 'uid', 'dfmp'],
-    levelScope: 'This repository publishes a charter and open questions; nothing is implemented.',
-    evidence: [{ t: 'document', ref: 'README.md' }],
-    risks: ['Design language may be mistaken for an available capability.', 'The absence of a specification can leave contributions without a clear target.'],
-    entry: 'https://github.com/draykerdk/open-science/issues',
-    path: 'README.md' },
-
-  valueunit: { artifact: 'architecture', problem: 'Distributing resources and relating worldwide donations and external economies to a distributed organization needs a common, accountable value language.',
-    scope: ["Common reserves, project custody and personal balances.", "Contextual and contestable allocation decisions.", "Retention and transfer of personal balances.", "Redemption limited by real available resources.", "Provenance, permissions and reconciliation.", "Separation from reputation, DAF points and constitutional authority."],
-    nonScope: ['An issued token or operating currency today.', 'An investment, guaranteed price, convertibility or promise of return.', 'An operating distribution of resources today.', 'Any claim about income or sustaining anyone financially.', 'Automated allocation by Dk.', 'Buying status, reputation, voting weight or priority with money.'],
-    deps: ['daf', 'dfmpproject'],
-    levelScope: 'This repository publishes a charter and open questions; nothing is implemented.',
-    evidence: [{ t: 'document', ref: 'README.md' }],
-    risks: ['Design language may be mistaken for an available capability.', 'The absence of a specification can leave contributions without a clear target.'],
-    entry: 'https://github.com/draykerdk/value-unit/issues',
-    path: 'README.md' },
-
-  pap: { artifact: 'architecture', problem: 'Organizing around an objective is rebuilt from nothing every time, and a project that works has no way to become durable without being rebuilt as something else.',
-    scope: ['Public description of projects and applications as composable modules.', 'Public description of the lifecycle from project to application, and what promotion requires.', 'Public description of reuse, cloning and templates across projects.', 'Public description of validation, modelling and simulation before resources are committed.', 'Public description of participation attributed through UID.', 'Public description of relation to DFMPProject and the project queues.'],
-    nonScope: ['A running platform, an account system or a hosting service.', 'A replacement for the proposal path described in DFMPProject.', 'A claim that projects carry their own money or that DAF permanently owns allocation rules.'],
-    deps: ['dfmpproject', 'uid', 'dfmp'],
-    levelScope: 'This repository publishes a charter and open questions; nothing is implemented.',
-    evidence: [{ t: 'document', ref: 'README.md' }],
-    risks: ['Design language may be mistaken for an available capability.', 'The absence of a specification can leave contributions without a clear target.'],
-    entry: 'https://github.com/draykerdk/pap/issues',
-    path: 'README.md' },
-
-  personal: { artifact: 'architecture', problem: 'An assistant that belongs to a platform ultimately works for the platform.',
-    scope: ['Public description of one agent per member, bound to UID.', 'Public description of raw personal context that stays local.', 'Public description of anonymous federated patterns or model updates with depersonalized metadata.', 'Public description of independent validation increasing global weight.', 'Public separation between federated learning and deliberate authorized sharing.', 'Public description of consent, refusal, contestability and re-identification safeguards.'],
-    nonScope: ['A released assistant, agent or application.', 'Any handling of real personal data.', 'The operational runtime, and the global scale of Dk.'],
-    deps: ['dk', 'uid', 'lc'],
-    levelScope: 'This repository publishes a charter and open questions; nothing is implemented.',
-    evidence: [{ t: 'document', ref: 'README.md' }],
-    risks: ['Design language may be mistaken for an available capability.', 'The absence of a specification can leave contributions without a clear target.', 'Depersonalized metadata may permit re-identification unless safeguards are specified and tested.'],
-    entry: 'https://github.com/draykerdk/dk-personal/issues',
-    path: 'README.md' },
-
-  academy: { artifact: 'architecture', problem: 'Open projects ask for expertise they do not teach, which quietly restricts them to people who already had access.',
-    scope: ['Public description of formation attached to real functions.', 'Public description of a personalised path, bound to UID.', 'Public description of problem-led learning, with mentoring and feedback.', 'Public description of learning that returns to the knowledge base.', 'Public description of entry without credentials.'],
-    nonScope: ['An accredited course, a certification or a qualification.', 'A prerequisite for participating in Drayker, or an automatic certifier.', 'A promise of placement, funding or employment.'],
-    deps: ['dknowledge', 'uid', 'pap'],
-    levelScope: 'This repository publishes a charter and open questions; nothing is implemented.',
-    evidence: [{ t: 'document', ref: 'README.md' }],
-    risks: ['Design language may be mistaken for an available capability.', 'The absence of a specification can leave contributions without a clear target.'],
-    entry: 'https://github.com/draykerdk/dk-academy/issues',
-    path: 'README.md' },
-
-  stations: { artifact: 'architecture', problem: 'An organization with nowhere to be reaches only the people who were already online and already able.',
-    scope: ['Public description of stations as a project model.', 'Public description of the distinction between support stations, centres and embassies.', 'Public description of activity first, and what evidence would justify a physical place.', 'Public description of production, research and service variants.', 'Public description of relation to distributed support, Academy and the economy.', 'Public description of local emergence inside one global body.'],
-    nonScope: ['An existing centre, embassy or physical facility.', 'A property, residency or relocation offer.', 'Any commitment to open a place, anywhere, on any timeline.'],
-    deps: ['dsupport', 'daf', 'valueunit'],
-    levelScope: 'This repository publishes a charter and open questions; nothing is implemented.',
-    evidence: [{ t: 'document', ref: 'README.md' }],
-    risks: ['Design language may be mistaken for an available capability.', 'The absence of a specification can leave contributions without a clear target.'],
-    entry: 'https://github.com/draykerdk/stations/issues',
-    path: 'README.md' }
+  "dk": {
+    "artifact": "architecture",
+    "problem": "Define Dk as distributed intelligence across personal, local and global scales, carried by a Distributed Kernel architecture able to compose data, knowledge, algorithms and intelligence.",
+    "scope": [
+      "Public architecture and conceptual boundaries of Dk as distributed intelligence and of Distributed Kernel as its technical architecture.",
+      "Relationship between Dk Global, Dk Personal and Dk Local."
+    ],
+    "nonScope": [
+      "A production-ready kernel implementation.",
+      "Claims that Dk Global, Dk Personal or Dk Local are deployed services."
+    ],
+    "deps": [
+      "bsdk",
+      "dknetwork",
+      "lc"
+    ],
+    "level": "none",
+    "levelScope": "The repository currently publishes architecture documentation; it does not contain a released kernel implementation.",
+    "evidence": [
+      {
+        "t": "document",
+        "ref": "docs/README.md"
+      }
+    ],
+    "risks": [
+      "Architecture language may be mistaken for implemented capability.",
+      "Boundaries among Global, Personal and Local remain incomplete."
+    ],
+    "entry": "https://github.com/draykerdk/dk/issues",
+    "path": "docs/README.md",
+    "reviewed": "2026-08-10"
+  },
+  "bsdk": {
+    "artifact": "architecture",
+    "problem": "Describe the base structure through which Dk functions and modules can be composed and revised.",
+    "scope": [
+      "Public proposal for the base structure of the Dk kernel.",
+      "Vocabulary for functions, modules and composition."
+    ],
+    "nonScope": [
+      "A production implementation of the kernel.",
+      "A stable or complete module specification."
+    ],
+    "deps": [
+      "dk"
+    ],
+    "level": "none",
+    "levelScope": "The repository contains an architectural proposal and no executable BSDK implementation.",
+    "evidence": [
+      {
+        "t": "document",
+        "ref": "docs/README.md"
+      }
+    ],
+    "risks": [
+      "The proposed structure may change as the Dk architecture becomes testable.",
+      "Conceptual terms may be read as stable interfaces before they are specified."
+    ],
+    "entry": "https://github.com/draykerdk/bsdk/issues",
+    "path": "docs/README.md",
+    "reviewed": "2026-08-10"
+  },
+  "dknetwork": {
+    "artifact": "architecture",
+    "problem": "Define the heterogeneous layered computing architecture (edge, regional mesh hubs, and clustered high-performance servers) that powers sovereign AI without cloud monopoly or surveillance.",
+    "scope": [
+      "Heterogeneous 3-tier computing topology (edge/local devices, regional mesh hubs, and federated heavy compute clusters).",
+      "Main authenticated network and secondary public interaction network protocols.",
+      "Partition-tolerant routing, offline-first execution, and depersonalized federated aggregation.",
+      "Redundancy and fault-detection mechanisms for distributed workloads."
+    ],
+    "nonScope": [
+      "A naive claim that advanced AI operates without servers or clustered hardware.",
+      "A centralized commercial cloud service owned by Drayker.",
+      "A finished, fully deployed global P2P network today."
+    ],
+    "deps": [
+      "dk",
+      "lc",
+      "dsupport"
+    ],
+    "level": "none",
+    "levelScope": "The heterogeneous 3-tier architecture and network plane specifications are documented; implementation of routing and peer discovery tooling is in active R&D.",
+    "evidence": [
+      {
+        "t": "document",
+        "ref": "README.md"
+      }
+    ],
+    "risks": [
+      "Underestimating bandwidth and compute requirements for large-scale training workloads.",
+      "Latency overhead across high-redundancy consensus checks."
+    ],
+    "entry": "https://github.com/draykerdk/dk-network/issues",
+    "path": "README.md",
+    "reviewed": "2026-09-08"
+  },
+  "lc": {
+    "artifact": "research-proposal",
+    "problem": "Explore authentication and cryptographic mechanisms that can adapt after authentication failure.",
+    "scope": [
+      "Public research direction for adaptive authentication, uPOW and encryption.",
+      "Documentation of intended security properties and open questions."
+    ],
+    "nonScope": [
+      "Audited cryptographic software.",
+      "A production authentication service or completed threat model."
+    ],
+    "deps": [
+      "dknetwork"
+    ],
+    "level": "none",
+    "levelScope": "The repository contains a research proposal; no safe production implementation is published.",
+    "evidence": [
+      {
+        "t": "document",
+        "ref": "docs/README.md"
+      }
+    ],
+    "risks": [
+      "Unspecified cryptography must not be treated as secure or production-ready.",
+      "Metaphorical descriptions can obscure concrete threat and trust assumptions."
+    ],
+    "entry": "https://github.com/draykerdk/living-cryptography/issues",
+    "path": "docs/README.md",
+    "reviewed": "2026-08-10"
+  },
+  "osdk": {
+    "artifact": "architecture",
+    "problem": "Define a universal coupling layer through which devices connect to the Drayker network and run personal intelligence.",
+    "scope": [
+      "Public design intent for device-to-network coupling.",
+      "Public description of the runtime version running on top of conventional operating systems functioning as an integrated application / super app environment.",
+      "Public description of edge hardware coupling preserving local privacy and zero telemetry.",
+      "Questions and boundaries needed for a future specification."
+    ],
+    "nonScope": [
+      "A released device adapter or proprietary lock-in operating system today.",
+      "Guaranteed compatibility with all existing hardware without testing."
+    ],
+    "deps": [
+      "dknetwork",
+      "personal",
+      "uid"
+    ],
+    "level": "none",
+    "levelScope": "OSDK is currently an architectural design without a published standalone OS implementation.",
+    "evidence": [
+      {
+        "t": "document",
+        "ref": "docs/README.md"
+      }
+    ],
+    "risks": [
+      "The universal-coupler description may overstate an early concept.",
+      "Hardware and security constraints remain unspecified."
+    ],
+    "entry": "https://github.com/draykerdk/osdk/issues",
+    "path": "docs/README.md",
+    "reviewed": "2026-09-03"
+  },
+  "uid": {
+    "artifact": "architecture",
+    "problem": "Define identity, agentic delegation, and reputation architecture that separates cryptographic personhood, bounded autonomous proxies, and contextual reputation clusters without surveillance or financialization.",
+    "scope": [
+      "Public specification for 3-layer identity (cryptographic personhood, bounded proxy agents, and contextual reputation).",
+      "Zero-knowledge proofs of authenticated presence and pairwise non-correlation.",
+      "Bounded agentic delegation rules and Situated Contextual Veto.",
+      "Non-transferable, domain-segmented reputation clusters."
+    ],
+    "nonScope": [
+      "A centralized identity provider or biometric database.",
+      "A monolithic social credit score or financialized reputation markets.",
+      "An operational application platform today."
+    ],
+    "deps": [
+      "dk",
+      "lc",
+      "pap"
+    ],
+    "level": "none",
+    "levelScope": "UID specifies the 3-layer architectural model and safeguards; cryptographic execution tooling remains in research and development.",
+    "evidence": [
+      {
+        "t": "document",
+        "ref": "README.md"
+      }
+    ],
+    "risks": [
+      "Misinterpreting representative proxy agents as legal or constitutional personhood.",
+      "Premature correlation of pairwise identities across distinct domains."
+    ],
+    "entry": "https://github.com/draykerdk/uid/issues",
+    "path": "README.md",
+    "reviewed": "2026-09-08"
+  },
+  "dfmp": {
+    "artifact": "protocol",
+    "problem": "Make complex collaborative work enterable through small functions that remain connected to a shared model.",
+    "scope": [
+      "Public description of the DFM method and DFMP proposal path.",
+      "Proposals and discussion for formalizing that method."
+    ],
+    "nonScope": [
+      "An operational decentralized approval system.",
+      "A separate community-review branch or mandatory council gate in the founding phase."
+    ],
+    "deps": [
+      "metadfmp"
+    ],
+    "level": "none",
+    "levelScope": "The method is described, while DFMP-000 and the complete proposal protocol remain unspecified.",
+    "evidence": [
+      {
+        "t": "document",
+        "ref": "README.md"
+      }
+    ],
+    "risks": [
+      "Aspirational process language may be interpreted as enforced governance.",
+      "Missing proposal details can produce inconsistent contribution paths."
+    ],
+    "entry": "https://github.com/draykerdk/dfmp/issues",
+    "path": "README.md",
+    "reviewed": "2026-08-10"
+  },
+  "metadfmp": {
+    "artifact": "research-proposal",
+    "problem": "Formalize and improve the engineering and functional-modeling foundations beneath DFM.",
+    "scope": [
+      "Public research direction for modeling DFM itself.",
+      "Proposed foundations for future cognitive-swarm research."
+    ],
+    "nonScope": [
+      "A running autonomous research agent.",
+      "A complete formal framework for DFM."
+    ],
+    "deps": [
+      "dfmp"
+    ],
+    "level": "none",
+    "levelScope": "The repository states a research direction but does not publish the proposed framework or an implementation.",
+    "evidence": [
+      {
+        "t": "document",
+        "ref": "docs/README.md"
+      }
+    ],
+    "risks": [
+      "Agent language may imply software that does not exist.",
+      "Circular dependencies with DFMP require careful specification."
+    ],
+    "entry": "https://github.com/draykerdk/metadfmp/issues",
+    "path": "docs/README.md",
+    "reviewed": "2026-08-10"
+  },
+  "daf": {
+    "artifact": "governance-proposal",
+    "problem": "Describe how autonomous Drayker units can test cooperation and bounded shared-resource governance during the transition to durable member governance and PAP.",
+    "scope": [
+      "Public proposal for a transitional federation scaffold.",
+      "Specification of participation, federative points, decisions and resource evaluation.",
+      "A first phase designed to run on a public repository, with no chain and no token.",
+      "A probable provisional ICP substrate if DAF reaches a token-economy phase, used to build and test Drayker's own infrastructure.",
+      "Transition of useful functions and transitional infrastructure into PAP, with DAF expected to dissolve when the durable environment exists.",
+      "A public reading surface (daf.drayker.org) for the specification, the record and the instruments: unit record, claim, resource request, cycle and vote."
+    ],
+    "nonScope": [
+      "An operating DAO federation.",
+      "A deployed smart contract or an enforced voting procedure.",
+      "A treasury held by the federation.",
+      "A transferable instrument, token or claim on pooled funds.",
+      "Drayker's final constitution or a permanent organizational layer.",
+      "ICP as Drayker's final infrastructure or a permanent dependency.",
+      "General member reputation, basic-needs support or authority outside DAF's bounded scope."
+    ],
+    "deps": [
+      "dfmp",
+      "advices",
+      "uid"
+    ],
+    "level": "none",
+    "levelScope": "The points and voting mechanics are specified as drafts; no unit is recorded, no assembly has been held and no contract is deployed. The site is a reading and composing surface over the repository, not an operating federation.",
+    "evidence": [
+      {
+        "t": "document",
+        "ref": "README.md"
+      },
+      {
+        "t": "document",
+        "ref": "dafp/daf-000-federation-constitution.md"
+      },
+      {
+        "t": "document",
+        "ref": "dafp/daf-001-phase-0-github-federation.md"
+      },
+      {
+        "t": "deployment",
+        "ref": "https://daf.drayker.org/"
+      }
+    ],
+    "risks": [
+      "Governance language may incorrectly imply a legal or operational federation.",
+      "A written specification may be read as a deployed system.",
+      "Point and quorum parameters are untested starting values, not validated by use.",
+      "Unspecified resource rules can create expectations the project cannot meet."
+    ],
+    "entry": "https://github.com/draykerdk/daf/issues/new/choose",
+    "path": "README.md",
+    "reviewed": "2026-09-08"
+  },
+  "advices": {
+    "artifact": "governance-proposal",
+    "problem": "Define how specialized technical advisory groups and the Independent Member Judicial Panel review proposals, enforce constitutional separation of powers, and protect members against capture or arbitrary revocation.",
+    "scope": [
+      "Public specification for specialized Technical Advisory Councils (epistemic and architectural peer review of models, protocols, and code).",
+      "Specification of the Independent Member Judicial Panel (constitutional compliance, sortition selection, distinct cryptographic signing keys, power to stay contested actions and replace operational coordinators).",
+      "Formalization of the Situated Contextual Veto for directly affected members."
+    ],
+    "nonScope": [
+      "Wealth-weighted or tokenized voting.",
+      "Opaque operational councils without public deliberation records.",
+      "Automatic vetoes over routine operational workflows during the founding phase."
+    ],
+    "deps": [
+      "dfmp",
+      "daf"
+    ],
+    "level": "none",
+    "levelScope": "The repository describes the dual structure of technical councils and the independent judicial panel, along with protection against capture. Operational tooling and sortition protocols remain in development.",
+    "evidence": [
+      {
+        "t": "document",
+        "ref": "README.md"
+      }
+    ],
+    "risks": [
+      "Readers may mistake a proposed council structure for fully automated on-chain execution.",
+      "Failure to maintain distinct signing keys and sortition rotation could lead to operator capture."
+    ],
+    "entry": "https://github.com/draykerdk/advices/issues",
+    "path": "README.md",
+    "reviewed": "2026-09-08"
+  },
+  "emergence": {
+    "artifact": "community-entrypoint",
+    "problem": "Provide an open route for useful proposals whose place in the Drayker ecosystem is not yet clear.",
+    "scope": [
+      "Public discussion of papers and proposals without an obvious repository.",
+      "Development of a transparent route into established components."
+    ],
+    "nonScope": [
+      "A substitute for a component-specific contribution route.",
+      "An operational routing protocol with guaranteed outcomes."
+    ],
+    "deps": [
+      "general",
+      "dfmp"
+    ],
+    "level": "none",
+    "levelScope": "The open-edge concept is documented, while its routing procedure remains undefined.",
+    "evidence": [
+      {
+        "t": "document",
+        "ref": "README.md"
+      }
+    ],
+    "risks": [
+      "Proposals can stagnate when the onward route is not explicit.",
+      "Over-specification could undermine the deliberately permeable boundary."
+    ],
+    "entry": "https://github.com/draykerdk/emergence-initiative/issues",
+    "path": "README.md",
+    "reviewed": "2026-08-10"
+  },
+  "dknowledge": {
+    "artifact": "knowledge-base",
+    "problem": "Keep the public vision, architecture, papers and historical roadmaps of Drayker connected to their sources.",
+    "scope": [
+      "Public documentation and knowledge history for Drayker and Dk.",
+      "Clear distinction between current orientation and historical material.",
+      "The E.C.H. Triad (Expansion, Complexity, Harmony) across scales, grounded in complex systems dynamics and scale invariance, with Harmony capable of reconstructing the model.",
+      "Anonymous federated learning through patterns or model updates with depersonalized metadata, with independent validation increasing global weight.",
+      "Deliberate, authorized sharing of knowledge or narrative with provenance and permissions, kept distinct from federated learning."
+    ],
+    "nonScope": [
+      "The private local Dknowledger vault.",
+      "An operational distributed data, sensor, oracle or ontology platform."
+    ],
+    "deps": [
+      "dk",
+      "dfmp",
+      "pap"
+    ],
+    "level": "operational",
+    "levelScope": "The public documentation site is deployed; the broader knowledge-system vision is not implemented.",
+    "evidence": [
+      {
+        "t": "deployment",
+        "ref": "https://dknowledge.drayker.org"
+      },
+      {
+        "t": "document",
+        "ref": "README.md"
+      }
+    ],
+    "risks": [
+      "Historical roadmaps can be mistaken for current commitments.",
+      "The long-term knowledge-system vision can be confused with the deployed documentation site.",
+      "Anonymous or depersonalized learning can be overstated before re-identification safeguards are tested."
+    ],
+    "entry": "https://github.com/draykerdk/dknowledge/issues",
+    "path": "README.md",
+    "reviewed": "2026-09-03"
+  },
+  "dfmpproject": {
+    "artifact": "project-framework",
+    "problem": "Give voluntary projects a clear, modular path from an initial intention to work that others can enter.",
+    "scope": [
+      "Public proposal for creating projects through DFM.",
+      "Future templates and examples for project proposals."
+    ],
+    "nonScope": [
+      "A complete project-incubation service.",
+      "Published templates that do not yet exist in this repository."
+    ],
+    "deps": [
+      "dfmp",
+      "daf"
+    ],
+    "level": "none",
+    "levelScope": "The project framework is described, but its proposal templates and worked examples are not yet published.",
+    "evidence": [
+      {
+        "t": "document",
+        "ref": "README.md"
+      }
+    ],
+    "risks": [
+      "The absence of templates makes the public entry route ambiguous.",
+      "Governance relationships may be read as active processes before they exist."
+    ],
+    "entry": "https://github.com/draykerdk/dfmpproject/issues",
+    "path": "README.md",
+    "reviewed": "2026-08-10"
+  },
+  "general": {
+    "artifact": "community-entrypoint",
+    "problem": "Give questions, volunteer introductions and proposals a public starting point when no component-specific route is clear.",
+    "scope": [
+      "Structured public issue intake and routing governed by Principle 07 (kind to people, relentless with ideas).",
+      "Volunteer introductions and partnership proposals.",
+      "A static reading surface over public issues and merged pull requests across the Drayker organization."
+    ],
+    "nonScope": [
+      "Private applications or guaranteed placement.",
+      "Binding governance decisions or project management."
+    ],
+    "deps": [
+      "org",
+      "emergence"
+    ],
+    "level": "operational",
+    "levelScope": "GitHub Issues provide public intake and routing; forum.drayker.org provides a static reading and composing surface while publication and follow-through remain on GitHub.",
+    "evidence": [
+      {
+        "t": "usage",
+        "ref": "https://github.com/draykerdk/general-forum/issues"
+      },
+      {
+        "t": "document",
+        "ref": "README.md"
+      },
+      {
+        "t": "deployment",
+        "ref": "https://forum.drayker.org/"
+      }
+    ],
+    "risks": [
+      "Public issue content can expose information contributors intended to keep private.",
+      "Unclear routing can leave submissions without a next action."
+    ],
+    "entry": "https://github.com/draykerdk/general-forum/issues/new/choose",
+    "path": "README.md",
+    "reviewed": "2026-09-08"
+  },
+  "org": {
+    "artifact": "portal",
+    "problem": "Provide the public participation portal and connected map of the Drayker ecosystem.",
+    "scope": [
+      "Static public portal for participation, organization, documentation and the founding path toward member constitution.",
+      "Live aggregation of open functions from public GitHub issues."
+    ],
+    "nonScope": [
+      "Private project management data.",
+      "A claim that every documented ecosystem concept is implemented."
+    ],
+    "deps": [
+      "general",
+      "dknowledge"
+    ],
+    "level": "operational",
+    "levelScope": "The static site and its public GitHub-backed contribution routes are deployed; component implementation claims remain bounded by their own evidence.",
+    "evidence": [
+      {
+        "t": "deployment",
+        "ref": "https://drayker.org"
+      },
+      {
+        "t": "test",
+        "ref": "tools/render-check.js"
+      }
+    ],
+    "risks": [
+      "Cached issue data can temporarily differ from GitHub.",
+      "Narrative changes can accidentally overstate early-stage components.",
+      "Contribution language can be mistaken for an operational membership process unless the boundary is explicit."
+    ],
+    "entry": "https://github.com/draykerdk/drayker.org/issues",
+    "path": "index.html",
+    "reviewed": "2026-08-17"
+  },
+  "com": {
+    "artifact": "portal",
+    "problem": "Present Drayker institutionally and explain how the ecosystem architecture fits together.",
+    "scope": [
+      "Static institutional presentation and ecosystem overview.",
+      "Handoff to drayker.org for public participation."
+    ],
+    "nonScope": [
+      "A duplicate contribution portal.",
+      "Independent editing of generated site content."
+    ],
+    "deps": [
+      "org"
+    ],
+    "level": "operational",
+    "levelScope": "The generated static institutional site is deployed at its canonical domain.",
+    "evidence": [
+      {
+        "t": "deployment",
+        "ref": "https://drayker.com"
+      },
+      {
+        "t": "document",
+        "ref": "README.md"
+      }
+    ],
+    "risks": [
+      "Editing the generated artifact directly can cause drift from the source component.",
+      "Institutional language can overstate implementation if evidence boundaries are lost."
+    ],
+    "entry": "https://github.com/draykerdk/drayker.com/issues",
+    "path": "README.md",
+    "reviewed": "2026-08-10"
+  },
+  "propagation": {
+    "artifact": "portal",
+    "problem": "Give volunteers a source-led way to explain, translate and connect people to Drayker while making the public design system reusable.",
+    "scope": [
+      "Public propagation guidance, message starters and volunteer mission selection.",
+      "Organized reuse of the Drayker logo variations, interactive mark engine, design tokens, examples and official exports.",
+      "Navigation to public documentation, discussion and contribution entrypoints."
+    ],
+    "nonScope": [
+      "Governance decisions or authoritative technical claims about other Drayker components.",
+      "Private volunteer coordination, contact collection or campaign analytics.",
+      "The production content of drayker.org, drayker.com or the public forum."
+    ],
+    "deps": [
+      "org",
+      "general"
+    ],
+    "level": "operational",
+    "levelScope": "The static propagation portal and reusable design library are published through GitHub Pages at propagation.drayker.org.",
+    "evidence": [
+      {
+        "t": "deployment",
+        "ref": "https://propagation.drayker.org/"
+      },
+      {
+        "t": "document",
+        "ref": "README.md"
+      },
+      {
+        "t": "test",
+        "ref": "tools/check.js"
+      }
+    ],
+    "risks": [
+      "Volunteer material can drift from primary sources if links and message starters are not reviewed.",
+      "Reusable visual components can be mistaken for permission to alter the official mark.",
+      "Archived design explorations can be confused with approved production variants without the library labels and usage guide."
+    ],
+    "entry": "https://github.com/draykerdk/general-forum/issues/new?template=volunteer-introduction.yml",
+    "path": "index.html",
+    "reviewed": "2026-08-11"
+  },
+  "dsupport": {
+    "artifact": "architecture",
+    "problem": "Members, projects, communities and a distributed network all need support without turning need, contribution or reputation into a market in human worth.",
+    "scope": [
+      "Public description of support for members, projects and communities as common capacity.",
+      "Public description of projects of life and a growing common floor as research directions.",
+      "Public description of the relationship with Dk Personal, PAP, Dknowledge, Academy and Stations.",
+      "Public description of support nodes, physical and virtual.",
+      "Public description of the two tiers of contribution: authenticated nodes and identity-free light contribution.",
+      "Public description of redundant computation and comparison as the basis of trust.",
+      "Public description of contribution weighted by scarcity rather than volume.",
+      "Public description of relation to Dk Network and LCrypt.",
+      "Public description of what the network owes a node.",
+      "Public description of failure, audit and removal of a node."
+    ],
+    "nonScope": [
+      "A deployed support network or any commitment of hardware.",
+      "A payment, reward or compensation scheme for running a node.",
+      "An operating income, benefit, housing, equipment or universal-basic-income programme.",
+      "Any tradable claim, income or return derived from contributing capacity.",
+      "A score-to-resource pipeline that overrides member-defined rights, needs or accountability.",
+      "Biometric intimacy, unverified fixed rates or automatic eligibility treated as requirements."
+    ],
+    "deps": [
+      "dknetwork",
+      "lc",
+      "daf",
+      "pap",
+      "personal",
+      "dknowledge"
+    ],
+    "level": "none",
+    "levelScope": "This repository publishes the current architectural formulation and open requirements; nothing is implemented.",
+    "evidence": [
+      {
+        "t": "document",
+        "ref": "README.md"
+      }
+    ],
+    "risks": [
+      "Design language may be mistaken for an available capability.",
+      "The absence of a specification can leave contributions without a clear target.",
+      "Incentive language may be mistaken for a rank of persons or an automatic entitlement.",
+      "Network support may be mistaken for the whole Support Model, erasing its human and project dimensions."
+    ],
+    "entry": "https://github.com/draykerdk/distributed-support/issues",
+    "path": "README.md",
+    "reviewed": "2026-09-08"
+  },
+  "openscience": {
+    "artifact": "architecture",
+    "problem": "Science that cannot be reproduced and health data that cannot be moved are two versions of the same failure — knowledge locked inside whoever collected it.",
+    "scope": [
+      "Public description of applications on the Dk kernel.",
+      "Public description of non-clinical biomedical exploration, longevity, and anti-eugenic commitments.",
+      "Public description of identity through UID, Situated Contextual Veto, and consent as the entry condition.",
+      "Public description of professional review between assisted analysis and any person.",
+      "Public description of DFM review alongside peer review.",
+      "Public description of data that belongs to the person.",
+      "Public description of a verifiable record as an infrastructure hypothesis."
+    ],
+    "nonScope": [
+      "A medical service, a diagnosis, a treatment recommendation, or advice of any kind.",
+      "Clinical autonomy of any kind, whatever the internal project name suggests.",
+      "Eugenic optimization, genetic caste stratification, or biological discrimination.",
+      "A claim that any research or health application is running.",
+      "Any handling of real patient data."
+    ],
+    "deps": [
+      "dk",
+      "uid",
+      "dfmp"
+    ],
+    "level": "none",
+    "levelScope": "This repository publishes a charter and open questions; nothing is implemented.",
+    "evidence": [
+      {
+        "t": "document",
+        "ref": "README.md"
+      }
+    ],
+    "risks": [
+      "Design language may be mistaken for an available capability.",
+      "The absence of a specification can leave contributions without a clear target."
+    ],
+    "entry": "https://github.com/draykerdk/open-science/issues",
+    "path": "README.md",
+    "reviewed": "2026-09-08"
+  },
+  "valueunit": {
+    "artifact": "architecture",
+    "problem": "Distributing resources and relating external material needs to a distributed organization needs an accountable capacity accounting language without financial speculation.",
+    "scope": [
+      "Public description of Dktron as an internal capacity accounting and settlement unit across three spheres: common pool, project custody, and personal member balances.",
+      "Public description of non-deterministic resource distribution under contextual and contestable rules.",
+      "Public description of temporary custody: project capacity returns to common reserves upon milestone completion or verified abandonment.",
+      "Public description of personal member Dktron: accumulable, transferable, and immune to inactivity confiscation or passive rentier yield.",
+      "Public description of conversion into fiat currency through lawful bridges for member material sustenance based on real material liquidity reserves.",
+      "Public description of provenance, purpose, permissions and accountable review.",
+      "Public description of an accounting record before an operating unit.",
+      "Public separation from DAF federative points and general reputation.",
+      "Public description of relation to the internal capacity economy and plutocratic immunity."
+    ],
+    "nonScope": [
+      "An issued speculative token, volatile cryptocurrency, investment, security or financial product.",
+      "Perpetual property or passive rentier accumulation of idle capacity or hardware.",
+      "An operating distribution of resources today.",
+      "Any guarantee of yield, appreciation, liquidity, income or support payments.",
+      "Confiscation or seizure of personal member balances based on inactivity.",
+      "Automated allocation by Dk without constitutional rules, accountable authorization and review.",
+      "Buying member status, reputation, voting weight or priority with money."
+    ],
+    "deps": [
+      "daf",
+      "dfmpproject"
+    ],
+    "level": "none",
+    "levelScope": "This repository publishes the current architectural formulation and open requirements; nothing is implemented.",
+    "evidence": [
+      {
+        "t": "document",
+        "ref": "README.md"
+      }
+    ],
+    "risks": [
+      "Currency or token language can create speculative financial expectations before legal and accounting boundaries are understood.",
+      "The absence of a specification can leave contributions without a clear target.",
+      "Temporary custody rules must be strictly stated to prevent rentier accumulation."
+    ],
+    "entry": "https://github.com/draykerdk/value-unit/issues",
+    "path": "README.md",
+    "reviewed": "2026-09-03"
+  },
+  "pap": {
+    "artifact": "architecture",
+    "problem": "Organizing around an objective is rebuilt from nothing every time, and a project that works has no way to become durable without being rebuilt as something else.",
+    "scope": [
+      "Public description of projects and applications as composable modules.",
+      "Public description of the lifecycle from project to application, and what promotion requires.",
+      "Public description of reuse, cloning and templates across projects.",
+      "Public description of validation, modelling and simulation before resources are committed.",
+      "Public description of participation attributed through UID.",
+      "Public description of relation to DFMPProject and the project queues."
+    ],
+    "nonScope": [
+      "A running platform, an account system or a hosting service.",
+      "A replacement for the proposal path described in DFMPProject.",
+      "A claim that projects carry their own money or that DAF permanently owns allocation rules."
+    ],
+    "deps": [
+      "dfmpproject",
+      "uid",
+      "dfmp"
+    ],
+    "level": "none",
+    "levelScope": "This repository publishes a charter and open questions; nothing is implemented.",
+    "evidence": [
+      {
+        "t": "document",
+        "ref": "README.md"
+      }
+    ],
+    "risks": [
+      "Design language may be mistaken for an available capability.",
+      "The absence of a specification can leave contributions without a clear target."
+    ],
+    "entry": "https://github.com/draykerdk/pap/issues",
+    "path": "README.md",
+    "reviewed": "2026-09-08"
+  },
+  "personal": {
+    "artifact": "architecture",
+    "problem": "An assistant that belongs to a platform ultimately works for the platform; an assistant must act strictly on the side of the person.",
+    "scope": [
+      "Public description of one agent per member, bound to UID.",
+      "Public description of attention sovereignty and metacognitive defusion: shield against addiction loops and cognitive drift.",
+      "Public description of distributed topology: runs locally on user hardware and nearest edge nodes.",
+      "Public description of offline capability: operates offline under specific conditions and with reduced capacity.",
+      "Public description of partner role: acts on the person's side as partner, assistant, trainer and tutor.",
+      "Public description of personal context that does not travel, zero continuous telemetry, and protection of intimate contradiction.",
+      "Public description of organizing knowledge, decisions and tasks for one person.",
+      "Public description of anonymous federated learning through patterns with depersonalized metadata while raw context stays local.",
+      "Public separation between federated patterns and deliberate, authorized sharing of knowledge.",
+      "Public description of consent, Situated Contextual Veto, contestability and portability.",
+      "Public description of relation to Dknowledge, Dk Local and Dk Global."
+    ],
+    "nonScope": [
+      "A released assistant, agent or application today.",
+      "External behavioral surveillance, performance scoring, or acting as a boss/monitor.",
+      "Any handling of real personal data on central servers.",
+      "The operational runtime, and the global scale of Dk."
+    ],
+    "deps": [
+      "dk",
+      "uid",
+      "lc"
+    ],
+    "level": "none",
+    "levelScope": "This repository publishes a charter and open questions; nothing is implemented.",
+    "evidence": [
+      {
+        "t": "document",
+        "ref": "README.md"
+      }
+    ],
+    "risks": [
+      "Design language may be mistaken for an available capability.",
+      "The absence of a specification can leave contributions without a clear target.",
+      "Depersonalized metadata may still permit re-identification unless safeguards are tested."
+    ],
+    "entry": "https://github.com/draykerdk/dk-personal/issues",
+    "path": "README.md",
+    "reviewed": "2026-09-08"
+  },
+  "academy": {
+    "artifact": "architecture",
+    "problem": "Open projects ask for expertise they do not teach, which quietly restricts them to people who already had access.",
+    "scope": [
+      "Public description of formation attached to real functions.",
+      "Active pedagogical framework (Dewey/Montessori): authentic problem-led learning strictly for learner autonomy and competence.",
+      "Public description of a personalised path, bound to UID.",
+      "Public description of problem-led learning, with mentoring and feedback.",
+      "Public description of learning that returns to the knowledge base.",
+      "Public description of the loop from conceptual formation to contextual learning, real function, consequence, Dknowledge and improved formation.",
+      "Public description of entry without credentials."
+    ],
+    "nonScope": [
+      "An accredited course, a certification or a qualification.",
+      "Productive quotas, commercial work pressure or economic dependency for minors (strict prohibition of digital child labor or sweatshop mechanics).",
+      "A prerequisite for participating in Drayker, or an automatic certifier.",
+      "A promise of placement, funding or employment."
+    ],
+    "deps": [
+      "dknowledge",
+      "uid",
+      "pap"
+    ],
+    "level": "none",
+    "levelScope": "This repository publishes a charter and open questions; nothing is implemented.",
+    "evidence": [
+      {
+        "t": "document",
+        "ref": "README.md"
+      }
+    ],
+    "risks": [
+      "Design language may be mistaken for an available capability.",
+      "The absence of a specification can leave contributions without a clear target.",
+      "Connecting learning to real functions must never turn into unpaid or exploitative labor for minors."
+    ],
+    "entry": "https://github.com/draykerdk/dk-academy/issues",
+    "path": "README.md",
+    "reviewed": "2026-09-03"
+  },
+  "stations": {
+    "artifact": "architecture",
+    "problem": "Physical presence, support and local context for the ecosystem: an organization with nowhere to be reaches only the people who were already online and already able.",
+    "scope": [
+      "Public description of multiple tiers of physical support structures for members.",
+      "Public description of local stations and postos: community hubs for member practical work, study, hardware access and mutual support.",
+      "Public description of embassies: bilateral diplomatic and strategic cooperation agreements with sovereign states for climate security, disaster anticipation and multilateral technology cooperation.",
+      "Public description of complementary roles: local hubs serve member everyday needs, while embassies articulate sovereign multilateral agreements.",
+      "Public description of activity first, and what evidence justifies physical installation.",
+      "Public description of relation to distributed support, Academy and the capacity economy."
+    ],
+    "nonScope": [
+      "An existing operational embassy or physical facility today.",
+      "A commercial property, speculative real estate or residency offer.",
+      "Any unilateral claim of state territorial sovereignty."
+    ],
+    "deps": [
+      "dsupport",
+      "daf",
+      "valueunit"
+    ],
+    "level": "none",
+    "levelScope": "This repository publishes a charter and architectural foundations; nothing is implemented.",
+    "evidence": [
+      {
+        "t": "document",
+        "ref": "README.md"
+      }
+    ],
+    "risks": [
+      "Design language may be mistaken for an available capability.",
+      "The absence of a specification can leave contributions without a clear target.",
+      "Stations could be mistaken for an operating network of properties; they are a model requiring validated community demand or bilateral state agreements."
+    ],
+    "entry": "https://github.com/draykerdk/stations/issues",
+    "path": "README.md",
+    "reviewed": "2026-09-08"
+  },
+  "theme": {
+    "artifact": "theme",
+    "problem": "Give Drayker documentation sites a consistent, accessible visual and navigation system.",
+    "scope": [
+      "Shared Jekyll layout and design tokens for documentation repositories.",
+      "Navigation back to source repositories and ecosystem entrypoints."
+    ],
+    "nonScope": [
+      "The Design Component used by drayker.org and drayker.com.",
+      "Governance or content truth for consuming repositories."
+    ],
+    "deps": [
+      "org"
+    ],
+    "level": "operational",
+    "levelScope": "The theme is published as repository code and referenced by Drayker documentation sites.",
+    "evidence": [
+      {
+        "t": "usage",
+        "ref": "https://github.com/draykerdk/dk/blob/master/docs/_config.yml"
+      },
+      {
+        "t": "document",
+        "ref": "README.md"
+      }
+    ],
+    "risks": [
+      "A breaking layout change can affect many documentation sites at once.",
+      "Shared styling can hide differences in content maturity between components."
+    ],
+    "entry": "https://github.com/draykerdk/drayker-theme/issues",
+    "path": "_layouts/default.html",
+    "reviewed": "2026-08-10"
+  }
 };
 
 
@@ -3265,49 +3979,60 @@ const CONTRACTS = {
 // instead of listing. TRAIL is a suggested reading order across all twenty-four.
 // ============================================================================
 const PLAIN = {
-  dk: 'One shared intelligence the whole system can call on, instead of a hundred clever programs that cannot talk to each other.',
-  bsdk: 'The building blocks that shared intelligence is made of, written so they can be changed later without rewriting everything above them.',
-  dknetwork: 'The wiring the system would run on, described as a list of requirements instead of a product from one company.',
-  lc: 'Security that reacts: when an authentication fails, the data is locked again under a new key rather than waiting to be broken.',
-  osdk: 'One way for any device to plug into the network, instead of one adapter per manufacturer.',
-  uid: 'One login that belongs to you rather than to a company, and works across everything built here.',
-  dfmp: 'The rulebook for cutting a problem into pieces small enough that a stranger can finish one alone.',
-  metadfmp: 'Research on the rulebook itself: writing the method formally enough that machines can help improve it.',
-  daf: 'A way for independent groups to share resources and decisions, where weight comes from work delivered instead of from a title.',
-  advices: 'Groups of people who actually know a subject, reading a proposal before it becomes a decision.',
-  emergence: 'The place for a good idea that does not fit anywhere yet, so that it is not thrown away for being early.',
-  dknowledge: 'The library: papers, decisions and old plans kept together with their dates, so the reasoning can be followed instead of guessed.',
-  dfmpproject: 'How anyone turns an intention into a project other people can join halfway through.',
-  general: 'The room you walk into when you do not know who to ask — and the one place where every public thread in the organization can be read together.',
-  org: 'This site: where somebody new understands the system and finds something to do the same day.',
-  com: 'The public face of the organization — what it is and how the parts fit — without the contribution machinery.',
-  theme: 'One shared look for the documentation sites, so that changing the pattern is one reviewable file instead of twenty.',
-  propagation: 'What you need to explain Drayker to someone else without overclaiming, plus the official logos and the mark engine, ready to use as they are.',
-  dsupport: 'A program and application for supporting members at every level, locally and globally.',
-  openscience: 'The first thing all of this is meant to serve: research anyone can check, and health data that follows the person.',
-  valueunit: 'Account for common resources, project custody and personal balances.',
-  pap: 'A project is how people organize around anything they want to do — a study plan, a research programme, a local group, a piece of software — and an application is what a project becomes once it works.',
-  personal: 'An assistant that is yours rather than a company’s, and that keeps what it knows about you to itself.',
-  academy: 'Learning the thing you are about to work on, so that arriving without a degree is a starting point and not a wall.',
-  stations: 'Local groups first, and eventually actual places — workshops, centres, embassies — so that taking part does not require already being online and already able.'
+  "dk": "Intelligence that connects personal context with shared knowledge.",
+  "bsdk": "A structure for composing and revising the Dk kernel.",
+  "dknetwork": "Local devices, regional nodes and shared computing clusters.",
+  "lc": "Research into adaptive authentication and encryption.",
+  "osdk": "A shared interface between devices and the Drayker network.",
+  "uid": "Identity, revocable representation and contextual contribution records.",
+  "dfmp": "Turn a shared problem into work people can deliver.",
+  "metadfmp": "Study and improve the method through explicit models.",
+  "daf": "A transitional framework for shared decisions and resources.",
+  "advices": "Technical deliberation and independent human recourse.",
+  "emergence": "An entry point for ideas whose place is still emerging.",
+  "dknowledge": "Knowledge with sources, context and a path to correction.",
+  "dfmpproject": "Give an intention a structure others can join.",
+  "general": "A shared view of public discussion across Drayker.",
+  "org": "Find the work and help shape the system.",
+  "com": "Understand the institution and the system it proposes.",
+  "propagation": "Help people encounter and understand the public work.",
+  "dsupport": "Connect needs with the capacity to participate and continue.",
+  "openscience": "Research people can examine, with care centred on the person.",
+  "valueunit": "Account for common resources, project custody and personal balances.",
+  "pap": "Compose projects and carry successful work into lasting applications.",
+  "personal": "A personal agent whose mandate the person controls.",
+  "academy": "Learning paths connected to curiosity and meaningful participation.",
+  "stations": "Physical places that support participation and shared work.",
+  "theme": "A shared reading experience for the documentation."
 };
 
 const ARCH_NOTES = {
-  dk: ['Data held so that many machines can read and extend it at once, without one copy being the true one.',
-    'The intelligence is not a program on a server; it is the network of them, which is why it cannot be switched off in one place.',
-    'The layer where behaviour is meant to improve from use rather than from a release — the least specified part, and the most argued over.',
-    'How an existing algorithm plugs in and inherits the rest instead of being rewritten for this system.'],
+  dk: ['Dk connects assistance in one person’s context with specialised project intelligence and shared synthesis. Moving between scales requires permission and preserves the origin of the information used.',
+    'The proposed data structure links records and their relationships across systems. Access, versioning and correction rules must specify which participants can read or change each record.',
+    'Dk Network connects local devices, regional nodes and computing clusters. Work is placed according to confidentiality, available hardware and the conditions under which results can be checked.',
+    'Changes to behaviour and models should remain inspectable and open to correction. The design needs criteria for accepting an improvement and for reversing a change that produces harm.',
+    'Shared interfaces would allow a specialised algorithm to contribute a capability without reproducing the whole system. Its inputs, outputs, assumptions and limits need to be documented.'],
   bsdk: ['A structure that carries its own description, so a change is a revision rather than a rewrite.',
     'People correct the machine and the machine surfaces what people missed; the loop is the point, not the automation.',
     'Which modules exist, what each may assume about the others, and where a boundary is allowed to move.',
     'Describing a function as a model instead of as code, so it can be reasoned about before it is built.'],
-  dknetwork: ["Three computing tiers connect local and edge execution, regional coordination and specialised clusters through public interfaces and independently operated infrastructure.", "A personal agent could keep a private task on a laptop while an authorised research simulation uses a shared cluster. Offline functions would depend on the device and data available locally.", "The network must make those boundaries explicit and test continuity, confidentiality and failure recovery under realistic conditions."],
-  lc: ["The research explores uPOW and responses to failed authentication, examining their computational cost, recovery behaviour and resistance to abuse.", "A useful experiment would compare an attack and an accidental failed login, measuring the effect on legitimate users and on the resources needed to recover.", "The value of a security mechanism depends on evidence that it protects the system under the conditions in which people will use it."],
+  dknetwork: ['Private personal processing begins on local devices or authorised edge infrastructure. Offline functions depend on the models, data, memory and power available there.',
+    'Regional infrastructure can relay messages, cache authorised material and coordinate nearby workloads. Partition recovery and synchronisation require explicit protocols and testing.',
+    'Specialised servers and accelerators support workloads beyond local hardware. Independent operators need public interfaces, permission boundaries and an agreed way to check results.',
+    'The two interaction networks concern access and trust; the three computing tiers concern hardware and workload placement. Either distinction must remain visible when specifying a task’s route.',
+    'Living Cryptography researches relevant security mechanisms. The network must also specify recovery from failed nodes, compromised credentials and unavailable resources, with evidence from realistic tests.'],
+  lc: ['The research examines when changing encryption state is useful and how legitimate users retain access. It must account for compromised keys and information already disclosed.',
+    'A proposed unit of computational work would contribute to authentication and distributed processing. Its specification must establish how work is verified and what it costs each participant.',
+    'Communication between participants needs explicit confidentiality and authentication properties. A mechanism’s guarantees depend on its threat model, implementation and operating conditions.',
+    'An attack and an accidental failed login can produce the same initial signal. Experiments must measure legitimate-user access, denial-of-service risks and recovery cost before choosing a response.'],
   osdk: ['One contract a device implements, instead of a bespoke integration for each cloud.',
     'How a thing announces itself, proves what it is, and is accepted or refused.',
     'A device is not just connected: it becomes something the rest of the system can use immediately.',
     'What the network guarantees a device, and what it demands back.'],
-  uid: ["The architecture distinguishes cryptographic identity, bounded and revocable proxy mandates, and reputation tied to a particular domain and its evidence.", "A member could authorise an agent to coordinate a project task, withdraw that mandate and retain their own identity and contribution record.", "Participation needs accountable actions and meaningful recourse while preserving privacy and rights independent of reputation or financial holdings."],
+  uid: ['Identity establishes the person’s continuity while selective disclosure limits what an interaction reveals. Credentials need recovery procedures; losing a key must not erase the person’s standing.',
+    'A proxy acts within a scope authorised by the member. A mandate specifies limits and duration, and revocation must reach systems that would otherwise continue accepting actions.',
+    'A record connects delivered work to evidence within a domain. It can be reviewed and corrected, without becoming a single score of a person’s worth or a financial asset.',
+    'Separate identifiers can reduce correlation but require protocol and metadata analysis. Contested access and delegated actions need an accessible human review path.'],
   dfmp: ['The five moves of the method, in order: what is being solved, cut into finishable pieces, given away, argued with, then recorded.',
     'The part that actually runs today, on ordinary public Git — no separate platform and no intermediary.',
     'Councils and a recorded validation status are the designed end state, and both are unwritten.',
@@ -3316,14 +4041,14 @@ const ARCH_NOTES = {
     'Many small agents searching a design space in parallel — a research direction, not running software.',
     'Testing a method by simulating it, so an architecture argument can have a result.',
     'Programs that write and revise programs — the tooling the formalization would need to be useful.'],
-  daf: ['The contract that would link autonomous units and hold shared resources — not deployed anywhere.',
-    'How an independent group joins the federation without asking permission from a head office.',
-    'Weight accumulated from delivered work rather than appointment. The mechanics are undefined, and that is an open invitation.',
-    'The rule that support is requested only when there is no alternative, and that what is decided is published.'],
-  advices: ['Membership follows what someone actually studies, not seniority in the project.',
-    'Review runs beside development instead of after it, so an objection arrives while it is still cheap.',
-    'A proposal is routed to the groups that can judge it, rather than to whoever is available.',
-    'A council states a position on the record, so a decision can be audited later. How it does that is unwritten.'],
+  daf: ['The constitution describes how participating groups test shared decision and resource rules. Useful functions may later migrate into PAP and member governance.',
+    'Proposals, votes, evidence and assembly records are kept in ordinary versioned files. A later infrastructure migration must preserve their meaning and attribution.',
+    'Points record delivered functions within the federation experiment. They remain distinct from UID reputation and Dktron balances, with awards and sanctions grounded in reviewable evidence.',
+    'An allocation identifies its purpose, responsibility and review conditions. Honest failure is recorded and examined; sanctions require established misconduct and the applicable review procedure.'],
+  advices: ['Councils bring relevant competence to the review of proposals, models and code. Their recorded reasoning helps others understand what was examined and why a position was reached.',
+    'The proposed panel reviews contested decisions and rights claims independently of technical councils and system operators. It needs its own means to suspend or remedy an action.',
+    'Member selection, eligibility and conflict checks must preserve independence in each case. The public proposal needs detailed procedures that can be examined before use.',
+    'A review should connect evidence and reasons to an outcome that can actually be carried out. Suspension, operator replacement and an accessible record are requirements to specify and demonstrate.'],
   emergence: ['A border that lets ideas in before anyone can classify them.',
     'Papers that do not fit DFMP, DFMPP or Meta DFM live here rather than nowhere.',
     'The route onward to a real home — the piece that is missing, which is why things can stagnate here.',
@@ -3336,9 +4061,10 @@ const ARCH_NOTES = {
     'Independent functions that get formed, and modules that connect them into something larger.',
     'How a new project becomes an autonomous unit inside the federation.',
     'How a new project relates to the queues of the projects that already exist.'],
-  general: ['Where something that concerns everyone is said once, in public.',
-    'A thought that does not have a repository yet is welcome here rather than lost.',
-    'The README says which repository each kind of question belongs to; the routing is the service.'],
+  general: ['The forum collects public issues and merged pull requests from source repositories. Search and project filters help readers discover related discussions.',
+    'Merged work remains linked to its original review and context. Readers can inspect what changed and follow the discussion that supported it.',
+    'A question can begin in General Forum when its project is unclear. The discussion can identify a suitable repository and preserve the path to it.',
+    'The routing guide connects a topic to the project responsible for it. Publishing and replying happen in that repository on GitHub.'],
   org: ['No build step and no server: the deployed file is the design, which is why a change is reviewable.',
     'The open-functions board is read live from public issues, so nothing on it is written by hand.',
     'The institutional site is generated from this same component, so the two deployments cannot drift.',
@@ -3357,23 +4083,44 @@ const ARCH_NOTES = {
     'Consent, qualified-provider boundaries, human review and appeal belong in the design.',
     'Infrastructure nodes, redundancy and scarcity are one branch of the program, not the whole.',
     'Support is separate from reputation, DAF points, Dktron ownership and hardware contribution.'],
-  openscience: ["The proposed path connects consent, data provenance, analysis and review, keeping research claims distinguishable from validated applications.", "A study could publish its method and limitations while protecting participant data and recording which uses each participant authorised.", "The aim is broadly accessible scientific progress and human flourishing. Each application must establish its own evidence, safeguards and practical limits."],
-  valueunit: ["The design separates the three spheres and connects redemption to real available resources. Reputation and federative governance records remain distinct from financial holdings.", "A project could return an unused allocation under its agreed terms while a member retains a personal balance for later use or authorised conversion to living expenses.", "Coherent accounting should make support dependable and resource decisions inspectable, without giving financial holdings constitutional authority."],
+  openscience: ['Research applications could use shared computing and knowledge capabilities. Each application still needs its own evidence, safeguards and evaluation.',
+    'UID would support attribution and authorisation. A study must explain which data it needs, for what purpose and how the person can revise or withdraw permission.',
+    'Assisted analysis must be distinguished from a clinical decision. Any future clinical use requires qualified review and respect for the person’s authority over bodily choices.',
+    'DFM can help structure a contribution; scientific peer review examines the research itself. Worked cases should explain how those responsibilities meet without treating one as a substitute for the other.',
+    'Health data has a specific purpose and permission boundary. Portability, correction and withdrawal require mechanisms that preserve those conditions when data moves.',
+    'Sources, methods and limitations should remain attached to findings. When evidence changes, dependent analyses and decisions need a visible review path.'],
+  valueunit: ['Common reserves record material resources and liquidity available for support and collective activity. An entry must remain connected to capacity that actually exists.',
+    'A project receives resources for an agreed purpose and under explicit conditions. Unspent allocations return according to those terms, with completion or abandonment recorded.',
+    'A personal balance is distinct from a project allocation. The proposal allows retention and transfer, protects it from forfeiture by inactivity and grants no passive yield or constitutional authority for holding it.',
+    'Conversion into living expenses depends on real available reserves and an authorised bridge. Reconciliation must prevent capacity from being counted or spent twice.',
+    'Contextual reputation and DAF points record different relationships. Neither is automatically interchangeable with a personal balance or a right to direct common resources.'],
   pap: ['A project is liquid and experimental; an application is the solid form of one that reached its objective. Every application was a project first.',
     'A project is a set of modules, so parts of it can be reused by someone solving a different problem.',
     'Cloning an existing project is a normal way to start one, rather than a shortcut.',
     'Validation, modelling and simulation come before resources are committed, so an idea can be discarded on evidence rather than after the spending.',
     'Who did what is attributable because participation is bound to an identity the person owns.',
     'DFMPProject says how a project is proposed; this is where the proposed project would then live.'],
-  personal: ["The design distinguishes stated preferences from inferences, keeps private context within authorised boundaries and makes mandates revocable. Local operation depends on the available hardware and data.", "A member could correct a mistaken inference, pause an automated task and decide which project receives a particular piece of context.", "A personal agent should expand a person’s room to think and act, including their ability to rest, reconsider and refuse an action in their own sphere."],
-  academy: ['Formation is attached to a real function, so learning and contributing are the same motion.',
-    'The path adapts to the person rather than to a curriculum written for an average.',
-    'What someone learns goes back into the knowledge base, which is what makes the next path shorter.',
-    'No credential is required to enter. That is a design constraint, not an aspiration.'],
-  stations: ['A station is proposed and run like any other project, with its own scope and its own community.',
-    'Production, research and service are different models of the same pattern.',
-    'A station is part of what physically holds the network up, and is authenticated like anything else.',
-    'One global body, many local places — autonomy at the edge, coherence at the centre.']
+  personal: ['The agent assists one member within permissions that can be inspected, revised and withdrawn. The person retains authority over its purposes and delegated actions.',
+    'Personal notes and raw context remain within authorised boundaries. Functions available offline depend on the device, model and data available locally.',
+    'Model updates are a possible sharing path, but can disclose information. The design must evaluate metadata, correlation and re-identification risks before claiming privacy.',
+    'Independent observations may strengthen a shared conclusion when their provenance and limits are understood. Repetition alone does not establish that a pattern is correct or representative.',
+    'A person can authorise the sharing of particular knowledge or contributions. This path is distinct from model updates and should preserve the stated purpose and attribution.',
+    'The proposed agent excludes compulsive engagement mechanisms and continuous behavioural telemetry. It should support correction of inferences and refusal within the person’s own sphere, with review of contested effects.'],
+  academy: ['A contribution can reveal what someone wants or needs to learn. A learning path connects those concepts to practice while leaving room for curiosity beyond an immediate task.',
+    'A person’s goals and prior understanding can guide the path. Identity and permissions should preserve continuity while keeping participation voluntary.',
+    'Worked cases and feedback help someone examine their understanding before extending a project. Learning develops through explanation, attempts and reflection.',
+    'A reusable explanation or worked example can become part of Dknowledge. Personal learning records remain subject to their own permission boundary.',
+    'The Academy supports participation without becoming a mandatory credential gate. People can enter the work directly and choose the support that helps them.'],
+  stations: ['A station begins with a purpose, participants and activities suited to a place. Its commitments and resource needs should be visible in its project record.',
+    'Support stations and centres address local activities and needs. Embassies are a separate proposal for negotiated institutional cooperation; they do not imply existing territorial agreements.',
+    'A group can begin in an available space and collect evidence of use. Sustained activity and practical needs can then inform a proposal for a longer-term location.',
+    'Different activities require different equipment, expertise and safeguards. A station’s scope should identify which of those functions it can responsibly support.',
+    'Distributed Support concerns resources and participation conditions; the Academy concerns learning; the capacity economy concerns accountable allocations. A station can connect these in a local setting.',
+    'Local groups adapt to their context and can share methods and results with other communities. This relationship should preserve both useful exchange and local accountability.'],
+  propagation: ['Message starters give an audience a clear introduction and a route to the public evidence. Volunteers can adapt the language while preserving the distinction between proposal and implementation.',
+    'The matcher uses a volunteer’s selected strength and time to suggest a bounded communication task. It is an orientation aid, and the person can choose another path.',
+    'The library connects approved assets, variations and their provenance. Its manifest lets contributors identify the original source and intended use of an export.',
+    'Official files support consistent presentation across surfaces. Their documented parameters let volunteers choose a suitable variation while preserving the identity of the mark.'],
 };
 
 // ============================================================================
@@ -3385,6 +4132,99 @@ const ARCH_NOTES = {
 // restating it. Honest by construction: `standing` is derived from the published
 // contract level, never written by hand.
 // ============================================================================
+const LEARNING_PATHS = {
+  "valueunit": {
+    "title": "Follow a resource through three distinct records.",
+    "intro": "Select a step to see what changes and which boundary the accounting must preserve. This is an illustrative design case.",
+    "steps": [
+      {
+        "t": "Common reserve",
+        "action": "A resource becomes available for collective use.",
+        "result": "The common record identifies the resource, its availability and who may authorise its allocation.",
+        "boundary": "An accounting entry represents real capacity; it does not create additional resources."
+      },
+      {
+        "t": "Project custody",
+        "action": "An approved project receives an allocation for a stated purpose.",
+        "result": "The project record carries the spending authority, conditions and review path attached to that allocation.",
+        "boundary": "Resources entrusted to a project are distinct from the personal balances of its participants."
+      },
+      {
+        "t": "Close or continue",
+        "action": "The project is reviewed against its agreed terms.",
+        "result": "Unspent project resources return according to those terms. Separately attributed personal balances remain with their members.",
+        "boundary": "Closing a project does not erase a personal balance, and inactivity alone does not cause its forfeiture."
+      },
+      {
+        "t": "Personal redemption",
+        "action": "A member requests an authorised conversion for a material need.",
+        "result": "The personal balance and external reserves are reconciled against what the bridge can actually provide.",
+        "boundary": "The same capacity cannot be counted or spent twice. Holding a balance grants no constitutional authority."
+      }
+    ]
+  },
+  "dknetwork": {
+    "title": "Follow a task from private context to shared computing.",
+    "intro": "Select each stage to examine where the work belongs and which information may move. This illustrates the proposed architecture.",
+    "steps": [
+      {
+        "t": "Begin locally",
+        "action": "A personal agent receives a task in the member’s private context.",
+        "result": "It checks whether the local model, data and hardware can complete the work.",
+        "boundary": "Offline capability depends on the resources available on the device."
+      },
+      {
+        "t": "Authorise sharing",
+        "action": "The task needs shared project material or additional resources.",
+        "result": "The member’s permissions establish what may leave the personal boundary and for which purpose.",
+        "boundary": "Moving a workload does not grant unrestricted access to the person’s notes or history."
+      },
+      {
+        "t": "Place the workload",
+        "action": "The authorised workload is matched to suitable infrastructure.",
+        "result": "Regional nodes can coordinate shared material; specialised clusters can execute an intensive simulation.",
+        "boundary": "Computing tiers describe capacity. Authenticated and public interaction networks describe a separate access boundary."
+      },
+      {
+        "t": "Review the result",
+        "action": "The result returns to the project or personal context.",
+        "result": "Its origin, assumptions and verification method help participants decide whether it is usable.",
+        "boundary": "Distributed execution alone does not establish correctness, privacy or resilience."
+      }
+    ]
+  },
+  "personal": {
+    "title": "Follow a mistaken inference through correction and consent.",
+    "intro": "Select a step to see how the person remains in control of the proposed agent. This is a worked interaction to specify and test.",
+    "steps": [
+      {
+        "t": "Inspect an inference",
+        "action": "The agent infers a preference from limited context.",
+        "result": "The person can examine that inference separately from preferences they explicitly stated.",
+        "boundary": "An inference is evidence to examine, not automatic authorisation to act."
+      },
+      {
+        "t": "Correct or pause",
+        "action": "The person corrects the inference or pauses the proposed action.",
+        "result": "The agent revises its working context and stops the action within the withdrawn mandate.",
+        "boundary": "The person can reconsider, rest and refuse within their own sphere."
+      },
+      {
+        "t": "Choose what to share",
+        "action": "The person authorises a specific contribution to a project.",
+        "result": "Only the selected information crosses into the project context under the stated purpose and permissions.",
+        "boundary": "Permission to share one item does not make the whole personal history common property."
+      },
+      {
+        "t": "Review consequences",
+        "action": "The effects of the action become visible.",
+        "result": "The person can revisit the decision; contested effects involving others can follow the independent review path.",
+        "boundary": "Personal delegation and human recourse remain distinct from the agent’s analysis."
+      }
+    ]
+  }
+};
+
 const PITCH = {
   "dk": {
     "claim": "Dk is the proposed intelligence of Drayker. It connects personal agents, specialised systems and collective synthesis so that knowledge can support decisions at the scale where they matter.",
@@ -3898,7 +4738,7 @@ class Component extends DCLogic {
     vw: typeof window !== 'undefined' ? window.innerWidth : 1440,
     // Component page tiers: 01 is always open, 02 and 03 can be folded away so a
     // reader can stop where they want. archOpen is the expanded architecture item.
-    t2: true, t3: true, archOpen: null,
+    t2: true, t3: true, archOpen: null, lessonStep: 0,
     // Section of a portal component page a .com deep link asked for.
     focus: null,
     econSimCommon: 10000,
@@ -4071,7 +4911,7 @@ class Component extends DCLogic {
         st.page = 'part'; st.proj = rest[1] || null;
       } else {
         st.site = 'org'; st.page = 'contrib'; st.tab = 'project'; st.proj = rest[1] || null; st.returnToJoin = false;
-        st.t2 = true; st.t3 = true; st.focus = rest[2] || null;
+        st.t2 = true; st.t3 = true; st.archOpen = null; st.lessonStep = 0; st.focus = rest[2] || null;
       }
     } else if (p === 'join') {
       st.site = 'org'; st.page = 'join'; st.returnToJoin = false;
@@ -4239,7 +5079,7 @@ class Component extends DCLogic {
       this.setState({ page: 'part', proj: key }); window.scrollTo(0, 0); return;
     }
     this.setState({ site: 'org', page: 'contrib', tab: 'project', proj: key, returnToJoin: !!returnToJoin,
-      t2: true, t3: true, archOpen: null }); window.scrollTo(0, 0);
+      t2: true, t3: true, archOpen: null, lessonStep: 0 }); window.scrollTo(0, 0);
   };
 
   pickTerm = (id) => () => this.setState((s) => ({ gTerm: s.gTerm === id ? null : id }));
@@ -4600,7 +5440,7 @@ class Component extends DCLogic {
     if (typeof document === 'undefined') return;
     const el = document.querySelector('[data-focus="' + f + '"]');
     if (!el) return;
-    const top = el.getBoundingClientRect().top + (window.pageYOffset || 0) - 76;
+    const top = el.getBoundingClientRect().top + (window.pageYOffset || 0) - (this.state.vw < 1080 ? 160 : 90);
     window.scrollTo(0, Math.max(0, top));
   };
 
@@ -4981,6 +5821,9 @@ class Component extends DCLogic {
     // project page keeps working with the network switched off.
     const prRepoUrl = pr && pr.repo ? 'https://github.com/draykerdk/' + pr.repo : 'https://github.com/draykerdk';
     const pc = pr ? CONTRACTS[pr.key] : null;
+    const lesson = pr ? LEARNING_PATHS[pr.key] : null;
+    const lessonIndex = lesson ? Math.min(s.lessonStep || 0, lesson.steps.length - 1) : 0;
+    const lessonCurrent = lesson ? lesson.steps[lessonIndex] : null;
     const pcLevel = pc ? (pc.level || 'none') : 'none';
     const nameOfKey = (k) => (PROJECTS.filter((x) => x.key === k)[0] || CONCEPTS.filter((x) => x.key === k)[0] || { name: k }).name;
 
@@ -5324,9 +6167,21 @@ class Component extends DCLogic {
       pcSourceUrl: pc ? prRepoUrl + '/blob/master/' + pc.path : '',
       pcSourcePath: pc ? pc.path : '',
       pcFileUrl: pc ? prRepoUrl + '/blob/master/.drayker/component.yml' : '',
-      pcReviewed: CONTRACT_REVIEWED,
+      pcReviewed: pc ? pc.reviewed : CONTRACT_REVIEWED,
       orgRules: ORG_RULES,
 
+      lessonHas: !!lesson,
+      lessonTitle: lesson ? lesson.title : '',
+      lessonIntro: lesson ? lesson.intro : '',
+      lessonAction: lessonCurrent ? lessonCurrent.action : '',
+      lessonResult: lessonCurrent ? lessonCurrent.result : '',
+      lessonBoundary: lessonCurrent ? lessonCurrent.boundary : '',
+      lessonSteps: lesson ? lesson.steps.map((step, i) => ({
+        label: (i + 1) + ' · ' + step.t, selected: i === lessonIndex,
+        border: i === lessonIndex ? '#FF5500' : 'var(--line3)',
+        color: i === lessonIndex ? '#FF5500' : 'var(--tx2)',
+        select: () => this.setState({ lessonStep: i })
+      })) : [],
       pdPlain: pr ? (PLAIN[pr.key] || '') : '',
       t2: s.t2, t3: s.t3,
       toggleT2: () => this.setState({ t2: !s.t2 }),
@@ -5341,6 +6196,10 @@ class Component extends DCLogic {
         mark: s.archOpen === i ? '−' : '+',
         toggle: () => this.setState({ archOpen: s.archOpen === i ? null : i })
       })) : [],
+      mapInputs: nbrs.filter((n) => n.dir === 'IT NEEDS'),
+      mapOutputs: nbrs.filter((n) => n.dir === 'NEEDS IT'),
+      mapNoInputs: nOwn.length === 0,
+      mapNoOutputs: nUsedBy.length === 0,
       mapNodes: nbrs,
       mapEdges: nbrs.map((n) => ({ x: n.x, y: n.y, stroke: n.fg })),
       mapHas: nbrs.length > 0,
