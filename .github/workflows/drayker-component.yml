@@ -5,6 +5,10 @@ on:
   push:
     branches:
       - master
+  # The organization snapshot opens its pull request with the workflow token, and
+  # events from that token do not start pull_request runs. It dispatches this
+  # workflow on its branch instead, so the required check exists on the PR head.
+  workflow_dispatch:
 
 permissions:
   contents: read
