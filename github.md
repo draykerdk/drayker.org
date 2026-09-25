@@ -4,7 +4,16 @@ branch: master
 Related repositories read for content: all 25 public component repositories in `PROJECTS`, including their READMEs and public component contracts. Constitutional alignment in this sync also reads the organization-wide `.github/GOVERNANCE.md` and profile.
 
 ## Last sync
-date: 2026-09-09T00:00:00Z
+date: 2026-09-25T00:00:00Z
+
+### Alignment pass — branch `alinhamento/livro-2.7.1`
+
+- **Direction states 2033 as the objective.** The page is now "Drayker, toward 2033": each phase keeps its exit condition, and 2033 is the goal they are measured against, not a schedule. Source: Dknowledge `roadmap/DIRECTION.md` on the same alignment branch. Phase 07 names Meta DFM integrated in Dk 1.0; phase 08 names the great migration.
+- **DAF wording in the manifesto and method.** The DAF is described as the transitional federation that tests shared resource rules until its useful functions move into PAP, and papers pass through councils and, during the transition, the DAF — no longer "the DAOs".
+- **"Intelligence is a partner, never the master."** The principle card, the manifesto and the Dk section no longer call intelligence "the means": it decides within the space the members give it, and the purposes stay with them. Same wording in the Dk repository and its ethical code.
+- Regenerated both prerender trees and the `.com` mirror. render-check, prerender-check (.org and .com) pass.
+
+### Previous sync (2026-09-09T00:00:00Z)
 
 ### Interaction and teaching review before integration
 
