@@ -305,23 +305,6 @@
   ],
   "issues": [
     {
-      "num": 4,
-      "title": "Write the triage protocol for a single veto",
-      "url": "https://github.com/draykerdk/advices/issues/4",
-      "repo": "advices",
-      "labels": [
-        "open-function",
-        "skill:governance",
-        "level:intermediate",
-        "effort:~8h"
-      ],
-      "user": "Hyadhuad",
-      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
-      "comments": 0,
-      "at": "2026-09-25T05:46:55Z",
-      "assigned": false
-    },
-    {
       "num": 5,
       "title": "Carry one veto through a network partition",
       "url": "https://github.com/draykerdk/dk-network/issues/5",

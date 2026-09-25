@@ -131,8 +131,11 @@ jobs:
             echo "no change"
             exit 0
           fi
-          git config user.name  'drayker-snapshot'
-          git config user.email 'actions@users.noreply.github.com'
+          # Commit as the Actions bot account. The master ruleset asks for an extra
+          # approval when a change is not attributable to a GitHub account, and the
+          # old generic identity left every snapshot pull request blocked.
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           branch='automation/org-snapshot'
           git switch -C "$branch"
           git add data/org.json
