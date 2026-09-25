@@ -11,6 +11,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: write
   contents: write
   issues: read
   pull-requests: write
@@ -138,10 +139,12 @@ jobs:
           git commit -m "data: organization snapshot $(date -u +%Y-%m-%d)"
           git push --force origin "HEAD:$branch"
 
-          # Keep this change behind the protected-branch contract. GitHub may require a
-          # maintainer to approve the check on a pull request opened by github-actions;
-          # auto-merge then lands it as soon as that check passes. Do not bypass the
-          # ruleset or push the snapshot directly to master.
+          # Keep this change behind the protected-branch contract. A pull request opened
+          # with the workflow token does not start pull_request workflows, so the
+          # required component-contract check is dispatched on the branch explicitly
+          # (workflow_dispatch is the documented exception). Auto-merge lands the PR as
+          # soon as that check passes. Do not bypass the ruleset or push the snapshot
+          # directly to master.
           pr=$(gh pr list --head "$branch" --base master --state open --json number --jq '.[0].number // empty')
           if [ -z "$pr" ]; then
             pr=$(gh pr create \
@@ -152,3 +155,4 @@ jobs:
               | grep -oE '[0-9]+$')
           fi
           gh pr merge "$pr" --squash --auto
+          gh workflow run drayker-component.yml --ref "$branch"
