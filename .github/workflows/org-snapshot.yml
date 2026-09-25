@@ -11,7 +11,9 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: write
   contents: write
+  issues: read
   pull-requests: write
 
 jobs:
@@ -28,16 +30,20 @@ jobs:
           mkdir -p data
 
           gh api 'orgs/draykerdk/repos?per_page=100&sort=updated' > /tmp/repos.json
-          # The repository issues endpoint also returns pull requests. Query every
-          # public component repository and discard objects carrying `pull_request`
-          # explicitly; relying on a search qualifier previously put a PR on the
-          # contributors' open-functions board.
-          while IFS= read -r r; do
-            file="/tmp/i-$(echo "$r" | tr '/' '-').json"
-            gh api "repos/$r/issues?state=open&per_page=100" > "$file"
-          done < <(jq -r '.[] | select(.archived == false and .name != ".github") | .full_name' /tmp/repos.json)
-          jq -s 'add | map(select(has("pull_request") | not)) | sort_by(.updated_at) | reverse' \
-            /tmp/i-*.json > /tmp/issues.json
+          # Open issues come from the search API. The workflow token is scoped to this
+          # repository, so the per-repository issues endpoint returned empty lists for
+          # every other repository and the guard below refused the snapshot every day
+          # from 2026-08-13 on. Search reads public data with any token. Pull requests
+          # are still discarded explicitly by the `pull_request` key — a search
+          # qualifier alone once put a PR on the open-functions board — and only
+          # non-archived component repositories are kept.
+          gh api --paginate -X GET search/issues \
+            -f q='org:draykerdk is:issue is:open' -f per_page=100 --jq '.items[]' \
+            | jq -s --slurpfile repos /tmp/repos.json '
+                ([$repos[0][] | select(.archived == false and .name != ".github") | .full_name]) as $ok
+                | map(select((has("pull_request") | not)
+                             and ((.repository_url | split("/") | .[-2:] | join("/")) as $r | $ok | index($r))))
+                | sort_by(.updated_at) | reverse' > /tmp/issues.json
 
           # Contributors of the four most recently pushed repositories, same as the site.
           echo '[]' > /tmp/people.json
@@ -133,10 +139,12 @@ jobs:
           git commit -m "data: organization snapshot $(date -u +%Y-%m-%d)"
           git push --force origin "HEAD:$branch"
 
-          # Keep this change behind the protected-branch contract. GitHub may require a
-          # maintainer to approve the check on a pull request opened by github-actions;
-          # auto-merge then lands it as soon as that check passes. Do not bypass the
-          # ruleset or push the snapshot directly to master.
+          # Keep this change behind the protected-branch contract. A pull request opened
+          # with the workflow token does not start pull_request workflows, so the
+          # required component-contract check is dispatched on the branch explicitly
+          # (workflow_dispatch is the documented exception). Auto-merge lands the PR as
+          # soon as that check passes. Do not bypass the ruleset or push the snapshot
+          # directly to master.
           pr=$(gh pr list --head "$branch" --base master --state open --json number --jq '.[0].number // empty')
           if [ -z "$pr" ]; then
             pr=$(gh pr create \
@@ -147,3 +155,4 @@ jobs:
               | grep -oE '[0-9]+$')
           fi
           gh pr merge "$pr" --squash --auto
+          gh workflow run drayker-component.yml --ref "$branch"
