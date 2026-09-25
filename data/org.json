@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T06:42:15Z",
+  "generated_at": "2026-09-25T06:53:20Z",
   "source": "github api, committed by .github/workflows/org-snapshot.yml",
   "repos": [
     {
@@ -12,7 +12,7 @@
       "issues": 1,
       "url": "https://github.com/draykerdk/drayker.org",
       "home": "https://drayker.org/",
-      "push": "2026-09-25T06:41:56Z"
+      "push": "2026-09-25T06:53:05Z"
     },
     {
       "name": "uid",
@@ -304,6 +304,23 @@
     }
   ],
   "issues": [
+    {
+      "num": 4,
+      "title": "Write the triage protocol for a single veto",
+      "url": "https://github.com/draykerdk/advices/issues/4",
+      "repo": "advices",
+      "labels": [
+        "open-function",
+        "skill:governance",
+        "level:intermediate",
+        "effort:~8h"
+      ],
+      "user": "Hyadhuad",
+      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
+      "comments": 0,
+      "at": "2026-09-25T05:46:55Z",
+      "assigned": false
+    },
     {
       "num": 5,
       "title": "Carry one veto through a network partition",
@@ -701,7 +718,7 @@
       "login": "Hyadhuad",
       "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
       "url": "https://github.com/Hyadhuad",
-      "n": 158,
+      "n": 160,
       "repos": [
         "drayker.org",
         "pap",
