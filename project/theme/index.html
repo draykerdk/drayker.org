@@ -3207,15 +3207,16 @@ const CONTRACTS = {
   },
   "uid": {
     "artifact": "architecture",
-    "problem": "Define identity, agentic delegation, and reputation architecture that separates cryptographic personhood, bounded autonomous proxies, and contextual reputation clusters without surveillance or financialization.",
+    "problem": "Define identity, agentic delegation, and reputation architecture that separates biometric personhood, bounded autonomous proxies, and contextual reputation clusters, with the member owning their data and without financialization.",
     "scope": [
-      "Public specification for 3-layer identity (cryptographic personhood, bounded proxy agents, and contextual reputation).",
-      "Zero-knowledge proofs of authenticated presence and pairwise non-correlation.",
+      "Public specification for 3-layer identity (biometric personhood, bounded proxy agents, and contextual reputation).",
+      "Multi-factor biometric personhood, certified by people at enrolment and verified continuously; only UID holders access the system.",
+      "Zero-knowledge proofs of credentials and pairwise non-correlation.",
       "Bounded agentic delegation rules and Situated Contextual Veto.",
       "Non-transferable, domain-segmented reputation clusters."
     ],
     "nonScope": [
-      "A centralized identity provider or biometric database.",
+      "A centralized identity provider or a central biometric database.",
       "A monolithic social credit score or financialized reputation markets.",
       "An operational application platform today."
     ],
@@ -3665,7 +3666,7 @@ const CONTRACTS = {
       "An operating income, benefit, housing, equipment or universal-basic-income programme.",
       "Any tradable claim, income or return derived from contributing capacity.",
       "A score-to-resource pipeline that overrides member-defined rights, needs or accountability.",
-      "Biometric intimacy, unverified fixed rates or automatic eligibility treated as requirements."
+      "Biometric requirements beyond the member’s UID, unverified fixed rates or automatic eligibility treated as requirements."
     ],
     "deps": [
       "dknetwork",
@@ -3912,7 +3913,7 @@ const CONTRACTS = {
     "nonScope": [
       "An existing operational embassy or physical facility today.",
       "A commercial property, speculative real estate or residency offer.",
-      "Any unilateral claim of state territorial sovereignty."
+      "Any claim over a state’s territory without that state’s consent. Pure autonomous zones on the high seas need no cession."
     ],
     "deps": [
       "dsupport",
@@ -4535,7 +4536,7 @@ const GLOSSARY = [
   { id: 'bsdk', t: 'BSDK', x: 'Base structure of the kernel', d: 'The structure Dk is assembled from: how functions and modules compose and revise themselves. An architectural proposal, with no executable implementation.' },
   { id: 'dknetwork', t: 'Dk Network', x: 'The network layer', d: 'A heterogeneous 3-tier computing topology: edge/local devices for private execution, regional mesh hubs for community caching and P2P relay, and federated clustered servers for heavy AI training and simulation without cloud monopoly.' },
   { id: 'lc', t: 'LCrypt', x: 'Living Cryptography', d: 'Authentication, uPOW and encryption designed to re-encrypt when an authentication fails, so a scheme broken once is not broken forever. The failure model and the uPOW calculation are the open questions; no threat model exists.' },
-  { id: 'uid', t: 'UID', x: 'Universal Identity', d: 'A proposed identity architecture separating the person, revocable proxy mandates and contextual contribution records. Selective disclosure and resistance to correlation require protocol design and validation; reputation remains domain-specific.' },
+  { id: 'uid', t: 'UID', x: 'Universal Identity', d: 'A proposed identity architecture separating the person, revocable proxy mandates and contextual contribution records. Membership rests on it: only UID holders access the system, and personhood is established by multi-factor biometrics, certified by people at enrolment and verified continuously, so each voice in the network belongs to a living person. The data belongs to the member and is not kept in a central database. Selective disclosure and resistance to correlation require protocol design and validation; reputation remains domain-specific.' },
   { id: 'osdk', t: 'OSDK', x: 'Universal device coupler', d: 'One coupler that attaches a device to the network, instead of one integration per manufacturer. Described, not specified — no device class has been mapped onto it.' },
   { id: 'daf', t: 'DAF', x: 'Decentralized Autonomous Federation', d: 'A transitional federation for testing governance and resource rules. Its first phase is designed for a repository; ICP is only a probable provisional substrate if a phase that experiments with units of account becomes necessary. DAF is expected to build toward Drayker’s own infrastructure and dissolve into PAP when the durable environment can absorb it. Nothing is operational.' },
   { id: 'daodac', t: 'DAO · DAC', x: 'Autonomous unit', d: 'A project, team or initiative organized with its own scope and decisions, meant to link to the federation by registering a unit and delivering a function. The procedure is now written; no unit has been recorded through it.' },
@@ -4544,7 +4545,7 @@ const GLOSSARY = [
   { id: 'valueunit', t: 'Dktron', x: 'Capacity accounting & settlement unit', d: 'An internal non-speculative unit separating common capacity reserves, task-linked project budgets under temporary custody, and personal member balances. Personal balances are never seized by inactivity, carry zero passive yield, buy zero voting power, and convert to external fiat based on verifiable material reserves.' },
   { id: 'dsupport', t: 'Distributed Support', x: 'Common Capacity Floor & member support', d: 'The support layer providing a Common Capacity Floor: ensuring unconditional baseline access to computation, energy, communication, and vital security as wage labor decouples from survival, enabling voluntary creation.' },
   { id: 'federated', t: 'Anonymous federated learning', x: 'Patterns travel; raw experience stays local', d: 'Personal and local instances contribute patterns or model updates with depersonalized metadata. Independent validation across other instances gives a pattern progressively stronger global weight. Re-identification safeguards remain to be specified.' },
-  { id: 'dzweck', t: 'Dzweck', x: 'A position of merit and focused mission', d: 'A recognized position of high technical and strategic responsibility: a member who has demonstrated consistent delivery, rigorous method and sustained contribution to vital projects. Reputation still varies within the level; it is not a monastic life pledge, superiority or automatic authority.' },
+  { id: 'dzweck', t: 'Dzweck', x: 'A position of merit and focused mission', d: 'A recognized position of high technical and strategic responsibility: a member who has demonstrated consistent delivery, rigorous method and sustained contribution to vital projects. While holding the position, a Dzweck sets aside individualism to integrate with Drayker and its system, out of a greater purpose rather than renunciation. Reputation still varies within the level; it is not a monastic life pledge, superiority or automatic authority, it is not inherited, and whoever leaves it returns to ordinary membership.' },
   { id: 'fn', t: 'Open function', x: 'A finishable piece of work', d: 'An issue cut small enough for one person to finish alone, carrying the real label open-function in the public boards. Claiming one is a comment in the thread; nobody assigns it.' },
   { id: 'contract', t: 'Component contract', x: '.drayker/component.yml', d: 'The file each repository publishes declaring what it is for, what is in and out of scope, what evidence backs its implementation level, and what could be misread. Validated on every pull request against a shared schema.' },
   { id: 'dknowledge', t: 'Dknowledge', x: 'The knowledge base', d: 'Where vision, papers, architecture and roadmap stay connected instead of scattered. It is also the oldest material in the ecosystem, so dates matter when reading it.' },
