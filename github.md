@@ -4,7 +4,18 @@ branch: master
 Related repositories read for content: all 25 public component repositories in `PROJECTS`, including their READMEs and public component contracts. Constitutional alignment in this sync also reads the organization-wide `.github/GOVERNANCE.md` and profile.
 
 ## Last sync
-date: 2026-09-25T00:00:00Z
+date: 2026-10-05T00:00:00Z
+
+### Alignment pass — branch `docs/align-oct-2026`
+
+- **Member councils replace the independent member judicial panel everywhere.** The Advices card, its relations, its mirrored contract, its narrative, the glossary entry, the governance card of the economy architecture and the separation-of-powers simulation now describe councils formed for each question: convened by members, with the conveners taking part, composed by Dknowledge from the best informed and the most affected, with Dk in the middle. Source: `advices` README and component contract on the same branch.
+- **Dk Global decides inside the constitution.** "Members govern; Dk models" and "it does not allocate resources on its own" no longer contradict the Dk ethical code: Dk Global decides only inside the space the members' constitution gives it, and every decision stays open to representation, proposals and justified vetoes. Source: `dk` docs on the same branch.
+- **Units of account instead of a token economy.** DAF phase wording follows the `daf` repository: ICP only as a probable provisional substrate for a phase that experiments with units of account.
+- **Direction, phase 08.** "The great migration" is replaced by entry into the network gaining scale, as in Dknowledge `roadmap/DIRECTION.md`.
+- **Weight in member choices.** "Voting weight" is replaced wherever it described the capacity economy. The DAF federative-points entry keeps its wording until the DAF voting draft is revised.
+- Regenerated both prerender trees and the `.com` mirror. render-check, prerender-check (.org and .com) pass.
+
+### Previous sync (2026-09-25T00:00:00Z)
 
 ### Alignment pass — branch `alinhamento/livro-2.7.1`
 
