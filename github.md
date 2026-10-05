@@ -6,6 +6,10 @@ Related repositories read for content: all 25 public component repositories in `
 ## Last sync
 date: 2026-10-05T00:00:00Z
 
+### UID as the primary application — branch `docs/uid-primary-app`
+
+- The UID glossary entry adds that UID is the primary application, the base of the super app in which DkApps run, as in the Direction and draykerdk/uid.
+
 ### No open code, and Autonomous Health on the project page — branch `docs/no-open-code-health`
 
 - **"Open source" is no longer a Drayker label.** The banner, the footer and the partner limits say the documentation is public under CC BY 4.0 and that the system itself is auditable by permission level, through Dknowledge and DFM, as the Dk ethical code states. The code of the sites stays public.
