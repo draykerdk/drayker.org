@@ -6,6 +6,13 @@ Related repositories read for content: all 25 public component repositories in `
 ## Last sync
 date: 2026-10-05T00:00:00Z
 
+### UID personhood and Dzweck purpose — branch `docs/uid-dzweck-oct-2026`
+
+- **UID rests on biometric personhood.** The UID glossary entry and its mirrored contract now say that only UID holders access the system and that personhood is established by multi-factor biometrics, certified by people at enrolment and verified continuously; the data belongs to the member and is not kept in a central database. The leftover "proofs of authenticated presence" is gone. Source: `uid` README and component contract (draykerdk/uid#7).
+- **Support and stations contracts mirrored.** Distributed Support excludes only biometric requirements beyond the member's UID (draykerdk/distributed-support#6). Stations no longer reads as excluding the pure autonomous zones on the high seas (draykerdk/stations#7).
+- **Dzweck purpose.** The glossary adds that a Dzweck sets aside individualism while holding the position, out of a greater purpose rather than renunciation, that the position is not inherited and that whoever leaves it returns to ordinary membership.
+- Regenerated both prerender trees and the `.com` mirror.
+
 ### Alignment pass — branch `docs/align-oct-2026`
 
 - **Member councils replace the independent member judicial panel everywhere.** The Advices card, its relations, its mirrored contract, its narrative, the glossary entry, the governance card of the economy architecture and the separation-of-powers simulation now describe councils formed for each question: convened by members, with the conveners taking part, composed by Dknowledge from the best informed and the most affected, with Dk in the middle. Source: `advices` README and component contract on the same branch.
