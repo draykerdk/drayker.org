@@ -12,7 +12,8 @@ date: 2026-10-05T00:00:00Z
 - **Dk Global decides inside the constitution.** "Members govern; Dk models" and "it does not allocate resources on its own" no longer contradict the Dk ethical code: Dk Global decides only inside the space the members' constitution gives it, and every decision stays open to representation, proposals and justified vetoes. Source: `dk` docs on the same branch.
 - **Units of account instead of a token economy.** DAF phase wording follows the `daf` repository: ICP only as a probable provisional substrate for a phase that experiments with units of account.
 - **Direction, phase 08.** "The great migration" is replaced by entry into the network gaining scale, as in Dknowledge `roadmap/DIRECTION.md`.
-- **Weight in member choices.** "Voting weight" is replaced wherever it described the capacity economy. The DAF federative-points entry keeps its wording until the DAF voting draft is revised.
+- **Weight in member choices.** "Voting weight" is replaced wherever it described the capacity economy.
+- **DAF voting is transitional.** The DAF card and the federative-points entry say so explicitly: voting holds until contextual weighing, justified vetoes and member councils, the mechanisms of version 1.0, can be reproduced and tested. Source: `daf` README and DAF-000.
 - Regenerated both prerender trees and the `.com` mirror. render-check, prerender-check (.org and .com) pass.
 
 ### Previous sync (2026-09-25T00:00:00Z)
