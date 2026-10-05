@@ -207,8 +207,8 @@
             <div style="font-size:14px;color:var(--tx2);line-height:1.55">No owner and no shareholders. The DAF is the transitional federation being designed to test shared resource rules until its useful functions move into PAP — architecture under discussion, not a treasury already running.</div>
           </div>
           <div style="padding:26px 24px">
-            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#FF5500;letter-spacing:0.14em;margin-bottom:8px">OPEN SOURCE</div>
-            <div style="font-size:14px;color:var(--tx2);line-height:1.55">Every paper, protocol and repository is public under Creative Commons.</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#FF5500;letter-spacing:0.14em;margin-bottom:8px">PUBLIC BY DEFAULT</div>
+            <div style="font-size:14px;color:var(--tx2);line-height:1.55">Every paper, protocol and documentation repository is public under Creative Commons. The system itself is auditable by permission level, through Dknowledge and DFM.</div>
           </div>
         </div>
       </section>
@@ -2091,7 +2091,7 @@
               </a>
             </sc-for>
           </div>
-          <p style="font-size:13px;color:var(--tx3);margin:18px 0 0;line-height:1.6">Published under a Creative Commons Attribution 4.0 International License; every site is open source. Dates matter more than titles here — check when a document was last touched before treating it as current.</p>
+          <p style="font-size:13px;color:var(--tx3);margin:18px 0 0;line-height:1.6">Published under a Creative Commons Attribution 4.0 International License; the code of every site is public. Dates matter more than titles here — check when a document was last touched before treating it as current.</p>
         </div>
       </section>
       </div>
@@ -2556,7 +2556,7 @@
     </div>
     <div style="border-top:1px solid var(--line)">
       <div style="max-width:1320px;margin:0 auto;padding:18px clamp(16px,4vw,44px);display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--tx3);letter-spacing:0.06em">CC BY 4.0 · OPEN SOURCE · NON-PROFIT</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--tx3);letter-spacing:0.06em">CC BY 4.0 · PUBLIC DOCUMENTATION · NON-PROFIT</div>
         <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--tx3);letter-spacing:0.06em">{{ domain }}</div>
       </div>
     </div>
@@ -2934,7 +2934,7 @@ const PROJECTS = [
     vision: 'Open Science explores how Dk could support research and health through traceable methods, authorised data use and findings that others can examine. The proposed path connects consent, data provenance, analysis and review, keeping research claims distinguishable from validated applications.',
     problem: 'Research depends on reliable evidence and responsible access to data. Health applications also require consent and careful evaluation of their effect on people.',
     state: 'The repository was opened in August 2026 with a charter and nothing else. Drayker has internal material on autonomous health that is not published, and nothing public states which part of open science comes first, what a health application on Dk would actually do, or how DFM review relates to peer review. Anyone who works in either field is better placed to write that than we are. The internal assessment is deliberately severe and belongs in public: this is conceptual, high-risk work with no clinical protocol, no validation, no dataset, no device, no regulatory approval and no safety evidence — not held back, simply absent. Documentation is published from the repository to science.drayker.org.',
-    arch: ['Research applications on Dk', 'Identity and specific consent', 'Qualified professional review', 'Method review and scientific review', 'Data under the person’s authority', 'A traceable research record'],
+    arch: ['Research applications on Dk', 'Autonomous Health: AI clinics tied to UID and Dk Personal', 'Identity and specific consent', 'Method review and scientific review', 'Data under the person’s authority', 'A traceable research record'],
     contribute: ['Take one non-clinical research question and demonstrate only search or organization of evidence, on synthetic data, with specialist review', 'Write what open science on Dk would have to guarantee', 'Write where the professional review sits and what it may override', 'Compare DFM review with peer review honestly'] },
 
   { key: 'valueunit', name: 'Dktron & value units', layer: 'APPLICATION', repo: 'value-unit', site: 'https://value.drayker.org',
@@ -4089,7 +4089,7 @@ const ARCH_NOTES = {
     'Support is separate from reputation, DAF points, Dktron ownership and hardware contribution.'],
   openscience: ['Research applications could use shared computing and knowledge capabilities. Each application still needs its own evidence, safeguards and evaluation.',
     'UID would support attribution and authorisation. A study must explain which data it needs, for what purpose and how the person can revise or withdraw permission.',
-    'Assisted analysis must be distinguished from a clinical decision. Any future clinical use requires qualified review and respect for the person’s authority over bodily choices.',
+    'Autonomous Health is the health system this work leads to: clinics run with artificial intelligence and integrated with each person’s UID and Dk Personal, for prevention and personalised, accessible treatment. None of it operates today.',
     'DFM can help structure a contribution; scientific peer review examines the research itself. Worked cases should explain how those responsibilities meet without treating one as a substitute for the other.',
     'Health data has a specific purpose and permission boundary. Portability, correction and withdrawal require mechanisms that preserve those conditions when data moves.',
     'Sources, methods and limitations should remain attached to findings. When evidence changes, dependent analyses and decisions need a visible review path.'],
@@ -4603,7 +4603,7 @@ const PARTNER_WAYS = [
 const PARTNER_LIMITS = [
   { k: 'NON-PROFIT', d: 'No equity, no revenue share, no token, no promise of financial return. Support is support.' },
   { k: 'NO CONTROL', d: 'Supporting the work does not buy direction over it. Priorities are argued in public like everything else.' },
-  { k: 'OPEN BY DEFAULT', d: 'What is produced stays public under CC BY 4.0 and open source. There is no private branch of the research.' },
+  { k: 'PUBLIC BY DEFAULT', d: 'What is published stays public under CC BY 4.0. The system itself is auditable by permission level, through Dknowledge and DFM.' },
   { k: 'NO EXCLUSIVITY', d: 'No part of the architecture is reserved for a partner. A specification everyone can implement is the point.' },
   { k: 'VOLUNTARY WORK', d: 'Contributors are volunteers. Participation implies no employment relationship and no compensation.' }
 ];
