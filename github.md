@@ -6,6 +6,11 @@ Related repositories read for content: all 25 public component repositories in `
 ## Last sync
 date: 2026-10-05T00:00:00Z
 
+### No open code, and Autonomous Health on the project page — branch `docs/no-open-code-health`
+
+- **"Open source" is no longer a Drayker label.** The banner, the footer and the partner limits say the documentation is public under CC BY 4.0 and that the system itself is auditable by permission level, through Dknowledge and DFM, as the Dk ethical code states. The code of the sites stays public.
+- **Open Science page:** Autonomous Health is described as the AI health system integrated with UID and Dk Personal, matching draykerdk/open-science#3.
+
 ### Founder's design restored — branch `docs/sweep-fixes-oct-2026`
 
 - **Autonomous Health** is an AI health system integrated with UID and Dk Personal; "clinical autonomy of any kind" no longer appears as non-scope (draykerdk/open-science#3).
