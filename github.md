@@ -6,6 +6,14 @@ Related repositories read for content: all 25 public component repositories in `
 ## Last sync
 date: 2026-10-05T00:00:00Z
 
+### Founder's design restored — branch `docs/sweep-fixes-oct-2026`
+
+- **Autonomous Health** is an AI health system integrated with UID and Dk Personal; "clinical autonomy of any kind" no longer appears as non-scope (draykerdk/open-science#3).
+- **The reward** for contributing capacity is a transferable kind of reputation that gives faster or priority access to resources (draykerdk/distributed-support#7, draykerdk/uid#8).
+- **Stations** are Drayker properties anywhere in the world, like offices for study, research and work; autonomous zones include housing (draykerdk/stations#8).
+- **Academy:** Dk as teacher, learning in practice with project colleagues; the imported pedagogy label is replaced (draykerdk/dk-academy#5).
+- Mirrored contracts updated; both prerender trees and the `.com` mirror regenerated.
+
 ### UID personhood and Dzweck purpose — branch `docs/uid-dzweck-oct-2026`
 
 - **UID rests on biometric personhood.** The UID glossary entry and its mirrored contract now say that only UID holders access the system and that personhood is established by multi-factor biometrics, certified by people at enrolment and verified continuously; the data belongs to the member and is not kept in a central database. The leftover "proofs of authenticated presence" is gone. Source: `uid` README and component contract (draykerdk/uid#7).
