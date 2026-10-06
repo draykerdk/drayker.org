@@ -13,7 +13,7 @@
 
 ## Core concepts
 
-- Drayker is the system; Dk is its intelligence; Dk Network is its network.
+- Drayker is the supersystem; Dk is its intelligence; Dk Network is its network.
 - Distributed Kernel is Dk's technical name and architectural principle; it does not reduce Dk to a low-level kernel.
 - DFM means Distributed Functional Modeling: model a problem, divide it into finishable functions, distribute them, review the result and preserve its sources.
 - Members are the intended constitutional subjects. Agents may carry delegated functions and Dk may perform contextual synthesis, but neither acquires member rights or sovereign authority.
