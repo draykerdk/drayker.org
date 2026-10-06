@@ -6,6 +6,15 @@ Related repositories read for content: all 25 public component repositories in `
 ## Last sync
 date: 2026-10-06T00:00:00Z
 
+### Conformance with the founder's decisions of 06/10 — branch `docs/conformance-oct-06-2026`
+
+- **Governance card.** "Members set the rules" becomes rules built by the members with Dk Global, within the kernel. Dk Global still decides inside them.
+- **Direction.** The intro and the transversal principle state two dates as objectives: Dk 1.0, already an ASI, by 2030, and Drayker consolidated by 2033. Phase 07 says Dk 1.0 is already an ASI, with 2030 as its objective (draykerdk/dknowledge, draykerdk/dk).
+- **Autonomous Health.** The open-science architecture, state, notes and mirrored contract describe an AI health system integrated with each person's UID, Dk Personal, personal Dknowledge and devices, investigating patterns with sufficient probability for multifactor detection, with professional review alongside AI diagnosis and monitoring (draykerdk/open-science).
+- **Supersystem.** The glossary, the Docs tagline, the partnership, organization and economy texts, the `.com` hero, the structured data, the home title and `llms.txt` define Drayker as a supersystem rather than an institution, effort or initiative.
+- **Member councils.** The Advices notes follow draykerdk/advices: a council is formed for each question, composed by Dknowledge and also convened by Dk when its certainty is low.
+- Regenerated both prerender trees and the `.com` mirror.
+
 ### Dzweck as a member level — branch `docs/dzweck-level-oct-2026`
 
 - The Dzweck glossary entry describes a member level, not a position: the member chooses the difficult, sets aside what they are not (individualism, reactivity, apathy) to create their own values, and answers for a mission that can be handed on. Source: the founder's decision of 06/10/2026 and the book.
