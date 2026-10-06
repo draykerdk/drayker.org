@@ -6,6 +6,11 @@ Related repositories read for content: all 25 public component repositories in `
 ## Last sync
 date: 2026-10-06T00:00:00Z
 
+### Dk Personal curation contrast — branch `docs/dk-personal-curation-contrast`
+
+- **Dk Personal contract.** The mirrored curation scope item adds that, unlike assistants built for whoever made them, Dk Personal does not manufacture consensus that benefits its makers or sell products and ideas, following the founder's addition of 06/10 (draykerdk/dk-personal).
+- Regenerated both prerender trees and the `.com` mirror.
+
 ### Dk Personal curation — branch `docs/dk-personal-curation`
 
 - **Dk Personal contract.** The mirrored contract adds one scope item: Dk Personal only takes the person's attention with what it learns is truly important to them, based on their real interests and goals, tells them what is important or urgent without being asked, and leaves the rest until they ask, following the founder's decision of 06/10 (draykerdk/dk-personal).
