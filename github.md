@@ -6,6 +6,11 @@ Related repositories read for content: all 25 public component repositories in `
 ## Last sync
 date: 2026-10-06T00:00:00Z
 
+### Each Dk scale works for someone — branch `docs/dk-scales-power-balance`
+
+- **Three scales.** The Dk Global card says it works for Drayker and all its members, and the Dk Local card says a local Dk works for its project, following the founder's decision of 06/10 that each scale works for someone and that the exchange of their contexts multiplies power instead of subtracting it (draykerdk/dk).
+- Regenerated both prerender trees and the `.com` mirror.
+
 ### Dk Personal curation contrast — branch `docs/dk-personal-curation-contrast`
 
 - **Dk Personal contract.** The mirrored curation scope item adds that, unlike assistants built for whoever made them, Dk Personal does not manufacture consensus that benefits its makers or sell products and ideas, following the founder's addition of 06/10 (draykerdk/dk-personal).
