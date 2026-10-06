@@ -4,7 +4,13 @@ branch: master
 Related repositories read for content: all 25 public component repositories in `PROJECTS`, including their READMEs and public component contracts. Constitutional alignment in this sync also reads the organization-wide `.github/GOVERNANCE.md` and profile.
 
 ## Last sync
-date: 2026-10-05T00:00:00Z
+date: 2026-10-06T00:00:00Z
+
+### Financing and the common floor — branch `docs/financing-floor-oct-2026`
+
+- **Financing the network earns the reward.** The manifesto, the economy cards, the token answer, the reputation entry and the mirrored UID and value-unit contracts say that the reward, the one transferable kind of reputation, is earned by contributing capacity or by financing the network, and can give faster or priority access to resources. Money still cannot buy member status, the reputation of work or weight in member choices (draykerdk/uid#10, draykerdk/value-unit#5).
+- **The common floor is for approved members.** The Distributed Support glossary entry, the merit-prize card and the mirrored contract say that approval has requirements of integration and collaboration, replacing "unconditional baseline access" (draykerdk/distributed-support#8).
+- Regenerated both prerender trees and the `.com` mirror.
 
 ### UID as the primary application — branch `docs/uid-primary-app`
 
