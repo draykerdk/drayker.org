@@ -6,6 +6,12 @@ Related repositories read for content: all 25 public component repositories in `
 ## Last sync
 date: 2026-10-06T00:00:00Z
 
+### Autonomous units — branch `docs/autonomous-units-oct-2026`
+
+- **DAF defined by what it federates.** The ecosystem card, the organization unit, the docs entry, the relations line and the glossary describe DAF as an autonomous, distributed federation of autonomous units: the groups and organizations of people working on different questions and projects in Drayker.
+- **"DAOs & DACs" is no longer the name of the units.** The organization unit, the glossary entry and the federation track say "autonomous units". A DAO can be one, but it is not the default form. The mirrored DAF contract follows draykerdk/daf.
+- Regenerated both prerender trees and the `.com` mirror.
+
 ### Portal residuals — branch `docs/portal-residuals-oct-2026`
 
 From a full reading of the manifesto, economy, organization and partnership content against the founder's decisions:
