@@ -6,6 +6,11 @@ Related repositories read for content: all 25 public component repositories in `
 ## Last sync
 date: 2026-10-06T00:00:00Z
 
+### Dzweck as a member level — branch `docs/dzweck-level-oct-2026`
+
+- The Dzweck glossary entry describes a member level, not a position: the member chooses the difficult, sets aside what they are not (individualism, reactivity, apathy) to create their own values, and answers for a mission that can be handed on. Source: the founder's decision of 06/10/2026 and the book.
+- Regenerated both prerender trees and the `.com` mirror.
+
 ### DAF as a primitive PAP — branch `docs/daf-primitive-pap-oct-2026`
 
 - The DAF project role, the organization unit, the glossary entry and the mirrored contract say that DAF is our way of implementing, now, a basic and primitive notion of what PAP will be, and of testing its dynamics as the very way Drayker is built (draykerdk/daf, draykerdk/pap, `.github/GOVERNANCE.md`).
