@@ -6,6 +6,11 @@ Related repositories read for content: all 25 public component repositories in `
 ## Last sync
 date: 2026-10-06T00:00:00Z
 
+### DAF as a primitive PAP — branch `docs/daf-primitive-pap-oct-2026`
+
+- The DAF project role, the organization unit, the glossary entry and the mirrored contract say that DAF is our way of implementing, now, a basic and primitive notion of what PAP will be, and of testing its dynamics as the very way Drayker is built (draykerdk/daf, draykerdk/pap, `.github/GOVERNANCE.md`).
+- Regenerated both prerender trees and the `.com` mirror.
+
 ### Autonomous units — branch `docs/autonomous-units-oct-2026`
 
 - **DAF defined by what it federates.** The ecosystem card, the organization unit, the docs entry, the relations line and the glossary describe DAF as an autonomous, distributed federation of autonomous units: the groups and organizations of people working on different questions and projects in Drayker.
