@@ -6,6 +6,11 @@ Related repositories read for content: all 25 public component repositories in `
 ## Last sync
 date: 2026-10-06T00:00:00Z
 
+### Two dates wording — branch `docs/two-dates-and-daf-meta`
+
+- The Direction principle now says the phases are measured against the two dates (Dk 1.0 by 2030, consolidation by 2033), which do not replace the exit conditions, matching draykerdk/dknowledge `roadmap/DIRECTION.md`.
+- Regenerated both prerender trees and the `.com` mirror.
+
 ### Allocation authority and Direction wording — branch `docs/allocation-and-health-oct-06`
 
 - **Allocation authority.** The mirrored Value Unit contract and `llms.txt` say that Dk Global decides and executes allocations inside the constitution, and that members can make a well-justified veto, which obliges review, following the founder's decision of 06/10 (draykerdk/value-unit, draykerdk/dknowledge).
