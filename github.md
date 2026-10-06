@@ -6,6 +6,12 @@ Related repositories read for content: all 25 public component repositories in `
 ## Last sync
 date: 2026-10-06T00:00:00Z
 
+### Allocation authority and Direction wording — branch `docs/allocation-and-health-oct-06`
+
+- **Allocation authority.** The mirrored Value Unit contract and `llms.txt` say that Dk Global decides and executes allocations inside the constitution, and that members can make a well-justified veto, which obliges review, following the founder's decision of 06/10 (draykerdk/value-unit, draykerdk/dknowledge).
+- **Direction.** The intro no longer adds "with something very close before then" to the two dates, and the transversal principle says the phases are measured against the two dates (draykerdk/dknowledge).
+- Regenerated both prerender trees and the `.com` mirror.
+
 ### Conformance with the founder's decisions of 06/10 — branch `docs/conformance-oct-06-2026`
 
 - **Governance card.** "Members set the rules" becomes rules built by the members with Dk Global, within the kernel. Dk Global still decides inside them.
