@@ -6,6 +6,18 @@ Related repositories read for content: all 25 public component repositories in `
 ## Last sync
 date: 2026-10-06T00:00:00Z
 
+### Portal residuals — branch `docs/portal-residuals-oct-2026`
+
+From a full reading of the manifesto, economy, organization and partnership content against the founder's decisions:
+
+- **Financing and the reward.** The economy summary no longer says money "buys no position", and the partnership page says that financing the network earns the reward, never a financial return.
+- **No open-code label left.** "Everything produced stays public" and "owned by nobody" are replaced: the documentation is public under CC BY 4.0, the system is auditable by permission level, and the parts belong to the members.
+- **Principle 08.** "Embodied human sovereignty… mortal human beings" becomes "Human sovereignty… the human members", matching the manifesto.
+- **Member councils.** The organization unit, the Docs gaps, the partnership outcomes and the Advices page follow draykerdk/advices: councils are formed for each question and composed by Dknowledge.
+- **Successor.** "DAF and its councils" becomes the DAF first, then PAP and the members' constitution, with member councils, as in `.github/GOVERNANCE.md`.
+- **Weight in member choices.** "Voting power" and "vote/seats" no longer describe Dktron or the economy simulation.
+- Regenerated both prerender trees and the `.com` mirror.
+
 ### Financing and the common floor — branch `docs/financing-floor-oct-2026`
 
 - **Financing the network earns the reward.** The manifesto, the economy cards, the token answer, the reputation entry and the mirrored UID and value-unit contracts say that the reward, the one transferable kind of reputation, is earned by contributing capacity or by financing the network, and can give faster or priority access to resources. Money still cannot buy member status, the reputation of work or weight in member choices (draykerdk/uid#10, draykerdk/value-unit#5).
