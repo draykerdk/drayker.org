@@ -19,7 +19,7 @@ reconstructed design.
 | `drayker-mark.js` / `DRAYKER-MARK.md` | Reusable official mark implementation and its contract. |
 | `assets/logo/` | Complete logo kit supplied with the package. |
 | `design/` | Preserved package references: the v3 baseline, historical v2 component and logo variations. These are provenance, not a second editable copy of current content. |
-| `V3-HANDOFF.md` | Design-to-implementation record for the 3.0 delivery. |
+| `.github/internal/` | Maintainer working notes (agent instructions, sync log, handoff records). Kept in the repository but not served, because GitHub Pages does not publish `.github/`. |
 | `.nojekyll` | Keeps GitHub Pages from interpreting `{{ … }}` component bindings as Liquid. |
 | `CNAME` | The custom domain. |
 | `SITE_PATTERN.md` | The Drayker web pattern: tokens, structure, interaction contract, how to reuse it. |
