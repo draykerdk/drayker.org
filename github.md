@@ -6,6 +6,11 @@ Related repositories read for content: all 25 public component repositories in `
 ## Last sync
 date: 2026-10-06T00:00:00Z
 
+### Subtle contrast in Dk Personal curation — branch `docs/subtle-contrast`
+
+- **Dk Personal contract.** The mirrored curation scope item no longer mentions other assistants. It says that Dk Personal has nothing to sell, neither products nor ideas, and no consensus to manufacture, and that it chooses from the interests and context of the person it serves, following the founder's correction of 07/10 (draykerdk/dk-personal).
+- Regenerated both prerender trees and the `.com` mirror.
+
 ### Neutral contrast in Dk Personal curation — branch `docs/dk-personal-neutral-contrast`
 
 - **Dk Personal contract.** The mirrored curation scope item now says that other assistants also choose what reaches people, but work for the companies that make them, so they tend to favour the consensus that suits those companies and to sell products and ideas, and that Dk Personal chooses from the interests and context of the person it serves, following the founder's note of 06/10 to describe other systems without reacting (draykerdk/dk-personal).
