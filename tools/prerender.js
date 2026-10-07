@@ -115,15 +115,15 @@ function titleFor(r, meta) {
 function structuredData(r, meta, url, title) {
   const siteName = SITE === 'com' ? 'Drayker' : 'Drayker Participation';
   const alternateName = SITE === 'com'
-    ? ['Drayker.com', 'Drayker Organization']
+    ? ['Drayker.com']
     : ['Drayker.org', 'Drayker Participation'];
   const websiteId = BASE + '#website';
   const webpageId = url + '#webpage';
   const graph = [
     {
       '@type': 'Organization', '@id': 'https://drayker.com/#organization', name: 'Drayker',
-      alternateName: 'Drayker Organization', url: 'https://drayker.com/',
-      description: 'Civilizational infrastructure constituted by members: distributed intelligence, memory, representation, coordination and common capacity.',
+      url: 'https://drayker.com/',
+      description: 'A supersystem constituted by members: distributed intelligence, memory, representation, coordination and common capacity.',
       logo: { '@type': 'ImageObject', url: 'https://drayker.org/assets/logo/kit/icon-512.png', width: 512, height: 512 },
       sameAs: ['https://github.com/draykerdk', 'https://twitter.com/Draykerdk', 'https://medium.com/drayker']
     },

@@ -1,6 +1,6 @@
 # drayker.org. Static Drayker system
 
-The public participation and constitution entry point for Drayker: what the member-constituted organization is meant to become, how DFM shapes the work, what each part of the ecosystem does, which functions are open and how someone can contribute during the founding phase.
+The public participation and constitution entry point for Drayker: what the member-constituted supersystem is meant to become, how DFM shapes the work, what each part of the ecosystem does, which functions are open and how someone can contribute during the founding phase.
 
 Live at **[drayker.org](https://drayker.org)**.
 
@@ -75,16 +75,16 @@ node tools/make-com.js ../drayker.com/index.html --sync
 - **Organization data** loads from the committed `data/org.json` snapshot first and is then enriched by the public API. Clean subroutes use an absolute snapshot URL, so `/docs/` and `/project/dk/` work exactly like the root.
 - **Volunteer guidance** is resolved locally in the browser. It recommends a track, projects and first steps without transmitting the visitor's answers. The visitor may then review and publish a prefilled public issue in [`general-forum`](https://github.com/draykerdk/general-forum/issues/new?template=volunteer-introduction.yml).
 - **Partnership proposals** are composed locally on `.com` and opened as a prefilled public issue in `general-forum`. The site does not collect contact information.
-- **Dknowledge** has one official repository-backed surface at [dknowledge.drayker.org](https://dknowledge.drayker.org). The footer, Docs vocabulary and didactic system map link there directly. The retired `/knowledge/` and `/project/dknowledge/` URLs are compatibility redirects only. **Dknowledger** is the private local vault, not the public site.
+- **Dknowledge** has one official repository-backed surface at [dknowledge.drayker.org](https://dknowledge.drayker.org). The footer, Docs vocabulary and didactic system map link there directly. The retired `/knowledge/` and `/project/dknowledge/` URLs are compatibility redirects only.
 
 ## Contributing
 
 Open an issue in this repository. If you want to work on the site itself, keep the runtime contract and the visual tokens in `SITE_PATTERN.md` intact, and never publish internal project-management state. A project page describes purpose, role, relationships and sources, not execution status.
 
-The current founding phase and direct-integration limits are written in the organization-wide [GOVERNANCE.md](https://github.com/draykerdk/.github/blob/master/GOVERNANCE.md). DFMP is the documented proposal method. DAF is a transitional governance scaffold, not an operational federation or Drayker's final constitution. Membership rules are not operational yet; the public entry today is voluntary contribution through the normal GitHub flow.
+The current founding phase and direct-integration limits are written in the organization-wide [GOVERNANCE.md](https://github.com/draykerdk/.github/blob/master/GOVERNANCE.md). DFMP is the documented proposal method. DAF is an autonomous federation of autonomous units and a basic and primitive form of PAP, implemented now on GitHub (Phase 0): its rules, instruments and public record exist. No unit has been recorded and no assembly has been held yet. It is not Drayker's final constitution. Membership rules are not operational yet; the public entry today is voluntary contribution through the normal GitHub flow.
 
-On vocabulary: **volunteer** is the operating role of the current founding phase — someone contributing through the open flow today, with no membership status implied. **Member** is the intended constitutional unit of Drayker — someone who participates as a constituent part of the system once membership rules become operational. A volunteer may become a member, and Drayker's future is not simply "an organization of volunteers"; but "volunteer" names a present working relationship, not a permanent classification of the person.
+On vocabulary: **volunteer** is the operating role of the current founding phase — someone contributing through the open flow today, with no membership status implied. **Member** is the intended constitutional unit of Drayker — someone who participates as a constituent part of the system once membership rules become operational. A volunteer may become a member, and Drayker's future is not simply "a supersystem of volunteers", but "volunteer" names a present working relationship, not a permanent classification of the person.
 
 [Steemit](https://steemit.com/@drayker) · [Medium](https://medium.com/drayker) · [Twitter](https://twitter.com/Draykerdk)
 
-Site content is published under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The code in this repository is under the license in `LICENSE`.
+Code under MIT (see `LICENSE`), content under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
