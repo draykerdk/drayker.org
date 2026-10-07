@@ -4,42 +4,53 @@ branch: master
 Related repositories read for content: all 25 public component repositories in `PROJECTS`, including their READMEs and public component contracts. Constitutional alignment in this sync also reads the organization-wide `.github/GOVERNANCE.md` and profile.
 
 ## Last sync
-date: 2026-10-07T00:00:00Z
+date: 2026-10-07T12:00:00Z
 
-### Internal working files no longer served — branch `docs/stop-serving-internal-files`
+### Public readiness, branch `docs/public-readiness`
+
+- **Drayker as a supersystem.** The home tab title reads "Drayker — volunteers portal", the /org heading reads "A supersystem designed to outgrow whoever started it", the JSON-LD no longer carries the "Drayker Organization" alternate name, and the glossary, role lines, Direction phase 1, propagation and drayker.com cards no longer define Drayker as an organization or an initiative.
+- **DAF.** Every DAF description follows one formula: an autonomous federation of autonomous units and a basic and primitive form of PAP, implemented now on GitHub (Phase 0), with its rules, instruments and public record in place and no unit recorded or assembly held yet (home, /org, ecosystem cards, glossary, project page, case and README).
+- **Dk Global.** It is partly the synthesis of the Dks across the network and partly its own kernels in a unified topology. Allocation follows one formula: on matters outside the constitution, within the space it grants, Dk Global decides and executes autonomously, and a well-justified veto obliges review (glossary, governance simulator, `llms.txt`).
+- **Councils.** The Advices card and glossary say Dk also convenes a council when its certainty is low.
+- **Smaller corrections.** Dk Personal card describes curation and outward promotion. The reward is the only transferable kind of reputation. Dzweck can be revoked. Open science and PAP states updated. The Dktron simulator is labelled illustrative and uses the Dktron unit. Portuguese and Spanish README tasks removed (English only).
+- **Contracts.** The mirrored component contracts were regenerated from every `.drayker/component.yml` (DAF, Distributed Support, Value Unit, Stations, Dknowledge, UID, Dk Network, PAP and review dates).
+- `data/org.json` carries the updated repository descriptions. README says code under MIT and content under CC BY 4.0, and no longer names the private vault.
+- Regenerated both prerender trees and the `.com` mirror.
+
+### Internal working files no longer served, branch `docs/stop-serving-internal-files`
 
 - Moved the maintainer working notes (`CLAUDE.md`, `github.md`, `V3-HANDOFF.md`, `INFRA-HANDOFF.md`, `DKNOWLEDGE-DESIGN.md`) from the site root to `.github/internal/`. They stay in the repository, and GitHub Pages does not publish `.github/`, so they are no longer reachable on drayker.org.
 - The README file table points to the new location.
 
 ### Representation and Dk Global — branch `docs/representation-and-dk-global`
 
-- **Dk Personal contract.** The mirrored scope adds outward representation: beyond the anonymous background exchange and as far as the person authorizes, Dk Personal promotes their interests with material arguments only, and the maturity of the personal Dknowledge weighs more than computation in its precision, following the founder's decision of 07/10 (draykerdk/dk-personal).
-- **Three scales.** The Dk Global card adds that it also has its own kernels, running in parallel in a unified topology, following the founder's decision of 07/10 (draykerdk/dk).
+- **Dk Personal contract.** The mirrored scope adds outward representation: beyond the anonymous background exchange and as far as the person authorizes, Dk Personal promotes their interests with material arguments only, and the maturity of the personal Dknowledge weighs more than computation in its precision (draykerdk/dk-personal).
+- **Three scales.** The Dk Global card adds that it also has its own kernels, running in parallel in a unified topology (draykerdk/dk).
 - Regenerated both prerender trees and the `.com` mirror.
 
 ### Subtle contrast in Dk Personal curation — branch `docs/subtle-contrast`
 
-- **Dk Personal contract.** The mirrored curation scope item no longer mentions other assistants. It says that Dk Personal has nothing to sell, neither products nor ideas, and no consensus to manufacture, and that it chooses from the interests and context of the person it serves, following the founder's correction of 07/10 (draykerdk/dk-personal).
+- **Dk Personal contract.** The mirrored curation scope item no longer mentions other assistants. It says that Dk Personal has nothing to sell, neither products nor ideas, and no consensus to manufacture, and that it chooses from the interests and context of the person it serves (draykerdk/dk-personal).
 - Regenerated both prerender trees and the `.com` mirror.
 
 ### Neutral contrast in Dk Personal curation — branch `docs/dk-personal-neutral-contrast`
 
-- **Dk Personal contract.** The mirrored curation scope item now says that other assistants also choose what reaches people, but work for the companies that make them, so they tend to favour the consensus that suits those companies and to sell products and ideas, and that Dk Personal chooses from the interests and context of the person it serves, following the founder's note of 06/10 to describe other systems without reacting (draykerdk/dk-personal).
+- **Dk Personal contract.** The mirrored curation scope item now says that other assistants also choose what reaches people, but work for the companies that make them, so they tend to favour the consensus that suits those companies and to sell products and ideas, and that Dk Personal chooses from the interests and context of the person it serves (draykerdk/dk-personal).
 - Regenerated both prerender trees and the `.com` mirror.
 
 ### Each Dk scale works for someone — branch `docs/dk-scales-power-balance`
 
-- **Three scales.** The Dk Global card says it works for Drayker and all its members, and the Dk Local card says a local Dk works for its project, following the founder's decision of 06/10 that each scale works for someone and that the exchange of their contexts multiplies power instead of subtracting it (draykerdk/dk).
+- **Three scales.** The Dk Global card says it works for Drayker and all its members, and the Dk Local card says a local Dk works for its project (draykerdk/dk).
 - Regenerated both prerender trees and the `.com` mirror.
 
 ### Dk Personal curation contrast — branch `docs/dk-personal-curation-contrast`
 
-- **Dk Personal contract.** The mirrored curation scope item adds that, unlike assistants built for whoever made them, Dk Personal does not manufacture consensus that benefits its makers or sell products and ideas, following the founder's addition of 06/10 (draykerdk/dk-personal).
+- **Dk Personal contract.** The mirrored curation scope item adds that, unlike assistants built for whoever made them, Dk Personal does not manufacture consensus that benefits its makers or sell products and ideas (draykerdk/dk-personal).
 - Regenerated both prerender trees and the `.com` mirror.
 
 ### Dk Personal curation — branch `docs/dk-personal-curation`
 
-- **Dk Personal contract.** The mirrored contract adds one scope item: Dk Personal only takes the person's attention with what it learns is truly important to them, based on their real interests and goals, tells them what is important or urgent without being asked, and leaves the rest until they ask, following the founder's decision of 06/10 (draykerdk/dk-personal).
+- **Dk Personal contract.** The mirrored contract adds one scope item: Dk Personal only takes the person's attention with what it learns is truly important to them, based on their real interests and goals, tells them what is important or urgent without being asked, and leaves the rest until they ask (draykerdk/dk-personal).
 - Regenerated both prerender trees and the `.com` mirror.
 
 ### Two dates wording — branch `docs/two-dates-and-daf-meta`
@@ -49,11 +60,11 @@ date: 2026-10-07T00:00:00Z
 
 ### Allocation authority and Direction wording — branch `docs/allocation-and-health-oct-06`
 
-- **Allocation authority.** The mirrored Value Unit contract and `llms.txt` say that Dk Global decides and executes allocations inside the constitution, and that members can make a well-justified veto, which obliges review, following the founder's decision of 06/10 (draykerdk/value-unit, draykerdk/dknowledge).
+- **Allocation authority.** The mirrored Value Unit contract and `llms.txt` say that Dk Global decides and executes allocations inside the constitution, and that members can make a well-justified veto, which obliges review (draykerdk/value-unit, draykerdk/dknowledge).
 - **Direction.** The intro no longer adds "with something very close before then" to the two dates, and the transversal principle says the phases are measured against the two dates (draykerdk/dknowledge).
 - Regenerated both prerender trees and the `.com` mirror.
 
-### Conformance with the founder's decisions of 06/10 — branch `docs/conformance-oct-06-2026`
+### Conformance pass of 06/10 — branch `docs/conformance-oct-06-2026`
 
 - **Governance card.** "Members set the rules" becomes rules built by the members with Dk Global, within the kernel. Dk Global still decides inside them.
 - **Direction.** The intro and the transversal principle state two dates as objectives: Dk 1.0, already an ASI, by 2030, and Drayker consolidated by 2033. Phase 07 says Dk 1.0 is already an ASI, with 2030 as its objective (draykerdk/dknowledge, draykerdk/dk).
@@ -64,7 +75,7 @@ date: 2026-10-07T00:00:00Z
 
 ### Dzweck as a member level — branch `docs/dzweck-level-oct-2026`
 
-- The Dzweck glossary entry describes a member level, not a position: the member chooses the difficult, sets aside what they are not (individualism, reactivity, apathy) to create their own values, and answers for a mission that can be handed on. Source: the founder's decision of 06/10/2026 and the book.
+- The Dzweck glossary entry describes a member level, not a position: the member chooses the difficult, sets aside what they are not (individualism, reactivity, apathy) to create their own values, and answers for a mission that can be handed on. Source: the change of 06/10/2026 and the book.
 - Regenerated both prerender trees and the `.com` mirror.
 
 ### DAF as a primitive PAP — branch `docs/daf-primitive-pap-oct-2026`
@@ -81,7 +92,7 @@ date: 2026-10-07T00:00:00Z
 
 ### Portal residuals — branch `docs/portal-residuals-oct-2026`
 
-From a full reading of the manifesto, economy, organization and partnership content against the founder's decisions:
+From a full reading of the manifesto, economy, organization and partnership content against the current documentation:
 
 - **Financing and the reward.** The economy summary no longer says money "buys no position", and the partnership page says that financing the network earns the reward, never a financial return.
 - **No open-code label left.** "Everything produced stays public" and "owned by nobody" are replaced: the documentation is public under CC BY 4.0, the system is auditable by permission level, and the parts belong to the members.
@@ -106,7 +117,7 @@ From a full reading of the manifesto, economy, organization and partnership cont
 - **"Open source" is no longer a Drayker label.** The banner, the footer and the partner limits say the documentation is public under CC BY 4.0 and that the system itself is auditable by permission level, through Dknowledge and DFM, as the Dk ethical code states. The code of the sites stays public.
 - **Open Science page:** Autonomous Health is described as the AI health system integrated with UID and Dk Personal, matching draykerdk/open-science#3.
 
-### Founder's design restored — branch `docs/sweep-fixes-oct-2026`
+### Original design restored — branch `docs/sweep-fixes-oct-2026`
 
 - **Autonomous Health** is an AI health system integrated with UID and Dk Personal; "clinical autonomy of any kind" no longer appears as non-scope (draykerdk/open-science#3).
 - **The reward** for contributing capacity is a transferable kind of reputation that gives faster or priority access to resources (draykerdk/distributed-support#7, draykerdk/uid#8).

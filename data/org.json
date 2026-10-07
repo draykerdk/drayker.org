@@ -89,7 +89,7 @@
     {
       "name": "general-forum",
       "full": "draykerdk/general-forum",
-      "desc": "Drayker public forum: issues and merged decisions across the organization, read in one place. Take part at drayker.org.",
+      "desc": "Drayker public forum: issues and merged decisions across Drayker, read in one place. Take part at drayker.org.",
       "lang": "HTML",
       "stars": 0,
       "forks": 0,
@@ -101,7 +101,7 @@
     {
       "name": "drayker.com",
       "full": "draykerdk/drayker.com",
-      "desc": "The Drayker institutional site — what the organization is and how the system fits together. Take part at drayker.org.",
+      "desc": "The Drayker institutional site: what the supersystem is and how its parts fit together. Take part at drayker.org.",
       "lang": "HTML",
       "stars": 0,
       "forks": 0,
@@ -209,7 +209,7 @@
     {
       "name": "daf",
       "full": "draykerdk/daf",
-      "desc": "DAF — Decentralized Autonomous Federation: governance and resource management for the Drayker ecosystem. Currently in research. Take part at drayker.org.",
+      "desc": "DAF, the Distributed Autonomous Federation: an autonomous federation of autonomous units, a basic and primitive form of PAP, implemented now. Take part at drayker.org.",
       "lang": "HTML",
       "stars": 1,
       "forks": 0,
@@ -233,7 +233,7 @@
     {
       "name": "advices",
       "full": "draykerdk/advices",
-      "desc": "Advice councils — volunteer groups with different levels of specialization that make recommendations and proposals. Currently in research. Take part at drayker.org.",
+      "desc": "Member councils, formed for each question and composed by Dknowledge from the best informed and the most affected, with Dk in the middle. Currently in research. Take part at drayker.org.",
       "lang": "",
       "stars": 1,
       "forks": 0,
