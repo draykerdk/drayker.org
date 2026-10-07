@@ -4,7 +4,12 @@ branch: master
 Related repositories read for content: all 25 public component repositories in `PROJECTS`, including their READMEs and public component contracts. Constitutional alignment in this sync also reads the organization-wide `.github/GOVERNANCE.md` and profile.
 
 ## Last sync
-date: 2026-10-06T00:00:00Z
+date: 2026-10-07T00:00:00Z
+
+### Internal working files no longer served — branch `docs/stop-serving-internal-files`
+
+- Moved the maintainer working notes (`CLAUDE.md`, `github.md`, `V3-HANDOFF.md`, `INFRA-HANDOFF.md`, `DKNOWLEDGE-DESIGN.md`) from the site root to `.github/internal/`. They stay in the repository, and GitHub Pages does not publish `.github/`, so they are no longer reachable on drayker.org.
+- The README file table points to the new location.
 
 ### Representation and Dk Global — branch `docs/representation-and-dk-global`
 
