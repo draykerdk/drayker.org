@@ -9,7 +9,7 @@
 - [Contribution guide](https://drayker.org/contrib/guide/): how public work moves from proposal to reviewed delivery.
 - [General Forum](https://forum.drayker.org/): public proposals, questions and decisions.
 - [Dknowledge](https://dknowledge.drayker.org/): current orientation, papers, architecture and evidence.
-- [Institutional site](https://drayker.com/): the canonical organization identity and presentation.
+- [Institutional site](https://drayker.com/): what the supersystem is and how its parts fit together.
 
 ## Core concepts
 
@@ -19,11 +19,11 @@
 - Members are the intended constitutional subjects. Agents may carry delegated functions and Dk may perform contextual synthesis, but neither acquires member rights or sovereign authority.
 - Drayker's internal economy circulates capacity contextually; money, contracts and markets remain part of its external interface.
 - Reputation is multidimensional operational memory, not a price, a currency, human worth or one global moral score.
-- Dk performs contextual synthesis; systemic safeguards — constitutional constraints, security, permissions, integrity, reserves and risk — bound what can be executed; Dk Global decides and executes allocations autonomously inside the constitution, and members can make a well-justified veto, which obliges review.
-- Decisions do not end the loop: effects, refusals and consequences return through members' personal Dks as new evidence, without a universal individual veto; a decision can be maintained, adapted, excepted, suspended or reversed.
+- Dk performs contextual synthesis; systemic safeguards — constitutional constraints, security, permissions, integrity, reserves and risk — bound what can be executed; on matters outside the constitution, within the space it grants, Dk Global decides and executes allocations autonomously, and members can make a well-justified veto, which obliges review until consensus.
+- Decisions do not end the loop: effects, refusals and consequences return through members' personal Dks as new evidence. A well-justified veto obliges review, and vetoes pass through triage and are recorded in a signed chain. A decision can be maintained, adapted, excepted, suspended or reversed.
 - Security conditions normal decisions, not only attacks. Legitimate criticism is not infiltration; internal error is not sabotage; extraordinary measures leave memory for later review.
 - Dknowledge is a multiscale operational ontology with contextual permissions. Auditability does not mean total exposure.
-- DAF is transitional scaffolding; PAP is the environment where intentions become projects and durable applications.
+- DAF is an autonomous federation of autonomous units and a basic and primitive form of PAP, implemented now on GitHub (Phase 0): its rules, instruments and public record exist. No unit has been recorded and no assembly has been held yet. PAP is the environment where intentions become projects and durable applications.
 - Public pages distinguish what is running now from architecture, research and designed future systems.
 - Intelligence is a means. Human will to potential and mass participation are the end.
 
