@@ -1,30 +1,30 @@
-# drayker-mark.js. Base do símbolo Drayker
+# drayker-mark.js. Basis of the Drayker symbol
 
-Motor único do símbolo: **corpo + estrutura orbital + efeito nos dois quartos**.
-Serve para páginas vivas (animado, reage ao cursor), para SVG estático
-(favicon, e-mail, PDF, corte) e como matemática pura para outros meios.
+A single engine for the symbol: **body + orbital structure + effect on the two quarters**.
+It serves live pages (animated, reacts to the cursor), static SVG
+(favicon, email, PDF, cutting) and pure maths for other media.
 
-Arquivo: `drayker-mark.js`. Sem dependências, sem build. Um `<script src>` basta.
+File: `drayker-mark.js`. No dependencies, no build. One `<script src>` is enough.
 
 ---
 
-## 1. O conceito (não invente outro)
+## 1. The concept (do not invent another)
 
-| peça | o que é | regra |
+| piece | what it is | rule |
 |---|---|---|
-| **corpo** | o planeta, esfera de raio `R = 100` no centro de um viewBox `-190 -190 380 380` | sempre esférico de verdade: tudo que é desenhado nele tem de fazer sentido sobre uma esfera |
-| **aros** | **uma megaestrutura / nave** em órbita — dois grandes círculos que *contêm* o vetor de olhar e são inclinados `±tilt` (42°, `0.733 rad`) em torno dele | por isso eles se cruzam sempre na frente de quem olha e reorientam com o cursor; nunca são ornamento |
-| **cunha** | a sombra que a estrutura projeta, cobrindo **dois quartos opostos** do disco | opaca, borda seca, sem blur. É a marca |
-| **quartos** | o que a estrutura *faz* com o planeta, desenhado **dentro da cunha** (clip) | leitura dupla e intencional: **proteção** (blindagem) e **extração de energia** |
+| **body** | the planet, a sphere of radius `R = 100` at the centre of a `-190 -190 380 380` viewBox | always truly spherical: everything drawn on it has to make sense on a sphere |
+| **hoops** | **a megastructure / ship** in orbit — two great circles that *contain* the gaze vector and are tilted `±tilt` (42°, `0.733 rad`) around it | that is why they always cross in front of the viewer and reorient with the cursor; they are never ornament |
+| **wedge** | the shadow the structure casts, covering **two opposite quarters** of the disc | opaque, hard edge, no blur. It is the mark |
+| **quarters** | what the structure *does* to the planet, drawn **inside the wedge** (clip) | a double, intentional reading: **protection** (shielding) and **energy extraction** |
 
-A cunha atravessa também a atmosfera: o brilho de limbo é apagado nos setores
-cobertos (`geom.limbBlock`). Sem isso a sombra denuncia que é pintura.
+The wedge also crosses the atmosphere: the limb glow is erased in the covered
+sectors (`geom.limbBlock`). Without that the shadow gives away that it is paint.
 
 ---
 
-## 2. Uso
+## 2. Usage
 
-### Declarativo (o caminho normal)
+### Declarative (the normal path)
 
 ```html
 <script src="drayker-mark.js"></script>
@@ -38,263 +38,263 @@ cobertos (`geom.limbBlock`). Sem isso a sombra denuncia que é pintura.
      data-stars></svg>
 ```
 
-Monta sozinho no `DOMContentLoaded`. Para conteúdo inserido depois:
+It mounts itself on `DOMContentLoaded`. For content inserted later:
 `Drayker.mount(container)`.
 
-Outros atributos: `data-sphere` (nome em `palette.spheres` ou omitido),
+Other attributes: `data-sphere` (a name in `palette.spheres`, or omitted),
 `data-tilt`, `data-shadow` (0–1), `data-animate="false"`,
-`data-gaze="0.16,0.34"` (olhar fixo em vez de seguir o cursor).
+`data-gaze="0.16,0.34"` (fixed gaze instead of following the cursor).
 
-### Programático
+### Programmatic
 
 ```js
 const mark = Drayker.create('#hero-mark', {
   body: 'plain', rings: 'collector', wedge: 'extract', ringRadius: 124
 });
-mark.setGaze(0.2, 0.3);   // congela o olhar
-mark.followCursor();      // volta a seguir o cursor
-mark.stop(); mark.start(); // controla o rAF
+mark.setGaze(0.2, 0.3);   // freezes the gaze
+mark.followCursor();      // follows the cursor again
+mark.stop(); mark.start(); // controls the rAF
 ```
 
-## 2.5 A MARCA OFICIAL (é esta, não invente outra)
+## 2.5 THE OFFICIAL MARK (it is this one, do not invent another)
 
-Duas cores e só: **preto** (#000000) nos aros, na borda e na sombra; **o globo**
-muda de cor por escopo. Laranja neon `#FF5500` no principal. Olhar travado em
-`0, 0.34`: simetria de eixo vertical, ponta focal da cunha abaixo do centro.
-Estática, sem gradiente, sem halo, sem noite.
+Two colours and nothing else: **black** (#000000) on the hoops, the edge and the shadow; **the globe**
+changes colour by scope. Neon orange `#FF5500` on the main one. Gaze locked at
+`0, 0.34`: vertical-axis symmetry, focal tip of the wedge below the centre.
+Static, no gradient, no halo, no night side.
 
 ```html
 <svg data-drayker data-rings="mono" data-accent="#FF5500"
      data-gaze="0,0.34" data-animate="false" data-fit="1.5"></svg>
 ```
 
-| aplicação | parâmetros |
+| application | parameters |
 |---|---|
-| marca — **e todo ícone ≥ 20 px** | `rings:'mono', weight:5, ringRadius:120, fit:1.5` |
-| compacto (exceção, < 20 px) | `rings:'mono', weight:7, ringRadius:106, fit:1.24` |
-| favicon 16 px | `rings:'monoBare', weight:9, fit:1.1` |
-| sem cunha | `+ shadow:0` |
-| órbita larga | `ringRadius:152, weight:3.4, fit:1.78` |
+| mark — **and every icon ≥ 20 px** | `rings:'mono', weight:5, ringRadius:120, fit:1.5` |
+| compact (exception, < 20 px) | `rings:'mono', weight:7, ringRadius:106, fit:1.24` |
+| 16 px favicon | `rings:'monoBare', weight:9, fit:1.1` |
+| no wedge | `+ shadow:0` |
+| wide orbit | `ringRadius:152, weight:3.4, fit:1.78` |
 
-**O ícone é a logo.** Não existe versão de ícone "simplificada" para uso normal:
-favicon 32/48, app icon, avatar, aba, botão, marcador de mapa. Todos são
-`drayker-marca.svg` sem alteração. `drayker-icone.svg` (compacto) e
-`drayker-favicon.svg` (monoBare) só entram quando a marca é renderizada abaixo
-de 20 px e os aros fecham; se der para usar a logo, usa a logo.
+**The icon is the logo.** There is no "simplified" icon version for normal use:
+favicon 32/48, app icon, avatar, tab, button, map marker. All of them are
+`drayker-mark.svg` unchanged. `drayker-icon.svg` (compact) and
+`drayker-favicon.svg` (monoBare) only come in when the mark is rendered below
+20 px and the hoops close up; if the logo can be used, use the logo.
 
-### Arquivos prontos · `assets/logo/`
+### Ready-made files · `assets/logo/`
 
 ```
-drayker-marca.svg  drayker-icone.svg  drayker-favicon.svg
-drayker-sem-cunha.svg  drayker-orbita-larga.svg
-escopo/drayker-{emergence,dk,daf,bsdk,network,lcrypt,uid,dfm}.svg
-escuro/drayker-{marca,icone,sem-cunha,orbita-larga,favicon}.svg   tinta branca
-escuro/escopo/drayker-{...}.svg            mesma coleção para fundo escuro
-mono/drayker-1cor-{preto,branco}.svg      uma tinta (globo = papel)
-mono/drayker-vazado-{branco,preto}.svg    disco com a cunha FURADA (evenodd)
-assinatura/drayker-{horizontal,vertical,horizontal-branco}.svg   titular
-assinatura/drayker-tecnica{,-branco}.svg   maiúscula espaçada, uso técnico
-kit/  favicon-16/32/48.png · apple-touch-icon.png (180, fundo #08080A, marca escura)
-      maskable-512.png (zona segura 20%, marca escura) · icon-512/1024.png
-      icon-512-branco.png · icon-512-escuro.png
+drayker-mark.svg  drayker-icon.svg  drayker-favicon.svg
+drayker-no-wedge.svg  drayker-wide-orbit.svg
+scope/drayker-{emergence,dk,daf,bsdk,network,lcrypt,uid,dfm}.svg
+dark/drayker-{mark,icon,no-wedge,wide-orbit,favicon}.svg   white ink
+dark/scope/drayker-{...}.svg            same collection for dark backgrounds
+mono/drayker-1color-{black,white}.svg      one ink (globe = paper)
+mono/drayker-knockout-{white,black}.svg    disc with the wedge CUT OUT (evenodd)
+signature/drayker-{horizontal,vertical,horizontal-white}.svg   primary
+signature/drayker-technical{,-white}.svg   spaced capitals, technical use
+kit/  favicon-16/32/48.png · apple-touch-icon.png (180, #08080A background, dark mark)
+      maskable-512.png (20% safe zone, dark mark) · icon-512/1024.png
+      icon-512-white.png · icon-512-dark.png
 ```
 
-A assinatura é **“Drayker” em caixa alta e baixa**, só o D maiúsculo, em
-**Archivo 600, tracking −0.012em** (horizontal) e **Archivo 500, tracking ~0**
-(vertical: caixa baixa não se espaça). Nunca `lengthAdjust="spacingAndGlyphs"`: a
-letra não é esticada nem comprimida em nenhuma aplicação. Archivo entrou no lugar
-do Space Grotesk porque `r`, `k` e `y` são formas simples. Haste e diagonal, sem
-perninha decorativa.
+The signature is **“Drayker” in mixed case**, only the D in capitals, in
+**Archivo 600, tracking −0.012em** (horizontal) and **Archivo 500, tracking ~0**
+(vertical: lowercase is not spaced out). Never `lengthAdjust="spacingAndGlyphs"`: the
+letters are not stretched or squashed in any application. Archivo replaced
+Space Grotesk because `r`, `k` and `y` are simple shapes. Stem and diagonal, no
+decorative little leg.
 
-Existe **uma segunda assinatura, a técnica**: `DRAYKER` em Archivo 500 com
-tracking **+0.22em**, sempre menor que o símbolo. Placa, casco, lombada, régua
-de rodapé. Ela nunca substitui a titular em peça de marca, e maiúscula colada
-(sem tracking) não existe. No escuro, só a palavra muda de cor: aros e borda
-continuam preto.
+There is **a second signature, the technical one**: `DRAYKER` in Archivo 500 with
+tracking **+0.22em**, always smaller than the symbol. Plate, hull, spine,
+footer ruler. It never replaces the primary signature on a brand piece, and tight capitals
+(without tracking) do not exist. On dark, only the word changes colour: hoops and edge
+stay black.
 
-**Archivo é o único tipo da marca**. 600 para marca e título, 500 para técnica e
-rótulo, 400 para texto. Sem fonte alternativa para peça grande, sem par de
-fontes. O texto ainda é `<text>` vivo. Converta para
-curvas no Illustrator/Figma antes de mandar para gráfica. Área de respiro já
-embutida no arquivo: **X = metade do raio do globo**. Mínimos: 24 mm / 110 px
-(horizontal), 16 mm / 72 px (vertical); abaixo disso, só o símbolo.
+**Archivo is the brand’s only typeface**. 600 for mark and title, 500 for technical text and
+labels, 400 for text. No alternative font for large pieces, no font
+pairing. The text is still live `<text>`. Convert it to
+outlines in Illustrator/Figma before sending it to print. Clear space is already
+built into the file: **X = half the globe’s radius**. Minimums: 24 mm / 110 px
+(horizontal), 16 mm / 72 px (vertical); below that, the symbol alone.
 
-### A tinta segue o fundo
-O aro é **uma peça só e tem uma cor só**. Na frente do globo, atrás dele e no
-trecho que o cruza. A borda do limbo acompanha o aro.
+### The ink follows the background
+The hoop is **a single piece and has a single colour**. In front of the globe, behind it and
+where it crosses it. The limb edge follows the hoop.
 
-| elemento | no claro | no escuro |
+| element | on light | on dark |
 |---|---|---|
-| aro inteiro (`over` + `out` + `back`) e borda do limbo | preto | **branco** |
-| cunha (sombra, não estrutura) | preto | **preto** |
-| globo | cor do escopo | cor do escopo |
+| whole hoop (`over` + `out` + `back`) and limb edge | black | **white** |
+| wedge (shadow, not structure) | black | **black** |
+| globe | scope colour | scope colour |
 
-A cunha é a única exceção, e por um motivo: em branco ela desapareceria sobre
-globos claros (`uid #E8ECF5` daria 1,18:1) e é ela que conta o que a estrutura faz
-com o planeta. São dois arquivos da mesma geometria: `assets/logo/` para fundo
-claro, `assets/logo/escuro/` para fundo escuro, gerados com
-`toMonoSVG({ ink: '#FFFFFF' })`. `ink` é a tinta do aro e da borda, `inkOnBody`
-(preto por padrão) a da cunha. Nos modos `ink` e `knockout` há uma tinta só.
-Sobre cor cheia, foto ou vídeo, nenhum dos dois serve: ali é o
-`mono/drayker-vazado-*.svg`.
+The wedge is the only exception, and for a reason: in white it would vanish on
+light globes (`uid #E8ECF5` would give 1.18:1), and it is the wedge that tells what the structure does
+to the planet. There are two files with the same geometry: `assets/logo/` for light
+backgrounds, `assets/logo/dark/` for dark backgrounds, generated with
+`toMonoSVG({ ink: '#FFFFFF' })`. `ink` is the ink of the hoop and the edge, `inkOnBody`
+(black by default) that of the wedge. The `ink` and `knockout` modes have a single ink.
+On solid colour, photo or video, neither of the two works: there it is
+`mono/drayker-knockout-*.svg`.
 
-Ordem de pintura: globo, cunha, `over`, `back`, `out`, borda.
+Paint order: globe, wedge, `over`, `back`, `out`, edge.
 
-### Emenda do aro com o globo
-`geom.hoop` classifica o aro em `over` / `out` / `back` e a troca de classe é
-resolvida por **bissecção** no ângulo exato do cruzamento, não na amostra mais
-próxima. Depois cada trecho avança ~3 px além da fronteira. Sem isso aparecia
-um corte branco onde o aro encontra o limbo. Se mexer em `hoop`, mantenha as
-duas coisas: ângulo exato **e** costura sobreposta.
+### Seam between hoop and globe
+`geom.hoop` classifies the hoop into `over` / `out` / `back`, and the change of class is
+resolved by **bisection** at the exact crossing angle, not at the nearest
+sample. Then each segment extends ~3 px beyond the boundary. Without this a
+white cut appeared where the hoop meets the limb. If you touch `hoop`, keep both
+things: exact angle **and** overlapping seam.
 
-### Não faça
-Esticar, girar ou espelhar · trocar a cor dos aros/borda/sombra (só o globo
-muda) · sombra, brilho, gradiente ou contorno extra · marca colorida sobre foto
-(ali é o vazado) · redesenhar a partir de print.
+### Don’t
+Stretch, rotate or mirror · change the colour of the hoops/edge/shadow (only the globe
+changes) · shadow, glow, gradient or extra outline · colour mark on a photo
+(that is where the knockout goes) · redraw from a screenshot.
 
-### SVG estático (favicon, e-mail, PDF, laser)
+### Static SVG (favicon, email, PDF, laser)
 
 ```js
 Drayker.toSVGString({ rings: 'seal', animate: false });
-// quadro congelado do motor inteiro (com defs, máscara, filtro)
+// frozen frame of the whole engine (with defs, mask, filter)
 
 Drayker.toMonoSVG({ accent: '#FF5500', ringRadius: 106, weight: 7, fit: 1.24 });
-// SVG MÍNIMO da marca oficial: ~6 formas, sem defs/máscara/filtro/script
+// MINIMAL SVG of the official mark: ~6 shapes, no defs/mask/filter/script
 ```
 
-`toMonoSVG` aceita ainda `mode`:
-`'color'` (padrão, globo colorido + preto) · `'ink'` (uma tinta só: o globo vira
-o papel) · `'knockout'` (disco cheio com a cunha furada, `fill-rule="evenodd"`),
-mais `ink` para a cor da tinta. É o gerador de todos os arquivos em
-`assets/logo/`. Para gerar de novo, rode-o e grave a string.
+`toMonoSVG` also accepts `mode`:
+`'color'` (default, coloured globe + black) · `'ink'` (a single ink: the globe becomes
+the paper) · `'knockout'` (solid disc with the wedge cut out, `fill-rule="evenodd"`),
+plus `ink` for the ink colour. It is the generator of every file in
+`assets/logo/`. To regenerate, run it and save the string.
 
 ---
 
-## 3. Opções
+## 3. Options
 
-| opção | default | nota |
+| option | default | note |
 |---|---|---|
-| `body` | `'plain'` | chave de `Drayker.bodies` |
-| `rings` | `'hairline'` | chave de `Drayker.rings` |
-| `wedge` | `'none'` | chave de `Drayker.wedgeFx` |
-| `accent` | `#FF5500` | cor do escopo |
-| `sphere` | do corpo | nome em `palette.spheres` ou array de stops |
-| `tilt` | `0.733` | inclinação dos planos, em rad. **Não mude sem motivo** |
-| `ringRadius` | `120` | raio da estrutura |
-| `weight` | `5` | espessura do traço nos estilos chapados (`mono`) |
-| `border` | `true` | borda preta no limbo (`mono`) |
-| `shadow` | `0.94` | opacidade da cunha |
-| `night` | `0.3` | lado noturno |
+| `body` | `'plain'` | key of `Drayker.bodies` |
+| `rings` | `'hairline'` | key of `Drayker.rings` |
+| `wedge` | `'none'` | key of `Drayker.wedgeFx` |
+| `accent` | `#FF5500` | scope colour |
+| `sphere` | from the body | name in `palette.spheres` or an array of stops |
+| `tilt` | `0.733` | tilt of the planes, in rad. **Do not change without a reason** |
+| `ringRadius` | `120` | radius of the structure |
+| `weight` | `5` | stroke thickness in the flat styles (`mono`) |
+| `border` | `true` | black edge on the limb (`mono`) |
+| `shadow` | `0.94` | opacity of the wedge |
+| `night` | `0.3` | night side |
 | `stars` / `animate` | `false` / `true` | |
-| `fit` | `null` | recorta o viewBox (meia-extensão em múltiplos de `R`). `1.35` para ícone pequeno |
-| `gaze` | `null` | `{x,y}` fixo; `null` = cursor |
+| `fit` | `null` | crops the viewBox (half-extent in multiples of `R`). `1.35` for a small icon |
+| `gaze` | `null` | fixed `{x,y}`; `null` = cursor |
 
-O olhar é **um só na página** (`window.__dkGaze`): todas as marcas viram juntas.
+There is **a single gaze per page** (`window.__dkGaze`): all marks turn together.
 
 ---
 
-## 4. Catálogo atual
+## 4. Current catalogue
 
-**Corpos** `plain` (esfera da marca) · `grid` (meridianos/paralelos) ·
-`geo` (casca geodésica icosaédrica) · `weave` (trança de dois sentidos) ·
-`star` (plumas radiais) · `voidBody` (horizonte de eventos).
+**Bodies** `plain` (the mark’s sphere) · `grid` (meridians/parallels) ·
+`geo` (icosahedral geodesic shell) · `weave` (two-way weave) ·
+`star` (radial plumes) · `voidBody` (event horizon).
 
-**Estruturas** `mono` (**a marca oficial**, duas cores, chapada, estática) ·
-`monoBare` (mono sem aros: globo + borda + cunha) ·
-`hairline` (fita de cromo) · `hull` (casco habitado: costuras, vigas, módulos, luzes) ·
-`collector` (painéis escuros + bocas de captação) ·
-`shieldRing` (aros finos + emissores) · `drydock` (pórticos e naves atracadas) ·
-`seal` (chapado, estático, versão antiga de ícone).
+**Structures** `mono` (**the official mark**, two colours, flat, static) ·
+`monoBare` (mono without hoops: globe + edge + wedge) ·
+`hairline` (chrome ribbon) · `hull` (inhabited hull: seams, beams, modules, lights) ·
+`collector` (dark panels + intake mouths) ·
+`shieldRing` (thin hoops + emitters) · `drydock` (gantries and docked ships) ·
+`seal` (flat, static, old icon version).
 
-**Quartos** `none` · `extract` (fluxo de energia para o ponto de captação) ·
-`shield` (malha de blindagem + varredura) · `terraform` (parcelas e placas acesas).
+**Quarters** `none` · `extract` (energy flow towards the intake point) ·
+`shield` (shielding mesh + sweep) · `terraform` (plots and lit plates).
 
-Qualquer combinação é válida. 6 × 6 × 4. Pares que já foram testados juntos:
+Any combination is valid. 6 × 6 × 4. Pairs already tested together:
 `hull+terraform`, `collector+extract`, `shieldRing+shield`, `drydock+none`.
 
 ---
 
-## 5. Como estender (é aqui que outro agente deve mexer)
+## 5. How to extend (this is where another agent should work)
 
-**Nunca edite o pipeline de `create()`.** Registre uma entrada nova.
+**Never edit the `create()` pipeline.** Register a new entry.
 
 ```js
 Drayker.bodies.myBody = {
-  sphere: 'ice',            // gradiente base (palette.spheres), opcional
-  hotLimb: false,           // limbo quente (estrelas), opcional
-  build(ctx) {              // cria os nós UMA vez
+  sphere: 'ice',            // base gradient (palette.spheres), optional
+  hotLimb: false,           // hot limb (stars), optional
+  build(ctx) {              // creates the nodes ONCE
     return { g: ctx.layers.body.appendChild(Drayker.mk('path', {
       fill: 'none', stroke: ctx.accent, 'stroke-width': 1
     })) };
   },
-  paint(ctx, p) {           // só atualiza atributos, todo quadro
+  paint(ctx, p) {           // only updates attributes, every frame
     ctx.body.g.setAttribute('d', Drayker.geom.hoop(p.normals[0], 99).over);
   }
 };
 ```
 
-`Drayker.rings.x` e `Drayker.wedgeFx.x` seguem a mesma forma
-(`ctx.ring` / `ctx.fx` guardam o retorno do `build`).
+`Drayker.rings.x` and `Drayker.wedgeFx.x` follow the same shape
+(`ctx.ring` / `ctx.fx` hold what `build` returns).
 
 **`ctx`** — `layers` (`stars`, `back`, `body`, `fx`, `limb`, `front`),
-`accent`, `metal`, `hull` (gradientes prontos), `blurSoft`, `opts`, `uid`,
+`accent`, `metal`, `hull` (ready-made gradients), `blurSoft`, `opts`, `uid`,
 `geom`, `vec`, `palette`.
 
-**`p`** (payload de paint) — `t` (segundos), `gaze`, `normals` (as duas normais),
-`spans` (setores angulares cobertos pela cunha), `wedge` (`{d, spans, apex}`), `opts`.
+**`p`** (paint payload) — `t` (seconds), `gaze`, `normals` (the two normals),
+`spans` (angular sectors covered by the wedge), `wedge` (`{d, spans, apex}`), `opts`.
 
-Regras de camada: peças atrás do corpo em `layers.back` (esmaeça-as);
-peças na frente em `layers.front`; superfície do planeta em `layers.body`;
-efeito nos dois quartos em `layers.fx` (já vem clipado na cunha).
+Layer rules: pieces behind the body in `layers.back` (fade them);
+pieces in front in `layers.front`; the planet’s surface in `layers.body`;
+the effect on the two quarters in `layers.fx` (already clipped to the wedge).
 
-**Ring style com casco largo** deve declarar `wedgePad` (quanto a cunha cresce
-além de `ringRadius`) e `flat: true` se for chapado/estático.
+**A ring style with a wide hull** must declare `wedgePad` (how much the wedge grows
+beyond `ringRadius`) and `flat: true` if it is flat/static.
 
-### Regras de desempenho
-- `build` cria nós; `paint` **só** faz `setAttribute`. Nada de criar nó por quadro.
-- Para conjuntos de pontos use `Drayker.syncDots(g, lista, r)` — pool reaproveitado.
-- O loop pinta em quadros alternados (~30 fps); é suficiente e barato com 8+ marcas.
+### Performance rules
+- `build` creates nodes; `paint` **only** calls `setAttribute`. Never create a node per frame.
+- For sets of points use `Drayker.syncDots(g, list, r)` — a reused pool.
+- The loop paints on alternate frames (~30 fps); that is enough and cheap with 8+ marks.
 
 ---
 
-## 6. Matemática pura (sem DOM)
+## 6. Pure maths (no DOM)
 
 `Drayker.vec` — `norm, cross, dot, scale, add, rotY, rotAxis`.
 
 `Drayker.geom`:
 
-| função | devolve |
+| function | returns |
 |---|---|
-| `basis(n)` | base ortonormal no plano de normal `n` |
-| `hoop(n, r)` | `{over, out, back}` — aro classificado (por cima do corpo / na frente e fora / atrás e fora). Atrás **e** dentro do disco é omitido |
-| `band(n, r1, r2)` | `{front, back}` — casco largo partido pelo corpo |
-| `onHoop(n, r, t)` | ponto 3D no aro (para pendurar módulos, luzes, feixes) |
-| `gazeNormals(gx, gy, tilt)` | as duas normais dos planos a partir do olhar |
-| `shadowWedge(gx, gy, tilt, R)` | `{d, spans, apex}` — a cunha nos dois quartos |
-| `limbBlock(spans, r1, r2)` | setores para apagar o halo atrás da cunha |
-| `night(gx, gy)` | lado noturno visível |
-| `smallCircle(axis, lat, r)` | paralelo sobre a esfera, só a parte visível |
-| `icosa(sub)` | `{verts, faces}` icosaedro subdividido |
+| `basis(n)` | orthonormal basis in the plane with normal `n` |
+| `hoop(n, r)` | `{over, out, back}` — classified hoop (over the body / in front and outside / behind and outside). Behind **and** inside the disc is omitted |
+| `band(n, r1, r2)` | `{front, back}` — wide hull split by the body |
+| `onHoop(n, r, t)` | 3D point on the hoop (to hang modules, lights, beams) |
+| `gazeNormals(gx, gy, tilt)` | the two plane normals from the gaze |
+| `shadowWedge(gx, gy, tilt, R)` | `{d, spans, apex}` — the wedge on the two quarters |
+| `limbBlock(spans, r1, r2)` | sectors where the halo behind the wedge is erased |
+| `night(gx, gy)` | visible night side |
+| `smallCircle(axis, lat, r)` | a parallel on the sphere, visible part only |
+| `icosa(sub)` | `{verts, faces}` subdivided icosahedron |
 
-Projeção é ortográfica trivial: `(x, y)` do vetor 3D já são coordenadas de tela,
-`z > 0` é na frente. Sem matriz de câmera, de propósito — dá para portar o mesmo
-código para canvas, three.js ou gerador de SVG no servidor sem tradução.
+The projection is a trivial orthographic one: `(x, y)` of the 3D vector are already screen coordinates,
+`z > 0` is in front. No camera matrix, on purpose — the same
+code can be ported to canvas, three.js or a server-side SVG generator without translation.
 
 ---
 
-## 7. Paleta
+## 7. Palette
 
 `Drayker.palette` — `ink #08080A`, `panel #0C0C0F`, `line #18181E`,
 `text #EDECF0`, `mute #8585A0`, `accent #FF5500`, `accentHot #FF8A38`,
-gradientes `chrome` / `hullDark`, esferas `brand, slate, ice, moss, star, void`.
-Cores de escopo já em uso no site: Dk `#5CE02E`, DAF `#FF8A00`, BSDK `#9C8CFF`,
+gradients `chrome` / `hullDark`, spheres `brand, slate, ice, moss, star, void`.
+Scope colours already in use on the site: Dk `#5CE02E`, DAF `#FF8A00`, BSDK `#9C8CFF`,
 Dk Network `#3FA9FF`, LCrypt `#14E0C0`, UID `#E8ECF5`, DFM/DFMP `#FFCB6B`,
-Emergence `#FF5500`. **Não invente cor nova** — puxe daqui.
+Emergence `#FF5500`. **Do not invent a new colour** — take it from here.
 
 ---
 
-## 8. Acessibilidade e limites
-- A marca é decorativa: `aria-hidden="true"` quando houver texto ao lado.
-- `prefers-reduced-motion`: a engine respeita sozinha — com movimento reduzido ativo no sistema, a marca não anima por conta própria e permanece no primeiro quadro válido. `mark.start()` continua disponível para quem quiser animar explicitamente mesmo assim.
-- Abaixo de ~40 px use `rings: 'seal'` e `wedge: 'none'`.
-- Não gire a cunha de forma independente dos aros: ela **é** a sombra deles.
+## 8. Accessibility and limits
+- The mark is decorative: `aria-hidden="true"` when there is text next to it.
+- `prefers-reduced-motion`: the engine respects it on its own — with reduced motion active in the system, the mark does not animate by itself and stays on the first valid frame. `mark.start()` remains available for anyone who wants to animate it explicitly anyway.
+- Below ~40 px use `rings: 'seal'` and `wedge: 'none'`.
+- Do not rotate the wedge independently of the hoops: it **is** their shadow.

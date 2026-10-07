@@ -77,7 +77,7 @@ for (const url of urls) {
   check(graph.some((entry) => entry['@type'] === 'WebPage' && entry.url === url), url + ' has no matching WebPage entity');
   check(html.includes('<noscript>') && html.includes('DRAYKER_PRERENDER_START'), url + ' has no readable no-script fallback');
 
-  for (const icon of ['assets/logo/drayker-icone.svg', 'assets/logo/escuro/drayker-icone.svg', 'assets/logo/kit/icon-512.png', 'assets/logo/kit/icon-512-escuro.png', 'assets/logo/kit/apple-touch-icon.png']) {
+  for (const icon of ['assets/logo/drayker-icon.svg', 'assets/logo/dark/drayker-icon.svg', 'assets/logo/kit/icon-512.png', 'assets/logo/kit/icon-512-dark.png', 'assets/logo/kit/apple-touch-icon.png']) {
     const basename = path.basename(icon).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const href = value(html, new RegExp('<link[^>]+href="([^"]*' + basename + '[^"]*)"'));
     check(Boolean(href), url + ' does not reference ' + icon);
