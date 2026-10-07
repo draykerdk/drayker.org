@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Drayker Organization — volunteers portal</title>
+<title>Drayker — volunteers portal</title>
 <meta name="description" content="A way of working where people keep creating, discovering and learning while intelligence carries the rest, and what results reaches the work that produced it: a method, a distributed system, and an organization designed to hand both over.">
 <meta name="theme-color" content="#08080A">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +14,7 @@
 <link rel="icon" href="./assets/logo/kit/favicon-16.png?v=20260811" type="image/png" sizes="16x16">
 <link rel="apple-touch-icon" href="./assets/logo/kit/apple-touch-icon.png?v=20260811" sizes="180x180">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Drayker Organization — volunteers portal">
+<meta property="og:title" content="Drayker — volunteers portal">
 <meta property="og:description" content="A way of working where people keep creating, discovering and learning while intelligence carries the rest, and what results reaches the work that produced it: a method, a distributed system, and an organization designed to hand both over.">
 <meta property="og:url" content="https://drayker.org/">
 <meta property="og:image" content="https://drayker.org/og.png">
@@ -3875,7 +3875,7 @@ class Component extends DCLogic {
     }
     const org = this.site === 'org';
     const suffix = org ? ' · drayker.org' : ' · drayker.com';
-    const title = key === 'home' && org ? 'Drayker Organization — volunteers portal' : m.t + suffix;
+    const title = key === 'home' && org ? 'Drayker — volunteers portal' : m.t + suffix;
     if (document.title !== title) document.title = title;
     const set = (sel, attr, val) => {
       const el = document.head ? document.head.querySelector(sel) : null;

@@ -56,7 +56,7 @@ mantém o Pages sem configuração extra.
 com limite estourado, ou num navegador com bloqueio, o leitor cai no conteúdo curado.
 que é honesto, mas estático e escrito à mão.
 
-**O que o workflow faz.** Uma vez por dia (e sob demanda), monta `data/org.json` com
+**O que o workflow faz.** Uma vez por semana, às segundas 04:17 UTC (e sob demanda), monta `data/org.json` com
 repositórios, issues abertas e contribuidores usando `gh api` + `jq`, no formato exato
 que o componente já consome, e comita só quando muda.
 
