@@ -6,6 +6,12 @@ Related repositories read for content: all 25 public component repositories in `
 ## Last sync
 date: 2026-10-06T00:00:00Z
 
+### Representation and Dk Global — branch `docs/representation-and-dk-global`
+
+- **Dk Personal contract.** The mirrored scope adds outward representation: beyond the anonymous background exchange and as far as the person authorizes, Dk Personal promotes their interests with material arguments only, and the maturity of the personal Dknowledge weighs more than computation in its precision, following the founder's decision of 07/10 (draykerdk/dk-personal).
+- **Three scales.** The Dk Global card adds that it also has its own kernels, running in parallel in a unified topology, following the founder's decision of 07/10 (draykerdk/dk).
+- Regenerated both prerender trees and the `.com` mirror.
+
 ### Subtle contrast in Dk Personal curation — branch `docs/subtle-contrast`
 
 - **Dk Personal contract.** The mirrored curation scope item no longer mentions other assistants. It says that Dk Personal has nothing to sell, neither products nor ideas, and no consensus to manufacture, and that it chooses from the interests and context of the person it serves, following the founder's correction of 07/10 (draykerdk/dk-personal).
