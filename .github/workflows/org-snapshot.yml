@@ -139,40 +139,24 @@ jobs:
           git commit -m "data: organization snapshot $(date -u +%Y-%m-%d)"
           git push --force origin "HEAD:$branch"
 
-          # Keep this change behind the protected-branch contract. A pull request opened
-          # with the workflow token does not start pull_request workflows, so the
-          # required component-contract check is dispatched on the branch explicitly
-          # (workflow_dispatch is the documented exception). Do not bypass the ruleset
-          # or push the snapshot directly to master.
+          # Keep this change behind the protected-branch contract. Do not bypass the
+          # ruleset or push the snapshot directly to master.
           pr=$(gh pr list --head "$branch" --base master --state open --json number --jq '.[0].number // empty')
           if [ -z "$pr" ]; then
             pr=$(gh pr create \
               --base master \
               --head "$branch" \
               --title 'data: refresh organization snapshot' \
-              --body 'Automated public GitHub snapshot for the static participation portal. Merges itself once the component-contract check passes.' \
+              --body 'Automated public GitHub snapshot for the static participation portal. Merges itself once the component-contract check passes on this pull request.' \
               | grep -oE '[0-9]+$')
           fi
-          sha=$(git rev-parse HEAD)
-          gh workflow run drayker-component.yml --ref "$branch"
+          gh pr merge "$pr" --squash --auto
 
-          # Auto-merge never fired on these pull requests. A check run started by the
-          # workflow token does not wake auto-merge, so PR #18 waited from 2026-09-25 to
-          # 2026-10-07 with a green required check. Wait for the dispatched check on this
-          # exact commit and merge directly. A failed check or a refused merge fails
-          # this job, so a stuck snapshot shows up as a red run.
-          run_id=''
-          for _ in $(seq 1 30); do
-            run_id=$(gh run list --workflow drayker-component.yml --branch "$branch" \
-              --event workflow_dispatch --commit "$sha" --json databaseId \
-              --jq '.[0].databaseId // empty')
-            [ -n "$run_id" ] && break
-            sleep 5
-          done
-          if [ -z "$run_id" ]; then
-            echo "component-contract check did not start on $sha" >&2
-            exit 1
-          fi
-          gh run watch "$run_id" --exit-status > /dev/null
-          gh pr merge "$pr" --squash --match-head-commit "$sha"
-          gh api -X DELETE "repos/${GITHUB_REPOSITORY}/git/refs/heads/$branch" > /dev/null || true
+          # The required check only counts when it comes from the pull_request run on
+          # the PR head. A run dispatched on the branch does not count. GitHub holds
+          # that pull_request run for approval, because the PR author,
+          # github-actions[bot], counts as a first-time contributor. Until a maintainer
+          # approves it, the PR stays blocked. That is why PR #18 sat open from
+          # 2026-09-25 to 2026-10-07 with auto-merge enabled. Once the run is approved
+          # and passes, auto-merge lands the PR.
+          echo "::notice::Snapshot PR #$pr waits for a maintainer to approve its component-contract run (Actions tab, branch $branch). Auto-merge lands it once that run passes."
