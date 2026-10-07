@@ -6,6 +6,11 @@ Related repositories read for content: all 25 public component repositories in `
 ## Last sync
 date: 2026-10-06T00:00:00Z
 
+### Neutral contrast in Dk Personal curation — branch `docs/dk-personal-neutral-contrast`
+
+- **Dk Personal contract.** The mirrored curation scope item now says that other assistants also choose what reaches people, but work for the companies that make them, so they tend to favour the consensus that suits those companies and to sell products and ideas, and that Dk Personal chooses from the interests and context of the person it serves, following the founder's note of 06/10 to describe other systems without reacting (draykerdk/dk-personal).
+- Regenerated both prerender trees and the `.com` mirror.
+
 ### Each Dk scale works for someone — branch `docs/dk-scales-power-balance`
 
 - **Three scales.** The Dk Global card says it works for Drayker and all its members, and the Dk Local card says a local Dk works for its project, following the founder's decision of 06/10 that each scale works for someone and that the exchange of their contexts multiplies power instead of subtracting it (draykerdk/dk).
