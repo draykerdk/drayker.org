@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-25T06:42:15Z",
+  "generated_at": "2026-10-07T08:22:44Z",
   "source": "github api, committed by .github/workflows/org-snapshot.yml",
   "repos": [
     {
@@ -12,91 +12,7 @@
       "issues": 1,
       "url": "https://github.com/draykerdk/drayker.org",
       "home": "https://drayker.org/",
-      "push": "2026-09-25T06:41:56Z"
-    },
-    {
-      "name": "uid",
-      "full": "draykerdk/uid",
-      "desc": "UID — Universal Identity — the identity layer of the Drayker ecosystem. Currently in research. Take part at drayker.org.",
-      "lang": "",
-      "stars": 1,
-      "forks": 0,
-      "issues": 2,
-      "url": "https://github.com/draykerdk/uid",
-      "home": "https://uid.drayker.org/",
-      "push": "2026-09-25T06:00:25Z"
-    },
-    {
-      "name": "stations",
-      "full": "draykerdk/stations",
-      "desc": "Stations & embassies — Drayker entry and local coordination points. Currently in research. Take part at drayker.org.",
-      "lang": "",
-      "stars": 0,
-      "forks": 0,
-      "issues": 1,
-      "url": "https://github.com/draykerdk/stations",
-      "home": "https://stations.drayker.org/",
-      "push": "2026-09-25T06:00:18Z"
-    },
-    {
-      "name": "pap",
-      "full": "draykerdk/pap",
-      "desc": "PAP — Projects & Applications: the platform for creating and composing projects and applications. Currently in research. Take part at drayker.org.",
-      "lang": "",
-      "stars": 0,
-      "forks": 0,
-      "issues": 1,
-      "url": "https://github.com/draykerdk/pap",
-      "home": "https://pap.drayker.org/",
-      "push": "2026-09-25T06:00:12Z"
-    },
-    {
-      "name": "osdk",
-      "full": "draykerdk/osdk",
-      "desc": "OSDK — the universal coupler connecting devices to the Dk network. Currently in research. Take part at drayker.org.",
-      "lang": "",
-      "stars": 0,
-      "forks": 0,
-      "issues": 1,
-      "url": "https://github.com/draykerdk/osdk",
-      "home": "https://osdk.drayker.org/",
-      "push": "2026-09-25T06:00:07Z"
-    },
-    {
-      "name": "metadfmp",
-      "full": "draykerdk/metadfmp",
-      "desc": "Meta DFM — the engineering and functional-modeling framework of Drayker: the DFM protocols formalized and the cognitive swarms that apply them. Currently in research. Take part at drayker.org.",
-      "lang": "",
-      "stars": 1,
-      "forks": 0,
-      "issues": 1,
-      "url": "https://github.com/draykerdk/metadfmp",
-      "home": "https://metadfmp.drayker.org/",
-      "push": "2026-09-25T06:00:00Z"
-    },
-    {
-      "name": "living-cryptography",
-      "full": "draykerdk/living-cryptography",
-      "desc": "Living Cryptography — an evolutionary encrypted tunnel that authenticates the distributed system end to end. Currently in research. Take part at drayker.org.",
-      "lang": "",
-      "stars": 1,
-      "forks": 0,
-      "issues": 2,
-      "url": "https://github.com/draykerdk/living-cryptography",
-      "home": "https://lc.drayker.org/",
-      "push": "2026-09-25T05:59:54Z"
-    },
-    {
-      "name": "general-forum",
-      "full": "draykerdk/general-forum",
-      "desc": "Drayker public forum: issues and merged decisions across Drayker, read in one place. Take part at drayker.org.",
-      "lang": "HTML",
-      "stars": 0,
-      "forks": 0,
-      "issues": 0,
-      "url": "https://github.com/draykerdk/general-forum",
-      "home": "https://forum.drayker.org/",
-      "push": "2026-09-25T05:59:49Z"
+      "push": "2026-10-07T08:22:24Z"
     },
     {
       "name": "drayker.com",
@@ -108,175 +24,7 @@
       "issues": 0,
       "url": "https://github.com/draykerdk/drayker.com",
       "home": "https://drayker.com/",
-      "push": "2026-09-25T05:59:35Z"
-    },
-    {
-      "name": "drayker-theme",
-      "full": "draykerdk/drayker-theme",
-      "desc": "The Drayker documentation theme — one dark Jekyll layout for every drayker.org documentation site. Take part at drayker.org.",
-      "lang": "HTML",
-      "stars": 0,
-      "forks": 0,
-      "issues": 0,
-      "url": "https://github.com/draykerdk/drayker-theme",
-      "home": "",
-      "push": "2026-09-25T05:59:29Z"
-    },
-    {
-      "name": "dknowledge",
-      "full": "draykerdk/dknowledge",
-      "desc": "Dknowledge — the Drayker knowledge base: current state, papers and roadmaps, with history marked separately. Currently in research. Take part at drayker.org.",
-      "lang": "JavaScript",
-      "stars": 1,
-      "forks": 0,
-      "issues": 1,
-      "url": "https://github.com/draykerdk/dknowledge",
-      "home": "https://dknowledge.drayker.org",
-      "push": "2026-09-25T05:59:24Z"
-    },
-    {
-      "name": "dk-personal",
-      "full": "draykerdk/dk-personal",
-      "desc": "Dk Personal — the agent that belongs to one person, inside the Dk intelligence. Currently in research. Take part at drayker.org.",
-      "lang": "",
-      "stars": 0,
-      "forks": 0,
-      "issues": 1,
-      "url": "https://github.com/draykerdk/dk-personal",
-      "home": "https://personal.drayker.org/",
-      "push": "2026-09-25T05:59:18Z"
-    },
-    {
-      "name": "dk-network",
-      "full": "draykerdk/dk-network",
-      "desc": "Dk Network — the Drayker network: two networks, three layers. Currently in research. Take part at drayker.org.",
-      "lang": "",
-      "stars": 1,
-      "forks": 0,
-      "issues": 2,
-      "url": "https://github.com/draykerdk/dk-network",
-      "home": "https://dknetwork.drayker.org/",
-      "push": "2026-09-25T05:59:13Z"
-    },
-    {
-      "name": "dk",
-      "full": "draykerdk/dk",
-      "desc": "Dk — the intelligence of Drayker: the agentic A.I., from a personal agent to a collective intelligence. Currently in research. Take part at drayker.org.",
-      "lang": "",
-      "stars": 2,
-      "forks": 0,
-      "issues": 0,
-      "url": "https://github.com/draykerdk/dk",
-      "home": "https://dk.drayker.org",
-      "push": "2026-09-25T05:59:07Z"
-    },
-    {
-      "name": "distributed-support",
-      "full": "draykerdk/distributed-support",
-      "desc": "Distributed support — physical and virtual support for the ecosystem. Currently in research. Take part at drayker.org.",
-      "lang": "",
-      "stars": 0,
-      "forks": 0,
-      "issues": 1,
-      "url": "https://github.com/draykerdk/distributed-support",
-      "home": "https://support.drayker.org/",
-      "push": "2026-09-25T05:59:01Z"
-    },
-    {
-      "name": "dfmpproject",
-      "full": "draykerdk/dfmpproject",
-      "desc": "DFMPProject — project proposals through DFM, from issue to adoption. Currently in research. Take part at drayker.org.",
-      "lang": "",
-      "stars": 1,
-      "forks": 0,
-      "issues": 1,
-      "url": "https://github.com/draykerdk/dfmpproject",
-      "home": "https://dfmpproject.drayker.org/",
-      "push": "2026-09-25T05:58:55Z"
-    },
-    {
-      "name": "dfmp",
-      "full": "draykerdk/dfmp",
-      "desc": "Distributed Functional Modeling — the protocol that models a problem, fragments it into small functions and distributes them for decentralized review. Currently in research. Take part at drayker.org.",
-      "lang": "",
-      "stars": 1,
-      "forks": 0,
-      "issues": 1,
-      "url": "https://github.com/draykerdk/dfmp",
-      "home": "https://dfmp.drayker.org",
-      "push": "2026-09-25T05:58:50Z"
-    },
-    {
-      "name": "daf",
-      "full": "draykerdk/daf",
-      "desc": "DAF, the Distributed Autonomous Federation: an autonomous federation of autonomous units, a basic and primitive form of PAP, implemented now. Take part at drayker.org.",
-      "lang": "HTML",
-      "stars": 1,
-      "forks": 0,
-      "issues": 2,
-      "url": "https://github.com/draykerdk/daf",
-      "home": "https://daf.drayker.org",
-      "push": "2026-09-25T05:58:44Z"
-    },
-    {
-      "name": "bsdk",
-      "full": "draykerdk/bsdk",
-      "desc": "BSDK — Base Structure Dk, the DNA-like base structure the kernel is assembled from. Currently in research. Take part at drayker.org.",
-      "lang": "",
-      "stars": 3,
-      "forks": 0,
-      "issues": 1,
-      "url": "https://github.com/draykerdk/bsdk",
-      "home": "https://bsdk.drayker.org/",
-      "push": "2026-09-25T05:58:38Z"
-    },
-    {
-      "name": "advices",
-      "full": "draykerdk/advices",
-      "desc": "Member councils, formed for each question and composed by Dknowledge from the best informed and the most affected, with Dk in the middle. Currently in research. Take part at drayker.org.",
-      "lang": "",
-      "stars": 1,
-      "forks": 0,
-      "issues": 2,
-      "url": "https://github.com/draykerdk/advices",
-      "home": "https://advices.drayker.org/",
-      "push": "2026-09-25T05:58:31Z"
-    },
-    {
-      "name": "drayker-propagation",
-      "full": "draykerdk/drayker-propagation",
-      "desc": "The Drayker propagation toolkit and canonical design library for volunteers. Take part at drayker.org.",
-      "lang": "HTML",
-      "stars": 0,
-      "forks": 0,
-      "issues": 0,
-      "url": "https://github.com/draykerdk/drayker-propagation",
-      "home": "https://propagation.drayker.org/",
-      "push": "2026-09-09T13:12:28Z"
-    },
-    {
-      "name": "emergence-initiative",
-      "full": "draykerdk/emergence-initiative",
-      "desc": "Emergence Initiative — a collaborative space for volunteers' proposals and initiatives outside the DFM models, organized freely and independently. Currently in research. Take part at drayker.org.",
-      "lang": "",
-      "stars": 1,
-      "forks": 0,
-      "issues": 0,
-      "url": "https://github.com/draykerdk/emergence-initiative",
-      "home": "https://ei.drayker.org",
-      "push": "2026-09-09T13:12:51Z"
-    },
-    {
-      "name": "dk-academy",
-      "full": "draykerdk/dk-academy",
-      "desc": "Dk Academy — learning routes around Dk. Currently in research. Take part at drayker.org.",
-      "lang": "",
-      "stars": 0,
-      "forks": 0,
-      "issues": 1,
-      "url": "https://github.com/draykerdk/dk-academy",
-      "home": "https://academy.drayker.org/",
-      "push": "2026-09-09T13:11:46Z"
+      "push": "2026-10-07T08:18:00Z"
     },
     {
       "name": "value-unit",
@@ -288,7 +36,55 @@
       "issues": 1,
       "url": "https://github.com/draykerdk/value-unit",
       "home": "https://value.drayker.org/",
-      "push": "2026-09-09T13:13:48Z"
+      "push": "2026-10-07T08:16:45Z"
+    },
+    {
+      "name": "uid",
+      "full": "draykerdk/uid",
+      "desc": "UID — Universal Identity — the identity layer of the Drayker ecosystem. Currently in research. Take part at drayker.org.",
+      "lang": "",
+      "stars": 1,
+      "forks": 0,
+      "issues": 2,
+      "url": "https://github.com/draykerdk/uid",
+      "home": "https://uid.drayker.org/",
+      "push": "2026-10-07T08:16:40Z"
+    },
+    {
+      "name": "stations",
+      "full": "draykerdk/stations",
+      "desc": "Stations & embassies — Drayker entry and local coordination points. Currently in research. Take part at drayker.org.",
+      "lang": "",
+      "stars": 0,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/stations",
+      "home": "https://stations.drayker.org/",
+      "push": "2026-10-07T06:45:27Z"
+    },
+    {
+      "name": "pap",
+      "full": "draykerdk/pap",
+      "desc": "PAP — Projects & Applications: the platform for creating and composing projects and applications. Currently in research. Take part at drayker.org.",
+      "lang": "",
+      "stars": 0,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/pap",
+      "home": "https://pap.drayker.org/",
+      "push": "2026-10-07T06:45:22Z"
+    },
+    {
+      "name": "osdk",
+      "full": "draykerdk/osdk",
+      "desc": "OSDK — the universal coupler connecting devices to the Dk network. Currently in research. Take part at drayker.org.",
+      "lang": "",
+      "stars": 0,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/osdk",
+      "home": "https://osdk.drayker.org/",
+      "push": "2026-10-07T06:45:17Z"
     },
     {
       "name": "open-science",
@@ -300,25 +96,229 @@
       "issues": 1,
       "url": "https://github.com/draykerdk/open-science",
       "home": "https://science.drayker.org/",
-      "push": "2026-09-09T13:13:17Z"
+      "push": "2026-10-07T06:45:13Z"
+    },
+    {
+      "name": "metadfmp",
+      "full": "draykerdk/metadfmp",
+      "desc": "Meta DFM — the engineering and functional-modeling framework of Drayker: the DFM protocols formalized and the cognitive swarms that apply them. Currently in research. Take part at drayker.org.",
+      "lang": "",
+      "stars": 1,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/metadfmp",
+      "home": "https://metadfmp.drayker.org/",
+      "push": "2026-10-07T06:45:08Z"
+    },
+    {
+      "name": "living-cryptography",
+      "full": "draykerdk/living-cryptography",
+      "desc": "Living Cryptography — an evolutionary encrypted tunnel that authenticates the distributed system end to end. Currently in research. Take part at drayker.org.",
+      "lang": "",
+      "stars": 1,
+      "forks": 0,
+      "issues": 2,
+      "url": "https://github.com/draykerdk/living-cryptography",
+      "home": "https://lc.drayker.org/",
+      "push": "2026-10-07T06:45:03Z"
+    },
+    {
+      "name": "general-forum",
+      "full": "draykerdk/general-forum",
+      "desc": "Drayker public forum: issues and merged decisions across Drayker, read in one place. Take part at drayker.org.",
+      "lang": "HTML",
+      "stars": 0,
+      "forks": 0,
+      "issues": 0,
+      "url": "https://github.com/draykerdk/general-forum",
+      "home": "https://forum.drayker.org/",
+      "push": "2026-10-07T06:44:58Z"
+    },
+    {
+      "name": "emergence-initiative",
+      "full": "draykerdk/emergence-initiative",
+      "desc": "Emergence Initiative — a collaborative space for volunteers' proposals and initiatives outside the DFM models, organized freely and independently. Currently in research. Take part at drayker.org.",
+      "lang": "",
+      "stars": 1,
+      "forks": 0,
+      "issues": 0,
+      "url": "https://github.com/draykerdk/emergence-initiative",
+      "home": "https://ei.drayker.org",
+      "push": "2026-10-07T06:44:50Z"
+    },
+    {
+      "name": "dknowledge",
+      "full": "draykerdk/dknowledge",
+      "desc": "Dknowledge — the Drayker knowledge base: current state, papers and roadmaps, with history marked separately. Currently in research. Take part at drayker.org.",
+      "lang": "JavaScript",
+      "stars": 1,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/dknowledge",
+      "home": "https://dknowledge.drayker.org",
+      "push": "2026-10-07T06:43:02Z"
+    },
+    {
+      "name": "drayker-theme",
+      "full": "draykerdk/drayker-theme",
+      "desc": "The Drayker documentation theme — one dark Jekyll layout for every drayker.org documentation site. Take part at drayker.org.",
+      "lang": "HTML",
+      "stars": 0,
+      "forks": 0,
+      "issues": 0,
+      "url": "https://github.com/draykerdk/drayker-theme",
+      "home": "",
+      "push": "2026-10-07T06:43:16Z"
+    },
+    {
+      "name": "drayker-propagation",
+      "full": "draykerdk/drayker-propagation",
+      "desc": "The Drayker propagation toolkit and canonical design library for volunteers. Take part at drayker.org.",
+      "lang": "HTML",
+      "stars": 0,
+      "forks": 0,
+      "issues": 0,
+      "url": "https://github.com/draykerdk/drayker-propagation",
+      "home": "https://propagation.drayker.org/",
+      "push": "2026-10-07T06:43:12Z"
+    },
+    {
+      "name": "dk",
+      "full": "draykerdk/dk",
+      "desc": "Dk — the intelligence of Drayker: the agentic A.I., from a personal agent to a collective intelligence. Currently in research. Take part at drayker.org.",
+      "lang": "",
+      "stars": 2,
+      "forks": 0,
+      "issues": 0,
+      "url": "https://github.com/draykerdk/dk",
+      "home": "https://dk.drayker.org",
+      "push": "2026-10-07T06:42:56Z"
+    },
+    {
+      "name": "dk-personal",
+      "full": "draykerdk/dk-personal",
+      "desc": "Dk Personal — the agent that belongs to one person, inside the Dk intelligence. Currently in research. Take part at drayker.org.",
+      "lang": "",
+      "stars": 0,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/dk-personal",
+      "home": "https://personal.drayker.org/",
+      "push": "2026-10-07T06:42:51Z"
+    },
+    {
+      "name": "dk-network",
+      "full": "draykerdk/dk-network",
+      "desc": "Dk Network — the Drayker network: two networks, three layers. Currently in research. Take part at drayker.org.",
+      "lang": "",
+      "stars": 1,
+      "forks": 0,
+      "issues": 2,
+      "url": "https://github.com/draykerdk/dk-network",
+      "home": "https://dknetwork.drayker.org/",
+      "push": "2026-10-07T06:42:46Z"
+    },
+    {
+      "name": "dk-academy",
+      "full": "draykerdk/dk-academy",
+      "desc": "Dk Academy — learning routes around Dk. Currently in research. Take part at drayker.org.",
+      "lang": "",
+      "stars": 0,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/dk-academy",
+      "home": "https://academy.drayker.org/",
+      "push": "2026-10-07T06:42:41Z"
+    },
+    {
+      "name": "distributed-support",
+      "full": "draykerdk/distributed-support",
+      "desc": "Distributed support — physical and virtual support for the ecosystem. Currently in research. Take part at drayker.org.",
+      "lang": "",
+      "stars": 0,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/distributed-support",
+      "home": "https://support.drayker.org/",
+      "push": "2026-10-07T06:42:36Z"
+    },
+    {
+      "name": "dfmpproject",
+      "full": "draykerdk/dfmpproject",
+      "desc": "DFMPProject — project proposals through DFM, from issue to adoption. Currently in research. Take part at drayker.org.",
+      "lang": "",
+      "stars": 1,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/dfmpproject",
+      "home": "https://dfmpproject.drayker.org/",
+      "push": "2026-10-07T06:42:32Z"
+    },
+    {
+      "name": "dfmp",
+      "full": "draykerdk/dfmp",
+      "desc": "Distributed Functional Modeling — the protocol that models a problem, fragments it into small functions and distributes them for decentralized review. Currently in research. Take part at drayker.org.",
+      "lang": "",
+      "stars": 1,
+      "forks": 0,
+      "issues": 0,
+      "url": "https://github.com/draykerdk/dfmp",
+      "home": "https://dfmp.drayker.org",
+      "push": "2026-10-07T06:42:27Z"
+    },
+    {
+      "name": "daf",
+      "full": "draykerdk/daf",
+      "desc": "DAF, the Distributed Autonomous Federation: an autonomous federation of autonomous units, a basic and primitive form of PAP, implemented now. Take part at drayker.org.",
+      "lang": "HTML",
+      "stars": 1,
+      "forks": 0,
+      "issues": 2,
+      "url": "https://github.com/draykerdk/daf",
+      "home": "https://daf.drayker.org",
+      "push": "2026-10-07T06:42:22Z"
+    },
+    {
+      "name": "bsdk",
+      "full": "draykerdk/bsdk",
+      "desc": "BSDK — Base Structure Dk, the DNA-like base structure the kernel is assembled from. Currently in research. Take part at drayker.org.",
+      "lang": "",
+      "stars": 3,
+      "forks": 0,
+      "issues": 1,
+      "url": "https://github.com/draykerdk/bsdk",
+      "home": "https://bsdk.drayker.org/",
+      "push": "2026-10-07T06:42:17Z"
+    },
+    {
+      "name": "advices",
+      "full": "draykerdk/advices",
+      "desc": "Member councils, formed for each question and composed by Dknowledge from the best informed and the most affected, with Dk in the middle. Currently in research. Take part at drayker.org.",
+      "lang": "",
+      "stars": 1,
+      "forks": 0,
+      "issues": 0,
+      "url": "https://github.com/draykerdk/advices",
+      "home": "https://advices.drayker.org/",
+      "push": "2026-10-07T06:42:12Z"
     }
   ],
   "issues": [
     {
-      "num": 4,
-      "title": "Write the triage protocol for a single veto",
-      "url": "https://github.com/draykerdk/advices/issues/4",
-      "repo": "advices",
+      "num": 5,
+      "title": "Specify one entry of the veto chain",
+      "url": "https://github.com/draykerdk/uid/issues/5",
+      "repo": "uid",
       "labels": [
         "open-function",
-        "skill:governance",
-        "level:intermediate",
-        "effort:~8h"
+        "skill:research",
+        "level:advanced",
+        "effort:~10h"
       ],
       "user": "Hyadhuad",
       "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
       "comments": 0,
-      "at": "2026-09-25T05:46:55Z",
+      "at": "2026-10-07T08:17:37Z",
       "assigned": false
     },
     {
@@ -336,23 +336,6 @@
       "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
       "comments": 0,
       "at": "2026-09-25T05:46:53Z",
-      "assigned": false
-    },
-    {
-      "num": 5,
-      "title": "Specify one entry of the veto chain",
-      "url": "https://github.com/draykerdk/uid/issues/5",
-      "repo": "uid",
-      "labels": [
-        "open-function",
-        "skill:research",
-        "level:advanced",
-        "effort:~10h"
-      ],
-      "user": "Hyadhuad",
-      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
-      "comments": 0,
-      "at": "2026-09-25T05:46:51Z",
       "assigned": false
     },
     {
@@ -561,23 +544,6 @@
     },
     {
       "num": 1,
-      "title": "Write how a council works",
-      "url": "https://github.com/draykerdk/advices/issues/1",
-      "repo": "advices",
-      "labels": [
-        "open-function",
-        "skill:governance",
-        "level:intermediate",
-        "effort:~6h"
-      ],
-      "user": "Hyadhuad",
-      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
-      "comments": 0,
-      "at": "2026-08-10T01:31:07Z",
-      "assigned": false
-    },
-    {
-      "num": 1,
       "title": "Recover or rewrite the Initial Network Architecture",
       "url": "https://github.com/draykerdk/dk-network/issues/1",
       "repo": "dk-network",
@@ -680,23 +646,6 @@
     },
     {
       "num": 1,
-      "title": "Write DFMP-000, the proposal process paper",
-      "url": "https://github.com/draykerdk/dfmp/issues/1",
-      "repo": "dfmp",
-      "labels": [
-        "open-function",
-        "skill:docs",
-        "level:intermediate",
-        "effort:~8h"
-      ],
-      "user": "Hyadhuad",
-      "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
-      "comments": 0,
-      "at": "2026-08-10T01:30:49Z",
-      "assigned": false
-    },
-    {
-      "num": 1,
       "title": "Write the first-time contributor guide",
       "url": "https://github.com/draykerdk/drayker.org/issues/1",
       "repo": "drayker.org",
@@ -718,12 +667,12 @@
       "login": "Hyadhuad",
       "avatar": "https://avatars.githubusercontent.com/u/37546274?v=4",
       "url": "https://github.com/Hyadhuad",
-      "n": 158,
+      "n": 247,
       "repos": [
+        "drayker.com",
         "drayker.org",
-        "pap",
-        "stations",
-        "uid"
+        "uid",
+        "value-unit"
       ]
     },
     {
