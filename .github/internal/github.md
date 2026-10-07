@@ -4,7 +4,14 @@ branch: master
 Related repositories read for content: all 25 public component repositories in `PROJECTS`, including their READMEs and public component contracts. Constitutional alignment in this sync also reads the organization-wide `.github/GOVERNANCE.md` and profile.
 
 ## Last sync
-date: 2026-10-07T12:00:00Z
+date: 2026-10-07T18:00:00Z
+
+### English-only design files and logo paths, branch `docs/english-only-logo-paths`
+
+- **Design files in English.** `DRAYKER-MARK.md` and `design/Drayker Logo Variations.html` (visible text, alt text and comments; layout, IDs and code unchanged) are in English. The v3 design file title reads "Drayker — volunteers portal".
+- **Logo paths in English.** Folders and files under `assets/logo/` renamed: `assinatura/` → `signature/`, `escopo/` → `scope/`, `escuro/` → `dark/`, `drayker-marca` → `drayker-mark`, `drayker-icone` → `drayker-icon`, `drayker-sem-cunha` → `drayker-no-wedge`, `drayker-orbita-larga` → `drayker-wide-orbit`, `drayker-tecnica` → `drayker-technical`, `-branco`/`-preto` → `-white`/`-black`, `1cor` → `1color`, `vazado` → `knockout`, `icon-512-escuro`/`-branco` → `icon-512-dark`/`-white`. Every reference in the portal, prerender tools, checks and the `.com` mirror follows. Three legacy copies stay at their old paths (`assets/logo/drayker-icone.svg`, `assets/logo/escuro/drayker-icone.svg`, `assets/logo/kit/icon-512-escuro.png`) because doc sites built from the shared theme load them as favicons until they rebuild; draykerdk/drayker-theme and draykerdk/daf point to the new paths.
+- **Organization snapshot weekly.** `.github/workflows/org-snapshot.yml` runs on Mondays at 04:17 UTC instead of daily; `workflow_dispatch` stays for runs on demand.
+- Regenerated both prerender trees and the `.com` mirror. render-check, prerender-check (.org and .com) pass.
 
 ### The only transferable reputation, branch `docs/only-transferable-reputation`
 
