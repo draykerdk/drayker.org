@@ -6,6 +6,11 @@ Related repositories read for content: all 25 public component repositories in `
 ## Last sync
 date: 2026-10-07T12:00:00Z
 
+### Membership and the common floor, branch `fix/membership-floor-kernel-embassies`
+
+- **Membership needs no approval.** Anyone becomes a member by being a person and creating their UID. The common floor belongs to every member; while the network cannot sustain it for everyone, access goes through a queue weighted by context, not through an approval. The economy paragraph, the merit-prize card, the Distributed Support glossary entry and the mirrored Distributed Support and Value Unit contracts drop "approved members" and "requirements of integration and collaboration", superseding the floor entry of `docs/financing-floor-oct-2026` below (draykerdk/distributed-support, draykerdk/value-unit).
+- Regenerated both prerender trees and the `.com` mirror.
+
 ### The only transferable reputation, branch `docs/only-transferable-reputation`
 
 - **UID and Value Unit contracts.** The mirrored contracts say that the reward is the only transferable reputation, earned by contributing capacity or by financing the network, and can give faster or priority access to resources (draykerdk/uid, draykerdk/value-unit).
