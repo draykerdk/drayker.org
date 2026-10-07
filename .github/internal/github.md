@@ -6,6 +6,11 @@ Related repositories read for content: all 25 public component repositories in `
 ## Last sync
 date: 2026-10-07T12:00:00Z
 
+### The only transferable reputation, branch `docs/only-transferable-reputation`
+
+- **UID and Value Unit contracts.** The mirrored contracts say that the reward is the only transferable reputation, earned by contributing capacity or by financing the network, and can give faster or priority access to resources (draykerdk/uid, draykerdk/value-unit).
+- Regenerated both prerender trees and the `.com` mirror. render-check, prerender-check (.org and .com) pass.
+
 ### Public readiness, branch `docs/public-readiness`
 
 - **Drayker as a supersystem.** The home tab title reads "Drayker — volunteers portal", the /org heading reads "A supersystem designed to outgrow whoever started it", the JSON-LD no longer carries the "Drayker Organization" alternate name, and the glossary, role lines, Direction phase 1, propagation and drayker.com cards no longer define Drayker as an organization or an initiative.
