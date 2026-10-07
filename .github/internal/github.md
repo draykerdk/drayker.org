@@ -6,6 +6,13 @@ Related repositories read for content: all 25 public component repositories in `
 ## Last sync
 date: 2026-10-07T18:00:00Z
 
+### Floor access by endorsement, branch `fix/floor-access-endorsement`
+
+- **Common floor.** Membership still needs no approval. The merit-prize card now says that while the network cannot sustain the floor for everyone, mainly when resources are scarce, access depends on an endorsement that works more like a queue weighted by context, such as each person’s need and urgency, than like an approval in itself. The floor sentence of the membership entry below uses the short form. This follows draykerdk/distributed-support#13.
+- **Kernel core.** The organization governance and the Dknowledge constitutional alignment paper now say that more than one tenth of the active Dzwecks is enough to block a change to the kernel core (draykerdk/.github#12, draykerdk/dknowledge#20). The portal carries no kernel core voting text, so nothing here changes.
+- **Contracts.** Every mirrored component contract was checked against `.drayker/component.yml` on master and already matches, so no contract changes.
+- Regenerated both prerender trees and the `.com` mirror.
+
 ### English-only design files and logo paths, branch `docs/english-only-logo-paths`
 
 - **Design files in English.** `DRAYKER-MARK.md` and `design/Drayker Logo Variations.html` (visible text, alt text and comments; layout, IDs and code unchanged) are in English. The v3 design file title reads "Drayker — volunteers portal".
@@ -15,7 +22,7 @@ date: 2026-10-07T18:00:00Z
 
 ### Membership and the common floor, branch `fix/membership-floor-kernel-embassies`
 
-- **Membership needs no approval.** Anyone becomes a member by being a person and creating their UID. The common floor belongs to every member; while the network cannot sustain it for everyone, access goes through a queue weighted by context, not through an approval. The economy paragraph, the merit-prize card, the Distributed Support glossary entry and the mirrored Distributed Support and Value Unit contracts drop "approved members" and "requirements of integration and collaboration", superseding the floor entry of `docs/financing-floor-oct-2026` below (draykerdk/distributed-support, draykerdk/value-unit).
+- **Membership needs no approval.** Anyone becomes a member by being a person and creating their UID. The common floor belongs to every member. While it does not reach everyone, access depends on an endorsement that works like a queue weighted by context. The economy paragraph, the merit-prize card, the Distributed Support glossary entry and the mirrored Distributed Support and Value Unit contracts drop "approved members" and "requirements of integration and collaboration", superseding the floor entry of `docs/financing-floor-oct-2026` below (draykerdk/distributed-support, draykerdk/value-unit).
 - Regenerated both prerender trees and the `.com` mirror.
 
 ### The only transferable reputation, branch `docs/only-transferable-reputation`
