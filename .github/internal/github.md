@@ -4,7 +4,22 @@ branch: master
 Related repositories read for content: all 25 public component repositories in `PROJECTS`, including their READMEs and public component contracts. Constitutional alignment in this sync also reads the organization-wide `.github/GOVERNANCE.md` and profile.
 
 ## Last sync
-date: 2026-10-07T18:00:00Z
+date: 2026-10-09T12:00:00Z
+
+### Newcomer readiness, branch `fix/newcomer-readiness`
+
+- **English only.** The translation track keeps its id and matching keys but reads `LOCALIZATION (PLANNED)`: documentation is English, readers use automatic translation, native translation and localization are planned, and the steps are plain-English clarity edits and glossary review (draykerdk/.github CONTRIBUTING.md). The contrib hero, the tracks intro, the join wizard options and the economy chain no longer present translation as current work, and the three translate-a-paper contribute items are gone.
+- **Volunteer flow.** The result page says the issue form asks only for a name or public handle (general-forum `volunteer-introduction.yml`), and that the introduction is public in the General Forum, where the founding steward and anyone following it can reply. The guide no longer promises matching.
+- **Board.** Issues are read with two label searches (`label:open-function`, then `label:"good first issue","help wanted"`), merged by URL, instead of the first 60 open issues; if the open-function search fails, the snapshot stays on screen. An issue is claimed when it has the `claimed` label or an assignee, and UNCLAIMED excludes it. Cards show the reply count and the opening date (`created_at`, `opened` in the snapshot); the status line says `SNAPSHOT FROM GITHUB` when the data is the committed snapshot. Cache key moved to `drayker-gh-v2`. The snapshot workflow uses the same searches and records `opened`.
+- **Labels.** The label map lists `skill:code · research · design · docs · governance`, `level:*` and `effort:~Nh`, says which labels the board reads, and asks people to suggest labels in the thread for a maintainer to apply; `open-function.yml` says the same.
+- **Process wording.** Guide step 03 branches from master; the guide names the founding steward exception (GOVERNANCE.md §2.1); research and governance steps point at proposal threads in the General Forum and the DFMP README; the /org DFMP card says the path is designed and that proposals follow the public Git flow until DFMP-000 is written.
+- **Designed, not running.** /org links `Unit records →` to daf.drayker.org/#/record; the councils card and the join wizard use the designed tense; units are teams, projects or groups; linking step 02 keeps the assembly condition and links daf.drayker.org/#/join; step 03 points at the starting values drafted in DAF-000 §3.2. On partnerships and the economy page, the reward for financing is stated as designed, with none recorded or issued today.
+- **Function triage.** `open-function.yml` applies `proposed-function` instead of `open-function`; its intro says a maintainer reviews the proposal and applies `open-function`, and only reviewed functions appear on the board. The board copy, the label map (new `proposed-function` row), guide step 01, the glossary entry, the loading state, the project and track empty states, README and SITE_PATTERN say the same. The board still searches only `open-function`, `good first issue` and `help wanted`. The `proposed-function` label has to exist in the repository for the form to apply it.
+- **Stalled claims.** Join step "What is asked of you", guide step 02 and the `claimed` legend state one rule: if a claim has been silent for two weeks, ask in the thread; if there is no answer within three days, anyone may take the function over by saying so in the thread. No claim lapses by itself.
+- **No status label.** The portal no longer uses a legal-status label: the home proof card reads `NO OWNER`, the footer lists `NO OWNER · NO SHAREHOLDERS · NO PROFIT DISTRIBUTION`, the partnership limit reads `NO PROFIT DISTRIBUTION`, and the partnerships intro, support note, funding way, partnerships description (also in the `.org` redirect at `partnerships/index.html`), join wizard and `.com` hero say "no owner, no shareholders and no profit distribution". The card image (`og.svg`, `og.png`) moves the phrase to its own line.
+- **Tracks from skill labels.** The board places an issue by its `skill:*` label first (`skill:docs` → outreach and community), and matches keywords on labels and the repository name only without one, so an `open-science` issue labelled `skill:research` is no longer in Code.
+- **Design tense and wording.** The manifesto says financing earns the reward in the designed economy, with none recorded or issued today; the DAF unit card says it is designed to govern shared resources during the transition; the community partnership follows the English-only rule; the /fn/ description names the draykerdk repositories instead of "the organization".
+- Regenerated both prerender trees and the `.com` mirror.
 
 ### Floor access by endorsement, branch `fix/floor-access-endorsement`
 
@@ -336,7 +351,7 @@ From a full reading of the manifesto, economy, organization and partnership cont
 | Interactive examples | Public Value Unit, Dk Network and Dk Personal documentation; selectable stages explaining action, result and boundary |
 | Component relationship map | Current component-contract dependencies, grouped responsively with keyboard-accessible links |
 | Contribute · Projects | READMEs and component contracts of all 25 public component repositories + live GitHub API repo data |
-| Contribute · Open functions | Per-repository GitHub issues endpoints, with pull-request objects rejected explicitly |
+| Contribute · Open functions | `data/org.json`, then GitHub search by label (`open-function`; `good first issue`, `help wanted`), merged by URL, with pull-request objects rejected explicitly |
 | Contribute · Guide | draykerdk/.github CONTRIBUTING.md + GOVERNANCE.md + labels.yml |
 | Contribute · Join (wizard + map) | curated. Questionnaire logic and track match, mapped onto the 25 public component repositories |
 | Docs | doc subdomains + github.com/draykerdk + .drayker/component.yml |
