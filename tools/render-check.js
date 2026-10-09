@@ -82,7 +82,7 @@ const load = (site) => {
   const code = block[1]
     .replace(SITE_CONST, "const SITE = '" + site + "';")
     .replace(CROSS_CONST, "const CROSS_SITE_URL = '" + cross + "';");
-  return eval(code + '\n;({ Component, PROJECTS, CONCEPTS, JOIN_STEPS, TRACKS, LAYER_GROUPS, CASE_LAYERS, ROUTE_META, ECON_CHAIN, ECON_LIMITS, ECON_TODAY, ECON_QUESTIONS })');
+  return eval(code + '\n;({ Component, PROJECTS, CONCEPTS, JOIN_STEPS, TRACKS, LAYER_GROUPS, CASE_LAYERS, ROUTE_META, ECON_CHAIN, ECON_LIMITS, ECON_TODAY, ECON_QUESTIONS, GUIDE, LABELS, ORG_UNITS, PARTNER_WAYS, PARTNER_LIMITS })');
 };
 
 const problems = [];
@@ -383,11 +383,75 @@ const resultTracks = combinations.map((jAns) => {
 });
 check(new Set(resultTracks).size === 3, 'three distinct Volunteer profiles should resolve to three distinct tracks');
 
+// Public documentation is English and is not translated by hand (.github CONTRIBUTING.md):
+// the track keeps its id and matching keys, but reads as planned localization, and no
+// step or project item asks anyone to translate.
+const localization = org.TRACKS.filter((t) => t.id === 'translation')[0];
+check(localization && localization.label === 'LOCALIZATION (PLANNED)', 'the translation track must read as planned localization');
+check(!/\btranslate\b|claim a language|native review/i.test(JSON.stringify(org.TRACKS.map((t) => t.steps))), 'no track step may ask for a hand translation');
+check(org.PROJECTS.every((p) => !p.contribute.some((c) => /^Translate\b/.test(c))), 'no project may list a hand translation as a way to contribute');
+check(!/Writing and translating|translation carry the same weight|Reviewing, translating/.test(src), 'translation must not be presented as current work');
+// The general-forum volunteer form requires a name or public handle, and nothing
+// matches people to functions: the result page says what is actually there.
+check(!src.includes('no handle') && src.includes('asks only for a name or public handle'), 'the volunteer result misstates what the issue form asks for');
+check(!src.includes('fastest way to get a first function cut') && !src.includes('We will point you at functions'), 'the volunteer flow promises a matching that is not set up');
+// Labels as they are actually used, suggested in the thread and applied by a maintainer.
+const labelFamilies = org.LABELS.filter((l) => l.l === 'skill: level: effort:')[0];
+check(labelFamilies && labelFamilies.d.includes('skill:code · research · design · docs · governance')
+  && labelFamilies.d.includes('effort:~Nh') && !labelFamilies.d.includes('effort:small'), 'the label map must list the label families actually in use');
+check(!src.includes('labelling it correctly is already a contribution') && src.includes('a maintainer applies them'), 'labels are suggested in the thread and applied by a maintainer');
+// The form lives only in the .org repository; the generated .com copy of this check skips it.
+const functionFormFile = path.join(__dirname, '..', '.github', 'ISSUE_TEMPLATE', 'open-function.yml');
+if (fs.existsSync(functionFormFile)) {
+  const functionForm = fs.readFileSync(functionFormFile, 'utf8');
+  check(!functionForm.includes('skill:translation') && functionForm.includes('A maintainer applies them'), 'the open-function form must ask authors to suggest labels, not to add them');
+  // Function triage: the form proposes, a maintainer reviews and applies open-function.
+  check(/^labels: \["proposed-function"\]$/m.test(functionForm), 'the open-function form must apply proposed-function, not open-function');
+  check(functionForm.includes('A maintainer reviews the proposal') && functionForm.includes('only reviewed functions appear on the board'),
+    'the open-function form must say that a maintainer reviews the proposal before it reaches the board');
+}
+// Function triage: proposals carry proposed-function and reach the board only after review.
+const proposedLabel = org.LABELS.filter((l) => l.l === 'proposed-function')[0];
+check(proposedLabel && proposedLabel.d.indexOf('Proposed function waiting for review; a maintainer applies open-function once it is reviewed.') === 0,
+  'the label map must explain proposed-function');
+check(org.GUIDE.filter((g) => g.n === '01')[0].body.includes('which a maintainer applies after reviewing the proposal'), 'guide step 01 must say that open-function is applied after review');
+check(src.includes('What is here is exactly what is open on GitHub — no more, and never a placeholder. A proposed function appears here once a maintainer has reviewed it.'),
+  'the board must say that functions appear after review');
+// Stalled claims: one rule everywhere, and no claim lapses by itself.
+const CLAIM_RULE = 'If a claim has been silent for two weeks, ask in the thread; if there is no answer within three days, anyone may take the function over by saying so in the thread.';
+check(org.GUIDE.filter((g) => g.n === '02')[0].body.includes(CLAIM_RULE), 'guide step 02 must state the stalled-claim rule');
+check(org.LABELS.filter((l) => l.l === 'claimed')[0].d.includes(CLAIM_RULE), 'the claimed label must state the stalled-claim rule');
+check(org.JOIN_STEPS.filter((j) => j.id === 'time')[0].lb.includes(CLAIM_RULE), 'the time step of the volunteer journey must state the stalled-claim rule');
+check(!/returns to the\s+board|open again|before taking over|go silent for two weeks/.test(src), 'no claim may be said to expire or go back to the board by itself');
+// No legal status is claimed: Drayker is described as having no owner, no shareholders
+// and no profit distribution.
+check(!/non-?profit/i.test(src), 'a legal-status label must not describe Drayker');
+check(src.includes('CC BY 4.0 · PUBLIC DOCUMENTATION · NO OWNER · NO SHAREHOLDERS · NO PROFIT DISTRIBUTION'), 'the footer must list no owner, no shareholders and no profit distribution');
+const profitLimit = org.PARTNER_LIMITS.filter((l) => l.k === 'NO PROFIT DISTRIBUTION')[0];
+check(profitLimit && profitLimit.d.includes('no owner, no shareholders and no profit distribution'), 'the partnership limits must describe no profit distribution, not a status');
+// Design tense: no reward exists today, the DAF is designed to govern resources, and
+// public documentation is English.
+check((src.match(/financing the network earns the reward/g) || []).length > 0
+  && src.split('financing the network earns the reward').slice(0, -1).every((before) => /designed economy[^.]{0,80}$/.test(before)),
+  'financing the network earns the reward only in the designed economy');
+check(org.ORG_UNITS.some((u) => u.desc && u.desc.includes('is designed to govern shared resources during the transition')), 'the DAF card must use the designed tense for resource governance');
+const communityWay = org.PARTNER_WAYS.filter((w) => w.label === 'COMMUNITY')[0];
+check(communityWay && !/Editorial, translation/.test(communityWay.desc) && communityWay.desc.includes('native translation and localization are planned'),
+  'the community partnership must follow the English-only rule');
+check(!/of the organization/.test(org.ROUTE_META.fn.d), 'the /fn/ description must not call Drayker an organization');
+// The process that runs today: branch from master, proposal threads in the General
+// Forum, and the founding steward's documented exception.
+check(org.GUIDE.filter((g) => g.n === '03')[0].body.includes('branch from master'), 'guide step 03 must branch from master');
+check(src.includes('GOVERNANCE.md §2.1'), 'the guide must name the founding steward exception');
+check(!/open motion|DFMP-000 and one legitimated|full DFMP path/.test(JSON.stringify(org.TRACKS)), 'track steps must point at proposal threads, not at motions or an unwritten DFMP-000');
+const unitsCard = org.ORG_UNITS.filter((u) => u.name === 'Autonomous units')[0];
+check(unitsCard && unitsCard.href === 'https://daf.drayker.org/#/record' && unitsCard.link === 'Unit records →', 'no unit exists yet: the units card links to the unit record');
+
 // Cached and offline GitHub states both retain curated content.
 (async () => {
   resetWindow();
   memory.clear();
-  memory.set('drayker-gh-v1', JSON.stringify({
+  memory.set('drayker-gh-v2', JSON.stringify({
     t: Date.now(),
     repos: [{ name: 'dk', full: 'draykerdk/dk', desc: 'Dk', lang: 'Python', stars: 1, forks: 0, issues: 2, url: 'https://github.com/draykerdk/dk', home: '', push: new Date().toISOString() }],
     issues: [], people: []
@@ -408,6 +472,94 @@ check(new Set(resultTracks).size === 3, 'three distinct Volunteer profiles shoul
   const snapOrg = make(org);
   await snapOrg.loadGH(false);
   check(orgCalls[0] === '/data/org.json' && snapOrg.state.ghState === 'ready', '.org did not retain its root snapshot');
+  check(snapOrg.renderVals().ghLabel.indexOf('SNAPSHOT FROM GITHUB · UPDATED ') === 0, 'a board read from the snapshot must say so, not claim live data');
+
+  // A v1 cache entry has no opening dates, so it is not read.
+  memory.clear();
+  memory.set('drayker-gh-v1', JSON.stringify({ t: Date.now(), repos: [{ name: 'dk' }], issues: [], people: [] }));
+  global.fetch = () => Promise.reject(new Error('offline'));
+  const oldCache = make(org);
+  await oldCache.loadGH(false);
+  check(oldCache.state.ghState === 'error', 'a v1 GitHub cache entry must be ignored');
+
+  // Live board: searches by label only, merged by URL; an issue is claimed by the
+  // claimed label or an assignee; replies are counted; dates are opening dates.
+  memory.clear();
+  const day = 864e5;
+  const ghIssue = (n, labels, extra) => Object.assign({
+    number: n, title: 'Function ' + n, html_url: 'https://github.com/draykerdk/dk/issues/' + n,
+    repository_url: 'https://api.github.com/repos/draykerdk/dk',
+    labels: labels.map((name) => ({ name })), user: { login: 'someone', avatar_url: '' }, comments: 0,
+    created_at: new Date(Date.now() - 5 * day).toISOString(), updated_at: new Date(Date.now() - 2 * 3600e3).toISOString(),
+    assignees: []
+  }, extra || {});
+  const liveCalls = [];
+  const reply = (body) => Promise.resolve({ ok: true, json: () => Promise.resolve(body) });
+  global.fetch = (url) => {
+    liveCalls.push(url);
+    if (url === '/data/org.json') return Promise.resolve({ ok: false, json: () => Promise.resolve(null) });
+    if (url.includes('/orgs/draykerdk/repos')) return reply([{ name: 'dk', full_name: 'draykerdk/dk', html_url: 'https://github.com/draykerdk/dk', pushed_at: new Date().toISOString() }]);
+    if (url.includes('/search/issues')) {
+      const q = decodeURIComponent(url.split('q=')[1].split('&')[0]);
+      if (q.includes('label:open-function')) {
+        return reply({ items: [ghIssue(1, ['open-function', 'skill:code']), ghIssue(2, ['open-function', 'claimed'], { comments: 3 }),
+          ghIssue(3, ['open-function'], { assignees: [{ login: 'x' }] }),
+          ghIssue(5, ['open-function', 'skill:research'], { html_url: 'https://github.com/draykerdk/open-science/issues/5',
+            repository_url: 'https://api.github.com/repos/draykerdk/open-science' })] });
+      }
+      if (q.includes('good first issue')) return reply({ items: [ghIssue(1, ['open-function', 'good first issue']), ghIssue(4, ['help wanted'])] });
+    }
+    return reply([]);
+  };
+  const liveBoard = make(org, { page: 'contrib', tab: 'fn' });
+  await liveBoard.loadGH(true);
+  const searches = liveCalls.filter((u) => u.includes('/search/issues')).map((u) => decodeURIComponent(u));
+  check(searches.length === 2, 'the board must make exactly two issue searches, got ' + searches.length);
+  check(searches.every((u) => u.includes('org:draykerdk is:issue is:open label:') && u.includes('per_page=100')), 'every board search must be filtered by label');
+  check(searches.some((u) => u.includes('label:open-function')) && searches.some((u) => u.includes('label:"good first issue","help wanted"')),
+    'the board must search open functions and the two entry labels it badges');
+  check(!searches.some((u) => u.includes('proposed-function')), 'proposed functions must never be read onto the board');
+  check(liveBoard.state.ghIssues.length === 5, 'board searches must be merged and deduplicated by URL');
+  let board = liveBoard.renderVals();
+  check(board.ghLabel.indexOf('LIVE FROM GITHUB.COM/DRAYKERDK · UPDATED ') === 0, 'live data must be labelled as live');
+  const card = (id) => board.liveFn.filter((r) => r.id === id)[0] || { meta: '' };
+  check(/opened by someone · 5d ago$/.test(card('#1').meta), 'a card must say when its issue was opened, from created_at');
+  check(card('#2').hasReplies && card('#2').replies === '3 replies — read the thread before taking it' && !card('#1').hasReplies,
+    'a card must show its reply count when the thread has replies');
+  check(/· claimed$/.test(card('#2').meta) && /· claimed$/.test(card('#3').meta) && !/claimed/.test(card('#1').meta),
+    'the claimed label and an assignee must both mark a card as claimed');
+  liveBoard.setState({ lvlF: 'free' });
+  board = liveBoard.renderVals();
+  check(board.liveFn.map((r) => r.id).sort().join() === '#1,#4,#5', 'UNCLAIMED must exclude issues with the claimed label or an assignee');
+  // An explicit skill:* label decides the track before any keyword match on the repository
+  // name: the "ci" in "open-science" must not put a research function in the Code track.
+  liveBoard.setState({ lvlF: 'all', trackF: 'research' });
+  check(liveBoard.renderVals().liveFn.map((r) => r.id).join() === '#5', 'an open-science issue labelled skill:research must be in the research track');
+  liveBoard.setState({ trackF: 'code' });
+  check(liveBoard.renderVals().liveFn.every((r) => r.id !== '#5'), 'an open-science issue labelled skill:research must not be in the code track');
+  check(liveBoard.trackOf(['open-function', 'skill:docs'], 'dk') === 'outreach' && liveBoard.trackOf(['skill:governance'], 'open-science') === 'governance'
+    && liveBoard.trackOf(['skill:design'], 'dk') === 'design' && liveBoard.trackOf(['skill:code'], 'dknowledge') === 'code',
+    'every skill:* label must map to its track');
+  check(liveBoard.trackOf(['open-function', 'documentation'], 'dk') === 'outreach', 'without a skill:* label the keyword match still places the issue');
+
+  // When the open-function search fails, the snapshot stays on screen, labelled as one,
+  // instead of an empty board; a snapshot without opening dates says "updated".
+  memory.clear();
+  const staleSnapshot = { generated_at: new Date().toISOString(), repos: [{ name: 'dk' }], people: [],
+    issues: [{ num: 9, title: 'Snapshot function', url: 'https://github.com/draykerdk/dk/issues/9', repo: 'dk', labels: ['open-function'],
+      user: 'someone', avatar: '', comments: 0, at: new Date(Date.now() - 2 * day).toISOString(), assigned: false }] };
+  global.fetch = (url) => {
+    if (url === '/data/org.json') return reply(staleSnapshot);
+    if (url.includes('/orgs/draykerdk/repos')) return reply([{ name: 'dk', full_name: 'draykerdk/dk', html_url: 'https://github.com/draykerdk/dk' }]);
+    if (url.includes('/search/issues')) return Promise.resolve({ ok: false, status: 403, json: () => Promise.resolve({}) });
+    return reply([]);
+  };
+  const limited = make(org, { page: 'contrib', tab: 'fn' });
+  await limited.loadGH(true);
+  const limitedBoard = limited.renderVals();
+  check(limited.state.ghSrc === 'snapshot' && limitedBoard.liveFn.length === 1, 'a rate-limited issue search must keep the snapshot board');
+  check(limitedBoard.ghLabel.indexOf('SNAPSHOT FROM GITHUB') === 0, 'a rate-limited refresh must keep the snapshot label');
+  check(/opened by someone · updated 2d ago$/.test(limitedBoard.liveFn[0].meta), 'a snapshot without opening dates must say updated, not opened');
 
   memory.clear();
   const comCalls = [];

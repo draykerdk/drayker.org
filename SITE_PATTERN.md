@@ -69,11 +69,11 @@ The component is static. Public organization data is snapshotted into `data/org.
 | What | Source | Failure behaviour |
 | --- | --- | --- |
 | Organization snapshot | `data/org.json`, generated from the public GitHub API and updated through a reviewable automation PR | Falls back to curated repository records if the snapshot is missing |
-| Open-functions board | Snapshot first, then `GET api.github.com/search/issues` for `org:draykerdk is:issue is:open label:open-function` | Keeps the snapshot or an honest empty state. Never sample rows |
+| Open-functions board | Snapshot first, then `GET api.github.com/search/issues` for `org:draykerdk is:issue is:open label:open-function`, plus one search for `label:"good first issue","help wanted"`, merged by URL | Keeps the snapshot, labelled as a snapshot, or an honest empty state. Never sample rows |
 | Volunteer introduction | A prefilled `volunteer-introduction.yml` issue in `draykerdk/general-forum`, opened in a new tab | The confirmation screen also prints the link |
 | Partnership proposal | A prefilled `partnership.yml` issue in `draykerdk/general-forum`, opened in a new tab | The confirmation screen also prints the link |
 
-Issue labels that shape a row: `skill:*` (drives the filters), `level:*` (badge), `effort:*` (estimate).
+Issue labels the board reads: `open-function`, `good first issue` and `help wanted` (which issues are listed, and the badge), `claimed` or an assignee (the UNCLAIMED filter), and `skill:*` (the track filter, before any keyword match on labels or the repository name). The `open-function.yml` issue form applies `proposed-function`, which the board never reads; a maintainer reviews the proposal and applies `open-function`. `level:*` and `effort:~Nh` are read on GitHub, not by the board.
 
 ## Reusing the pattern
 

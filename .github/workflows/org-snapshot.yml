@@ -38,10 +38,18 @@ jobs:
           # are still discarded explicitly by the `pull_request` key — a search
           # qualifier alone once put a PR on the open-functions board — and only
           # non-archived component repositories are kept.
+          # The searches match the portal's live board: open functions, and the two
+          # entry labels it badges, merged by URL.
           gh api --paginate -X GET search/issues \
-            -f q='org:draykerdk is:issue is:open' -f per_page=100 --jq '.items[]' \
+            -f q='org:draykerdk is:issue is:open label:open-function' -f per_page=100 --jq '.items[]' \
+            > /tmp/issues-fn.jsonl
+          gh api --paginate -X GET search/issues \
+            -f q='org:draykerdk is:issue is:open label:"good first issue","help wanted"' -f per_page=100 --jq '.items[]' \
+            > /tmp/issues-entry.jsonl
+          cat /tmp/issues-fn.jsonl /tmp/issues-entry.jsonl \
             | jq -s --slurpfile repos /tmp/repos.json '
                 ([$repos[0][] | select(.archived == false and .name != ".github") | .full_name]) as $ok
+                | unique_by(.html_url)
                 | map(select((has("pull_request") | not)
                              and ((.repository_url | split("/") | .[-2:] | join("/")) as $r | $ok | index($r))))
                 | sort_by(.updated_at) | reverse' > /tmp/issues.json
@@ -80,7 +88,7 @@ jobs:
                 repo: (.repository_url | split("/") | last),
                 labels: [.labels[]?.name | ascii_downcase],
                 user: (.user.login // ""), avatar: (.user.avatar_url // ""),
-                comments: (.comments // 0), at: .updated_at,
+                comments: (.comments // 0), at: .updated_at, opened: .created_at,
                 assigned: ((.assignees | length) > 0) }],
               people: $people[0]
             }' > /tmp/org.json
