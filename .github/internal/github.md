@@ -4,7 +4,20 @@ branch: master
 Related repositories read for content: all 25 public component repositories in `PROJECTS`, including their READMEs and public component contracts. Constitutional alignment in this sync also reads the organization-wide `.github/GOVERNANCE.md` and profile.
 
 ## Last sync
-date: 2026-10-09T12:00:00Z
+date: 2026-10-19T12:00:00Z
+
+### Component state, vocabulary and the founding core, branch `docs/1910-portal-state-glossary`
+
+- **Current orientation.** The Direction link points to `https://dknowledge.drayker.org/CURRENT`, without the trailing slash that returned 404, on every route.
+- **Stations.** The mirrored contract follows draykerdk/stations#13: a whole country can adopt the Drayker infrastructure in a local and customized version isolated from the global network, where each person has a UID in that system, using it does not make anyone a member, and whoever also makes it a member UID has the two integrated, almost like two nationalities. Embassies articulate bilateral agreements. The project vision, state, notes and `.com` copy say that an embassy is, most of the time, an autonomous zone on ceded territory, and that pure autonomous zones are on the high seas (draykerdk/stations).
+- **Component state.** The Dk Network, UID, Councils, Dktron and Dk Personal pages state what each README publishes and what is still missing, instead of a generic line (draykerdk/dk-network, draykerdk/uid, draykerdk/advices, draykerdk/value-unit, draykerdk/dk-personal).
+- **Vocabulary.** Member & volunteer, the Distributed Support entry, the merit-prize card, the manifesto and the mirrored Distributed Support contract (draykerdk/distributed-support#16) say every active member, with the inactive member; the Dzweck entry gives the whole member level, including time away, inactivity, the count of active Dzwecks for the kernel core and the sentences against a caste of `.github/GOVERNANCE.md` §3.5; Dknowledge is defined as knowledge, memory and operational ontology across scales. New entries: Dk Global, Dk Local, Embassy of Drayker, Contextual reputation, Reward and Constitution (two layers).
+- **Founding core.** /org names the Embassy of Drayker as the initial authority (`.github/GOVERNANCE.md` §1). Principle 08 and the manifesto keep ratification human and name Dk Global as the most central member, which builds the project, approves it or presents an alternative, and does not ratify. The Constitution entry says the kernel core is held in BSDK.
+- **Under construction.** The home page says that Drayker is under construction, that each component is at a different stage, and that this documentation is the reference for the current state of each one.
+- **Generator.** The usage comment of `tools/make-com.js` writes to `../drayker.com/index.html`, the path the README uses.
+- Regenerated both prerender trees and the `.com` mirror.
+
+### Previous sync (2026-10-09T12:00:00Z)
 
 ### Newcomer readiness, branch `fix/newcomer-readiness`
 
@@ -114,7 +127,7 @@ date: 2026-10-09T12:00:00Z
 
 ### Dzweck as a member level — branch `docs/dzweck-level-oct-2026`
 
-- The Dzweck glossary entry describes a member level, not a position: the member chooses the difficult, sets aside what they are not (individualism, reactivity, apathy) to create their own values, and answers for a mission that can be handed on. Source: the change of 06/10/2026 and the book.
+- The Dzweck glossary entry describes a member level, not a position: the member chooses the difficult, sets aside what they are not (individualism, reactivity, apathy) to create their own values, and answers for a mission that can be handed on. Source: the change of 06/10/2026.
 - Regenerated both prerender trees and the `.com` mirror.
 
 ### DAF as a primitive PAP — branch `docs/daf-primitive-pap-oct-2026`
@@ -183,9 +196,9 @@ From a full reading of the manifesto, economy, organization and partnership cont
 
 ### Previous sync (2026-09-25T00:00:00Z)
 
-### Alignment pass — branch `alinhamento/livro-2.7.1`
+### Alignment pass
 
-- **Direction states 2033 as the objective.** The page is now "Drayker, toward 2033": each phase keeps its exit condition, and 2033 is the goal they are measured against, not a schedule. Source: Dknowledge `roadmap/DIRECTION.md` on the same alignment branch. Phase 07 names Meta DFM integrated in Dk 1.0; phase 08 names the great migration.
+- **Direction states 2033 as the objective.** The page is now "Drayker, toward 2033": each phase keeps its exit condition, and 2033 is the goal they are measured against, not a schedule. Source: Dknowledge `roadmap/DIRECTION.md`. Phase 07 names Meta DFM integrated in Dk 1.0; phase 08 names the great migration.
 - **DAF wording in the manifesto and method.** The DAF is described as the transitional federation that tests shared resource rules until its useful functions move into PAP, and papers pass through councils and, during the transition, the DAF — no longer "the DAOs".
 - **"Intelligence is a partner, never the master."** The principle card, the manifesto and the Dk section no longer call intelligence "the means": it decides within the space the members give it, and the purposes stay with them. Same wording in the Dk repository and its ethical code.
 - Regenerated both prerender trees and the `.com` mirror. render-check, prerender-check (.org and .com) pass.
