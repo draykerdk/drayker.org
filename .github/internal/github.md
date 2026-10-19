@@ -4,7 +4,21 @@ branch: master
 Related repositories read for content: all 25 public component repositories in `PROJECTS`, including their READMEs and public component contracts. Constitutional alignment in this sync also reads the organization-wide `.github/GOVERNANCE.md` and profile.
 
 ## Last sync
-date: 2026-10-19T12:00:00Z
+date: 2026-10-19T18:00:00Z
+
+### Symbiont, the two vetoes, vocabulary and direction, branch `docs/1910b-portal-harmonization`
+
+- **Manifesto.** The symbiont, parasite and predator; what Drayker is (not a software and not an institution, a supersystem that keeps and returns capacity, an alternative force that does not compete); Drayker belongs to its members. The first-person section names the absolute veto and the justified contextual veto instead of the situated veto.
+- **Home.** The four pieces of the architecture (DFM, Dknowledge, Dk, contextual representation) beside the four layers.
+- **Organization simulator.** Only its labels change: who recommends, who judges, who executes, and the member block split into the absolute veto and the contextual veto. The designed governance card names the two vetoes.
+- **Wording.** "Infrastructure that belongs to its members" instead of "public infrastructure" and "unowned"; "distributed review" instead of "decentralized peer review"; UID without expanding the acronym; the superintelligence and version 1.0 on the Dk page; the Dk state, the entry step of the volunteer journey, voluntary work and principle 04.
+- **Vocabulary.** Dk, DFM, DFMP, BSDK, Dk Network, Distributed Support, councils, E.C.H., economy of capacity, Dknowledge, federated learning, UID, member, embassy, supersystem and Dktron revised; new entries for Stations, Drayker, the Common Capacity Floor, the symbiont, superintelligence, the two vetoes, the veto chain, context clusters, continuous contextual representation, external relations, the economic corpus, symbolic engineering and enclosure.
+- **Direction.** The page repeats Dknowledge `roadmap/DIRECTION.md` (draykerdk/dknowledge#25): how the architecture is evaluated, the objective for 2033, the eight phases with the four stages of the transition, the forecast in phase 7 and "Drayker consolidated" in phase 8, after consolidation, and the five transversal principles.
+- **Contract mirrors.** Every mirror repeats the component contract of the open pull request of its repository, or master where there is none; project texts that repeated sentences those pull requests changed follow them (BSDK, Dk Network, Meta DFM, OSDK, Dk Personal, Stations, DAF notes).
+- `llms.txt` names Dk Global as the most central member and the two objectives; `SITE_PATTERN.md` no longer says "open-infrastructure".
+- Regenerated both prerender trees and the `.com` mirror.
+
+### Previous sync (2026-10-19T12:00:00Z)
 
 ### Component state, vocabulary and the founding core, branch `docs/1910-portal-state-glossary`
 
