@@ -1,6 +1,6 @@
 // Generates the drayker.com build from this repository's index.html.
 //
-//   node tools/make-com.js ../drayker.com-site/index.html --sync
+//   node tools/make-com.js ../drayker.com/index.html --sync
 //
 // One component, two sites. The institutional presentation is not maintained as a second
 // copy that slowly drifts — it is produced from this file by changing the SITE build
