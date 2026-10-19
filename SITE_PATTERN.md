@@ -1,6 +1,6 @@
 # Drayker site pattern
 
-This repository is the first deployment of the Drayker web pattern: a dark, open-infrastructure interface built as a single Design Component and served as a static GitHub Pages site.
+This repository is the first deployment of the Drayker web pattern: a dark interface for a supersystem built in public, made as a single Design Component and served as a static GitHub Pages site.
 
 ## Runtime contract
 
