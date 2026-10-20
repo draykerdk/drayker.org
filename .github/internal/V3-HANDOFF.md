@@ -46,7 +46,7 @@ Navegação `.org`: inalterada.
 
 ## 2. Mudanças em relação à v2 (produção)
 
-**Tipografia.** Space Grotesk → **Archivo** (400/500/600/700), conforme `CLAUDE.md` e
+**Tipografia.** Space Grotesk → **Archivo** (400/500/600/700), conforme `MAINTAINING.md` e
 `DRAYKER-MARK.md`. JetBrains Mono segue só em rótulo técnico. Nenhuma cor, borda, grid,
 card ou peça de marca foi alterada. O logo 3D, a física do anel e as animações estão intactos.
 
