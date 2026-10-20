@@ -423,12 +423,13 @@ check(org.GUIDE.filter((g) => g.n === '02')[0].body.includes(CLAIM_RULE), 'guide
 check(org.LABELS.filter((l) => l.l === 'claimed')[0].d.includes(CLAIM_RULE), 'the claimed label must state the stalled-claim rule');
 check(org.JOIN_STEPS.filter((j) => j.id === 'time')[0].lb.includes(CLAIM_RULE), 'the time step of the volunteer journey must state the stalled-claim rule');
 check(!/returns to the\s+board|open again|before taking over|go silent for two weeks/.test(src), 'no claim may be said to expire or go back to the board by itself');
-// No legal status is claimed: Drayker is described as having no owner, no shareholders
-// and no profit distribution.
+// No legal status is claimed: Drayker is described as belonging to its members, with no
+// shareholders and no profit distribution.
 check(!/non-?profit/i.test(src), 'a legal-status label must not describe Drayker');
-check(src.includes('CC BY 4.0 · PUBLIC DOCUMENTATION · NO OWNER · NO SHAREHOLDERS · NO PROFIT DISTRIBUTION'), 'the footer must list no owner, no shareholders and no profit distribution');
+check(src.includes('CC BY 4.0 · PUBLIC DOCUMENTATION · BELONGS TO ITS MEMBERS · NO SHAREHOLDERS · NO PROFIT DISTRIBUTION'), 'the footer must say that Drayker belongs to its members, with no shareholders and no profit distribution');
+check(!/no owner/i.test(src), 'Drayker is described by belonging to its members, not by the absence of an owner');
 const profitLimit = org.PARTNER_LIMITS.filter((l) => l.k === 'NO PROFIT DISTRIBUTION')[0];
-check(profitLimit && profitLimit.d.includes('no owner, no shareholders and no profit distribution'), 'the partnership limits must describe no profit distribution, not a status');
+check(profitLimit && profitLimit.d.includes('belongs to its members, with no shareholders and no profit distribution'), 'the partnership limits must describe no profit distribution, not a status');
 // Design tense: no reward exists today, the DAF is designed to govern resources, and
 // public documentation is English.
 check((src.match(/financing the network earns the reward/g) || []).length > 0
