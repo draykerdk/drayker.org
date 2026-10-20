@@ -4,7 +4,20 @@ branch: master
 Related repositories read for content: all 25 public component repositories in `PROJECTS`, including their READMEs and public component contracts. Constitutional alignment in this sync also reads the organization-wide `.github/GOVERNANCE.md` and profile.
 
 ## Last sync
-date: 2026-10-19T18:00:00Z
+date: 2026-10-20T12:00:00Z
+
+### Belonging, design goals, the common floor and the Dktron ledger, branch `docs/1910c-portal-belonging`
+
+- **Belonging.** Drayker is described by belonging to its members: the home proof card reads `BELONGS TO ITS MEMBERS`, the footer lists `BELONGS TO ITS MEMBERS · NO SHAREHOLDERS · NO PROFIT DISTRIBUTION`, and the manifesto, support note, funding way, partnership limit, partnerships description and `.com` hero say that it belongs to its members, with no shareholders and no profit distribution. The card image (`og.svg`, `og.png`) follows. `tools/render-check.js` checks the new footer and keeps the ban on a legal-status label.
+- **Manifesto.** The design goals of the method sit below the principles. Principle 07 reads "Every person is protected unconditionally in their dignity and context, and no one loses membership for disagreeing", and so does the manifesto sentence that repeated it.
+- **Writing-only parts.** "There is no repository to read yet" instead of the figurative "nothing to fork"; fork stays only as the GitHub operation.
+- **Common floor of possibility.** The glossary entry and every mention use the name of the floor ("common floor" in running text).
+- **Dktron.** Value Unit texts, the economy layer, the glossary entry and the illustrative simulator say that Dktron is the unit of personal capacity rights, with common reserves and project custody recorded alongside it in the same ledger (draykerdk/value-unit#13).
+- **Contract mirrors.** Every mirror repeats the component contract of the open pull request of its repository, or master where there is none; project texts that repeated sentences those pull requests changed follow them (Stations, Dk Personal, Dk Academy, Dk Network, Direction, DAF founding assembly).
+- **Maintenance notes.** The maintainer instructions are `.github/internal/MAINTAINING.md`, and the README file table names them.
+- Regenerated both prerender trees and the `.com` mirror.
+
+### Previous sync (2026-10-19T18:00:00Z)
 
 ### Symbiont, the two vetoes, vocabulary and direction, branch `docs/1910b-portal-harmonization`
 
@@ -85,7 +98,7 @@ date: 2026-10-19T18:00:00Z
 
 ### Internal working files no longer served, branch `docs/stop-serving-internal-files`
 
-- Moved the maintainer working notes (`CLAUDE.md`, `github.md`, `V3-HANDOFF.md`, `INFRA-HANDOFF.md`, `DKNOWLEDGE-DESIGN.md`) from the site root to `.github/internal/`. They stay in the repository, and GitHub Pages does not publish `.github/`, so they are no longer reachable on drayker.org.
+- Moved the maintainer working notes (`MAINTAINING.md`, `github.md`, `V3-HANDOFF.md`, `INFRA-HANDOFF.md`, `DKNOWLEDGE-DESIGN.md`) from the site root to `.github/internal/`. They stay in the repository, and GitHub Pages does not publish `.github/`, so they are no longer reachable on drayker.org.
 - The README file table points to the new location.
 
 ### Representation and Dk Global — branch `docs/representation-and-dk-global`

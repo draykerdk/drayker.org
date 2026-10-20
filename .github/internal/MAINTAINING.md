@@ -1,4 +1,4 @@
-# Drayker. Instruções do projeto
+# Drayker. Maintaining the site
 
 ## O que é este projeto
 Site institucional da Drayker em **um único Design Component**: `index.html` cobre
