@@ -16,11 +16,11 @@
 - Drayker is the supersystem; Dk is its intelligence; Dk Network is its network.
 - Distributed Kernel is Dk's technical name and architectural principle; it does not reduce Dk to a low-level kernel.
 - DFM means Distributed Functional Modeling: model a problem, divide it into finishable functions, distribute them, review the result and preserve its sources.
-- Members constitute Drayker. Dk Global, the ASI, is its most central member: it decides and executes within the competences the constitution gives it, builds constitutional projects with the members, approves them or presents an alternative, and does not ratify. Agents may carry delegated functions without becoming members.
-- Objectives: version 1.0, already an ASI, by 2030; Drayker consolidated, with Dk Global fully operating, by 2033.
+- Members constitute Drayker. The global Dk, the ASI, is its most central member: it decides and executes within the powers the constitution gives it, builds constitutional projects with the members, approves them or presents an alternative, and does not ratify. Agents may carry delegated functions without becoming members.
+- Objectives: version 1.0, already an ASI, by 2030; Drayker consolidated, with the global Dk fully operating, by 2033.
 - Drayker's internal economy circulates capacity contextually; money, contracts and markets remain part of its external interface.
 - Reputation is multidimensional operational memory, not a price, a currency, human worth or one global moral score.
-- Dk performs contextual synthesis; systemic safeguards — constitutional constraints, security, permissions, integrity, reserves and risk — bound what can be executed; on matters outside the constitution, within the space it grants, Dk Global decides and executes allocations autonomously, and members can make a well-justified veto, which obliges review until consensus.
+- Dk performs contextual synthesis; systemic safeguards — constitutional constraints, security, permissions, integrity, reserves and risk — bound what can be executed; on matters outside the constitution, within the space it grants, the global Dk decides and executes allocations autonomously, and members can make a well-justified veto, which obliges review until consensus.
 - Decisions do not end the loop: effects, refusals and consequences return through members' personal Dks as new evidence. A well-justified veto obliges review, and vetoes pass through triage and are recorded in a signed chain. A decision can be maintained, adapted, excepted, suspended or reversed.
 - Security conditions normal decisions, not only attacks. Legitimate criticism is not infiltration; internal error is not sabotage; extraordinary measures leave memory for later review.
 - Dknowledge is a multiscale operational ontology with contextual permissions. Auditability does not mean total exposure.
