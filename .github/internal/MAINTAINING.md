@@ -3,8 +3,8 @@
 ## O que é este projeto
 Site institucional da Drayker em **um único Design Component**: `index.html` cobre
 drayker.com e drayker.org com um switch .com/.org e é a fonte atual das rotas publicadas.
-`design/Drayker v3.dc.html` preserva a base do pacote 3.4.1. A v2 é histórica. Os arquivos
-em `design/` documentam a proveniência e não são uma segunda cópia editável do conteúdo.
+`.github/internal/design-archive/Drayker v3.dc.html` preserva a base do pacote 3.4.1. A v2 é histórica. Os arquivos
+em `.github/internal/design-archive/` documentam a proveniência e não são uma segunda cópia editável do conteúdo.
 
 Publicação: HTML estático em GitHub Pages, repositório `draykerdk/drayker.org`.
 

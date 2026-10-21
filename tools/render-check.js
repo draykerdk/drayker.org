@@ -115,7 +115,7 @@ const com = load('com');
 check(src.includes('class="dk-core"'), 'animated mark core is missing');
 check(src.includes('ringBackRef') && src.includes('ringOverRef') && src.includes('ringOutRef'), '3D ring layers are missing');
 check(src.includes('@keyframes dk-surf') && src.includes('@keyframes dk-breathe'), 'mark animations are missing');
-check(src.includes('Dk Global') && src.includes('Dk Personal') && src.includes('Dk Local'), 'Dk scopes are not explained separately');
+check(src.includes('Global Dk') && src.includes('Personal Dk') && src.includes('Local Dk'), 'Dk scopes are not explained separately');
 check(src.includes("font-family:'Archivo'") && !src.includes('Space Grotesk'), 'v3 must use Archivo rather than Space Grotesk');
 check(src.includes('drayker-icon.svg?v=20260813') && src.includes('dark/drayker-icon.svg?v=20260813'), 'adaptive SVG favicons are missing');
 check(src.includes('icon-512.png?v=20260813') && src.includes('icon-512-dark.png?v=20260813'), 'high-resolution PNG favicons are missing');

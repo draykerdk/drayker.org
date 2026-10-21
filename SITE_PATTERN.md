@@ -39,7 +39,7 @@ This repository is the first deployment of the Drayker web pattern: a dark inter
 - Home
 - Manifesto
 - DFM Protocol
-- Dk, with Dk Global, Dk Personal and Dk Local explained separately
+- Dk, with the global Dk, the personal Dk and the local Dk explained separately
 - Ecosystem
 - Organization
 - Funding & partnerships (`.com`)
