@@ -39,7 +39,8 @@ check(fs.existsSync(robotsPath), 'robots.txt is missing');
 check(fs.existsSync(llmsPath), 'llms.txt is missing');
 if (fs.existsSync(robotsPath)) {
   const robots = read(robotsPath);
-  check(robots.includes('OAI-SearchBot') && robots.includes('ChatGPT-User'), 'AI search crawlers are not explicitly allowed');
+  const robotsLines = robots.split(/\r?\n/).map((line) => line.trim());
+  check(robotsLines.includes('User-agent: *') && robotsLines.includes('Allow: /'), 'robots.txt must allow every crawler with User-agent: * and Allow: /');
   check(robots.includes('Sitemap: ' + base + 'sitemap.xml'), 'robots.txt has the wrong sitemap');
 }
 if (fs.existsSync(llmsPath)) check(read(llmsPath).includes(base), 'llms.txt does not identify the canonical site');
