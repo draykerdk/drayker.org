@@ -2870,7 +2870,7 @@ const PROJECTS = [
     tagline: 'A shared interface between devices and the Drayker network.',
     vision: 'OSDK proposes a common way for devices to describe their capabilities and connect to Drayker. It concerns the boundary between physical equipment, network services and applications. A public coupling interface would describe capabilities, authorisation and communication requirements so applications can work with compatible equipment.',
     problem: 'Devices expose different protocols and permissions. Reusing them across projects often requires new integration work and careful handling of access.',
-    state: 'The coupler is described, and no specification is published yet: nothing public says what it must guarantee, and no device class has been mapped onto the model. Documentation is published from docs/ to osdk.drayker.org and is still thin.',
+    state: 'The coupler architecture and its two forms (runtime super-app environment on conventional OSes and native device coupling) are published on osdk.drayker.org. No concrete device-interface specification, isolation protocol or released adapter exists yet — turning the coupler model into a testable specification for a first device class is open work.',
     arch: ['Universal coupler', 'Device attachment', 'Instant application to things', 'Network binding'],
     contribute: ['Write the first coupler specification', 'Map an existing device class onto the model', 'Diagram how a thing joins the network'] },
 
@@ -2890,11 +2890,11 @@ const PROJECTS = [
     arch: ['Model → Fragment → Distribute → Review → Legitimate', 'Issue → pull request → merge, in the open', 'Councils and validation status — designed, not in place', 'dfmpp/ — the proposals themselves'],
     contribute: ['Write DFMP-000 — no permission needed, open an issue with the draft', 'Turn the Bayesian template into a reusable issue form'] },
 
-  { key: 'metadfmp', name: 'Meta DFM', repo: 'metadfmp', layer: 'PROTOCOL', site: 'https://github.com/draykerdk/metadfmp',
+  { key: 'metadfmp', name: 'Meta DFM', repo: 'metadfmp', layer: 'PROTOCOL', site: 'https://metadfmp.drayker.org',
     tagline: 'Study and improve the method through explicit models.',
     vision: 'Meta DFM is the evolutionary application of DFM to Drayker’s own engineering: research and modelling that look for better versions of the method, the components and the architecture. It is designed as an evolutionary research and development super-agent. Formal models and worked cases connect proposed rules to observable consequences, giving human review and computational research a common object to examine.',
     problem: 'A method can sound convincing while leaving its assumptions, limits and outcomes difficult to compare. Improvement requires questions that can be tested.',
-    state: 'The heaviest formal requirements in the ecosystem. Drayker has internal material on the method and on the notation its papers use, and none of it is published yet — preparing it for publication is open work anyone can take. Entry functions are rare; review is always open. Documentation is published from docs/ to metadfmp.drayker.org, whose slug keeps the older MetaDFMP spelling.',
+    state: 'The research architecture — metacognitive reasoner, adversarial solver/prover network, degrees of rigour, simulated proof with plans B and C, and reinforcement learning into Dknowledge — is published at metadfmp.drayker.org. Formal protocol notation, trust-chain formalization and executable benchmarks remain open work.',
     arch: ['Formalized DFM protocols', 'A swarm of agents in a construction architecture', 'Simulation and evolutionary search', 'Metaprogramming primitives'],
     contribute: ['Review a formalization motion', 'Reproduce a published simulation', 'Document the notation used in the papers'] },
 
@@ -2992,9 +2992,9 @@ const PROJECTS = [
     tagline: 'Research people can examine, with care centred on the person.',
     vision: 'Open Science explores how Dk could support research and health through traceable methods, authorised data use and findings that others can examine. The proposed path connects consent, data provenance, analysis and review, keeping research claims distinguishable from validated applications.',
     problem: 'Research depends on reliable evidence and responsible access to data. Health applications also require consent and careful evaluation of their effect on people.',
-    state: 'The repository was opened in August 2026 with a charter. The Autonomous Health paper and its roadmap are published in Dknowledge, but nothing public yet states which part of open science comes first or how DFM review relates to peer review. Anyone who works in either field is better placed to write that than we are. The internal assessment is deliberately severe and belongs in public: this is conceptual, high-risk work with no clinical protocol, no validation, no dataset, no device, no regulatory approval and no safety evidence — not held back, simply absent. Documentation is published from the repository to science.drayker.org.',
+    state: 'The charter is published at science.drayker.org alongside the Autonomous Health synthesis and staged roadmap in Dknowledge. Open questions include formalizing how DFM review pairs with peer review and specifying reproducible evidence workflows. This remains conceptual, high-risk research work: no clinical protocol, validation, dataset, device, regulatory approval or operating medical service exists today.',
     arch: ['Research applications on Dk', 'Autonomous Health: AI health tied to UID, personal Dk, personal Dknowledge and devices', 'Identity and specific consent', 'Method review and scientific review', 'Data under the person’s authority', 'A traceable research record'],
-    contribute: ['Take one non-clinical research question and demonstrate only search or organization of evidence, on synthetic data, with specialist review', 'Write what open science on Dk would have to guarantee', 'Write where the professional review sits and what it may override', 'Compare DFM review with peer review honestly'] },
+    contribute: ['Take one open biomedical research question and demonstrate reproducible search, synthesis and provenance tracking on public literature and synthetic data, with specialist review', 'Write what open science on Dk would have to guarantee', 'Write where the professional review sits and what it may override', 'Compare DFM review with peer review honestly'] },
 
   { key: 'valueunit', name: 'Dktron & value units', layer: 'APPLICATION', repo: 'value-unit', site: 'https://value.drayker.org',
     tagline: 'Account for common resources, project custody and personal balances.',
@@ -3008,7 +3008,7 @@ const PROJECTS = [
     tagline: 'Compose projects and carry successful work into lasting applications.',
     vision: 'PAP proposes an environment for creating, adapting and connecting collaborative projects. A project that fulfils its purpose can become a maintained application. Projects would combine functions, templates, validation and attributable participation, preserving the knowledge needed to adapt them to another context.',
     problem: 'Useful structure and learning often remain tied to the group that produced them. Another initiative may struggle to reuse the work or understand why it succeeded.',
-    state: 'The repository was opened in August 2026, and its README now describes the platform, how a project would be built and its first functions. Drayker has internal material on the platform that is not published yet; the closest public relative is DFMPProject, which describes how a project gets proposed but not where it then lives. A repository comes only after a public charter and one worked example. Documentation is published from the repository to pap.drayker.org.',
+    state: 'The repository at pap.drayker.org now publishes the full architectural charter: the lifecycle from liquid project to settled application, five combinable ways to build a project, composable modules, parallel testing of competing proposals, and DAF’s progressive dissolution into PAP. Worked templates and a running platform remain open work.',
     arch: ['The lifecycle from project to application', 'Projects and applications as composable modules', 'Reuse, cloning and templates across projects', 'Validation, modelling and simulation before resources are committed', 'Participation attributed through UID', 'Relation to DFMPProject and the project queues'],
     contribute: ['Define what a project must satisfy to become an application', 'Write what the platform has to guarantee a project', 'Describe one application worth composing first', 'Argue where DFMPProject ends and the platform begins'] },
 
@@ -3016,7 +3016,7 @@ const PROJECTS = [
     tagline: 'The intelligence that belongs to one person, keeping what is intimate as close to them as possible, on their own device.',
     vision: 'The personal Dk is designed to work for the person and no one else: it takes their attention only with what is truly important to them, tells them what is important or urgent without being asked, and, as far as they authorize, promotes them outward with material arguments only. It helps a member organise knowledge, make decisions, learn and act within their own context. Its authority comes from explicit and revisable delegation. The design distinguishes stated preferences from inferences, keeps private context within authorised boundaries and makes mandates revocable. Local operation depends on the available hardware and data.',
     problem: 'An assistant can infer a preference incorrectly or act beyond what a person intended. Continuity is useful only when the person can inspect, correct and limit that assistance.',
-    state: 'The public proposal describes personal context, delegated authority and the two vetoes. Nothing is implemented and no real personal data is handled. It still needs a worked interaction model: what the agent may retain, which information may leave the personal boundary, how an inference is corrected and how another system honours a revoked mandate. Documentation is published from the repository to personal.drayker.org.',
+    state: 'The public proposal at personal.drayker.org describes personal context, attention sovereignty, outward representation and the two vetoes. An early experimental local-vault prototype is public in draykerdk/personal-dknowledge (guided DFM protocols and a proposal-only bridge requiring human confirmation), while the full personal Dk runtime and federated-learning safeguards remain unimplemented.',
     arch: ['A personal Dk with a bounded mandate', 'Private context and local operation', 'Federated learning with explicit privacy tests', 'Evidence across instances', 'Deliberate sharing and attribution', 'Attention, correction and the two vetoes'],
     contribute: ['Write one concrete personal use case', 'Specify which federated updates may leave and how metadata is depersonalized', 'Threat-model re-identification', 'Separate federated learning from deliberate authorized sharing'] },
 
@@ -3093,7 +3093,7 @@ const ROLES = {
 // what could be misread. Concepts with no repository have no contract, and the
 // page says so instead of implying one.
 // ============================================================================
-const CONTRACT_REVIEWED = '2026-08-10';
+const CONTRACT_REVIEWED = '2026-11-18';
 
 const IMPL = {
   none: { label: 'NO IMPLEMENTATION PUBLISHED', c: 'var(--tx3)' },
@@ -3135,7 +3135,7 @@ const CONTRACTS = {
     ],
     "entry": "https://github.com/draykerdk/dk/issues",
     "path": "docs/README.md",
-    "reviewed": "2026-10-21"
+    "reviewed": "2026-11-18"
   },
   "bsdk": {
     "artifact": "architecture",
@@ -3165,7 +3165,7 @@ const CONTRACTS = {
     ],
     "entry": "https://github.com/draykerdk/bsdk/issues",
     "path": "docs/README.md",
-    "reviewed": "2026-10-21"
+    "reviewed": "2026-11-18"
   },
   "dknetwork": {
     "artifact": "architecture",
@@ -3278,12 +3278,12 @@ const CONTRACTS = {
       }
     ],
     "risks": [
-      "The universal-coupler description may overstate an early concept.",
+      "Coupling interfaces and isolation guarantees still require concrete protocol specifications and hardware testing.",
       "Hardware and security constraints remain unspecified."
     ],
     "entry": "https://github.com/draykerdk/osdk/issues",
     "path": "docs/README.md",
-    "reviewed": "2026-10-19"
+    "reviewed": "2026-11-18"
   },
   "uid": {
     "artifact": "architecture",
@@ -3372,7 +3372,7 @@ const CONTRACTS = {
       "dfmp"
     ],
     "level": "none",
-    "levelScope": "The repository states a research direction but does not publish the proposed framework or an implementation.",
+    "levelScope": "The repository publishes the proposed research architecture (metacognitive reasoner and solver/prover loop); formal specifications and executable benchmarks remain open work.",
     "evidence": [
       {
         "t": "document",
@@ -3385,7 +3385,7 @@ const CONTRACTS = {
     ],
     "entry": "https://github.com/draykerdk/metadfmp/issues",
     "path": "docs/README.md",
-    "reviewed": "2026-10-21"
+    "reviewed": "2026-11-18"
   },
   "daf": {
     "artifact": "governance-proposal",
@@ -3564,7 +3564,7 @@ const CONTRACTS = {
     ],
     "entry": "https://github.com/draykerdk/dknowledge/issues",
     "path": "README.md",
-    "reviewed": "2026-10-21"
+    "reviewed": "2026-11-18"
   },
   "dfmpproject": {
     "artifact": "project-framework",
@@ -3671,7 +3671,7 @@ const CONTRACTS = {
     ],
     "entry": "https://github.com/draykerdk/drayker.org/issues",
     "path": "index.html",
-    "reviewed": "2026-08-17"
+    "reviewed": "2026-11-18"
   },
   "com": {
     "artifact": "portal",
@@ -3705,7 +3705,7 @@ const CONTRACTS = {
     ],
     "entry": "https://github.com/draykerdk/drayker.com/issues",
     "path": "README.md",
-    "reviewed": "2026-08-10"
+    "reviewed": "2026-11-18"
   },
   "propagation": {
     "artifact": "portal",
@@ -3804,7 +3804,7 @@ const CONTRACTS = {
     "scope": [
       "Public description of applications on the Dk kernel.",
       "Public description of Autonomous Health: an AI health system integrated with each person's UID, personal Dk, personal Dknowledge and devices, with AI-run clinics, investigating patterns with sufficient probability for multifactor detection, prevention and personalised, accessible treatment.",
-      "Public description of non-clinical biomedical exploration, longevity, and anti-eugenic commitments.",
+      "Public description of open biomedical and longevity research alongside Autonomous Health.",
       "Public description of identity through UID, the absolute veto over one's own life and one's own personal Dk, the justified contextual veto over decisions that directly affect the member's life and context, and consent as the entry condition.",
       "Public description of professional review alongside AI diagnosis and monitoring.",
       "Public description of DFM review alongside peer review.",
@@ -3836,7 +3836,7 @@ const CONTRACTS = {
     ],
     "entry": "https://github.com/draykerdk/open-science/issues",
     "path": "README.md",
-    "reviewed": "2026-10-21"
+    "reviewed": "2026-11-18"
   },
   "valueunit": {
     "artifact": "architecture",
@@ -3955,7 +3955,7 @@ const CONTRACTS = {
       "lc"
     ],
     "level": "none",
-    "levelScope": "This repository publishes a charter and open questions; nothing is implemented.",
+    "levelScope": "This repository publishes the architectural charter and open questions for the personal Dk; an early experimental local-vault prototype lives separately in draykerdk/personal-dknowledge, while the full personal Dk runtime is not yet implemented.",
     "evidence": [
       {
         "t": "document",
@@ -3969,7 +3969,7 @@ const CONTRACTS = {
     ],
     "entry": "https://github.com/draykerdk/dk-personal/issues",
     "path": "README.md",
-    "reviewed": "2026-10-21"
+    "reviewed": "2026-11-18"
   },
   "academy": {
     "artifact": "architecture",
@@ -5704,7 +5704,7 @@ class Component extends DCLogic {
       econSimCustody: Math.max(0, s.econSimCustody - 50),
       econSimPersonal: s.econSimPersonal + 50,
       econSimLockout: false,
-      econSimAlert: 'DELIVERY SETTLEMENT: 50 units of project custody attributed to the member’s personal balance, where they become Dktron. Property of the member: freely accumulable, spendable, or convertible for living costs. Zero platform tollbooths.'
+      econSimAlert: 'DELIVERY SETTLEMENT: 50 units of project custody attributed to the member’s personal balance, where they become Dktron. Personal capacity rights attributed to the member: freely accumulable, spendable, or convertible for living costs. Zero platform tollbooths.'
     }));
   };
 
@@ -5720,7 +5720,7 @@ class Component extends DCLogic {
   simDormancy = () => {
     this.setState(() => ({
       econSimLockout: false,
-      econSimAlert: '5 YEARS DORMANCY SIMULATION: 0 Dktrons lost. Inactivity is never penalized. Personal capacity balances are property and are never seized, degraded, or burned by time.'
+      econSimAlert: '5 YEARS DORMANCY SIMULATION: 0 Dktrons lost. Inactivity is never penalized. Personal capacity balances stay under the member’s authority and are never seized, degraded, or burned by time.'
     }));
   };
 
@@ -5893,7 +5893,7 @@ class Component extends DCLogic {
         style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', marginBottom: '22px' }
       }, [
         e('div', { key: 'kicker', style: { fontFamily: "'JetBrains Mono', monospace", fontSize: '11px', letterSpacing: '0.18em', color: '#FF5500', textTransform: 'uppercase' } }, 'Constitutional Checks · Separation of Powers'),
-        e('div', { key: 'tag', style: { fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', letterSpacing: '0.12em', color: 'var(--tx3)' } }, 'WHO RECOMMENDS, WHO JUDGES, WHO EXECUTES')
+        e('div', { key: 'tag', style: { fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', letterSpacing: '0.12em', color: 'var(--tx3)' } }, 'DECISION, COUNCILS, SAFEGUARDS AND VETOES')
       ]),
       e('div', {
         key: 'branches',
@@ -5912,7 +5912,7 @@ class Component extends DCLogic {
         e('div', { key: 'b3', style: { background: 'var(--bg)', padding: '18px 16px', borderTop: isSurv ? '2px solid #5CE02E' : '2px solid #5CE02E' } }, [
           e('div', { key: 'l', style: { fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: '#5CE02E', marginBottom: '4px' } }, '03 · INDEPENDENT MEANS'),
           e('div', { key: 't', style: { fontSize: '15px', fontWeight: '600', color: 'var(--tx)', marginBottom: '4px' } }, 'Protective Checks'),
-          e('div', { key: 'd', style: { fontSize: '12.5px', color: 'var(--tx2)', lineHeight: '1.5' } }, 'Preserved records, independent technical support and operator substitution. Councils can suspend actions.')
+          e('div', { key: 'd', style: { fontSize: '12.5px', color: 'var(--tx2)', lineHeight: '1.5' } }, 'Preserved records, independent technical support and operator substitution. Grounded council conclusions revise decisions and vetoes.')
         ]),
         e('div', { key: 'b4', style: { background: 'var(--bg)', padding: '18px 16px', borderTop: '2px solid #FF5500' } }, [
           e('div', { key: 'l', style: { fontFamily: "'JetBrains Mono', monospace", fontSize: '10px', color: '#FF5500', marginBottom: '4px' } }, 'MEMBER · ABSOLUTE VETO'),
